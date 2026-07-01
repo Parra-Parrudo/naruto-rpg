@@ -1,0 +1,117 @@
+{{!-- Effect Changes Tab for Naruto RPG - Must be single root element --}}
+<section class="tab" data-tab="changes" data-group="sheet">
+  <p class="hint">{{localize "NARUTO_RPG.ActiveEffects.changesHint"}}</p>
+
+  <ol class="changes-list">
+    {{#each parsedChanges}}
+    <li class="effect-change flexrow" data-index="{{@index}}" data-target-type="{{this.targetType}}" data-target-id="{{this.targetId}}">
+      {{!-- Target Type --}}
+      <div class="change-field">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.targetType"}}</label>
+        <select name="changes.{{@index}}.targetType" class="change-target-type" data-index="{{@index}}">
+          <optgroup label="{{localize 'NARUTO_RPG.ActiveEffects.TargetGroups.traits'}}">
+            <option value="trait" {{#if (eq this.targetType 'trait')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.trait"}}</option>
+            <option value="resourceMax" {{#if (eq this.targetType 'resourceMax')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.resourceMax"}}</option>
+          </optgroup>
+          <optgroup label="{{localize 'NARUTO_RPG.ActiveEffects.TargetGroups.rolls'}}">
+            <option value="rollAll" {{#if (eq this.targetType 'rollAll')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.rollAll"}}</option>
+            <option value="rollTrait" {{#if (eq this.targetType 'rollTrait')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.rollTrait"}}</option>
+          </optgroup>
+          <optgroup label="{{localize 'NARUTO_RPG.ActiveEffects.TargetGroups.maneuverTechnique'}}">
+            <option value="maneuverTechniqueSpeed" {{#if (eq this.targetType 'maneuverTechniqueSpeed')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverTechniqueSpeed"}}</option>
+            <option value="maneuverTechniqueDamage" {{#if (eq this.targetType 'maneuverTechniqueDamage')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverTechniqueDamage"}}</option>
+            <option value="maneuverTechniqueMovement" {{#if (eq this.targetType 'maneuverTechniqueMovement')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverTechniqueMovement"}}</option>
+          </optgroup>
+          <optgroup label="{{localize 'NARUTO_RPG.ActiveEffects.TargetGroups.maneuverSpecific'}}">
+            <option value="maneuverSpecificSpeed" {{#if (eq this.targetType 'maneuverSpecificSpeed')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverSpecificSpeed"}}</option>
+            <option value="maneuverSpecificDamage" {{#if (eq this.targetType 'maneuverSpecificDamage')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverSpecificDamage"}}</option>
+            <option value="maneuverSpecificMovement" {{#if (eq this.targetType 'maneuverSpecificMovement')}}selected{{/if}}>{{localize "NARUTO_RPG.ActiveEffects.TargetTypes.maneuverSpecificMovement"}}</option>
+          </optgroup>
+        </select>
+      </div>
+
+      {{!-- Target ID Select for Traits --}}
+      <div class="change-field change-trait-select" data-for-type="trait,rollTrait"
+        style="{{#unless (or (eq this.targetType 'trait') (eq this.targetType 'rollTrait') (eq this.targetType ''))}}display:none{{/unless}}">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.target"}}</label>
+        <select name="changes.{{@index}}.traitTargetId" class="trait-target-select" data-index="{{@index}}">
+          <option value="">{{localize "NARUTO_RPG.Common.select"}}...</option>
+          {{#each ../traits}}
+          <option value="{{this.id}}">{{this.name}} ({{this.type}})</option>
+          {{/each}}
+        </select>
+      </div>
+
+      {{!-- Target ID Select for Resources --}}
+      <div class="change-field change-resource-select" data-for-type="resourceMax"
+        style="{{#if (eq this.targetType 'resourceMax')}}{{else}}display:none{{/if}}">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.target"}}</label>
+        <select name="changes.{{@index}}.resourceTargetId" class="resource-target-select" data-index="{{@index}}">
+          <option value="health" {{#if (eq this.targetId 'health')}}selected{{/if}}>{{localize "NARUTO_RPG.Resources.health"}}</option>
+          <option value="chi" {{#if (eq this.targetId 'chi')}}selected{{/if}}>{{localize "NARUTO_RPG.Resources.chi"}}</option>
+          <option value="willpower" {{#if (eq this.targetId 'willpower')}}selected{{/if}}>{{localize "NARUTO_RPG.Resources.willpower"}}</option>
+          <option value="soak" {{#if (eq this.targetId 'soak')}}selected{{/if}}>{{localize "NARUTO_RPG.Combat.soak"}}</option>
+        </select>
+      </div>
+
+      {{!-- Target ID for Roll All (no selection needed) --}}
+      <div class="change-field change-rollall-select" data-for-type="rollAll"
+        style="{{#if (eq this.targetType 'rollAll')}}{{else}}display:none{{/if}}">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.target"}}</label>
+        <span class="rollall-label">{{localize "NARUTO_RPG.ActiveEffects.allRolls"}}</span>
+      </div>
+
+      {{!-- Target ID Select for Technique (Maneuver by Technique) --}}
+      <div class="change-field change-technique-select" data-for-type="maneuverTechnique"
+        style="{{#unless (or (eq this.targetType 'maneuverTechniqueSpeed') (eq this.targetType 'maneuverTechniqueDamage') (eq this.targetType 'maneuverTechniqueMovement'))}}display:none{{/unless}}">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.technique"}}</label>
+        <select name="changes.{{@index}}.techniqueTargetId" class="technique-target-select" data-index="{{@index}}">
+          <option value="">{{localize "NARUTO_RPG.Common.select"}}...</option>
+          {{#each ../techniques}}
+          <option value="{{this.id}}" {{#if (eq this.id ../targetId)}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      {{!-- Target ID Select for Specific Maneuver --}}
+      <div class="change-field change-maneuver-select" data-for-type="maneuverSpecific"
+        style="{{#unless (or (eq this.targetType 'maneuverSpecificSpeed') (eq this.targetType 'maneuverSpecificDamage') (eq this.targetType 'maneuverSpecificMovement'))}}display:none{{/unless}}">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.maneuver"}}</label>
+        <select name="changes.{{@index}}.maneuverTargetId" class="maneuver-target-select" data-index="{{@index}}">
+          <option value="">{{localize "NARUTO_RPG.Common.select"}}...</option>
+          {{#each ../maneuvers}}
+          <option value="{{this.id}}" {{#if (eq this.id ../targetId)}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      {{!-- Mode --}}
+      <div class="change-field change-mode-field">
+        <label>{{localize "EFFECT.ChangeMode"}}</label>
+        <select name="changes.{{@index}}.mode">
+          <option value="2" {{#if (eq this.mode 2)}}selected{{/if}}>{{localize "EFFECT.MODE_ADD"}}</option>
+          <option value="1" {{#if (eq this.mode 1)}}selected{{/if}}>{{localize "EFFECT.MODE_MULTIPLY"}}</option>
+          <option value="5" {{#if (eq this.mode 5)}}selected{{/if}}>{{localize "EFFECT.MODE_OVERRIDE"}}</option>
+        </select>
+      </div>
+
+      {{!-- Value --}}
+      <div class="change-field change-value-field">
+        <label>{{localize "EFFECT.ChangeValue"}}</label>
+        <input type="text" name="changes.{{@index}}.value" value="{{this.value}}" placeholder="0" />
+      </div>
+
+      {{!-- Delete Button --}}
+      <button type="button" class="icon delete-change" data-action="deleteChange" data-index="{{@index}}" title="{{localize 'NARUTO_RPG.Common.delete'}}">
+        <i class="fas fa-trash"></i>
+      </button>
+    </li>
+    {{/each}}
+  </ol>
+
+  <div class="add-change">
+    <button type="button" data-action="addChange">
+      <i class="fas fa-plus"></i> {{localize "NARUTO_RPG.ActiveEffects.addChange"}}
+    </button>
+  </div>
+</section>

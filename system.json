@@ -1,0 +1,55 @@
+{
+  "id": "naruto-rpg",
+  "title": "Naruto RPG",
+  "description": "Sistema não-oficial de RPG baseado no universo Naruto (Naruto RPG + Livro de Expansão) para Foundry VTT. Baseado no sistema Street Fighter RPG de Kirlian Silvestre (MIT).",
+  "version": "0.1.0",
+  "socket": true,
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Leandro Nagy",
+      "flags": {}
+    },
+    {
+      "name": "Kirlian Silvestre (sistema original Street Fighter)",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "module/naruto-rpg.mjs"
+  ],
+  "styles": [
+    "styles/naruto-rpg.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [],
+  "packFolders": [],
+  "primaryTokenAttribute": "resources.health.value",
+  "secondaryTokenAttribute": "resources.willpower.value",
+  "grid": {
+    "type": 2,
+    "distance": 1,
+    "units": "m"
+  },
+  "background": "systems/naruto-rpg/assets/images/background.webp",
+  "url": "https://github.com/Parra-Parrudo/naruto-rpg",
+  "manifest": "https://github.com/Parra-Parrudo/naruto-rpg/releases/latest/download/system.json",
+  "download": "https://github.com/Parra-Parrudo/naruto-rpg/releases/latest/download/naruto-rpg.zip",
+  "license": "LICENSE",
+  "readme": "README.md",
+  "flags": {}
+}

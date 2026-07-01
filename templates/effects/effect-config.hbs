@@ -1,0 +1,120 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="effect-icon" src="{{data.icon}}" data-edit="icon" title="{{data.name}}" />
+    <div class="header-details flexcol">
+      <input type="text" name="name" value="{{data.name}}" placeholder="{{localize 'NARUTO_RPG.ActiveEffects.name'}}" />
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{localize "NARUTO_RPG.ActiveEffects.Tabs.details"}}</a>
+    <a class="item" data-tab="duration">{{localize "NARUTO_RPG.ActiveEffects.Tabs.duration"}}</a>
+    <a class="item" data-tab="changes">{{localize "NARUTO_RPG.ActiveEffects.Tabs.changes"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Details Tab --}}
+    <div class="tab" data-group="primary" data-tab="details">
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.disabled"}}</label>
+        <input type="checkbox" name="disabled" {{checked data.disabled}} />
+        <p class="hint">{{localize "NARUTO_RPG.ActiveEffects.disabledHint"}}</p>
+      </div>
+
+      <div class="form-group stacked">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.description"}}</label>
+        <textarea name="description" rows="4">{{data.description}}</textarea>
+      </div>
+    </div>
+
+    {{!-- Duration Tab --}}
+    <div class="tab" data-group="primary" data-tab="duration">
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.Duration.startTime"}}</label>
+        <input type="number" name="duration.startTime" value="{{data.duration.startTime}}" />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.Duration.seconds"}}</label>
+        <input type="number" name="duration.seconds" value="{{data.duration.seconds}}" placeholder="{{localize 'NARUTO_RPG.Common.none'}}" />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.Duration.rounds"}}</label>
+        <input type="number" name="duration.rounds" value="{{data.duration.rounds}}" placeholder="{{localize 'NARUTO_RPG.Common.none'}}" />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.Duration.turns"}}</label>
+        <input type="number" name="duration.turns" value="{{data.duration.turns}}" placeholder="{{localize 'NARUTO_RPG.Common.none'}}" />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.ActiveEffects.Duration.combat"}}</label>
+        <input type="text" name="duration.combat" value="{{data.duration.combat}}" disabled />
+      </div>
+    </div>
+
+    {{!-- Changes Tab --}}
+    <div class="tab" data-group="primary" data-tab="changes">
+      <p class="hint">{{localize "NARUTO_RPG.ActiveEffects.changesHint"}}</p>
+
+      <ol class="changes-list">
+        {{#each parsedChanges as |change idx|}}
+        <li class="effect-change flexrow" data-index="{{idx}}">
+          {{!-- Target Type --}}
+          <select class="change-target-type" data-index="{{idx}}">
+            {{#each ../effectTargetTypes as |targetType|}}
+            <option value="{{targetType.value}}" {{#if (eq targetType.value ../change.targetType)}}selected{{/if}}>{{targetType.label}}</option>
+            {{/each}}
+          </select>
+
+          {{!-- Trait Select (for trait and rollTrait types) --}}
+          <select class="change-trait-select" data-index="{{idx}}" 
+            style="{{#unless (or (eq change.targetType 'trait') (eq change.targetType 'rollTrait'))}}display:none{{/unless}}">
+            <option value="">{{localize "NARUTO_RPG.Common.select"}}...</option>
+            {{#each ../traits as |trait|}}
+            <option value="{{trait.id}}" {{#if (eq trait.id ../change.targetId)}}selected{{/if}}>
+              {{trait.name}} ({{trait.type}})
+            </option>
+            {{/each}}
+          </select>
+
+          {{!-- Resource Select (for resourceMax type) --}}
+          <select class="change-resource-select" data-index="{{idx}}"
+            style="{{#unless (eq change.targetType 'resourceMax')}}display:none{{/unless}}">
+            {{#each ../resourceTypes as |resource|}}
+            <option value="{{resource.value}}" {{#if (eq resource.value ../change.targetId)}}selected{{/if}}>{{resource.label}}</option>
+            {{/each}}
+          </select>
+
+          {{!-- Mode --}}
+          <select class="change-mode" data-index="{{idx}}">
+            {{selectOptions ../modes selected=change.mode}}
+          </select>
+
+          {{!-- Value --}}
+          <input type="text" class="change-value" data-index="{{idx}}" value="{{change.value}}" placeholder="0" />
+
+          {{!-- Delete Button --}}
+          <a class="effect-change-delete" data-index="{{idx}}" title="{{localize 'NARUTO_RPG.Common.delete'}}">
+            <i class="fas fa-trash"></i>
+          </a>
+        </li>
+        {{/each}}
+      </ol>
+
+      <div class="add-change">
+        <a class="effect-change-add">
+          <i class="fas fa-plus"></i> {{localize "NARUTO_RPG.ActiveEffects.addChange"}}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sheet-footer flexrow">
+    <button type="submit" class="submit">
+      <i class="fas fa-save"></i> {{localize "NARUTO_RPG.Common.save"}}
+    </button>
+  </footer>
+</form>

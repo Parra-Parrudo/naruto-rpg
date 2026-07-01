@@ -1,0 +1,20 @@
+<div class="naruto-rpg chat-card">
+  <div class="card-header">
+    <h3>{{item.name}}</h3>
+  </div>
+  <div class="card-content">
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.category"}}:</strong> {{item.system.category}}</p>
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.speedModifier"}}:</strong> {{item.system.speedModifier}}</p>
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.damageModifier"}}:</strong> {{item.system.damageModifier}}</p>
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.movementModifier"}}:</strong> {{item.system.movementModifier}}</p>
+    {{#if item.system.chiCost}}
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.chiCost"}}:</strong> {{item.system.chiCost}}</p>
+    {{/if}}
+    {{#if item.system.willpowerCost}}
+    <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.willpowerCost"}}:</strong> {{item.system.willpowerCost}}</p>
+    {{/if}}
+    {{#if item.system.notes}}
+    <p><em>{{item.system.notes}}</em></p>
+    {{/if}}
+  </div>
+</div>

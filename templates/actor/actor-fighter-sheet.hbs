@@ -1,0 +1,622 @@
+<section class="{{cssClass}} flexcol">
+  {{#if isImported}}
+  <div class="import-warning">
+    <i class="fas fa-lock"></i>
+    {{localize "NARUTO_RPG.Character.readOnlyWarning"}}
+  </div>
+  {{/if}}
+
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-field="img" title="{{actor.name}}" />
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'NARUTO_RPG.Common.name'}}" {{#if isImported}}disabled{{/if}} />
+      </h1>
+      {{!-- Fighting Style in header --}}
+      {{#each items.fightingStyles as |style|}}
+      <div class="header-style" data-item-id="{{style.id}}">
+        <span class="style-label">{{localize "NARUTO_RPG.Item.Types.fightingStyle"}}:</span>
+        <span class="style-name">{{style.name}}</span>
+      </div>
+      {{/each}}
+      <div class="header-details">
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Profile.concept"}}</label>
+          <input type="text" name="system.profile.concept" value="{{systemData.profile.concept}}" {{#unless isEditable}}disabled{{/unless}} />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Profile.playerName"}}</label>
+          <input type="text" name="system.profile.playerName" value="{{systemData.profile.playerName}}" {{#unless isEditable}}disabled{{/unless}} />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item active" data-tab="traits">{{localize "NARUTO_RPG.Tabs.traits"}}</a>
+    <a class="item" data-tab="maneuvers">{{localize "NARUTO_RPG.Tabs.maneuvers"}}</a>
+    <a class="item" data-tab="resources">{{localize "NARUTO_RPG.Tabs.resources"}}</a>
+    <a class="item" data-tab="effects">{{localize "NARUTO_RPG.Tabs.effects"}}</a>
+    <a class="item" data-tab="biography">{{localize "NARUTO_RPG.Tabs.biography"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Traits Tab (Attributes, Abilities, Techniques, Backgrounds) --}}
+    <div class="tab active" data-group="primary" data-tab="traits">
+      {{!-- Attributes - 3 columns by category --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Item.Types.attribute"}}</h3>
+        <div class="traits-columns">
+          {{!-- Physical --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.physical"}}</h4>
+            <ul class="trait-list">
+              {{#each items.attributesByCategory.physical as |attr|}}
+              <li class="trait-item {{#if attr.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{attr.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{attr.name}}</a>
+                {{{circlePips attr.effectiveValue 8 baseValue=attr.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{!-- Social --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.social"}}</h4>
+            <ul class="trait-list">
+              {{#each items.attributesByCategory.social as |attr|}}
+              <li class="trait-item {{#if attr.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{attr.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{attr.name}}</a>
+                {{{circlePips attr.effectiveValue 8 baseValue=attr.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{!-- Mental --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.mental"}}</h4>
+            <ul class="trait-list">
+              {{#each items.attributesByCategory.mental as |attr|}}
+              <li class="trait-item {{#if attr.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{attr.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{attr.name}}</a>
+                {{{circlePips attr.effectiveValue 8 baseValue=attr.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Abilities - 3 columns by category --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Item.Types.ability"}}</h3>
+        <div class="traits-columns">
+          {{!-- Talents --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.talents"}}</h4>
+            <ul class="trait-list">
+              {{#each items.abilitiesByCategory.talents as |ability|}}
+              <li class="trait-item {{#if ability.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{ability.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{ability.name}}</a>
+                {{{circlePips ability.effectiveValue 8 baseValue=ability.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{!-- Skills --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.skills"}}</h4>
+            <ul class="trait-list">
+              {{#each items.abilitiesByCategory.skills as |ability|}}
+              <li class="trait-item {{#if ability.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{ability.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{ability.name}}</a>
+                {{{circlePips ability.effectiveValue 8 baseValue=ability.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{!-- Knowledge --}}
+          <div class="trait-column">
+            <h4>{{localize "NARUTO_RPG.Categories.knowledge"}}</h4>
+            <ul class="trait-list">
+              {{#each items.abilitiesByCategory.knowledge as |ability|}}
+              <li class="trait-item {{#if ability.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{ability.id}}">
+                <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{ability.name}}</a>
+                {{{circlePips ability.effectiveValue 8 baseValue=ability.baseValue}}}
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Techniques and Backgrounds - side by side --}}
+      <div class="traits-row">
+        {{!-- Techniques --}}
+        <div class="traits-section traits-half">
+          <h3>{{localize "NARUTO_RPG.Item.Types.technique"}}</h3>
+          <ul class="trait-list">
+            {{#each items.techniques as |tech|}}
+            <li class="trait-item {{#if tech.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{tech.id}}">
+              <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{tech.name}}</a>
+              {{{circlePips tech.effectiveValue 8 baseValue=tech.baseValue}}}
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+
+        {{!-- Backgrounds --}}
+        <div class="traits-section traits-half">
+          <h3>{{localize "NARUTO_RPG.Item.Types.background"}}</h3>
+          <ul class="trait-list">
+            {{#each items.backgrounds as |bg|}}
+            <li class="trait-item {{#if bg.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{bg.id}}">
+              <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{bg.name}}</a>
+              {{{circlePips bg.effectiveValue 5 baseValue=bg.baseValue}}}
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Maneuvers Tab --}}
+    <div class="tab" data-group="primary" data-tab="maneuvers">
+      <div class="traits-section">
+        <div class="section-header">
+          <h3>{{localize "NARUTO_RPG.Item.Types.specialManeuver"}}</h3>
+          {{#unless isImported}}
+          <button type="button" class="add-basic-maneuvers" data-action="addBasicManeuvers" title="{{localize 'NARUTO_RPG.Maneuvers.addBasic'}}">
+            <i class="fas fa-fist-raised"></i> {{localize "NARUTO_RPG.Maneuvers.addBasic"}}
+          </button>
+          {{/unless}}
+        </div>
+        <div class="maneuver-list">
+          {{#each items.specialManeuvers as |maneuver|}}
+          <div class="maneuver-card" data-item-id="{{maneuver.id}}">
+            <div class="maneuver-row">
+              <a class="maneuver-name rollable" data-action="rollManeuver" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{maneuver.name}}</a>
+              <span class="maneuver-category">{{maneuver.system.category}}</span>
+              <div class="maneuver-stats-inline">
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.speed'}}">
+                  <i class="fas fa-bolt"></i> {{maneuver.calculatedSpeed}} <span class="stat-original">({{maneuver.originalSpeed}})</span>
+                </span>
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.damage'}}">
+                  <i class="fas fa-fist-raised"></i> {{maneuver.calculatedDamage}} <span class="stat-original">({{maneuver.originalDamage}})</span>
+                </span>
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.movement'}}">
+                  <i class="fas fa-running"></i> {{maneuver.calculatedMovement}} <span class="stat-original">({{maneuver.originalMovement}})</span>
+                </span>
+              </div>
+              {{#if maneuver.system.chiCost}}
+              <span class="cost-badge chi" title="{{localize 'NARUTO_RPG.SpecialManeuver.chiCost'}}">
+                <i class="fas fa-yin-yang"></i> {{maneuver.system.chiCost}}
+              </span>
+              {{/if}}
+              {{#if maneuver.system.willpowerCost}}
+              <span class="cost-badge willpower" title="{{localize 'NARUTO_RPG.SpecialManeuver.willpowerCost'}}">
+                <i class="fas fa-brain"></i> {{maneuver.system.willpowerCost}}
+              </span>
+              {{/if}}
+              {{#unless ../isImported}}
+              <div class="item-controls">
+                <a data-action="editItem" data-item-id="{{maneuver.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+                <a data-action="deleteItem" data-item-id="{{maneuver.id}}" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              </div>
+              {{/unless}}
+              <span class="maneuver-expand"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="maneuver-notes collapsed">
+              <div class="notes-content">
+                {{#if maneuver.system.notes}}
+                <p>{{maneuver.system.notes}}</p>
+                {{else}}
+                <p class="no-notes">{{localize "NARUTO_RPG.Common.none"}}</p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Combos Section --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Combo.title"}}</h3>
+        <div class="combo-list">
+          {{#each systemData.combos as |combo|}}
+          <div class="combo-card" data-combo-index="{{@index}}">
+            <div class="combo-row">
+              <span class="combo-dizzy {{#if combo.isDizzy}}active{{/if}}" title="{{localize 'NARUTO_RPG.Combo.isDizzyHint'}}">
+                <i class="fas fa-dizzy"></i>
+              </span>
+              <div class="combo-maneuvers">
+                {{#each combo.maneuverIds as |maneuverId|}}
+                <span class="combo-maneuver-tag">{{lookup ../../maneuverNamesById maneuverId}}</span>
+                {{#unless @last}}<i class="fas fa-arrow-right combo-arrow"></i>{{/unless}}
+                {{/each}}
+              </div>
+              {{#unless ../isImported}}
+              <div class="item-controls">
+                <a data-action="editCombo" data-combo-index="{{@index}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+                <a data-action="deleteCombo" data-combo-index="{{@index}}" title="{{localize 'NARUTO_RPG.Combo.remove'}}"><i class="fas fa-trash"></i></a>
+              </div>
+              {{/unless}}
+            </div>
+          </div>
+          {{else}}
+          <p class="no-items">{{localize "NARUTO_RPG.Common.none"}}</p>
+          {{/each}}
+        </div>
+        {{#unless isImported}}
+        <div class="combo-add">
+          <button type="button" data-action="addCombo">
+            <i class="fas fa-plus"></i>
+            {{localize "NARUTO_RPG.Combo.add"}}
+          </button>
+        </div>
+        {{/unless}}
+      </div>
+    </div>
+
+    {{!-- Resources Tab --}}
+    <div class="tab" data-group="primary" data-tab="resources">
+      <div class="resources-section">
+        {{!-- Health --}}
+        <div class="resource-row" data-resource="health">
+          <label class="resource-label clickable">{{localize "NARUTO_RPG.Resources.health"}}</label>
+          {{{circlePips effectiveResources.health.value effectiveResources.health.effectiveMax class="resource-pips"}}}
+          <span class="resource-value">
+            {{effectiveResources.health.value}} / {{effectiveResources.health.effectiveMax}}
+            {{#unless (eq effectiveResources.health.max effectiveResources.health.effectiveMax)}}
+            <span class="resource-modifier" title="{{localize 'NARUTO_RPG.ActiveEffects.modified'}}">({{effectiveResources.health.max}})</span>
+            {{/unless}}
+          </span>
+          {{#unless isImported}}
+          <a class="resource-edit" data-action="editResourceMax" data-resource="health" title="{{localize 'NARUTO_RPG.Resources.editMax'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{/unless}}
+        </div>
+
+        {{!-- Chi --}}
+        <div class="resource-row" data-resource="chi">
+          <label class="resource-label clickable">{{localize "NARUTO_RPG.Resources.chi"}}</label>
+          {{{circlePips effectiveResources.chi.value effectiveResources.chi.effectiveMax class="resource-pips"}}}
+          <span class="resource-value">
+            {{effectiveResources.chi.value}} / {{effectiveResources.chi.effectiveMax}}
+            {{#unless (eq effectiveResources.chi.max effectiveResources.chi.effectiveMax)}}
+            <span class="resource-modifier" title="{{localize 'NARUTO_RPG.ActiveEffects.modified'}}">({{effectiveResources.chi.max}})</span>
+            {{/unless}}
+          </span>
+          {{#unless isImported}}
+          <a class="resource-edit" data-action="editResourceMax" data-resource="chi" title="{{localize 'NARUTO_RPG.Resources.editMax'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{/unless}}
+        </div>
+
+        {{!-- Willpower --}}
+        <div class="resource-row" data-resource="willpower">
+          <label class="resource-label clickable">{{localize "NARUTO_RPG.Resources.willpower"}}</label>
+          {{{circlePips effectiveResources.willpower.value effectiveResources.willpower.effectiveMax class="resource-pips"}}}
+          <span class="resource-value">
+            {{effectiveResources.willpower.value}} / {{effectiveResources.willpower.effectiveMax}}
+            {{#unless (eq effectiveResources.willpower.max effectiveResources.willpower.effectiveMax)}}
+            <span class="resource-modifier" title="{{localize 'NARUTO_RPG.ActiveEffects.modified'}}">({{effectiveResources.willpower.max}})</span>
+            {{/unless}}
+          </span>
+          {{#unless isImported}}
+          <a class="resource-edit" data-action="editResourceMax" data-resource="willpower" title="{{localize 'NARUTO_RPG.Resources.editMax'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{/unless}}
+        </div>
+
+        {{!-- Honor --}}
+        <div class="resource-row" data-renown="honor">
+          <label>{{localize "NARUTO_RPG.Renown.honor"}}</label>
+          {{{circlePips systemData.renown.honor.permanent 10 dataAttrs="data-resource=\"honor\""}}}
+          <span class="resource-value">{{systemData.renown.honor.permanent}} ({{systemData.renown.honor.temporary}})</span>
+          {{#unless isImported}}
+          <a class="resource-edit" data-action="editRenownPermanent" data-renown="honor" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{/unless}}
+        </div>
+
+        {{!-- Glory --}}
+        <div class="resource-row" data-renown="glory">
+          <label>{{localize "NARUTO_RPG.Renown.glory"}}</label>
+          {{{circlePips systemData.renown.glory.permanent 10 dataAttrs="data-resource=\"glory\""}}}
+          <span class="resource-value">{{systemData.renown.glory.permanent}} ({{systemData.renown.glory.temporary}})</span>
+          {{#unless isImported}}
+          <a class="resource-edit" data-action="editRenownPermanent" data-renown="glory" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{/unless}}
+        </div>
+
+        {{!-- Experience --}}
+        <div class="resource-row">
+          <label>{{localize "NARUTO_RPG.Experience.title"}}</label>
+          <span class="resource-value">{{systemData.experience.spent}} / {{systemData.experience.total}}</span>
+        </div>
+      </div>
+
+      {{!-- Weapons --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Item.Types.weapon"}}</h3>
+        <div class="weapon-list">
+          {{#each items.weapons as |weapon|}}
+          <div class="weapon-card" data-item-id="{{weapon.id}}">
+            <div class="weapon-row">
+              <span class="weapon-name">{{weapon.name}}</span>
+              <span class="weapon-technique">{{weapon.system.techniqueId}}</span>
+              <div class="weapon-stats-inline">
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.speed'}}">
+                  <i class="fas fa-bolt"></i> {{weapon.system.speed}}
+                </span>
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.damage'}}">
+                  <i class="fas fa-fist-raised"></i> {{weapon.system.damage}}
+                </span>
+                <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.movement'}}">
+                  <i class="fas fa-running"></i> {{weapon.system.movement}}
+                </span>
+              </div>
+              <a class="weapon-equip {{#if weapon.system.isEquipped}}equipped{{/if}}" data-action="toggleWeaponEquip" title="{{localize 'NARUTO_RPG.Weapon.equip'}}">
+                <i class="fas {{#if weapon.system.isEquipped}}fa-hand-rock{{else}}fa-hand-paper{{/if}}"></i>
+              </a>
+              {{#unless ../isImported}}
+              <div class="item-controls">
+                <a data-action="editItem" data-item-id="{{weapon.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+                <a data-action="deleteItem" data-item-id="{{weapon.id}}" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              </div>
+              {{/unless}}
+              <span class="weapon-expand"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="weapon-notes collapsed">
+              <div class="notes-content">
+                {{#if weapon.system.special}}
+                <p>{{weapon.system.special}}</p>
+                {{else}}
+                <p class="no-notes">{{localize "NARUTO_RPG.Common.none"}}</p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Equipment --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Item.Types.equipment"}}</h3>
+        <ul class="equipment-list">
+          {{#each items.equipment as |equip|}}
+          <li class="equipment-item" data-item-id="{{equip.id}}">
+            <span class="equipment-name">{{equip.name}}</span>
+            {{#unless ../isImported}}
+            <div class="item-controls">
+              <a data-action="editItem" data-item-id="{{equip.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+              <a data-action="deleteItem" data-item-id="{{equip.id}}" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+            </div>
+            {{/unless}}
+          </li>
+          {{else}}
+          <li class="equipment-empty">{{localize "NARUTO_RPG.Common.none"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    {{!-- Effects Tab --}}
+    <div class="tab" data-group="primary" data-tab="effects">
+      {{!-- Passive Effects --}}
+      <div class="effects-section">
+        <h3>
+          <i class="fas fa-shield-alt"></i>
+          {{localize "NARUTO_RPG.Effects.passive"}}
+        </h3>
+        <ul class="effect-list">
+          {{#each effects.passive as |effect|}}
+          <li class="effect-item {{#if effect.isManual}}effect-manual{{/if}}" data-effect-id="{{effect.id}}">
+            <img class="effect-icon" src="{{effect.icon}}" alt="{{effect.name}}" />
+            <span class="effect-name">{{effect.name}}</span>
+            {{#if effect.isManual}}<span class="effect-manual-badge" title="{{localize 'NARUTO_RPG.Effects.manual'}}"><i class="fas fa-user-edit"></i></span>{{/if}}
+            <div class="effect-controls">
+              <a data-action="toggleEffect" title="{{localize 'NARUTO_RPG.Effects.toggle'}}">
+                <i class="fas {{#if effect.disabled}}fa-toggle-off{{else}}fa-toggle-on{{/if}}"></i>
+              </a>
+              {{#if (or (not ../isImported) effect.isManual)}}
+              <a data-action="editEffect" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+              <a data-action="deleteEffect" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              {{/if}}
+            </div>
+          </li>
+          {{else}}
+          <li class="effect-empty">{{localize "NARUTO_RPG.Effects.noPassive"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+
+      {{!-- Temporary Effects --}}
+      <div class="effects-section">
+        <h3>
+          <i class="fas fa-clock"></i>
+          {{localize "NARUTO_RPG.Effects.temporary"}}
+        </h3>
+        <ul class="effect-list">
+          {{#each effects.temporary as |effect|}}
+          <li class="effect-item {{#if effect.isManual}}effect-manual{{/if}}" data-effect-id="{{effect.id}}">
+            <img class="effect-icon" src="{{effect.icon}}" alt="{{effect.name}}" />
+            <span class="effect-name">{{effect.name}}</span>
+            {{#if effect.isManual}}<span class="effect-manual-badge" title="{{localize 'NARUTO_RPG.Effects.manual'}}"><i class="fas fa-user-edit"></i></span>{{/if}}
+            {{#if effect.duration.label}}
+            <span class="effect-duration">{{effect.duration.label}}</span>
+            {{/if}}
+            <div class="effect-controls">
+              <a data-action="toggleEffect" title="{{localize 'NARUTO_RPG.Effects.toggle'}}">
+                <i class="fas {{#if effect.disabled}}fa-toggle-off{{else}}fa-toggle-on{{/if}}"></i>
+              </a>
+              {{#if (or (not ../isImported) effect.isManual)}}
+              <a data-action="editEffect" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+              <a data-action="deleteEffect" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              {{/if}}
+            </div>
+          </li>
+          {{else}}
+          <li class="effect-empty">{{localize "NARUTO_RPG.Effects.noTemporary"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+
+      {{!-- Inactive Effects --}}
+      <div class="effects-section">
+        <h3>
+          <i class="fas fa-ban"></i>
+          {{localize "NARUTO_RPG.Effects.inactive"}}
+        </h3>
+        <ul class="effect-list">
+          {{#each effects.inactive as |effect|}}
+          <li class="effect-item effect-disabled {{#if effect.isManual}}effect-manual{{/if}}" data-effect-id="{{effect.id}}">
+            <img class="effect-icon" src="{{effect.icon}}" alt="{{effect.name}}" />
+            <span class="effect-name">{{effect.name}}</span>
+            {{#if effect.isManual}}<span class="effect-manual-badge" title="{{localize 'NARUTO_RPG.Effects.manual'}}"><i class="fas fa-user-edit"></i></span>{{/if}}
+            <div class="effect-controls">
+              <a data-action="toggleEffect" title="{{localize 'NARUTO_RPG.Effects.toggle'}}">
+                <i class="fas fa-toggle-off"></i>
+              </a>
+              {{#if (or (not ../isImported) effect.isManual)}}
+              <a data-action="editEffect" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+              <a data-action="deleteEffect" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              {{/if}}
+            </div>
+          </li>
+          {{else}}
+          <li class="effect-empty">{{localize "NARUTO_RPG.Effects.noInactive"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+
+      {{!-- Add Effect Button --}}
+      <div class="effect-add">
+        <button type="button" data-action="createEffect">
+          <i class="fas fa-plus"></i>
+          {{localize "NARUTO_RPG.Effects.add"}}
+        </button>
+      </div>
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab" data-group="primary" data-tab="biography">
+      {{!-- Profile Fields --}}
+      <div class="biography-section profile-fields">
+        <div class="form-row">
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.chronicleName"}}</label>
+            <input type="text" name="system.profile.chronicleName" value="{{systemData.profile.chronicleName}}" {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.schoolName"}}</label>
+            <input type="text" name="system.profile.schoolName" value="{{systemData.profile.schoolName}}" {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.fightingTeam"}}</label>
+            <input type="text" name="system.profile.fightingTeam" value="{{systemData.profile.fightingTeam}}" {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.stable"}}</label>
+            <input type="text" name="system.profile.stable" value="{{systemData.profile.stable}}" {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
+            <input type="text" name="system.profile.signature" value="{{systemData.profile.signature}}" {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+          <div class="form-group">
+            <label>{{localize "NARUTO_RPG.Profile.languages"}}</label>
+            <input type="text" name="system.languagesText" value="{{languagesText}}" placeholder="English, Japanese, ..." {{#unless isEditable}}disabled{{/unless}} />
+          </div>
+        </div>
+      </div>
+
+      {{!-- Divisions --}}
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Item.Types.division"}}</h3>
+        <ul class="division-list">
+          {{#each items.divisions as |division|}}
+          <li class="division-item" data-item-id="{{division.id}}">
+            <div class="division-header">
+              <span class="division-name">{{division.name}}</span>
+              <span class="division-rank">{{localize "NARUTO_RPG.Division.rank"}}: {{division.system.rank}}</span>
+              {{#unless ../isImported}}
+              <div class="item-controls">
+                <a data-action="editItem" data-item-id="{{division.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+                <a data-action="deleteItem" data-item-id="{{division.id}}" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
+              </div>
+              {{/unless}}
+            </div>
+            <div class="division-stats">
+              <span class="division-stat">
+                <i class="fas fa-trophy"></i>
+                {{localize "NARUTO_RPG.Division.wins"}}: {{division.system.wins}}
+              </span>
+              <span class="division-stat">
+                <i class="fas fa-handshake"></i>
+                {{localize "NARUTO_RPG.Division.draws"}}: {{division.system.draws}}
+              </span>
+              <span class="division-stat">
+                <i class="fas fa-times-circle"></i>
+                {{localize "NARUTO_RPG.Division.losses"}}: {{division.system.losses}}
+              </span>
+              <span class="division-stat">
+                <i class="fas fa-fist-raised"></i>
+                {{localize "NARUTO_RPG.Division.knockouts"}}: {{division.system.knockouts}}
+              </span>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+
+      {{!-- Background --}}
+      <div class="biography-section">
+        <h3>{{localize "NARUTO_RPG.Profile.background"}}</h3>
+        {{#if isEditable}}
+        <prose-mirror name="system.background" button="true" toggled="true" value="{{systemData.background}}">
+          {{{enrichedBackground}}}
+        </prose-mirror>
+        {{else}}
+        <div class="editor-content">{{{enrichedBackground}}}</div>
+        {{/if}}
+      </div>
+
+      {{!-- Motivations --}}
+      <div class="biography-section">
+        <h3>{{localize "NARUTO_RPG.Profile.motivations"}}</h3>
+        {{#if isEditable}}
+        <prose-mirror name="system.motivations" button="true" toggled="true" value="{{systemData.motivations}}">
+          {{{enrichedMotivations}}}
+        </prose-mirror>
+        {{else}}
+        <div class="editor-content">{{{enrichedMotivations}}}</div>
+        {{/if}}
+      </div>
+
+      {{!-- Appearance --}}
+      <div class="biography-section">
+        <h3>{{localize "NARUTO_RPG.Profile.appearanceNotes"}}</h3>
+        {{#if isEditable}}
+        <prose-mirror name="system.appearanceNotes" button="true" toggled="true" value="{{systemData.appearanceNotes}}">
+          {{{enrichedAppearanceNotes}}}
+        </prose-mirror>
+        {{else}}
+        <div class="editor-content">{{{enrichedAppearanceNotes}}}</div>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+</section>

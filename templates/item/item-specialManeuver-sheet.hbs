@@ -1,0 +1,197 @@
+<section class="{{cssClass}} flexcol">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-action="editImage" data-field="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'NARUTO_RPG.Item.Types.specialManeuver'}}" />
+      </h1>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item active" data-tab="details">{{localize "NARUTO_RPG.Tabs.details"}}</a>
+    <a class="item" data-tab="effects">{{localize "NARUTO_RPG.Tabs.effects"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Details Tab --}}
+    <div class="tab active" data-group="primary" data-tab="details">
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.Common.sourceId"}}</label>
+        <input type="text" name="system.sourceId" value="{{systemData.sourceId}}" placeholder="e.g., hadouken" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.SpecialManeuver.category"}}</label>
+        <select name="system.category">
+          <option value="">-- {{localize "NARUTO_RPG.Common.select"}} --</option>
+          {{#each worldTechniques}}
+          <option value="{{this.id}}" {{#if (eq this.id ../systemData.category)}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.Common.description"}}</label>
+        {{#if isEditable}}<prose-mirror name="system.description" button="true" toggled="true" value="{{systemData.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}<div class="editor-content">{{{enrichedDescription}}}</div>{{/if}}
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.SpecialManeuver.notes"}}</label>
+        <textarea name="system.notes" rows="2">{{systemData.notes}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.SpecialManeuver.ruleSummary"}}</label>
+        <input type="text" name="system.ruleSummary" value="{{systemData.ruleSummary}}" maxlength="150" />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.SpecialManeuver.defaultPowerPointCost"}}</label>
+        <input type="number" name="system.defaultPowerPointCost" value="{{systemData.defaultPowerPointCost}}" min="-1" max="10" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.chiCost"}}</label>
+          <input type="number" name="system.chiCost" value="{{systemData.chiCost}}" min="0" max="10" />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.willpowerCost"}}</label>
+          <input type="number" name="system.willpowerCost" value="{{systemData.willpowerCost}}" min="0" max="10" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Weapon.speed"}}</label>
+          <input type="text" name="system.speedModifier" value="{{systemData.speedModifier}}" />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Weapon.damage"}}</label>
+          <input type="text" name="system.damageModifier" value="{{systemData.damageModifier}}" />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Weapon.movement"}}</label>
+          <input type="text" name="system.movementModifier" value="{{systemData.movementModifier}}" />
+        </div>
+      </div>
+
+      <div class="list-section">
+        <h3>{{localize "NARUTO_RPG.SpecialManeuver.prerequisites"}}</h3>
+        <ul class="entry-list">
+          {{#each prerequisiteEntries}}
+          <li class="entry-item">
+            <span class="entry-type">{{this.type}}</span>
+            <span class="entry-name">{{this.name}}</span>
+            {{#if this.value}}<span class="entry-value">{{this.value}}</span>{{/if}}
+            <a class="prerequisite-delete" data-action="prerequisiteDelete" data-index="{{@index}}" title="Delete"><i class="fas fa-trash"></i></a>
+          </li>
+          {{/each}}
+        </ul>
+        <div class="entry-add-row">
+          <select name="newPrereqType">
+            <option value="trait">Trait</option>
+            <option value="maneuver">Maneuver</option>
+          </select>
+          <select name="newPrereqId">
+            <option value="">-- {{localize "NARUTO_RPG.Common.select"}} --</option>
+          </select>
+          <input type="number" name="newPrereqValue" value="1" min="1" max="10" style="width: 60px;" />
+          <a class="prerequisite-add" data-action="prerequisiteAdd" title="Add"><i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+
+      <div class="list-section">
+        <h3>{{localize "NARUTO_RPG.SpecialManeuver.stylePowerPointCosts"}}</h3>
+        <ul class="entry-list">
+          {{#each styleCostEntries}}
+          <li class="entry-item">
+            <span class="entry-name">{{this.name}}</span>
+            <span class="entry-value">{{this.cost}} PP</span>
+            <a class="style-cost-delete" data-action="styleCostDelete" data-index="{{@index}}" title="Delete"><i class="fas fa-trash"></i></a>
+          </li>
+          {{/each}}
+        </ul>
+        <div class="entry-add-row">
+          <select name="newStyleId">
+            <option value="">-- {{localize "NARUTO_RPG.Common.select"}} --</option>
+            {{#each worldStyles}}
+            <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+          <input type="number" name="newStyleCost" value="0" min="-1" max="10" style="width: 60px;" />
+          <a class="style-cost-add" data-action="styleCostAdd" title="Add"><i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+
+      <div class="list-section">
+        <h3>{{localize "NARUTO_RPG.SpecialManeuver.backgroundPowerPointCosts"}}</h3>
+        <ul class="entry-list">
+          {{#each backgroundCostEntries}}
+          <li class="entry-item">
+            <span class="entry-name">{{this.name}}</span>
+            <span class="entry-value">{{this.cost}} PP</span>
+            <a class="background-cost-delete" data-action="backgroundCostDelete" data-index="{{@index}}" title="Delete"><i class="fas fa-trash"></i></a>
+          </li>
+          {{/each}}
+        </ul>
+        <div class="entry-add-row">
+          <select name="newBackgroundId">
+            <option value="">-- {{localize "NARUTO_RPG.Common.select"}} --</option>
+            {{#each worldBackgrounds}}
+            <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+          <input type="number" name="newBackgroundCost" value="0" min="-1" max="10" style="width: 60px;" />
+          <a class="background-cost-add" data-action="backgroundCostAdd" title="Add"><i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+
+      <details class="advanced-section">
+        <summary>{{localize "NARUTO_RPG.SpecialManeuver.overrides"}}</summary>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.damageTraitOverride"}}</label>
+          <select name="system.damageTraitOverride">
+            <option value="">-- {{localize "NARUTO_RPG.Common.none"}} --</option>
+            {{#each worldTraits}}
+            <option value="{{this.id}}" {{#if (eq this.id ../systemData.damageTraitOverride)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.damageAttributeOverride"}}</label>
+          <select name="system.damageAttributeOverride">
+            <option value="">-- {{localize "NARUTO_RPG.Common.none"}} --</option>
+            {{#each worldTraits}}
+            <option value="{{this.id}}" {{#if (eq this.id ../systemData.damageAttributeOverride)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.speedTraitOverride"}}</label>
+          <select name="system.speedTraitOverride">
+            <option value="">-- {{localize "NARUTO_RPG.Common.none"}} --</option>
+            {{#each worldTraits}}
+            <option value="{{this.id}}" {{#if (eq this.id ../systemData.speedTraitOverride)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.SpecialManeuver.movementTraitOverride"}}</label>
+          <select name="system.movementTraitOverride">
+            <option value="">-- {{localize "NARUTO_RPG.Common.none"}} --</option>
+            {{#each worldTraits}}
+            <option value="{{this.id}}" {{#if (eq this.id ../systemData.movementTraitOverride)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </details>
+    </div>
+
+    {{!-- Effects Tab --}}
+    <div class="tab" data-group="primary" data-tab="effects">
+      {{> "systems/naruto-rpg/templates/item/partials/item-effects-tab.hbs"}}
+    </div>
+  </section>
+</section>

@@ -1,0 +1,68 @@
+<div class="resources-section">
+  <h2>{{localize "NARUTO_RPG.Resources.health"}}</h2>
+  <div class="resources-container">
+    {{!-- Health --}}
+    <div class="resource">
+      <span class="resource-label">{{localize "NARUTO_RPG.Resources.health"}}</span>
+      <div class="resource-bar-container">
+        <div class="resource-bar health" style="width: {{percentage systemData.resources.health.value systemData.resources.health.max}}%"></div>
+      </div>
+      <div class="resource-values">
+        <button type="button" class="resource-control" data-resource="health" data-action="decrease">-</button>
+        <input type="number" name="system.resources.health.value" value="{{systemData.resources.health.value}}" />
+        <span>/</span>
+        <input type="number" name="system.resources.health.max" value="{{systemData.resources.health.max}}" />
+        <button type="button" class="resource-control" data-resource="health" data-action="increase">+</button>
+      </div>
+    </div>
+
+    {{!-- Chi --}}
+    <div class="resource">
+      <span class="resource-label">{{localize "NARUTO_RPG.Resources.chi"}}</span>
+      <div class="resource-bar-container">
+        <div class="resource-bar chi" style="width: {{percentage systemData.resources.chi.value systemData.resources.chi.max}}%"></div>
+      </div>
+      <div class="resource-values">
+        <button type="button" class="resource-control" data-resource="chi" data-action="decrease">-</button>
+        <input type="number" name="system.resources.chi.value" value="{{systemData.resources.chi.value}}" />
+        <span>/</span>
+        <input type="number" name="system.resources.chi.max" value="{{systemData.resources.chi.max}}" />
+        <button type="button" class="resource-control" data-resource="chi" data-action="increase">+</button>
+      </div>
+    </div>
+
+    {{#if systemData.resources.super}}
+    {{!-- Super --}}
+    <div class="resource">
+      <span class="resource-label">{{localize "NARUTO_RPG.Resources.super"}}</span>
+      <div class="resource-bar-container">
+        <div class="resource-bar super" style="width: {{percentage systemData.resources.super.value systemData.resources.super.max}}%"></div>
+      </div>
+      <div class="resource-values">
+        <button type="button" class="resource-control" data-resource="super" data-action="decrease">-</button>
+        <input type="number" name="system.resources.super.value" value="{{systemData.resources.super.value}}" />
+        <span>/</span>
+        <input type="number" name="system.resources.super.max" value="{{systemData.resources.super.max}}" />
+        <button type="button" class="resource-control" data-resource="super" data-action="increase">+</button>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if systemData.resources.willpower}}
+    {{!-- Willpower --}}
+    <div class="resource">
+      <span class="resource-label">{{localize "NARUTO_RPG.Resources.willpower"}}</span>
+      <div class="resource-bar-container">
+        <div class="resource-bar willpower" style="width: {{percentage systemData.resources.willpower.value systemData.resources.willpower.max}}%"></div>
+      </div>
+      <div class="resource-values">
+        <button type="button" class="resource-control" data-resource="willpower" data-action="decrease">-</button>
+        <input type="number" name="system.resources.willpower.value" value="{{systemData.resources.willpower.value}}" />
+        <span>/</span>
+        <input type="number" name="system.resources.willpower.max" value="{{systemData.resources.willpower.max}}" />
+        <button type="button" class="resource-control" data-resource="willpower" data-action="increase">+</button>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,481 @@
+{
+  "NARUTO_RPG": {
+    "System": "Naruto RPG",
+    "Actor": {
+      "Types": {
+        "fighter": "Shinobi",
+        "npc": "NPC"
+      }
+    },
+    "Item": {
+      "Types": {
+        "fightingStyle": "Estilo de Arte Ninja",
+        "specialManeuver": "Jutsu",
+        "attribute": "Atributo",
+        "ability": "Habilidade",
+        "technique": "Técnica",
+        "background": "Antecedente",
+        "weapon": "Arma",
+        "division": "Rank Ninja",
+        "equipment": "Equipamento"
+      }
+    },
+    "Attributes": {
+      "Categories": {
+        "physical": "Físicos",
+        "social": "Sociais",
+        "mental": "Mentais"
+      },
+      "strength": "Força",
+      "dexterity": "Destreza",
+      "stamina": "Vigor",
+      "charisma": "Carisma",
+      "manipulation": "Manipulação",
+      "appearance": "Aparência",
+      "perception": "Percepção",
+      "intelligence": "Inteligência",
+      "wits": "Raciocínio"
+    },
+    "Techniques": {
+      "punch": "Soco",
+      "kick": "Chute",
+      "block": "Bloqueio",
+      "grab": "Apresar",
+      "athletics": "Esportes",
+      "focus": "Focus"
+    },
+    "Resources": {
+      "health": "Saúde",
+      "chi": "Chakra",
+      "willpower": "Vontade",
+      "editMax": "Editar Máximo",
+      "editMaxTitle": "Editar Máximo de {resource}",
+      "maxValue": "Valor Máximo",
+      "permanent": "Permanente"
+    },
+    "Maneuver": {
+      "Categories": {
+        "punch": "Soco",
+        "kick": "Chute",
+        "block": "Bloqueio",
+        "grab": "Apresar",
+        "athletics": "Esportes",
+        "focus": "Focus",
+        "other": "Outro"
+      }
+    },
+    "Maneuvers": {
+      "addBasic": "Adicionar Manobras Básicas",
+      "allBasicAlreadyAdded": "Todas as manobras básicas já foram adicionadas a este personagem.",
+      "basicNotFound": "Não foi possível encontrar as manobras básicas no diretório de itens.",
+      "addedBasic": "Adicionadas {count} manobras básicas ao personagem.",
+      "addBasicError": "Erro ao adicionar manobras básicas."
+    },
+    "Trait": {
+      "Types": {
+        "attribute": "Atributo",
+        "ability": "Habilidade",
+        "technique": "Técnica",
+        "background": "Antecedente"
+      },
+      "Categories": {
+        "physical": "Físicos",
+        "social": "Sociais",
+        "mental": "Mentais",
+        "talents": "Talentos",
+        "skills": "Perícias",
+        "knowledge": "Conhecimentos",
+        "techniques": "Técnicas",
+        "backgrounds": "Antecedentes"
+      },
+      "traitType": "Tipo de Característica",
+      "category": "Categoria",
+      "bonusPointCost": "Custo em Pontos de Bônus",
+      "experiencePointCost": "Custo de XP",
+      "startLevel": "Nível Inicial",
+      "experiencePointCostOnStartLevel": "Custo de XP no Nível Inicial",
+      "isOptional": "Opcional",
+      "isUnique": "Único",
+      "isWeaponTechnique": "Técnica de Arma",
+      "isFirearmTechnique": "Técnica de Arma de Fogo",
+      "techniqueType": "Tipo de Técnica",
+      "normalTechnique": "Normal",
+      "availableLevels": "Níveis Disponíveis"
+    },
+    "FightingStyle": {
+      "initialChi": "Chakra Inicial",
+      "initialWillpower": "Força de Vontade Inicial",
+      "motto": "Lema"
+    },
+    "SpecialManeuver": {
+      "category": "Categoria",
+      "speedModifier": "Modificador de Velocidade",
+      "damageModifier": "Modificador de Dano",
+      "movementModifier": "Modificador de Movimento",
+      "chiCost": "Custo de Chakra",
+      "willpowerCost": "Custo de Força de Vontade",
+      "defaultPowerPointCost": "Custo Padrão em Pontos de Jutsu",
+      "bonusPointCost": "Custo em Pontos de Bônus",
+      "stylePowerPointCosts": "Pontos de Jutsu por Estilo",
+      "backgroundPowerPointCosts": "Pontos de Jutsu por Antecedente",
+      "prerequisites": "Pré-requisitos",
+      "notes": "Notas",
+      "ruleSummary": "Resumo das Regras",
+      "damageTraitOverride": "Substituição de Característica de Dano",
+      "damageAttributeOverride": "Substituição de Atributo de Dano",
+      "speedTraitOverride": "Substituição de Característica de Velocidade",
+      "movementTraitOverride": "Substituição de Característica de Movimento"
+    },
+    "Weapon": {
+      "techniqueId": "ID da Técnica",
+      "speed": "Velocidade",
+      "damage": "Dano",
+      "movement": "Movimento",
+      "special": "Especial",
+      "equip": "Equipar/Desequipar"
+    },
+    "Prerequisite": {
+      "Types": {
+        "techniqueRating": "Nível de Técnica",
+        "maneuver": "Jutsu",
+        "attributeRating": "Nível de Atributo",
+        "abilityRating": "Nível de Habilidade",
+        "background": "Antecedente"
+      }
+    },
+    "Effect": {
+      "New": "Novo Efeito",
+      "Types": {
+        "categoryBonus": "Bônus de Categoria",
+        "categoryInitialFixed": "Categoria Inicial Fixa",
+        "categoryInitialMax": "Categoria Inicial Máxima",
+        "categoryXpCost": "Custo de XP da Categoria",
+        "traitBonus": "Bônus de Característica",
+        "traitInitialFixed": "Característica Inicial Fixa",
+        "traitInitialMax": "Característica Inicial Máxima",
+        "traitXpCost": "Custo de XP da Característica",
+        "priorityPoints": "Pontos de Prioridade",
+        "grantManeuver": "Conceder Jutsu",
+        "bypassPrerequisite": "Ignorar Pré-requisito",
+        "grantDivision": "Conceder Rank Ninja"
+      }
+    },
+    "Common": {
+      "name": "Nome",
+      "description": "Descrição",
+      "sourceId": "ID de Origem",
+      "effects": "Efeitos",
+      "requirements": "Requisitos",
+      "value": "Valor",
+      "max": "Máximo",
+      "min": "Mínimo",
+      "total": "Total",
+      "roll": "Rolar",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "create": "Criar",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "select": "Selecionar",
+      "none": "Nenhum",
+      "special": "Especial"
+    },
+    "Tabs": {
+      "details": "Detalhes",
+      "combat": "Combate",
+      "costs": "Custos",
+      "prerequisites": "Pré-requisitos",
+      "levels": "Níveis",
+      "effects": "Efeitos",
+      "biography": "Biografia",
+      "traits": "Características",
+      "maneuvers": "Jutsus",
+      "resources": "Recursos"
+    },
+    "Renown": {
+      "honor": "Honra",
+      "glory": "Glória",
+      "editPermanent": "Editar Valor Permanente",
+      "editPermanentTitle": "Editar {renown} Permanente",
+      "permanentValue": "Valor Permanente"
+    },
+    "Experience": {
+      "title": "Experiência",
+      "total": "Total",
+      "spent": "Gasto"
+    },
+    "SheetLabels": {
+      "Actor": "Ficha de Personagem Naruto RPG",
+      "Item": "Ficha de Item Naruto RPG",
+      "Effect": "Ficha de Efeito Naruto RPG"
+    },
+    "Library": {
+      "import": "Importar Biblioteca",
+      "importSuccess": "Biblioteca importada com sucesso",
+      "importError": "Erro ao importar biblioteca"
+    },
+    "Character": {
+      "import": "Importar Personagens",
+      "importSuccess": "Personagens importados com sucesso",
+      "importError": "Erro ao importar personagens",
+      "isImported": "Personagem Importado",
+      "isManual": "Personagem Manual",
+      "readOnlyWarning": "Este personagem foi importado e não pode ser editado. Reimporte para atualizar.",
+      "importMyCharacter": "Importar Meu Personagem",
+      "playerImportHint": "Selecione um arquivo contendo exatamente um personagem para importar nesta ficha.",
+      "reimportHint": "Você só pode reimportar o mesmo personagem ({name}). Selecione o arquivo para atualizar.",
+      "playerImportSuccess": "Personagem importado com sucesso!",
+      "invalidFileFormat": "Formato de arquivo inválido: array de personagens ausente.",
+      "multipleCharactersError": "O arquivo contém {count} personagens. Por favor, selecione um arquivo com exatamente um personagem.",
+      "reimportNameMismatch": "Não é possível importar: esperado personagem \"{expected}\" mas o arquivo contém \"{found}\".",
+      "importParseError": "Falha ao processar arquivo: {message}",
+      "importingFile": "Importando personagem de: {name}..."
+    },
+    "Profile": {
+      "characterName": "Nome do Personagem",
+      "playerName": "Nome do Jogador",
+      "chronicleName": "Crônica",
+      "schoolName": "Vila",
+      "fightingTeam": "Time",
+      "stable": "Clã",
+      "concept": "Conceito",
+      "signature": "Nindô",
+      "background": "Histórico",
+      "motivations": "Motivações",
+      "appearanceNotes": "Aparência",
+      "languages": "Idiomas"
+    },
+    "Combo": {
+      "title": "Combos",
+      "isDizzy": "Atordoante",
+      "isDizzyHint": "Este combo causa atordoamento",
+      "maneuvers": "Manobras",
+      "add": "Adicionar Combo",
+      "remove": "Remover Combo",
+      "selectManeuver": "Selecione a manobra...",
+      "minManeuvers": "Um combo deve ter pelo menos 2 manobras",
+      "maxManeuvers": "Um combo pode ter no máximo 3 manobras"
+    },
+    "Categories": {
+      "physical": "Físicos",
+      "social": "Sociais",
+      "mental": "Mentais",
+      "talents": "Talentos",
+      "skills": "Perícias",
+      "knowledge": "Conhecimentos"
+    },
+    "Division": {
+      "rank": "Graduação",
+      "wins": "Vitórias",
+      "draws": "Empates",
+      "losses": "Derrotas",
+      "knockouts": "KO"
+    },
+    "ContextMenu": {
+      "increment": "Incrementar",
+      "decrement": "Decrementar",
+      "sendToChat": "Enviar para o Chat"
+    },
+    "Dialog": {
+      "DeleteItem": {
+        "Title": "Excluir Item",
+        "Content": "Tem certeza que deseja excluir {name}?"
+      }
+    },
+    "Effects": {
+      "passive": "Efeitos Passivos",
+      "temporary": "Efeitos Temporários",
+      "inactive": "Efeitos Inativos",
+      "noPassive": "Nenhum efeito passivo",
+      "noTemporary": "Nenhum efeito temporário",
+      "noInactive": "Nenhum efeito inativo",
+      "add": "Adicionar Efeito",
+      "new": "Novo Efeito",
+      "toggle": "Alternar Efeito",
+      "manual": "Efeito Manual (Adicionado pelo GM)"
+    },
+    "ActiveEffects": {
+      "name": "Nome do Efeito",
+      "disabled": "Desativado",
+      "disabledHint": "Efeitos desativados estão inativos e não aplicam suas alterações.",
+      "description": "Descrição",
+      "changesHint": "Defina o que este efeito modifica quando ativo.",
+      "addChange": "Adicionar Alteração",
+      "targetType": "Tipo",
+      "target": "Alvo",
+      "allRolls": "Todas as Rolagens",
+      "Tabs": {
+        "details": "Detalhes",
+        "duration": "Duração",
+        "changes": "Alterações"
+      },
+      "Duration": {
+        "startTime": "Tempo Inicial",
+        "seconds": "Segundos",
+        "rounds": "Rodadas",
+        "turns": "Turnos",
+        "combat": "Combate"
+      },
+      "TargetTypes": {
+        "trait": "Modificar Característica",
+        "resourceMax": "Modificar Máximo de Recurso",
+        "rollAll": "Modificar Todas as Rolagens",
+        "rollTrait": "Modificar Rolagens com Característica",
+        "maneuverTechniqueSpeed": "Velocidade da Manobra (por Técnica)",
+        "maneuverTechniqueDamage": "Dano da Manobra (por Técnica)",
+        "maneuverTechniqueMovement": "Movimento da Manobra (por Técnica)",
+        "maneuverSpecificSpeed": "Velocidade da Manobra (Específica)",
+        "maneuverSpecificDamage": "Dano da Manobra (Específica)",
+        "maneuverSpecificMovement": "Movimento da Manobra (Específica)"
+      },
+      "TargetGroups": {
+        "traits": "Características",
+        "rolls": "Rolagens",
+        "maneuverTechnique": "Manobra (por Técnica)",
+        "maneuverSpecific": "Manobra (Específica)"
+      },
+      "ManeuverStats": {
+        "speed": "Velocidade",
+        "damage": "Dano",
+        "movement": "Movimento"
+      },
+      "technique": "Técnica",
+      "maneuver": "Manobra",
+      "modified": "Modificado por efeitos (valor base)",
+      "modifiedManeuverStat": "Modificado por efeitos"
+    },
+    "Roll": {
+      "title": "Rolagem de Dados",
+      "click": "Clique para rolar",
+      "attribute": "Atributo",
+      "secondTrait": "Segunda Característica",
+      "selectAttribute": "Selecione o atributo...",
+      "selectTrait": "Selecione a Característica...",
+      "dicePool": "Parada de Dados",
+      "difficulty": "Dificuldade",
+      "difficultyShort": "Dif.",
+      "modifier": "Modificador",
+      "activeEffects": "Efeitos Ativos",
+      "roll": "Rolar",
+      "noDice": "Nenhum dado para rolar!",
+      "success": "Sucesso",
+      "failure": "Falha",
+      "criticalFailure": "Falha Crítica!",
+      "successCount": "{count} Sucesso(s)",
+      "onesRemoved": "{count} sucesso(s) removido(s) por 1s",
+      "reroll": "Rolar Novamente",
+      "fixedModifiers": "Modificadores Fixos",
+      "maneuverDamage": "Dano da Manobra",
+      "targetSoak": "Absorção de {name}",
+      "applyDamage": "Aplicar Dano",
+      "applyDamageTo": "Aplicar dano em {name}",
+      "damageApplied": "{damage} de dano aplicado em {name}",
+      "noDamageToApply": "Nenhum dano para aplicar"
+    },
+    "Errors": {
+      "noFileSelected": "Por favor, selecione um arquivo para importar.",
+      "actorNotFound": "Personagem não encontrado",
+      "prerequisiteExists": "Este pré-requisito já existe."
+    },
+    "Settings": {
+      "AutoRollDamage": {
+        "Name": "Rolar Dano Automaticamente",
+        "Hint": "Rola o dano automaticamente quando um ataque é bem-sucedido."
+      },
+      "ShowCombatAnimations": {
+        "Name": "Mostrar Animações de Combate",
+        "Hint": "Exibe animações durante ações de combate."
+      },
+      "OnesRemoveSuccesses": {
+        "Name": "1s Removem Sucessos",
+        "Hint": "Cada dado mostrando 1 remove um sucesso da rolagem."
+      },
+      "CriticalFailureRule": {
+        "Name": "Regra de Falha Crítica",
+        "Hint": "Determina quando uma rolagem é considerada falha crítica.",
+        "MoreOnesThanSuccesses": "Mais 1s que sucessos (e nenhum sucesso líquido)",
+        "OnesWithNoSuccesses": "Qualquer 1 sem nenhum sucesso",
+        "Disabled": "Desativado"
+      },
+      "HidePlayerManeuversFromGM": {
+        "Name": "Esconder Manobras dos Jogadores do GM",
+        "Hint": "Quando ativado, o GM não pode ver as manobras selecionadas dos jogadores online até que sejam reveladas. Isso preserva o elemento surpresa do combate."
+      },
+      "AutoAddTraitsOnImport": {
+        "Name": "Adicionar Características Automaticamente na Importação",
+        "Hint": "Adiciona automaticamente todos os atributos, habilidades, técnicas e antecedentes não opcionais aos personagens importados."
+      },
+      "AutoAddTraitsOnManualCreate": {
+        "Name": "Adicionar Características Automaticamente na Criação Manual",
+        "Hint": "Adiciona automaticamente todos os atributos, habilidades, técnicas e antecedentes não opcionais aos personagens criados manualmente."
+      }
+    },
+    "Combat": {
+      "Phase": {
+        "Setup": "Preparação",
+        "Selection": "Fase de Seleção",
+        "Execution": "Fase de Execução"
+      },
+      "Status": {
+        "Pending": "Pendente",
+        "Ready": "Pronto",
+        "Selecting": "Selecionando...",
+        "Waiting": "Aguardando",
+        "Acting": "Agindo",
+        "Revealed": "Revelado",
+        "Interrupted": "Interrompido",
+        "Completed": "Concluído",
+        "Skipped": "Pulado"
+      },
+      "StartTurn": "Iniciar Turno",
+      "StartExecution": "Iniciar Execução",
+      "NextTurn": "Próximo Turno",
+      "CompleteAction": "Completar Ação",
+      "SelectManeuver": "Selecionar Manobra",
+      "ChangeManeuver": "Alterar Manobra",
+      "SelectManeuverTitle": "Selecione Sua Manobra",
+      "SelectManeuverFor": "Selecionar Manobra para {name}",
+      "CurrentSelection": "Seleção Atual",
+      "NoManeuversAvailable": "Nenhuma manobra disponível para este personagem.",
+      "ManeuverSelected": "Manobra selecionada: {name}",
+      "CannotAffordManeuver": "Você não pode pagar o custo desta manobra.",
+      "CannotAfford": "Custo Insuficiente",
+      "Speed": "Velocidade",
+      "Damage": "Dano",
+      "Movement": "Movimento",
+      "YourTurn": "Sua Vez!",
+      "YourTurnTitle": "Vez de {name}",
+      "SelectedManeuver": "Manobra Selecionada",
+      "RevealManeuver": "Revelar Manobra",
+      "SkipTurn": "Pular Turno",
+      "SkipTurnTitle": "Pular Turno",
+      "SkipTurnConfirm": "Tem certeza que deseja pular seu turno?",
+      "ManeuverRevealed": "Manobra Revelada!",
+      "ProceedWithRoll": "Você pode prosseguir com sua rolagem.",
+      "MoveBeforeRevealHint": "Você pode se mover no mapa antes de revelar sua manobra.",
+      "NoManeuverSelected": "Nenhuma manobra selecionada!",
+      "ManeuverNotFound": "Manobra não encontrada no personagem!",
+      "RollManeuver": "Rolar Manobra",
+      "Interrupt": "Interromper",
+      "InterruptTitle": "Interromper Ação",
+      "InterruptConfirm": "{name} irá interromper a ação de {target}. Continuar?",
+      "InterruptionNotification": "{interruptor} interrompe {interrupted}!",
+      "Uses": "usa",
+      "OnlyGMCanStartTurn": "Apenas o GM pode iniciar um novo turno.",
+      "OnlyGMCanStartExecution": "Apenas o GM pode iniciar a fase de execução.",
+      "OnlyGMCanAdvanceTurn": "Apenas o GM pode avançar para o próximo turno.",
+      "NotAllSelectionsComplete": "Nem todos os combatentes selecionaram suas manobras.",
+      "NotAllActionsComplete": "Nem todos os combatentes completaram suas ações.",
+      "NotYourCombatant": "Você não controla este combatente.",
+      "NotInSelectionPhase": "O combate não está na fase de seleção.",
+      "InvalidInterruption": "Tentativa de interrupção inválida.",
+      "CannotInterrupt": "Você não pode interromper este combatente.",
+      "ActionAlreadyCompleted": "Esta ação já foi completada.",
+      "SelectionPhaseStarted": "Fase de seleção iniciada. Escolham suas manobras!",
+      "ExecutionPhaseStarted": "Fase de execução iniciada. As ações começam!",
+      "ResetSelections": "Resetar todas as seleções e iniciar um novo turno",
+      "OpenTurnDialog": "Abrir diálogo de turno",
+      "soak": "Absorção"
+    }
+  }
+}

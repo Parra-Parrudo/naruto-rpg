@@ -1,0 +1,13 @@
+<div class="attributes-section">
+  <h2>{{localize "NARUTO_RPG.Tabs.attributes"}}</h2>
+  <div class="attributes-grid">
+    {{#each systemData.attributes as |attr key|}}
+    <div class="attribute rollable" data-roll-type="attribute" data-attribute="{{key}}">
+      <span class="attribute-label">{{localize (concat "NARUTO_RPG.Attributes." key)}}</span>
+      <div class="attribute-value">
+        <input type="number" name="system.attributes.{{key}}.value" value="{{attr.value}}" min="{{attr.min}}" max="{{attr.max}}" />
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

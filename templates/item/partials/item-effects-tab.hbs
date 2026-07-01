@@ -1,0 +1,37 @@
+{{!-- Effects Tab Partial for Item Sheets --}}
+<div class="effects-tab">
+  <div class="effects-header">
+    <h3>{{localize "NARUTO_RPG.Tabs.effects"}}</h3>
+    <a class="effect-control" data-action="effectCreate" title="{{localize 'NARUTO_RPG.Effects.add'}}">
+      <i class="fas fa-plus"></i> {{localize "NARUTO_RPG.Effects.add"}}
+    </a>
+  </div>
+
+  {{#if effects.length}}
+  <ul class="effects-list">
+    {{#each effects as |effect|}}
+    <li class="effect-item flexrow" data-effect-id="{{effect.id}}">
+      <img class="effect-icon" src="{{effect.img}}" title="{{effect.name}}" />
+      <span class="effect-name">{{effect.name}}</span>
+      <span class="effect-status {{#if effect.disabled}}inactive{{else}}active{{/if}}">
+        {{#if effect.disabled}}
+        <i class="fas fa-times-circle" title="{{localize 'NARUTO_RPG.Effects.inactive'}}"></i>
+        {{else}}
+        <i class="fas fa-check-circle" title="{{localize 'NARUTO_RPG.Effects.passive'}}"></i>
+        {{/if}}
+      </span>
+      <div class="effect-controls">
+        <a class="effect-control" data-action="effectEdit" title="{{localize 'NARUTO_RPG.Common.edit'}}">
+          <i class="fas fa-edit"></i>
+        </a>
+        <a class="effect-control" data-action="effectDelete" title="{{localize 'NARUTO_RPG.Common.delete'}}">
+          <i class="fas fa-trash"></i>
+        </a>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p class="no-effects">{{localize "NARUTO_RPG.Effects.noPassive"}}</p>
+  {{/if}}
+</div>

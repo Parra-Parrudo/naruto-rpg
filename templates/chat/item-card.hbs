@@ -1,0 +1,30 @@
+<div class="naruto-rpg chat-card">
+  <div class="card-header">
+    <img src="{{item.img}}" alt="{{item.name}}" />
+    <h3>{{item.name}}</h3>
+  </div>
+  <div class="card-content">
+    {{#if item.system.description}}
+    <div class="card-description">
+      {{{item.system.description}}}
+    </div>
+    {{/if}}
+    
+    <div class="card-stats">
+      {{#if item.system.speed}}
+      <span class="stat"><strong>{{localize "NARUTO_RPG.Combat.speed"}}:</strong> {{item.system.speed}}</span>
+      {{/if}}
+      {{#if damage}}
+      <span class="stat"><strong>{{localize "NARUTO_RPG.Combat.damage"}}:</strong> {{damage}}</span>
+      {{/if}}
+      {{#if item.system.chiCost}}
+      <span class="stat"><strong>{{localize "NARUTO_RPG.SpecialMove.chiCost"}}:</strong> {{item.system.chiCost}}</span>
+      {{/if}}
+    </div>
+  </div>
+  <div class="card-buttons">
+    <button type="button" data-action="damage">
+      <i class="fas fa-fist-raised"></i> {{localize "NARUTO_RPG.Combat.damage"}}
+    </button>
+  </div>
+</div>

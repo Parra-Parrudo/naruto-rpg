@@ -1,0 +1,12 @@
+<div class="naruto-rpg chat-card">
+  <div class="card-header">
+    <h3>{{item.name}}</h3>
+  </div>
+  <div class="card-content">
+    <p><strong>{{typeLabel}}</strong>{{#if categoryLabel}} ({{categoryLabel}}){{/if}}</p>
+    <p><strong>{{localize "NARUTO_RPG.Common.value"}}:</strong> {{item.system.value}}</p>
+    {{#if item.system.description}}
+    <p>{{item.system.description}}</p>
+    {{/if}}
+  </div>
+</div>

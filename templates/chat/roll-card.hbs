@@ -1,0 +1,16 @@
+<div class="naruto-rpg chat-card roll-card">
+  <div class="card-header">
+    <h3>{{title}}</h3>
+  </div>
+  <div class="card-content">
+    <div class="roll-result">
+      <span class="roll-total">{{roll.total}}</span>
+      <span class="roll-formula">{{roll.formula}}</span>
+    </div>
+    {{#if description}}
+    <div class="roll-description">
+      {{{description}}}
+    </div>
+    {{/if}}
+  </div>
+</div>

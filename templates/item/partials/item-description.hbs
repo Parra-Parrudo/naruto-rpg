@@ -1,0 +1,4 @@
+<div class="description-container">
+  <label>{{localize "NARUTO_RPG.Common.description"}}</label>
+  {{#if isEditable}}<prose-mirror name="system.description" button="true" toggled="true" value="{{systemData.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}<div class="editor-content">{{{enrichedDescription}}}</div>{{/if}}
+</div>

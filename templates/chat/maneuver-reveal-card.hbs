@@ -1,0 +1,58 @@
+<div class="nrpg-maneuver-reveal-card chat-card">
+  <header class="nrpg-reveal-header">
+    <h3 class="nrpg-reveal-title">
+      <i class="fas fa-fist-raised"></i>
+      {{localize "NARUTO_RPG.Combat.ManeuverRevealed"}}
+    </h3>
+  </header>
+
+  <section class="nrpg-reveal-content">
+    <div class="nrpg-combatant-info">
+      <span class="nrpg-combatant-name">{{combatantName}}</span>
+      <span class="nrpg-reveal-uses">{{localize "NARUTO_RPG.Combat.Uses"}}</span>
+    </div>
+
+    <div class="nrpg-maneuver-card-inline">
+      <div class="nrpg-maneuver-row">
+        <span class="nrpg-maneuver-name">{{maneuver.name}}</span>
+        <div class="nrpg-maneuver-stats-inline">
+          {{#if maneuver.category}}
+          <span class="nrpg-maneuver-category">{{maneuver.category}}</span>
+          {{/if}}
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Speed'}}">
+            <i class="fas fa-bolt"></i> {{maneuver.speed}}
+          </span>
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Damage'}}">
+            <i class="fas fa-fist-raised"></i> {{maneuver.damage}}
+          </span>
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Movement'}}">
+            <i class="fas fa-running"></i> {{maneuver.movement}}
+          </span>
+        </div>
+
+        {{#if maneuver.chiCost}}
+        <span class="nrpg-cost-badge nrpg-cost-chi" title="{{localize 'NARUTO_RPG.Resources.chi'}}">
+          <i class="fas fa-yin-yang"></i> {{maneuver.chiCost}}
+        </span>
+        {{/if}}
+        {{#if maneuver.willpowerCost}}
+        <span class="nrpg-cost-badge nrpg-cost-willpower" title="{{localize 'NARUTO_RPG.Resources.willpower'}}">
+          <i class="fas fa-brain"></i> {{maneuver.willpowerCost}}
+        </span>
+        {{/if}}
+
+        {{#if maneuver.notes}}
+        <span class="nrpg-maneuver-expand-chat" data-action="toggleNotes"><i class="fas fa-chevron-down"></i></span>
+        {{/if}}
+      </div>
+
+      {{#if maneuver.notes}}
+      <div class="nrpg-maneuver-notes collapsed">
+        <div class="nrpg-notes-content-chat">
+          <p>{{maneuver.notes}}</p>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </section>
+</div>

@@ -1,0 +1,97 @@
+<div class="nrpg-action-turn-dialog">
+  <header class="nrpg-turn-header">
+    <div class="nrpg-turn-indicator">
+      <i class="fas fa-bolt"></i>
+      <h2>{{localize "NARUTO_RPG.Combat.YourTurn"}}</h2>
+    </div>
+    <div class="nrpg-turn-status">
+      <span class="nrpg-status-badge nrpg-status-{{actionStatus}}">{{statusLabel}}</span>
+    </div>
+  </header>
+
+  {{#if hasManeuver}}
+  <section class="nrpg-maneuver-display">
+    <h3>{{localize "NARUTO_RPG.Combat.SelectedManeuver"}}</h3>
+    <div class="nrpg-maneuver-card nrpg-maneuver-preview">
+      <div class="nrpg-maneuver-row">
+        <span class="nrpg-maneuver-name">{{maneuver.name}}</span>
+        <span class="nrpg-maneuver-category">{{maneuver.category}}</span>
+
+        <div class="nrpg-maneuver-stats-inline">
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Speed'}}">
+            <i class="fas fa-bolt"></i> {{maneuver.speed}}
+          </span>
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Damage'}}">
+            <i class="fas fa-fist-raised"></i> {{maneuver.damage}}
+          </span>
+          <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Movement'}}">
+            <i class="fas fa-running"></i> {{maneuver.movement}}
+          </span>
+        </div>
+
+        {{#if maneuver.chiCost}}
+        <span class="nrpg-cost-badge nrpg-cost-chi" title="{{localize 'NARUTO_RPG.Resources.chi'}}">
+          <i class="fas fa-yin-yang"></i> {{maneuver.chiCost}}
+        </span>
+        {{/if}}
+        {{#if maneuver.willpowerCost}}
+        <span class="nrpg-cost-badge nrpg-cost-willpower" title="{{localize 'NARUTO_RPG.Resources.willpower'}}">
+          <i class="fas fa-brain"></i> {{maneuver.willpowerCost}}
+        </span>
+        {{/if}}
+
+        {{#if maneuver.notes}}
+        <span class="nrpg-maneuver-expand" data-action="toggleNotes"><i class="fas fa-chevron-down"></i></span>
+        {{/if}}
+      </div>
+
+      {{#if maneuver.notes}}
+      <div class="nrpg-maneuver-notes collapsed">
+        <div class="nrpg-notes-content">
+          <p>{{maneuver.notes}}</p>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+
+    {{#unless isRevealed}}
+    <p class="nrpg-turn-hint">
+      <i class="fas fa-info-circle"></i>
+      {{localize "NARUTO_RPG.Combat.MoveBeforeRevealHint"}}
+    </p>
+    {{/unless}}
+  </section>
+  {{else}}
+  <section class="nrpg-no-maneuver-warning">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>{{localize "NARUTO_RPG.Combat.NoManeuverSelected"}}</p>
+  </section>
+  {{/if}}
+
+  <footer class="nrpg-turn-actions">
+    {{#if canReveal}}
+    <button type="button" class="nrpg-action-btn nrpg-reveal-btn" data-action="revealManeuver">
+      <i class="fas fa-eye"></i>
+      {{localize "NARUTO_RPG.Combat.RevealManeuver"}}
+    </button>
+    {{/if}}
+
+    {{#if isRevealed}}
+    <div class="nrpg-revealed-notice">
+      <i class="fas fa-check-circle"></i>
+      <span>{{localize "NARUTO_RPG.Combat.ManeuverRevealed"}}</span>
+    </div>
+    <button type="button" class="nrpg-action-btn nrpg-roll-btn" data-action="rollManeuver">
+      <i class="fas fa-dice"></i>
+      {{localize "NARUTO_RPG.Combat.RollManeuver"}}
+    </button>
+    {{/if}}
+
+    {{#if canSkip}}
+    <button type="button" class="nrpg-action-btn nrpg-skip-btn" data-action="skipTurn">
+      <i class="fas fa-forward"></i>
+      {{localize "NARUTO_RPG.Combat.SkipTurn"}}
+    </button>
+    {{/if}}
+  </footer>
+</div>

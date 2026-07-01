@@ -1,0 +1,98 @@
+<form class="naruto-rpg roll-dialog">
+  <div class="roll-traits">
+    {{!-- First Trait (Attribute) --}}
+    <div class="trait-select">
+      <label>{{localize "NARUTO_RPG.Roll.attribute"}}</label>
+      <select name="attribute" class="trait-dropdown">
+        <option value="">{{localize "NARUTO_RPG.Roll.selectAttribute"}}</option>
+        {{#each attributes}}
+        <option value="{{this.id}}" data-value="{{this.effectiveValue}}" {{#if this.selected}}selected{{/if}}>
+          {{this.name}} ({{this.effectiveValue}})
+        </option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="trait-plus">+</div>
+
+    {{!-- Second Trait (Ability/Technique/Background) --}}
+    <div class="trait-select">
+      <label>{{localize "NARUTO_RPG.Roll.secondTrait"}}</label>
+      <select name="secondTrait" class="trait-dropdown">
+        <option value="">{{localize "NARUTO_RPG.Roll.selectTrait"}}</option>
+        <optgroup label="{{localize 'NARUTO_RPG.Item.Types.ability'}}">
+          {{#each abilities}}
+          <option value="{{this.id}}" data-value="{{this.effectiveValue}}" {{#if this.secondSelected}}selected{{else if this.selected}}selected{{/if}}>
+            {{this.name}} ({{this.effectiveValue}})
+          </option>
+          {{/each}}
+        </optgroup>
+        <optgroup label="{{localize 'NARUTO_RPG.Item.Types.technique'}}">
+          {{#each techniques}}
+          <option value="{{this.id}}" data-value="{{this.effectiveValue}}" {{#if this.secondSelected}}selected{{else if this.selected}}selected{{/if}}>
+            {{this.name}} ({{this.effectiveValue}})
+          </option>
+          {{/each}}
+        </optgroup>
+        <optgroup label="{{localize 'NARUTO_RPG.Item.Types.background'}}">
+          {{#each backgrounds}}
+          <option value="{{this.id}}" data-value="{{this.effectiveValue}}" {{#if this.secondSelected}}selected{{else if this.selected}}selected{{/if}}>
+            {{this.name}} ({{this.effectiveValue}})
+          </option>
+          {{/each}}
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  {{!-- Dice Pool Summary --}}
+  <div class="dice-pool-summary">
+    <span class="pool-label">{{localize "NARUTO_RPG.Roll.dicePool"}}:</span>
+    <span class="pool-value" id="dicePoolTotal">0</span>
+    <span class="pool-dice">d10</span>
+  </div>
+
+  {{!-- Difficulty --}}
+  <div class="roll-difficulty">
+    <label>{{localize "NARUTO_RPG.Roll.difficulty"}}</label>
+    <input type="number" name="difficulty" value="{{difficulty}}" min="2" max="10" />
+  </div>
+
+  {{!-- Modifier --}}
+  <div class="roll-modifier">
+    <label>{{localize "NARUTO_RPG.Roll.modifier"}}</label>
+    <input type="number" name="modifier" value="0" />
+  </div>
+
+  {{!-- Fixed Modifiers (from maneuvers, etc.) --}}
+  {{#if fixedModifiers.length}}
+  <div class="roll-fixed-modifiers">
+    <label>{{localize "NARUTO_RPG.Roll.fixedModifiers"}}</label>
+    <ul class="fixed-modifier-list">
+      {{#each fixedModifiers}}
+      <li class="fixed-modifier-item">
+        <input type="checkbox" name="fixedMod-{{@index}}" id="fixedMod-{{@index}}" data-value="{{this.value}}" {{#if this.checked}}checked{{/if}} />
+        <label for="fixedMod-{{@index}}">
+          {{this.name}} ({{this.displayValue}})
+        </label>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
+
+  {{!-- Active Effect Modifiers --}}
+  <div class="roll-effect-modifiers" {{#unless effectModifiers.length}}style="display:none"{{/unless}}>
+    <label>{{localize "NARUTO_RPG.Roll.activeEffects"}}</label>
+    <ul class="effect-modifier-list">
+      {{#each effectModifiers}}
+      <li class="effect-modifier-item">
+        <input type="checkbox" name="effectMod-{{@index}}" id="effectMod-{{@index}}" data-value="{{this.value}}" {{#if this.checked}}checked{{/if}} />
+        <label for="effectMod-{{@index}}">
+          {{this.name}} ({{this.displayValue}})
+        </label>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</form>

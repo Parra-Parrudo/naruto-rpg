@@ -1,0 +1,481 @@
+{
+  "NARUTO_RPG": {
+    "System": "Naruto RPG",
+    "Actor": {
+      "Types": {
+        "fighter": "Shinobi",
+        "npc": "NPC"
+      }
+    },
+    "Item": {
+      "Types": {
+        "fightingStyle": "Ninja Art Style",
+        "specialManeuver": "Jutsu",
+        "attribute": "Attribute",
+        "ability": "Ability",
+        "technique": "Technique",
+        "background": "Background",
+        "weapon": "Weapon",
+        "division": "Ninja Rank",
+        "equipment": "Equipment"
+      }
+    },
+    "Attributes": {
+      "Categories": {
+        "physical": "Physical",
+        "social": "Social",
+        "mental": "Mental"
+      },
+      "strength": "Strength",
+      "dexterity": "Dexterity",
+      "stamina": "Stamina",
+      "charisma": "Charisma",
+      "manipulation": "Manipulation",
+      "appearance": "Appearance",
+      "perception": "Perception",
+      "intelligence": "Intelligence",
+      "wits": "Wits"
+    },
+    "Techniques": {
+      "punch": "Punch",
+      "kick": "Kick",
+      "block": "Block",
+      "grab": "Grab",
+      "athletics": "Athletics",
+      "focus": "Focus"
+    },
+    "Resources": {
+      "health": "Health",
+      "chi": "Chakra",
+      "willpower": "Willpower",
+      "editMax": "Edit Maximum",
+      "editMaxTitle": "Edit {resource} Maximum",
+      "maxValue": "Maximum Value",
+      "permanent": "Permanent"
+    },
+    "Maneuver": {
+      "Categories": {
+        "punch": "Punch",
+        "kick": "Kick",
+        "block": "Block",
+        "grab": "Grab",
+        "athletics": "Athletics",
+        "focus": "Focus",
+        "other": "Other"
+      }
+    },
+    "Maneuvers": {
+      "addBasic": "Add Basic Maneuvers",
+      "allBasicAlreadyAdded": "All basic maneuvers are already added to this character.",
+      "basicNotFound": "Could not find basic maneuvers in the items directory.",
+      "addedBasic": "Added {count} basic maneuvers to the character.",
+      "addBasicError": "Error adding basic maneuvers."
+    },
+    "Trait": {
+      "Types": {
+        "attribute": "Attribute",
+        "ability": "Ability",
+        "technique": "Technique",
+        "background": "Background"
+      },
+      "Categories": {
+        "physical": "Physical",
+        "social": "Social",
+        "mental": "Mental",
+        "talents": "Talents",
+        "skills": "Skills",
+        "knowledge": "Knowledge",
+        "techniques": "Techniques",
+        "backgrounds": "Backgrounds"
+      },
+      "traitType": "Trait Type",
+      "category": "Category",
+      "bonusPointCost": "Bonus Point Cost",
+      "experiencePointCost": "XP Cost",
+      "startLevel": "Start Level",
+      "experiencePointCostOnStartLevel": "XP Cost at Start Level",
+      "isOptional": "Optional",
+      "isUnique": "Unique",
+      "isWeaponTechnique": "Weapon Technique",
+      "isFirearmTechnique": "Firearm Technique",
+      "techniqueType": "Technique Type",
+      "normalTechnique": "Normal",
+      "availableLevels": "Available Levels"
+    },
+    "FightingStyle": {
+      "initialChi": "Initial Chakra",
+      "initialWillpower": "Initial Willpower",
+      "motto": "Motto"
+    },
+    "SpecialManeuver": {
+      "category": "Category",
+      "speedModifier": "Speed Modifier",
+      "damageModifier": "Damage Modifier",
+      "movementModifier": "Movement Modifier",
+      "chiCost": "Chakra Cost",
+      "willpowerCost": "Willpower Cost",
+      "defaultPowerPointCost": "Default Jutsu Point Cost",
+      "bonusPointCost": "Bonus Point Cost",
+      "stylePowerPointCosts": "Jutsu Points per Style",
+      "backgroundPowerPointCosts": "Jutsu Points per Background",
+      "prerequisites": "Prerequisites",
+      "notes": "Notes",
+      "ruleSummary": "Rule Summary",
+      "damageTraitOverride": "Damage Trait Override",
+      "damageAttributeOverride": "Damage Attribute Override",
+      "speedTraitOverride": "Speed Trait Override",
+      "movementTraitOverride": "Movement Trait Override"
+    },
+    "Weapon": {
+      "techniqueId": "Technique ID",
+      "speed": "Speed",
+      "damage": "Damage",
+      "movement": "Movement",
+      "special": "Special",
+      "equip": "Equip/Unequip"
+    },
+    "Prerequisite": {
+      "Types": {
+        "techniqueRating": "Technique Rating",
+        "maneuver": "Jutsu",
+        "attributeRating": "Attribute Rating",
+        "abilityRating": "Ability Rating",
+        "background": "Background"
+      }
+    },
+    "Effect": {
+      "New": "New Effect",
+      "Types": {
+        "categoryBonus": "Category Bonus",
+        "categoryInitialFixed": "Category Initial Fixed",
+        "categoryInitialMax": "Category Initial Max",
+        "categoryXpCost": "Category XP Cost",
+        "traitBonus": "Trait Bonus",
+        "traitInitialFixed": "Trait Initial Fixed",
+        "traitInitialMax": "Trait Initial Max",
+        "traitXpCost": "Trait XP Cost",
+        "priorityPoints": "Priority Points",
+        "grantManeuver": "Grant Jutsu",
+        "bypassPrerequisite": "Bypass Prerequisite",
+        "grantDivision": "Grant Ninja Rank"
+      }
+    },
+    "Common": {
+      "name": "Name",
+      "description": "Description",
+      "sourceId": "Source ID",
+      "effects": "Effects",
+      "requirements": "Requirements",
+      "value": "Value",
+      "max": "Max",
+      "min": "Min",
+      "total": "Total",
+      "roll": "Roll",
+      "edit": "Edit",
+      "delete": "Delete",
+      "create": "Create",
+      "cancel": "Cancel",
+      "save": "Save",
+      "select": "Select",
+      "none": "None",
+      "special": "Special"
+    },
+    "Tabs": {
+      "details": "Details",
+      "combat": "Combat",
+      "costs": "Costs",
+      "prerequisites": "Prerequisites",
+      "levels": "Levels",
+      "effects": "Effects",
+      "biography": "Biography",
+      "traits": "Traits",
+      "maneuvers": "Jutsus",
+      "resources": "Resources"
+    },
+    "Renown": {
+      "honor": "Honor",
+      "glory": "Glory",
+      "editPermanent": "Edit Permanent Value",
+      "editPermanentTitle": "Edit {renown} Permanent",
+      "permanentValue": "Permanent Value"
+    },
+    "Experience": {
+      "title": "Experience",
+      "total": "Total",
+      "spent": "Spent"
+    },
+    "SheetLabels": {
+      "Actor": "Naruto RPG Actor Sheet",
+      "Item": "Naruto RPG Item Sheet",
+      "Effect": "Naruto RPG Effect Sheet"
+    },
+    "Library": {
+      "import": "Import Library",
+      "importSuccess": "Library imported successfully",
+      "importError": "Error importing library"
+    },
+    "Character": {
+      "import": "Import Characters",
+      "importSuccess": "Characters imported successfully",
+      "importError": "Error importing characters",
+      "isImported": "Imported Character",
+      "isManual": "Manual Character",
+      "readOnlyWarning": "This character was imported and cannot be edited. Re-import to update.",
+      "importMyCharacter": "Import My Character",
+      "playerImportHint": "Select a file containing exactly one character to import into this sheet.",
+      "reimportHint": "You can only reimport the same character ({name}). Select the file to update.",
+      "playerImportSuccess": "Character imported successfully!",
+      "invalidFileFormat": "Invalid file format: missing characters array.",
+      "multipleCharactersError": "File contains {count} characters. Please select a file with exactly one character.",
+      "reimportNameMismatch": "Cannot import: expected character \"{expected}\" but file contains \"{found}\".",
+      "importParseError": "Failed to parse file: {message}",
+      "importingFile": "Importing character from: {name}..."
+    },
+    "Profile": {
+      "characterName": "Character Name",
+      "playerName": "Player Name",
+      "chronicleName": "Chronicle",
+      "schoolName": "Village",
+      "fightingTeam": "Team",
+      "stable": "Clan",
+      "concept": "Concept",
+      "signature": "Nindo",
+      "background": "Background",
+      "motivations": "Motivations",
+      "appearanceNotes": "Appearance",
+      "languages": "Languages"
+    },
+    "Combo": {
+      "title": "Combos",
+      "isDizzy": "Dizzy",
+      "isDizzyHint": "This combo causes dizzy",
+      "maneuvers": "Maneuvers",
+      "add": "Add Combo",
+      "remove": "Remove Combo",
+      "selectManeuver": "Select maneuver...",
+      "minManeuvers": "A combo must have at least 2 maneuvers",
+      "maxManeuvers": "A combo can have at most 3 maneuvers"
+    },
+    "Categories": {
+      "physical": "Physical",
+      "social": "Social",
+      "mental": "Mental",
+      "talents": "Talents",
+      "skills": "Skills",
+      "knowledge": "Knowledge"
+    },
+    "Division": {
+      "rank": "Rank",
+      "wins": "Wins",
+      "draws": "Draws",
+      "losses": "Losses",
+      "knockouts": "KO"
+    },
+    "ContextMenu": {
+      "increment": "Increment",
+      "decrement": "Decrement",
+      "sendToChat": "Send to Chat"
+    },
+    "Dialog": {
+      "DeleteItem": {
+        "Title": "Delete Item",
+        "Content": "Are you sure you want to delete {name}?"
+      }
+    },
+    "Effects": {
+      "passive": "Passive Effects",
+      "temporary": "Temporary Effects",
+      "inactive": "Inactive Effects",
+      "noPassive": "No passive effects",
+      "noTemporary": "No temporary effects",
+      "noInactive": "No inactive effects",
+      "add": "Add Effect",
+      "new": "New Effect",
+      "toggle": "Toggle Effect",
+      "manual": "Manual Effect (GM Added)"
+    },
+    "ActiveEffects": {
+      "name": "Effect Name",
+      "disabled": "Disabled",
+      "disabledHint": "Disabled effects are inactive and do not apply their changes.",
+      "description": "Description",
+      "changesHint": "Define what this effect modifies when active.",
+      "addChange": "Add Change",
+      "targetType": "Type",
+      "target": "Target",
+      "allRolls": "All Rolls",
+      "Tabs": {
+        "details": "Details",
+        "duration": "Duration",
+        "changes": "Changes"
+      },
+      "Duration": {
+        "startTime": "Start Time",
+        "seconds": "Seconds",
+        "rounds": "Rounds",
+        "turns": "Turns",
+        "combat": "Combat"
+      },
+      "TargetTypes": {
+        "trait": "Modify Trait",
+        "resourceMax": "Modify Resource Max",
+        "rollAll": "Modify All Rolls",
+        "rollTrait": "Modify Rolls with Trait",
+        "maneuverTechniqueSpeed": "Maneuver Speed (by Technique)",
+        "maneuverTechniqueDamage": "Maneuver Damage (by Technique)",
+        "maneuverTechniqueMovement": "Maneuver Movement (by Technique)",
+        "maneuverSpecificSpeed": "Maneuver Speed (Specific)",
+        "maneuverSpecificDamage": "Maneuver Damage (Specific)",
+        "maneuverSpecificMovement": "Maneuver Movement (Specific)"
+      },
+      "TargetGroups": {
+        "traits": "Traits",
+        "rolls": "Rolls",
+        "maneuverTechnique": "Maneuver (by Technique)",
+        "maneuverSpecific": "Maneuver (Specific)"
+      },
+      "ManeuverStats": {
+        "speed": "Speed",
+        "damage": "Damage",
+        "movement": "Movement"
+      },
+      "technique": "Technique",
+      "maneuver": "Maneuver",
+      "modified": "Modified by effects (base value)",
+      "modifiedManeuverStat": "Modified by effects"
+    },
+    "Roll": {
+      "title": "Dice Roll",
+      "click": "Click to roll",
+      "attribute": "Attribute",
+      "secondTrait": "Second Trait",
+      "selectAttribute": "Select attribute...",
+      "selectTrait": "Select trait...",
+      "dicePool": "Dice Pool",
+      "difficulty": "Difficulty",
+      "difficultyShort": "Diff.",
+      "modifier": "Modifier",
+      "activeEffects": "Active Effects",
+      "roll": "Roll",
+      "noDice": "No dice to roll!",
+      "success": "Success",
+      "failure": "Failure",
+      "criticalFailure": "Critical Failure!",
+      "successCount": "{count} Success(es)",
+      "onesRemoved": "{count} success(es) removed by 1s",
+      "reroll": "Reroll",
+      "fixedModifiers": "Fixed Modifiers",
+      "maneuverDamage": "Maneuver Damage",
+      "targetSoak": "{name}'s Soak",
+      "applyDamage": "Apply Damage",
+      "applyDamageTo": "Apply damage to {name}",
+      "damageApplied": "{damage} damage applied to {name}",
+      "noDamageToApply": "No damage to apply"
+    },
+    "Errors": {
+      "noFileSelected": "Please select a file to import.",
+      "actorNotFound": "Actor not found",
+      "prerequisiteExists": "This prerequisite already exists."
+    },
+    "Settings": {
+      "AutoRollDamage": {
+        "Name": "Auto Roll Damage",
+        "Hint": "Automatically roll damage when an attack succeeds."
+      },
+      "ShowCombatAnimations": {
+        "Name": "Show Combat Animations",
+        "Hint": "Display animations during combat actions."
+      },
+      "OnesRemoveSuccesses": {
+        "Name": "Ones Remove Successes",
+        "Hint": "Each die showing 1 removes one success from the roll."
+      },
+      "CriticalFailureRule": {
+        "Name": "Critical Failure Rule",
+        "Hint": "Determines when a roll is considered a critical failure.",
+        "MoreOnesThanSuccesses": "More 1s than successes (and no net successes)",
+        "OnesWithNoSuccesses": "Any 1s with no successes",
+        "Disabled": "Disabled"
+      },
+      "HidePlayerManeuversFromGM": {
+        "Name": "Hide Player Maneuvers from GM",
+        "Hint": "When enabled, the GM cannot see the selected maneuvers of online players until they are revealed. This preserves the surprise element of combat."
+      },
+      "AutoAddTraitsOnImport": {
+        "Name": "Auto-add Traits on Import",
+        "Hint": "Automatically add all non-optional attributes, abilities, techniques, and backgrounds to imported characters."
+      },
+      "AutoAddTraitsOnManualCreate": {
+        "Name": "Auto-add Traits on Manual Creation",
+        "Hint": "Automatically add all non-optional attributes, abilities, techniques, and backgrounds to manually created characters."
+      }
+    },
+    "Combat": {
+      "Phase": {
+        "Setup": "Setup",
+        "Selection": "Selection Phase",
+        "Execution": "Execution Phase"
+      },
+      "Status": {
+        "Pending": "Pending",
+        "Ready": "Ready",
+        "Selecting": "Selecting...",
+        "Waiting": "Waiting",
+        "Acting": "Acting",
+        "Revealed": "Revealed",
+        "Interrupted": "Interrupted",
+        "Completed": "Completed",
+        "Skipped": "Skipped"
+      },
+      "StartTurn": "Start Turn",
+      "StartExecution": "Start Execution",
+      "NextTurn": "Next Turn",
+      "CompleteAction": "Complete Action",
+      "SelectManeuver": "Select Maneuver",
+      "ChangeManeuver": "Change Maneuver",
+      "SelectManeuverTitle": "Select Your Maneuver",
+      "SelectManeuverFor": "Select Maneuver for {name}",
+      "CurrentSelection": "Current Selection",
+      "NoManeuversAvailable": "No maneuvers available for this character.",
+      "ManeuverSelected": "Maneuver selected: {name}",
+      "CannotAffordManeuver": "You cannot afford this maneuver's cost.",
+      "CannotAfford": "Cannot Afford",
+      "Speed": "Speed",
+      "Damage": "Damage",
+      "Movement": "Movement",
+      "YourTurn": "Your Turn!",
+      "YourTurnTitle": "{name}'s Turn",
+      "SelectedManeuver": "Selected Maneuver",
+      "RevealManeuver": "Reveal Maneuver",
+      "SkipTurn": "Skip Turn",
+      "SkipTurnTitle": "Skip Turn",
+      "SkipTurnConfirm": "Are you sure you want to skip your turn?",
+      "ManeuverRevealed": "Maneuver Revealed!",
+      "ProceedWithRoll": "You may now proceed with your roll.",
+      "MoveBeforeRevealHint": "You can move on the map before revealing your maneuver.",
+      "NoManeuverSelected": "No maneuver selected!",
+      "ManeuverNotFound": "Maneuver not found in character!",
+      "RollManeuver": "Roll Maneuver",
+      "Interrupt": "Interrupt",
+      "InterruptTitle": "Interrupt Action",
+      "InterruptConfirm": "{name} will interrupt {target}'s action. Continue?",
+      "InterruptionNotification": "{interruptor} interrupts {interrupted}!",
+      "Uses": "uses",
+      "OnlyGMCanStartTurn": "Only the GM can start a new turn.",
+      "OnlyGMCanStartExecution": "Only the GM can start the execution phase.",
+      "OnlyGMCanAdvanceTurn": "Only the GM can advance to the next turn.",
+      "NotAllSelectionsComplete": "Not all combatants have selected their maneuvers.",
+      "NotAllActionsComplete": "Not all combatants have completed their actions.",
+      "NotYourCombatant": "You do not control this combatant.",
+      "NotInSelectionPhase": "Combat is not in the selection phase.",
+      "InvalidInterruption": "Invalid interruption attempt.",
+      "CannotInterrupt": "You cannot interrupt this combatant.",
+      "ActionAlreadyCompleted": "This action has already been completed.",
+      "SelectionPhaseStarted": "Selection phase started. Choose your maneuvers!",
+      "ExecutionPhaseStarted": "Execution phase started. Actions begin!",
+      "ResetSelections": "Reset all selections and start a new turn",
+      "OpenTurnDialog": "Open turn dialog",
+      "soak": "Soak"
+    }
+  }
+}

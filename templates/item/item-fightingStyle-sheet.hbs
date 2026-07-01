@@ -1,0 +1,51 @@
+<section class="{{cssClass}} flexcol">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-action="editImage" data-field="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'NARUTO_RPG.Item.Types.fightingStyle'}}" />
+      </h1>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item active" data-tab="details">{{localize "NARUTO_RPG.Tabs.details"}}</a>
+    <a class="item" data-tab="effects">{{localize "NARUTO_RPG.Tabs.effects"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Details Tab --}}
+    <div class="tab active" data-group="primary" data-tab="details">
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.Common.sourceId"}}</label>
+        <input type="text" name="system.sourceId" value="{{systemData.sourceId}}" placeholder="e.g., aikido" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.Common.description"}}</label>
+        {{#if isEditable}}<prose-mirror name="system.description" button="true" toggled="true" value="{{systemData.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}<div class="editor-content">{{{enrichedDescription}}}</div>{{/if}}
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.FightingStyle.initialChi"}}</label>
+          <input type="number" name="system.initialChi" value="{{systemData.initialChi}}" min="0" max="10" />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.FightingStyle.initialWillpower"}}</label>
+          <input type="number" name="system.initialWillpower" value="{{systemData.initialWillpower}}" min="0" max="10" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "NARUTO_RPG.FightingStyle.motto"}}</label>
+        <textarea name="system.motto" rows="2">{{systemData.motto}}</textarea>
+      </div>
+    </div>
+
+    {{!-- Effects Tab --}}
+    <div class="tab" data-group="primary" data-tab="effects">
+      {{> "systems/naruto-rpg/templates/item/partials/item-effects-tab.hbs"}}
+    </div>
+  </section>
+</section>

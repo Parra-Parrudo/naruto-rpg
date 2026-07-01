@@ -1,0 +1,127 @@
+{
+  "Actor": {
+    "types": ["fighter"],
+    "htmlFields": ["background", "motivations", "appearanceNotes"],
+    "fighter": {
+      "importData": {
+        "isImported": false,
+        "characterId": "",
+        "importedAt": "",
+        "sourceVersion": ""
+      },
+      "profile": {
+        "characterName": "",
+        "playerName": "",
+        "chronicleName": "",
+        "schoolName": "",
+        "fightingTeam": "",
+        "stable": "",
+        "concept": "",
+        "signature": ""
+      },
+      "resources": {
+        "health": { "value": 10, "max": 10 },
+        "chi": { "value": 0, "max": 10 },
+        "willpower": { "value": 0, "max": 10 }
+      },
+      "renown": {
+        "honor": { "permanent": 0, "temporary": 0 },
+        "glory": { "permanent": 0, "temporary": 0 }
+      },
+      "experience": {
+        "total": 0,
+        "spent": 0
+      },
+      "divisionRecords": [],
+      "sessionRecords": [],
+      "languages": [],
+      "combos": [],
+      "background": "",
+      "motivations": "",
+      "appearanceNotes": ""
+    }
+  },
+  "Item": {
+    "types": ["fightingStyle", "specialManeuver", "attribute", "ability", "technique", "background", "weapon", "division", "equipment"],
+    "htmlFields": ["description"],
+    "fightingStyle": {
+      "sourceId": "",
+      "initialChi": 3,
+      "initialWillpower": 4,
+      "motto": "",
+      "description": ""
+    },
+    "specialManeuver": {
+      "sourceId": "",
+      "category": "punch",
+      "prerequisites": [],
+      "defaultPowerPointCost": 0,
+      "stylePowerPointCosts": {},
+      "backgroundPowerPointCosts": {},
+      "chiCost": null,
+      "willpowerCost": null,
+      "speedModifier": "+0",
+      "damageModifier": "+0",
+      "movementModifier": "+0",
+      "notes": "",
+      "ruleSummary": "",
+      "damageTraitOverride": null,
+      "damageAttributeOverride": null,
+      "speedTraitOverride": null,
+      "movementTraitOverride": null,
+      "description": ""
+    },
+    "attribute": {
+      "sourceId": "",
+      "category": "physical",
+      "value": 1,
+      "isOptional": false,
+      "description": ""
+    },
+    "ability": {
+      "sourceId": "",
+      "category": "talents",
+      "value": 0,
+      "isOptional": false,
+      "description": ""
+    },
+    "technique": {
+      "sourceId": "",
+      "value": 0,
+      "isOptional": false,
+      "isWeaponTechnique": false,
+      "isFirearmTechnique": false,
+      "description": ""
+    },
+    "background": {
+      "sourceId": "",
+      "value": 0,
+      "isOptional": true,
+      "isUnique": false,
+      "description": ""
+    },
+    "weapon": {
+      "sourceId": "",
+      "techniqueId": "",
+      "speed": "",
+      "damage": "",
+      "movement": "",
+      "special": "",
+      "isEquipped": false,
+      "description": ""
+    },
+    "division": {
+      "sourceId": "",
+      "rank": "",
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "knockouts": 0,
+      "description": ""
+    },
+    "equipment": {
+      "sourceId": "",
+      "description": ""
+    }
+  }
+}

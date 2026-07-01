@@ -1,0 +1,116 @@
+<div class="naruto-rpg chat-card roll-result {{resultType}}"
+     data-actor-id="{{actor.id}}"
+     data-attribute-id="{{attribute.id}}"
+     data-second-trait-id="{{secondTrait.id}}"
+     data-difficulty="{{difficulty}}"
+     data-modifier="{{modifier}}"
+     data-target-token-id="{{targetTokenId}}"
+     data-target-actor-id="{{targetActorId}}"
+     data-target-name="{{targetName}}"
+     data-damage="{{finalSuccesses}}"
+     data-roll-title="{{rollTitle}}"
+     data-dice-pool="{{dicePool}}"
+     data-fixed-modifiers="{{json fixedModifiers}}"
+     data-effect-modifiers="{{json effectModifiers}}"
+     data-attribute-value="{{attribute.value}}"
+     data-second-trait-value="{{secondTrait.value}}"
+     data-second-trait-type="{{secondTrait.type}}"
+     data-attribute-name="{{attribute.name}}"
+     data-second-trait-name="{{secondTrait.name}}"
+     data-has-target="{{#if targetActorId}}true{{else}}false{{/if}}"
+     data-is-damage-roll="{{#if isDamageRoll}}true{{else}}false{{/if}}"
+     >
+  <div class="card-header">
+    <h3>{{rollTitle}}</h3>
+    <button type="button" class="reroll-button" data-tooltip="{{localize 'NARUTO_RPG.Roll.reroll'}}">
+      <i class="fas fa-redo"></i>
+    </button>
+  </div>
+
+  <div class="card-content">
+    {{!-- Roll Info --}}
+    <div class="roll-info">
+      {{#if attribute}}
+      <div class="roll-trait">
+        <span class="trait-label">{{attribute.name}}</span>
+        <span class="trait-value">{{attribute.value}}</span>
+      </div>
+      {{/if}}
+      
+      {{#if secondTrait}}
+      <span class="roll-plus">+</span>
+      <div class="roll-trait">
+        <span class="trait-label">{{secondTrait.name}}</span>
+        <span class="trait-value">{{secondTrait.value}}</span>
+      </div>
+      {{/if}}
+
+      {{#if modifier}}
+      <span class="roll-plus">{{#if (gt modifier 0)}}+{{/if}}</span>
+      <div class="roll-trait modifier">
+        <span class="trait-label">{{localize "NARUTO_RPG.Roll.modifier"}}</span>
+        <span class="trait-value">{{modifier}}</span>
+      </div>
+      {{/if}}
+    </div>
+
+    {{!-- Fixed Modifiers List --}}
+    {{#if hasModifiers}}
+    <div class="modifiers-section">
+      <ul class="modifiers-list">
+        {{#each fixedModifiers}}
+        <li>{{this.name}}: <strong>{{this.displayValue}}</strong></li>
+        {{/each}}
+        {{#each effectModifiers}}
+        <li>{{this.name}}: <strong>{{this.displayValue}}</strong></li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+    <div class="roll-summary">
+      <span class="dice-pool">{{dicePool}}d10</span>
+      <span class="difficulty">{{localize "NARUTO_RPG.Roll.difficultyShort"}} {{difficulty}}</span>
+    </div>
+
+    {{!-- Dice Results --}}
+    <div class="dice-results">
+      {{#each diceResults}}
+      <span class="die d10 {{this.cssClass}}" data-value="{{this.value}}">{{this.value}}</span>
+      {{/each}}
+    </div>
+
+    {{!-- Result Summary --}}
+    <div class="roll-result-summary {{resultType}}">
+      {{#if onesRemoveSuccesses}}
+      {{#if onesRemoved}}
+      <div class="ones-removed">
+        <i class="fas fa-minus-circle"></i>
+        {{localize "NARUTO_RPG.Roll.onesRemoved" count=onesRemoved}}
+      </div>
+      {{/if}}
+      {{/if}}
+
+      <div class="final-result">
+        {{#if isCriticalFailure}}
+        <i class="fas fa-skull"></i>
+        {{else if (gt finalSuccesses 0)}}
+        <i class="fas fa-check-circle"></i>
+        {{else}}
+        <i class="fas fa-times-circle"></i>
+        {{/if}}
+        <span class="result-label">{{resultLabel}}</span>
+      </div>
+    </div>
+
+    {{!-- Apply Damage Button --}}
+    {{#if canApplyDamage}}
+    <div class="roll-actions">
+      <button type="button" class="apply-damage-button" data-tooltip="{{localize 'NARUTO_RPG.Roll.applyDamageTo' name=targetName}}">
+        <i class="fas fa-heart-broken"></i>
+        {{localize "NARUTO_RPG.Roll.applyDamage"}} ({{finalSuccesses}})
+      </button>
+    </div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'NARUTO_RPG.Common.name'}}" />
+      </h1>
+      <div class="header-details">
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Details.type"}}</label>
+          <input type="text" name="system.details.type" value="{{systemData.details.type}}" />
+        </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Details.threat"}}</label>
+          <input type="number" name="system.details.threat" value="{{systemData.details.threat}}" min="1" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{localize "NARUTO_RPG.Tabs.attributes"}}</a>
+    <a class="item" data-tab="combat">{{localize "NARUTO_RPG.Tabs.combat"}}</a>
+    <a class="item" data-tab="moves">{{localize "NARUTO_RPG.Tabs.moves"}}</a>
+    <a class="item" data-tab="biography">{{localize "NARUTO_RPG.Tabs.biography"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Attributes Tab --}}
+    <div class="tab" data-group="primary" data-tab="attributes">
+      {{> "systems/naruto-rpg/templates/actor/partials/actor-attributes.hbs"}}
+      {{> "systems/naruto-rpg/templates/actor/partials/actor-resources.hbs"}}
+    </div>
+
+    {{!-- Combat Tab --}}
+    <div class="tab" data-group="primary" data-tab="combat">
+      {{> "systems/naruto-rpg/templates/actor/partials/actor-combat.hbs"}}
+    </div>
+
+    {{!-- Moves Tab --}}
+    <div class="tab" data-group="primary" data-tab="moves">
+      {{> "systems/naruto-rpg/templates/actor/partials/actor-items.hbs" itemType="moves"}}
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab" data-group="primary" data-tab="biography">
+      {{> "systems/naruto-rpg/templates/actor/partials/actor-biography.hbs"}}
+    </div>
+  </section>
+</form>
