@@ -50,6 +50,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       deleteCombo: NarutoRpgActorSheet._onDeleteCombo,
       addBasicManeuvers: NarutoRpgActorSheet._onAddBasicManeuvers,
       importCharacter: NarutoRpgActorSheet._onImportCharacter,
+      sendNindoToChat: NarutoRpgActorSheet._onSendNindoToChat,
     },
     form: {
       submitOnChange: true,
@@ -350,6 +351,13 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
           break;
       }
     }
+
+    // Sort traits by their sort value (official sheet order), then by name
+    const bySort = (a, b) => ((a.sort ?? 0) - (b.sort ?? 0)) || a.name.localeCompare(b.name);
+    Object.values(attributesByCategory).forEach(arr => arr.sort(bySort));
+    Object.values(abilitiesByCategory).forEach(arr => arr.sort(bySort));
+    techniques.sort(bySort);
+    backgrounds.sort(bySort);
 
     // Calculate maneuver stats using centralized calculator (SSOT)
     const characterStats = getCharacterStatsForManeuver(this.actor);
@@ -978,6 +986,22 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    * @param {PointerEvent} event
    * @param {HTMLElement} target
    */
+  /**
+   * Send the character's Nindo to chat
+   */
+  static async _onSendNindoToChat(event, target) {
+    const nindo = (this.actor.system.profile?.signature || "").trim();
+    if (!nindo) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Profile.noNindo"));
+      return;
+    }
+    const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<div class="nrpg-nindo-card"><i class="fas fa-scroll"></i> <em>"${esc(nindo)}"</em><div class="nrpg-nindo-caption">— ${game.i18n.format("NARUTO_RPG.Profile.nindoChatCaption", { name: esc(this.actor.name) })}</div></div>`,
+    });
+  }
+
   static async _onRollTrait(event, target) {
     event.preventDefault();
     

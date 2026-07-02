@@ -22,7 +22,7 @@ import { registerCombatSockets } from "./combat/combat-socket.mjs";
 
 import { registerEffects } from "./effects/index.mjs";
 
-import { showImportDialog } from "./helpers/library-importer.mjs";
+import { importOfficialContent, showImportDialog } from "./helpers/library-importer.mjs";
 import { showCharacterImportDialog } from "./helpers/character-importer.mjs";
 import { executeRoll } from "./dice/roll-dialog.mjs";
 import { createImportButton, canInteractWithChatMessage } from "./helpers/utils.mjs";
@@ -37,6 +37,7 @@ Hooks.once("init", async () => {
     config: NARUTO_RPG,
     showImportDialog,
     showCharacterImportDialog,
+    importOfficialContent,
   };
 
   CONFIG.NARUTO_RPG = NARUTO_RPG;
@@ -113,9 +114,34 @@ Hooks.on("renderItemDirectory", (app, html, data) => {
     () => game.narutorpg.showImportDialog()
   );
 
+  const officialButton = createImportButton(
+    "nrpg-import-official",
+    "NARUTO_RPG.Library.officialImport",
+    "fas fa-scroll",
+    () => game.narutorpg.importOfficialContent()
+  );
+
   const actionButtons = html.querySelector(".directory-header .action-buttons");
   if (actionButtons) {
     actionButtons.prepend(button);
+    actionButtons.prepend(officialButton);
+  }
+});
+
+/* Oferece a importacao do conteudo oficial na primeira vez que o GM abre o mundo */
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) return;
+  if (game.settings.get("naruto-rpg", "officialContentImported")) return;
+
+  const { DialogV2 } = foundry.applications.api;
+  const confirmed = await DialogV2.confirm({
+    window: { title: game.i18n.localize("NARUTO_RPG.Library.officialImportPromptTitle") },
+    content: `<p>${game.i18n.localize("NARUTO_RPG.Library.officialImportPromptContent")}</p>`,
+  });
+  if (confirmed) {
+    await importOfficialContent();
+  } else {
+    await game.settings.set("naruto-rpg", "officialContentImported", true);
   }
 });
 

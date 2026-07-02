@@ -40,7 +40,7 @@
       "punch": "Soco",
       "kick": "Chute",
       "block": "Bloqueio",
-      "grab": "Apresar",
+      "grab": "Apresamento",
       "athletics": "Esportes",
       "focus": "Focus"
     },
@@ -58,7 +58,7 @@
         "punch": "Soco",
         "kick": "Chute",
         "block": "Bloqueio",
-        "grab": "Apresar",
+        "grab": "Apresamento",
         "athletics": "Esportes",
         "focus": "Focus",
         "other": "Outro"
@@ -212,7 +212,23 @@
     "Library": {
       "import": "Importar Biblioteca",
       "importSuccess": "Biblioteca importada com sucesso",
-      "importError": "Erro ao importar biblioteca"
+      "importError": "Erro ao importar biblioteca",
+      "Folders": {
+        "attributes": "Atributos",
+        "abilities": "Habilidades",
+        "techniques": "Técnicas",
+        "backgrounds": "Antecedentes",
+        "divisions": "Ranks Ninja",
+        "fightingStyles": "Estilos de Artes Ninja",
+        "specialManeuvers": "Jutsus",
+        "weapons": "Armas",
+        "equipment": "Equipamentos"
+      },
+      "officialImport": "Conteúdo Oficial",
+      "officialImportPromptTitle": "Naruto RPG — Conteúdo Oficial",
+      "officialImportPromptContent": "Deseja importar agora o conteúdo oficial do Naruto RPG (Atributos, Habilidades, Técnicas, Antecedentes, Ranks Ninja, Estilos de Artes Ninja, Armas, Equipamentos e o diário de regras de combate)? Você também pode fazer isso depois pelo botão \"Conteúdo Oficial\" no diretório de Itens.",
+      "officialImportDone": "Conteúdo oficial importado: {count} itens criados ({skipped} já existiam).",
+      "officialImportError": "Não foi possível carregar o conteúdo oficial do sistema."
     },
     "Character": {
       "import": "Importar Personagens",
@@ -243,7 +259,11 @@
       "background": "Histórico",
       "motivations": "Motivações",
       "appearanceNotes": "Aparência",
-      "languages": "Idiomas"
+      "languages": "Idiomas",
+      "sendNindo": "Enviar Nindô para o chat",
+      "noNindo": "Este personagem ainda não tem um Nindô definido.",
+      "nindoChatCaption": "Nindô de {name}",
+      "nindoPlaceholder": "Meu caminho ninja..."
     },
     "Combo": {
       "title": "Combos",

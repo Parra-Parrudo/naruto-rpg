@@ -13,6 +13,21 @@ import { findWorldItemBySourceId, getWorldItemId, createActiveEffectsFromData } 
  * @returns {Promise<{success: boolean, counts: object, errors: string[]}>}
  */
 export async function importLibrary(file) {
+  const text = await file.text();
+  let library;
+  try {
+    library = JSON.parse(text);
+  } catch (e) {
+    return { success: false, counts: {}, errors: [`Failed to parse library file: ${e.message}`] };
+  }
+  return importLibraryData(library, file.name);
+}
+
+/**
+ * Import a parsed library object and create Foundry items
+ * Skips items whose sourceId already exists in the world
+ */
+export async function importLibraryData(library, fallbackName = "Library") {
   const errors = [];
   const counts = {
     fightingStyles: 0,
@@ -23,26 +38,29 @@ export async function importLibrary(file) {
     backgrounds: 0,
     weapons: 0,
     divisions: 0,
+    equipment: 0,
+    skipped: 0,
   };
 
   try {
-    const text = await file.text();
-    const library = JSON.parse(text);
 
     // Use library name from JSON as main folder
-    const libraryName = library.name || file.name.replace(/\.[^/.]+$/, "");
+    const libraryName = library.name || fallbackName.replace(/\.[^/.]+$/, "");
+    const exists = (id, types) => id && findWorldItemBySourceId(id, types);
     const mainFolder = await getOrCreateFolder(libraryName);
 
     // Create subfolders for each item type
+    const loc = (k) => game.i18n.localize(k);
     const folders = {
-      attributes: await getOrCreateSubfolder("Attributes", mainFolder),
-      abilitys: await getOrCreateSubfolder("Abilities", mainFolder),
-      techniques: await getOrCreateSubfolder("Techniques", mainFolder),
-      backgrounds: await getOrCreateSubfolder("Backgrounds", mainFolder),
-      divisions: await getOrCreateSubfolder("Divisions", mainFolder),
-      fightingStyles: await getOrCreateSubfolder("Fighting Styles", mainFolder),
-      specialManeuvers: await getOrCreateSubfolder("Special Maneuvers", mainFolder),
-      weapons: await getOrCreateSubfolder("Weapons", mainFolder),
+      attributes: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.attributes"), mainFolder),
+      abilitys: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.abilities"), mainFolder),
+      techniques: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.techniques"), mainFolder),
+      backgrounds: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.backgrounds"), mainFolder),
+      divisions: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.divisions"), mainFolder),
+      fightingStyles: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.fightingStyles"), mainFolder),
+      specialManeuvers: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.specialManeuvers"), mainFolder),
+      weapons: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.weapons"), mainFolder),
+      equipment: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.equipment"), mainFolder),
     };
 
     // PHASE 1: Import traits FIRST (attributes, abilities, techniques, backgrounds)
@@ -50,6 +68,7 @@ export async function importLibrary(file) {
     if (library.traits && Array.isArray(library.traits)) {
       for (const trait of library.traits) {
         try {
+          if (exists(trait.id, ["attribute", "ability", "technique", "background"])) { counts.skipped++; continue; }
           const itemType = await createTraitItem(trait, folders);
           // Map itemType to correct count key (ability -> abilities, not abilitys)
           const countKey = itemType === "ability" ? "abilities" : itemType + "s";
@@ -64,6 +83,7 @@ export async function importLibrary(file) {
     if (library.divisions && Array.isArray(library.divisions)) {
       for (const division of library.divisions) {
         try {
+          if (exists(division.id, "division")) { counts.skipped++; continue; }
           await createDivisionItem(division, folders.divisions);
           counts.divisions++;
         } catch (e) {
@@ -76,6 +96,7 @@ export async function importLibrary(file) {
     if (library.fighting_styles && Array.isArray(library.fighting_styles)) {
       for (const style of library.fighting_styles) {
         try {
+          if (exists(style.id, "fightingStyle")) { counts.skipped++; continue; }
           await createFightingStyleItem(style, folders.fightingStyles);
           counts.fightingStyles++;
         } catch (e) {
@@ -88,6 +109,7 @@ export async function importLibrary(file) {
     if (library.special_maneuvers && Array.isArray(library.special_maneuvers)) {
       for (const maneuver of library.special_maneuvers) {
         try {
+          if (exists(maneuver.id, "specialManeuver")) { counts.skipped++; continue; }
           await createSpecialManeuverItem(maneuver, folders.specialManeuvers);
           counts.specialManeuvers++;
         } catch (e) {
@@ -100,6 +122,7 @@ export async function importLibrary(file) {
     if (library.weapons && Array.isArray(library.weapons)) {
       for (const weapon of library.weapons) {
         try {
+          if (exists(weapon.id, "weapon")) { counts.skipped++; continue; }
           await createWeaponItem(weapon, folders.weapons);
           counts.weapons++;
         } catch (e) {
@@ -108,11 +131,74 @@ export async function importLibrary(file) {
       }
     }
 
+    // PHASE 6: Import equipment
+    if (library.equipment && Array.isArray(library.equipment)) {
+      for (const eq of library.equipment) {
+        try {
+          if (exists(eq.id, "equipment")) { counts.skipped++; continue; }
+          await createEquipmentItem(eq, folders.equipment);
+          counts.equipment++;
+        } catch (e) {
+          errors.push(`Equipment ${eq.id}: ${e.message}`);
+        }
+      }
+    }
+
     return { success: true, counts, errors, libraryName };
   } catch (e) {
-    errors.push(`Failed to parse library file: ${e.message}`);
+    errors.push(`Failed to import library: ${e.message}`);
     return { success: false, counts, errors };
   }
+}
+
+/**
+ * Create an Equipment item from library data
+ */
+async function createEquipmentItem(data, folder) {
+  await Item.create({
+    name: data.name,
+    type: "equipment",
+    folder: folder,
+    sort: data.sort ?? 0,
+    system: {
+      sourceId: data.id,
+      description: data.description || "",
+    },
+  });
+}
+
+/**
+ * Import the official Naruto RPG content bundled with the system
+ * (characteristics, styles, ranks, weapons, equipment and rules journal)
+ */
+export async function importOfficialContent({ silent = false } = {}) {
+  const response = await fetch("systems/naruto-rpg/data/conteudo-oficial.json");
+  if (!response.ok) {
+    ui.notifications.error(game.i18n.localize("NARUTO_RPG.Library.officialImportError"));
+    return { success: false };
+  }
+  const data = await response.json();
+  const result = await importLibraryData(data.library, "Naruto RPG");
+
+  // Rules journal
+  if (data.journal && !game.journal.find(j => j.name === data.journal.name)) {
+    await JournalEntry.create({
+      name: data.journal.name,
+      pages: data.journal.pages.map((p, i) => ({
+        name: p.name,
+        type: "text",
+        sort: (i + 1) * 100,
+        text: { format: 1, content: p.content },
+      })),
+    });
+  }
+
+  await game.settings.set("naruto-rpg", "officialContentImported", true);
+  if (!silent) {
+    const total = Object.entries(result.counts).filter(([k]) => k !== "skipped").reduce((a, [, v]) => a + v, 0);
+    ui.notifications.info(game.i18n.format("NARUTO_RPG.Library.officialImportDone", { count: total, skipped: result.counts.skipped ?? 0 }));
+  }
+  return result;
 }
 
 /**
@@ -154,6 +240,7 @@ async function createDivisionItem(data, folder) {
     name: data.name,
     type: "division",
     folder: folder?.id || folder,
+    sort: data.sort ?? 0,
     system: {
       sourceId: data.id,
       description: data.description || "",
@@ -172,6 +259,7 @@ async function createFightingStyleItem(data, folder) {
     name: data.name,
     type: "fightingStyle",
     folder: folder,
+    sort: data.sort ?? 0,
     system: {
       sourceId: data.id,
       initialChi: data.initialChi ?? 3,
@@ -280,6 +368,7 @@ async function createTraitItem(data, folders) {
     name: data.name,
     type: itemType,
     folder: folder,
+    sort: data.sort ?? 0,
     system: {
       sourceId: data.id,
       isOptional: data.isOptional ?? false,
@@ -323,6 +412,7 @@ async function createWeaponItem(data, folder) {
     name: data.name,
     type: "weapon",
     folder: folder,
+    sort: data.sort ?? 0,
     system: {
       sourceId: data.id,
       techniqueId,

@@ -24,9 +24,10 @@
           <label>{{localize "NARUTO_RPG.Profile.concept"}}</label>
           <input type="text" name="system.profile.concept" value="{{systemData.profile.concept}}" {{#unless isEditable}}disabled{{/unless}} />
         </div>
-        <div class="form-group">
-          <label>{{localize "NARUTO_RPG.Profile.playerName"}}</label>
-          <input type="text" name="system.profile.playerName" value="{{systemData.profile.playerName}}" {{#unless isEditable}}disabled{{/unless}} />
+        <div class="form-group nindo-group">
+          <label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
+          <input type="text" name="system.profile.signature" value="{{systemData.profile.signature}}" placeholder="{{localize 'NARUTO_RPG.Profile.nindoPlaceholder'}}" {{#unless isEditable}}disabled{{/unless}} />
+          <a class="nindo-chat-btn" data-action="sendNindoToChat" title="{{localize 'NARUTO_RPG.Profile.sendNindo'}}"><i class="fas fa-bullhorn"></i></a>
         </div>
       </div>
     </div>
@@ -529,16 +530,6 @@
           <div class="form-group">
             <label>{{localize "NARUTO_RPG.Profile.stable"}}</label>
             <input type="text" name="system.profile.stable" value="{{systemData.profile.stable}}" {{#unless isEditable}}disabled{{/unless}} />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
-            <input type="text" name="system.profile.signature" value="{{systemData.profile.signature}}" {{#unless isEditable}}disabled{{/unless}} />
-          </div>
-          <div class="form-group">
-            <label>{{localize "NARUTO_RPG.Profile.languages"}}</label>
-            <input type="text" name="system.languagesText" value="{{languagesText}}" placeholder="English, Japanese, ..." {{#unless isEditable}}disabled{{/unless}} />
           </div>
         </div>
       </div>

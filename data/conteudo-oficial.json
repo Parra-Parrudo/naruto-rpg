@@ -1,0 +1,872 @@
+{
+ "library": {
+  "name": "Naruto RPG — Conteúdo Oficial",
+  "version": "1.0.0",
+  "traits": [
+   {
+    "id": "strength",
+    "name": "Força",
+    "category": "physical",
+    "description": "<p>Poder físico bruto: quanto peso você levanta, o quanto seus golpes ferem. Somada ao dano da maioria dos ataques corpo-a-corpo.</p>",
+    "isOptional": false,
+    "sort": 100
+   },
+   {
+    "id": "dexterity",
+    "name": "Destreza",
+    "category": "physical",
+    "description": "<p>Agilidade, reflexos e coordenação motora. Governa a velocidade dos movimentos, o equilíbrio e a precisão.</p>",
+    "isOptional": false,
+    "sort": 200
+   },
+   {
+    "id": "stamina",
+    "name": "Vigor",
+    "category": "physical",
+    "description": "<p>Resistência e fôlego. Determina sua Absorção de dano e a capacidade de agüentar punição e continuar lutando.</p>",
+    "isOptional": false,
+    "sort": 300
+   },
+   {
+    "id": "charisma",
+    "name": "Carisma",
+    "category": "social",
+    "description": "<p>Charme natural e magnetismo pessoal. A capacidade de conquistar simpatia e inspirar os outros.</p>",
+    "isOptional": false,
+    "sort": 400
+   },
+   {
+    "id": "manipulation",
+    "name": "Manipulação",
+    "category": "social",
+    "description": "<p>A arte de conseguir o que quer dos outros, seja por lábia, astúcia ou engano.</p>",
+    "isOptional": false,
+    "sort": 500
+   },
+   {
+    "id": "appearance",
+    "name": "Aparência",
+    "category": "social",
+    "description": "<p>Impressão causada à primeira vista: beleza, presença e porte.</p>",
+    "isOptional": false,
+    "sort": 600
+   },
+   {
+    "id": "perception",
+    "name": "Percepção",
+    "category": "mental",
+    "description": "<p>Consciência do ambiente: notar detalhes, pressentir emboscadas, ler intenções.</p>",
+    "isOptional": false,
+    "sort": 700
+   },
+   {
+    "id": "intelligence",
+    "name": "Inteligência",
+    "category": "mental",
+    "description": "<p>Raciocínio lógico, memória e capacidade de aprender. Governa conhecimentos e estratégia.</p>",
+    "isOptional": false,
+    "sort": 800
+   },
+   {
+    "id": "wits",
+    "name": "Raciocínio",
+    "category": "mental",
+    "description": "<p>Rapidez de pensamento e reação mental sob pressão. Usado na iniciativa e em respostas imediatas.</p>",
+    "isOptional": false,
+    "sort": 900
+   },
+   {
+    "id": "alertness",
+    "name": "Prontidão",
+    "category": "talents",
+    "description": "<p>Sua consciência do que acontece ao redor. Percepção + Prontidão é o teste clássico para notar perigos e emboscadas.</p>",
+    "isOptional": false,
+    "sort": 1000
+   },
+   {
+    "id": "insight",
+    "name": "Perspicácia",
+    "category": "talents",
+    "description": "<p>Ler as pessoas: perceber mentiras, intenções e emoções ocultas por trás das palavras e gestos.</p>",
+    "isOptional": false,
+    "sort": 1100
+   },
+   {
+    "id": "intimidation",
+    "name": "Intimidação",
+    "category": "talents",
+    "description": "<p>Dobrar os outros pelo medo, seja por ameaça explícita, presença ou reputação.</p>",
+    "isOptional": false,
+    "sort": 1200
+   },
+   {
+    "id": "leadership",
+    "name": "Liderança",
+    "category": "talents",
+    "description": "<p>Comandar e inspirar quem já o segue: coordenar um time em missão, dar ordens que são obedecidas.</p>",
+    "isOptional": false,
+    "sort": 1300
+   },
+   {
+    "id": "streetwise",
+    "name": "Manha",
+    "category": "talents",
+    "description": "<p>Malandragem de rua: contatos do submundo, gírias, saber onde conseguir o que não se vende em lojas.</p>",
+    "isOptional": false,
+    "sort": 1400
+   },
+   {
+    "id": "labia",
+    "name": "Lábia",
+    "category": "talents",
+    "description": "<p>A arte de convencer pela palavra — o dom do orador, do negociador, do diplomata. É o famoso \"Talk no Jutsu\": discursos que mudam convicções e trazem inimigos de volta da luz. (Expansão)</p>",
+    "isOptional": false,
+    "sort": 1500
+   },
+   {
+    "id": "blind_fighting",
+    "name": "Luta às Cegas",
+    "category": "skills",
+    "description": "<p>Lutar sem depender da visão: no escuro, cegado ou contra inimigos invisíveis.</p>",
+    "isOptional": false,
+    "sort": 1600
+   },
+   {
+    "id": "animal_empathy",
+    "name": "Empatia com Animais",
+    "category": "skills",
+    "description": "<p>Compreender e se fazer entender por animais, acalmá-los e treiná-los. Marca registrada do clã Inuzuka.</p>",
+    "isOptional": false,
+    "sort": 1700
+   },
+   {
+    "id": "survival",
+    "name": "Sobrevivência",
+    "category": "skills",
+    "description": "<p>Sobreviver em ambiente hostil: rastrear, caçar, encontrar abrigo e água, orientar-se.</p>",
+    "isOptional": false,
+    "sort": 1800
+   },
+   {
+    "id": "stealth",
+    "name": "Furtividade",
+    "category": "skills",
+    "description": "<p>Mover-se sem ser visto nem ouvido. Testada contra a Percepção + Prontidão dos observadores.</p>",
+    "isOptional": false,
+    "sort": 1900
+   },
+   {
+    "id": "traps",
+    "name": "Armadilhas",
+    "category": "skills",
+    "description": "<p>Montar, detectar e desarmar armadilhas — dos fios com kunais explosivas às fossas camufladas.</p>",
+    "isOptional": false,
+    "sort": 2000
+   },
+   {
+    "id": "oficio",
+    "name": "Ofício",
+    "category": "skills",
+    "description": "<p>Criar e reparar objetos com as próprias mãos: forjar lâminas, fabricar ferramentas ninja, confeccionar pergaminhos, consertar marionetes. Recomenda-se declarar uma especialização — Ofício (Ferraria), Ofício (Marionetes). (Expansão)</p>",
+    "isOptional": false,
+    "sort": 2100
+   },
+   {
+    "id": "poisons",
+    "name": "Venefício",
+    "category": "knowledge",
+    "description": "<p>O estudo dos venenos e antídotos: identificar, extrair, preparar e aplicar toxinas.</p>",
+    "isOptional": false,
+    "sort": 2200
+   },
+   {
+    "id": "medicine",
+    "name": "Medicina",
+    "category": "knowledge",
+    "description": "<p>Diagnosticar e tratar ferimentos e doenças. Base do ninja médico.</p>",
+    "isOptional": false,
+    "sort": 2300
+   },
+   {
+    "id": "styles",
+    "name": "Estilos",
+    "category": "knowledge",
+    "description": "<p>Conhecimento das artes ninja e dos estilos de luta: reconhecer o que cada escola pode e não pode fazer.</p>",
+    "isOptional": false,
+    "sort": 2400
+   },
+   {
+    "id": "investigation",
+    "name": "Investigação",
+    "category": "knowledge",
+    "description": "<p>Notar pistas, conduzir pesquisas e interrogatórios, agir como detetive.</p>",
+    "isOptional": false,
+    "sort": 2500
+   },
+   {
+    "id": "politics",
+    "name": "Política",
+    "category": "knowledge",
+    "description": "<p>As relações entre os países e vilas: alianças, costumes, interesses e intrigas dos líderes.</p>",
+    "isOptional": false,
+    "sort": 2600
+   },
+   {
+    "id": "ocultismo",
+    "name": "Ocultismo",
+    "category": "knowledge",
+    "description": "<p>O estudo do que escapa ao entendimento comum: a teoria dos selos, a natureza das Bijuus, maldições, rituais proibidos. Onde a Investigação reúne fatos, o Ocultismo decifra o esotérico. (Expansão)</p>",
+    "isOptional": false,
+    "sort": 2700
+   },
+   {
+    "id": "punch",
+    "name": "Soco",
+    "category": "techniques",
+    "description": "<p>Todo golpe envolvendo mãos e braços: punhos fechados, golpes laterais, perfurantes com os dedos.</p>",
+    "isOptional": false,
+    "sort": 2800
+   },
+   {
+    "id": "kick",
+    "name": "Chute",
+    "category": "techniques",
+    "description": "<p>Golpes com pernas e pés, dos chutes diretos aos voadores. Costumam ferir mais que socos, porém mais lentos.</p>",
+    "isOptional": false,
+    "sort": 2900
+   },
+   {
+    "id": "block",
+    "name": "Bloqueio",
+    "category": "techniques",
+    "description": "<p>Defesas e aparos. A maioria não causa dano, mas quanto melhor a Técnica, mais golpes você neutraliza.</p>",
+    "isOptional": false,
+    "sort": 3000
+   },
+   {
+    "id": "grab",
+    "name": "Apresamento",
+    "category": "techniques",
+    "description": "<p>Imobilizações, chaves e projeções. Um ninja bem treinado só precisa agarrar o oponente uma ou duas vezes para deixá-lo indefeso.</p>",
+    "isOptional": false,
+    "sort": 3100
+   },
+   {
+    "id": "athletics",
+    "name": "Esportes",
+    "category": "techniques",
+    "description": "<p>Velocidade e mobilidade: saltos, arremetidas e recuos. Parte integral de quase todos os Jutsus de movimento.</p>",
+    "isOptional": false,
+    "sort": 3200
+   },
+   {
+    "id": "focus",
+    "name": "Focus",
+    "category": "techniques",
+    "description": "<p>Canalizar mente e espírito — e o Chakra — para feitos sobrenaturais. Governa os Jutsus além do entendimento humano: bolas de fogo, controle elemental, telepatia.</p>",
+    "isOptional": false,
+    "sort": 3300
+   },
+   {
+    "id": "arremesso",
+    "name": "Arremesso",
+    "category": "techniques",
+    "description": "<p>O uso de todas as Armas de Arremesso: Shurikens, Kunais e Senbons, de alvos próximos a distâncias consideráveis. Um arqueiro usa Arremesso (Arco) — declare esta especialização ao Narrador.</p>",
+    "isOptional": false,
+    "sort": 3400,
+    "isWeaponTechnique": true
+   },
+   {
+    "id": "armas_brancas",
+    "name": "Armas Brancas",
+    "category": "techniques",
+    "description": "<p>O uso de armas brancas em combate corpo-a-corpo, das kunais às espadas lendárias. <strong>Grupos de Armas:</strong> as Armas Brancas dividem-se em grupos pela funcionalidade (Facas, Espadas, Bastões, Lanças, Machados, Martelos, Correntes, Chicotes, Nunchakos, Leques...). Um ninja está apto a usar <strong>um grupo de armas a cada dois níveis</strong> da Técnica Armas Brancas e deve informar ao Narrador sobre sua escolha. Com ao menos um ponto nesta Técnica, o ninja tem acesso às manobras básicas de Armas Brancas.</p>",
+    "isOptional": false,
+    "sort": 3500,
+    "isWeaponTechnique": true
+   },
+   {
+    "id": "allies",
+    "name": "Aliados",
+    "category": "backgrounds",
+    "description": "<p>Amigos ou criaturas que apóiam o personagem e podem ser chamados em momentos de necessidade — de outros ninjas a animais invocados pelo Kuchiyose no Jutsu.</p>",
+    "isOptional": true,
+    "sort": 3600,
+    "unique": false
+   },
+   {
+    "id": "mascote",
+    "name": "Mascote",
+    "category": "backgrounds",
+    "description": "<p>Um animal companheiro sintonizado com o Shinobi. Em níveis altos, o elo se torna empático e até místico, e o personagem pode comprar Jutsus que reflitam as habilidades do animal.</p>",
+    "isOptional": true,
+    "sort": 3700,
+    "unique": false
+   },
+   {
+    "id": "contacts",
+    "name": "Contatos",
+    "category": "backgrounds",
+    "description": "<p>Pessoas que fornecem informações ao personagem — qualquer um, em qualquer lugar, do informante de beco ao burocrata da torre do Kage.</p>",
+    "isOptional": true,
+    "sort": 3800,
+    "unique": false
+   },
+   {
+    "id": "resources",
+    "name": "Recursos",
+    "category": "backgrounds",
+    "description": "<p>Riqueza e posses materiais. Determina seu padrão de vida e o equipamento que pode adquirir.</p>",
+    "isOptional": true,
+    "sort": 3900,
+    "unique": false
+   },
+   {
+    "id": "cla_notavel",
+    "name": "Clã Notável",
+    "category": "backgrounds",
+    "description": "<p>Você pertence a um dos clãs renomados do mundo ninja, com o prestígio, os aliados e as expectativas que isso traz.</p>",
+    "isOptional": true,
+    "sort": 4000,
+    "unique": false
+   },
+   {
+    "id": "afinidade_elemental",
+    "name": "Afinidade Elemental",
+    "category": "backgrounds",
+    "description": "<p>Sua ligação natural com um elemento (Fogo, Água, Terra, Vento ou Relâmpago) concede bônus aos Jutsus daquele elemento. Declare o elemento ao adquirir.</p>",
+    "isOptional": true,
+    "sort": 4100,
+    "unique": false
+   },
+   {
+    "id": "sensei",
+    "name": "Sensei",
+    "category": "backgrounds",
+    "description": "<p>Um mestre que ensina e orienta o personagem. Quanto maior o nível, mais poderoso e dedicado é o mestre — encontrar um assim pode ser uma aventura por si só.</p>",
+    "isOptional": true,
+    "sort": 4200,
+    "unique": false
+   },
+   {
+    "id": "construtor_habilidoso",
+    "name": "Construtor Habilidoso",
+    "category": "backgrounds",
+    "description": "<p>Acesso a oficina, materiais e conhecimento para construir dispositivos e equipamentos especiais, como as marionetes de combate.</p>",
+    "isOptional": true,
+    "sort": 4300,
+    "unique": false
+   },
+   {
+    "id": "posicao_na_vila",
+    "name": "Posição na Vila",
+    "category": "backgrounds",
+    "description": "<p>O cargo oficial e a autoridade formal que o personagem ocupa na hierarquia de sua aldeia. Distinto do Renome: Renome é fama; Posição é poder institucional. (Expansão)</p>",
+    "isOptional": true,
+    "sort": 4400,
+    "unique": false
+   },
+   {
+    "id": "artefato",
+    "name": "Artefato",
+    "category": "backgrounds",
+    "description": "<p>A posse de um item especial que não está à venda em loja alguma — de um consumível de fórmula secreta a um objeto único e histórico com nome e poder próprios. (Expansão)</p>",
+    "isOptional": true,
+    "sort": 4500,
+    "unique": false
+   },
+   {
+    "id": "contrato_invocacao",
+    "name": "Contrato de Invocação",
+    "category": "backgrounds",
+    "description": "<p>Um pacto de sangue firmado com uma espécie de animais invocáveis (sapos, lesmas, cobras, cães ninja...). Permite o Kuchiyose no Jutsu com essa espécie. (Expansão)</p>",
+    "isOptional": true,
+    "sort": 4600,
+    "unique": false
+   },
+   {
+    "id": "jinchuuriki",
+    "name": "Jinchuuriki",
+    "category": "backgrounds",
+    "description": "<p>O destino de ser o recipiente vivo de uma das nove Bijuus. O nível reflete o grau de controle sobre o poder da besta — do selo instável ao Controle Total (nível 6). (Expansão)</p>",
+    "isOptional": true,
+    "sort": 4700,
+    "unique": true
+   },
+   {
+    "id": "selo_amaldicoado",
+    "name": "Selo Amaldiçoado",
+    "category": "backgrounds",
+    "description": "<p>A marca de um selo amaldiçoado e seus estágios de transformação — do surto involuntário ao Segundo Estágio Completo e à Transformação Eremita (Senninka). (Expansão)</p>",
+    "isOptional": true,
+    "sort": 4800,
+    "unique": true
+   }
+  ],
+  "divisions": [
+   {
+    "id": "rank_estudante",
+    "name": "Estudante da Academia",
+    "description": "<p>O primeiro passo de um ninja. Ainda sem permissão para missões, aprende a base: Henge, Bunshin, Kawarimi.</p>",
+    "sort": 100
+   },
+   {
+    "id": "rank_genin",
+    "name": "Genin",
+    "description": "<p>Shinobi graduado na Academia. Formam times de três sob um Jounin e recebem missões de nível D a C.</p>",
+    "sort": 200
+   },
+   {
+    "id": "rank_chuunin",
+    "name": "Chuunin",
+    "description": "<p>Aprovado no Exame Chuunin. Ninja de nível médio, apto a liderar esquadrões e assumir missões de nível C a B.</p>",
+    "sort": 300
+   },
+   {
+    "id": "rank_jounin",
+    "name": "Jounin",
+    "description": "<p>A elite da vila. Inteligência e habilidade comprovadas; recebe as missões mais difíceis (A e S) e treina times de Genins.</p>",
+    "sort": 400
+   },
+   {
+    "id": "rank_anbu",
+    "name": "ANBU",
+    "description": "<p>O corpo especial de operações secretas, subordinado diretamente ao Kage: assassinatos, espionagem e missões que não existem oficialmente.</p>",
+    "sort": 500
+   },
+   {
+    "id": "rank_kage",
+    "name": "Kage",
+    "description": "<p>O líder e o ninja mais poderoso da vila. Apenas cinco carregam o título nas Grandes Nações.</p>",
+    "sort": 600
+   }
+  ],
+  "fighting_styles": [
+   {
+    "id": "ninjutsu",
+    "name": "Ninjutsu",
+    "initialChi": 4,
+    "initialWillpower": 3,
+    "description": "<p>O caminho mais clássico do ninja: o entendimento e a aplicação do Chakra para resultados esplêndidos — melhoria das capacidades físicas, aumento dos sentidos e manipulação dos elementos. Mestres de Ninjutsu alteram a forma e a natureza do Chakra, chegando a criar novos Jutsus. Antecedentes comuns: Atributos Mentais altos, Afinidade Elemental; a Técnica Focus é essencial.</p>",
+    "sort": 100
+   },
+   {
+    "id": "taijutsu",
+    "name": "Taijutsu",
+    "initialChi": 1,
+    "initialWillpower": 6,
+    "description": "<p>Utilizar o corpo como uma arma letal. O adepto treina para ser todo o arsenal de que precisa, sem depender de grandes reservas de Chakra. Divide-se em dois estilos clássicos: o Gouken Ryuu (punho forte de Maito Gai e Rock Lee) e o Jyuuken Ryu (punho suave do clã Hyuuga).</p>",
+    "sort": 200
+   },
+   {
+    "id": "genjutsu",
+    "name": "Genjutsu",
+    "initialChi": 3,
+    "initialWillpower": 4,
+    "description": "<p>A arte das ilusões: manipular o Chakra e as percepções do oponente para aprisioná-lo em experiências que não existem. O genjutsista vence a batalha na mente do inimigo antes de qualquer golpe.</p>",
+    "sort": 300
+   },
+   {
+    "id": "ninjutsu_medico",
+    "name": "Ninjutsu Médico",
+    "initialChi": 6,
+    "initialWillpower": 1,
+    "description": "<p>Detentores de um controle fenomenal sobre o Chakra, os ninjas médicos curam aliados — e, pelos métodos reversos, infligem danos precisos. Ninguém conhece melhor os pontos vitais e o fluxo de Chakra de um oponente.</p>",
+    "sort": 400
+   },
+   {
+    "id": "marionetes",
+    "name": "Manipulação de Marionetes",
+    "initialChi": 4,
+    "initialWillpower": 3,
+    "description": "<p>A arte de Suna: controlar marionetes de combate com fios de Chakra. Cada marionete é tratada como um personagem em separado, com seus próprios Jutsus. O Antecedente Construtor Habilidoso é quase indispensável.</p>",
+    "sort": 500
+   },
+   {
+    "id": "combate_armado",
+    "name": "Combate Armado",
+    "initialChi": 2,
+    "initialWillpower": 5,
+    "description": "<p>O estilo dos ninjas que fazem das armas seu repertório principal, como Ten Ten. Distribui seu treinamento entre as Técnicas de Arremesso e Armas Brancas, com acesso amplo aos Jutsus armados.</p>",
+    "sort": 600
+   },
+   {
+    "id": "kenjutsu",
+    "name": "Kenjutsu",
+    "initialChi": 2,
+    "initialWillpower": 5,
+    "description": "<p>(Expansão) A arte da espada ninja: uma filosofia onde a lâmina é extensão do próprio corpo. Tradição de Kirigakure e das Sete Espadas da Névoa (Zabuza, Killer Bee, Suigetsu). Concentra tudo em Armas Brancas como técnica primária, com Jutsus exclusivos de espada — em troca, perde acesso a Arremessos e ao suporte de Focus.</p>",
+    "sort": 700
+   },
+   {
+    "id": "senjutsu",
+    "name": "Senjutsu",
+    "initialChi": 2,
+    "initialWillpower": 5,
+    "description": "<p>(Expansão) A arte da Energia Natural: escutar o mundo e equilibrar os três Chakras (físico, espiritual e natural). Inseparável do Modo Sennin — fora dele seus Jutsus exclusivos são inacessíveis. Estilo de longo prazo: sem um Sensei que o guie, a prática pode levar à petrificação.</p>",
+    "sort": 800
+   },
+   {
+    "id": "fuinjutsu",
+    "name": "Fuinjutsu",
+    "initialChi": 4,
+    "initialWillpower": 3,
+    "description": "<p>(Expansão) A arte dos selos: selar e libertar — objetos, Chakra, criaturas, memórias. Do simples pergaminho de armazenamento ao selo que aprisiona uma Bijuu. Selos raros e proibidos exigem também o Conhecimento Ocultismo.</p>",
+    "sort": 900
+   }
+  ],
+  "weapons": [
+   {
+    "id": "w_fuuma_shuriken",
+    "name": "Fuuma Shuriken",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+3",
+    "movement": "+0",
+    "special": "Grupo: Espadas",
+    "description": "<p>Esta arma parece muito com uma cruz composta por quatro lâminas. É balanceada o suficiente para ser arremessada com eficiência, mas pode ser usada para combate de perto. Ela pode ser dobrada e convertida em uma única lâmina, modificando seus bônus para -1 em Velocidade e +2 Dano. <strong>Preço:</strong> 1500 Ryo. Pode também ser usada com a Técnica Arremesso.</p>",
+    "sort": 100
+   },
+   {
+    "id": "w_kama",
+    "name": "Kama",
+    "techniqueId": "armas_brancas",
+    "speed": "+2",
+    "damage": "+2",
+    "movement": "-1",
+    "special": "Grupo: Facas",
+    "description": "<p>Trata-se basicamente de uma foice em tamanho reduzido, extremamente leve e fácil de ocultar. <strong>Preço:</strong> 300 Ryo.</p>",
+    "sort": 200
+   },
+   {
+    "id": "w_arco_e_flecha",
+    "name": "Arco e Flecha",
+    "techniqueId": "arremesso",
+    "speed": "+0",
+    "damage": "+3",
+    "movement": "-3",
+    "special": "Grupo: Arco",
+    "description": "<p>Apesar de não ser comum ver ninjas utilizando este tipo de arma, um arqueiro habildoso pode ser um adversário perigoso. O alcance de uma flecha lançada por um arqueiro é igual a Percepção + Arremesso x 10. O preço deste ítem é referente ao Arco e uma Aljava com 12 flechas comuns. <strong>Preço:</strong> 1500 Ryo.</p>",
+    "sort": 300
+   },
+   {
+    "id": "w_kunai",
+    "name": "Kunai",
+    "techniqueId": "armas_brancas",
+    "speed": "+2",
+    "damage": "+1",
+    "movement": "+0",
+    "special": "Grupo: Facas",
+    "description": "<p>Uma arma muito comum entre os ninjas, semelhante a uma faca, utilizada tanto para ataque, como para defesa. Pode ser usada também como ferramenta, como por exemplo, escalar montanhas. <strong>Preço:</strong> 400 Ryo (5 unidades). Pode também ser usada com a Técnica Arremesso.</p>",
+    "sort": 400
+   },
+   {
+    "id": "w_kunai_explosiva",
+    "name": "Kunai Explosiva",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+1",
+    "movement": "+0",
+    "special": "Grupo: Facas; Acesso: Chuunin",
+    "description": "<p>Esta kunai possui uma inscrição gravada em seu cabo que é mais alongado, que ao ser ativada pelo ninja (através do Jutsu Kai instantaneamente e sem custo em Chakra, ou de modo similar gastando 1 Ponto de Chakra) a mesma explodirá e afetará o hexágono onde a mesma se encontra, e os seis hexágonos em volta. A explosão causa 8 dados de Dano. Acesso: Chuunin <strong>Preço:</strong> 400 Ryo. <strong>Acesso:</strong> Chuunin. Pode também ser usada com a Técnica Arremesso.</p>",
+    "sort": 500
+   },
+   {
+    "id": "w_kusari",
+    "name": "Kusari",
+    "techniqueId": "armas_brancas",
+    "speed": "+0",
+    "damage": "+2",
+    "movement": "-1",
+    "special": "Grupo: Correntes; Alcance 2 Hexágonos",
+    "description": "<p>Essa corrente tem uma ponta pesada, geralmente um grande anel de metal. Golpeia o oponente à distância, mas pode ser usada para prender oponentes, tomar a sua arma, etc. Um design variado, a Kusarigama, tem uma foice na ponta da corrente adicionando um bônus de +4 ao Dano ao invés de +2 e custa 400 Ryo a mais. Capítulo 9 – Ferramentas e Equipamentos NARUTO RPG Página 105 <strong>Preço:</strong> 900 Ryo.</p>",
+    "sort": 600
+   },
+   {
+    "id": "w_chicote",
+    "name": "Chicote",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+1",
+    "movement": "+0",
+    "special": "Grupo: Chicotes; Alcance 2 Hexágonos",
+    "description": "<p>Trata-se de uma longa trama de couro presa a um cabo. Sua ponta é trifurcada e um pouco mais rígida de modo que um especialista neste tipo de arma (Armas Brancas ••••, sendo o Chicote sua arma primária) é capaz de estalar esta ponta no momento exato em que acerta um oponente, e assim obtém um dado adicional de Dano. <strong>Preço:</strong> 400 Ryo.</p>",
+    "sort": 700
+   },
+   {
+    "id": "w_nunchako",
+    "name": "Nunchako",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+2",
+    "movement": "+0",
+    "special": "Grupo: Nunchakos",
+    "description": "<p>Dois bastões curtos de madeira ligados por uma corda ou corrente, mas há versões onde os bastões são substituídos por canos de ferro ou aço. É capaz de golpes rápidos e extremamente dolorosos. Um ninja ao usar o Nunchako, realiza uma série de movimentos rápidos em torno de seu corpo, fazendo com que oponentes incautos ao tentarem acertá-lo com manobras corpo-a-corpo acabam por serem acertados por estes rápidos movimentos. Caso a manobra do ninja interrompa a manobra do adversário, o ninja pode aplicar como uma ação livre um rápido golpe (que causa um Dano igual a Força + Armas Brancas + Modifi <strong>Preço:</strong> 300 Ryo.</p>",
+    "sort": 800
+   },
+   {
+    "id": "w_aian_nakkuru",
+    "name": "Aian Nakkuru",
+    "techniqueId": "punch",
+    "speed": "+1",
+    "damage": "+1",
+    "movement": "+0",
+    "special": "",
+    "description": "<p>Muito semelhante a um soco inglês, mas possui uma ponta que permite cortar e perfurar oponentes. Quando feita com um metal especial que conduz o Chakra do ninja, adiciona determinados efeitos aos golpes dependendo da natureza do Chakra do usuário. É usada juntamente com os Jutsus e manobras básicas de Soco. Esta arma é considerada uma “Arma com Lâmina” para determinar o acesso a determinados Jutsus. <strong>Preço:</strong> 120 Ryo.</p>",
+    "sort": 900
+   },
+   {
+    "id": "w_shuriken",
+    "name": "Shuriken",
+    "techniqueId": "arremesso",
+    "speed": "+2",
+    "damage": "-1",
+    "movement": "+1",
+    "special": "",
+    "description": "<p>São as estrelas ninja, mas podem ser dardos, ou qualquer arma de arremesso cortante incapaz de combater como se fosse uma faca. Podem ser mortais na mão de um mestre. Um ninja pode arremessar por turno uma shuriken adicional para cada dois pontos, após o primeiro, que o ninja possuir na Técnica de Arremesso. Caso o ninja esteja executando um Jutsu como Repeating Shot, ele poderá lançar em um turno o dobro da sua capacidade normal. <strong>Preço:</strong> 120 Ryo (5 unidades).</p>",
+    "sort": 1000
+   },
+   {
+    "id": "w_tessen",
+    "name": "Tessen",
+    "techniqueId": "armas_brancas",
+    "speed": "+0",
+    "damage": "+2",
+    "movement": "+0",
+    "special": "Grupo: Leques",
+    "description": "<p>Leques de Guerra são normalmente usados em lutas cerimoniais, mas konoichis costumam utilizá-los no campo de batalha. Podem ser feitos de aço, ou de qualquer outro material. Variam também no tamanho. Isto pode aumentar o preço, assim como as estatísticas. O Narrador tem a palavra final quanto aos detalhes. <strong>Preço:</strong> 400~800 Ryous.</p>",
+    "sort": 1100
+   },
+   {
+    "id": "w_kanabo",
+    "name": "Kanabo",
+    "techniqueId": "armas_brancas",
+    "speed": "+0",
+    "damage": "+3",
+    "movement": "+0",
+    "special": "Grupo: Bastões",
+    "description": "<p>É um bastão parecido com um taco de baseball, mas sua ponta é coberta com pregos, vidro entre outras coisas. É uma arma simples, mas extremamente poderosa. <strong>Preço:</strong> 120 Ryo.</p>",
+    "sort": 1200
+   },
+   {
+    "id": "w_bastao_longo",
+    "name": "Bastão Longo",
+    "techniqueId": "armas_brancas",
+    "speed": "+0",
+    "damage": "+2",
+    "movement": "+0",
+    "special": "Grupo: Bastões; Alcance 2 Hexágonos",
+    "description": "<p>Um cajado de madeira com cerca de 180 cm de comprimento, normalmente usado com as duas mãos. Tem a vantagem de poder acertar o oponente a uma distância relativamente segura. <strong>Preço:</strong> 130 Ryo.</p>",
+    "sort": 1300
+   },
+   {
+    "id": "w_marreta_de_guerra",
+    "name": "Marreta de Guerra",
+    "techniqueId": "armas_brancas",
+    "speed": "-3",
+    "damage": "+5",
+    "movement": "+0",
+    "special": "Grupo: Martelos",
+    "description": "<p>Trata-se de uma grande marreta maciça, que é usada para esmagar seus oponentes. Para usá\u0002la é necessário que o ninja possua o Atributo Força em nível igual ou maior que 5. Caso o ninja acerte um oponente, e cause uma quantidade de dano igual ou maior que o Atributo Força do oponente, o mesmo deverá fazer um teste de Destreza, ou sofrerá Knockdown em adição ao Dano. Para cada ponto acima de 5 no Atributo Força do ninja, ele ganha um bônus de +1 Velocidade em todas as manobras com esta arma. <strong>Preço:</strong> 7.000 Ryo.</p>",
+    "sort": 1400
+   },
+   {
+    "id": "w_maca_de_guerra",
+    "name": "Maça de Guerra",
+    "techniqueId": "armas_brancas",
+    "speed": "-2",
+    "damage": "+5",
+    "movement": "+0",
+    "special": "Grupo: Martelos; Acesso: Chuunin",
+    "description": "<p>Trata-se de um grande martelo, coberto de espinhos e lâminas de ferro. É preferida pelos ninjas que gostam de intimidar seus oponentes Acesso: Chuunin <strong>Preço:</strong> 5.000 Ryo. <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1500
+   },
+   {
+    "id": "w_espada_longa",
+    "name": "Espada Longa",
+    "techniqueId": "armas_brancas",
+    "speed": "-1",
+    "damage": "+4",
+    "movement": "+0",
+    "special": "Grupo: Espadas; Acesso: Chuunin",
+    "description": "<p>Esta é uma espada típica. Resistente, pesada e letal. Acesso: Chuunin <strong>Preço:</strong> 5.000 Ryo. <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1600
+   },
+   {
+    "id": "w_rapieira",
+    "name": "Rapieira",
+    "techniqueId": "armas_brancas",
+    "speed": "+2",
+    "damage": "+2",
+    "movement": "+1",
+    "special": "Grupo: Espadas",
+    "description": "<p>Espada típica da esgrima. Ela é bastante leve e ágil, mas não é muito resistente. Caso seja usada para Aparar um golpe de uma arma mais pesada (como espadas, martelos, etc...) e o oponente produzir em um só golpe, mais Dano que o nível de Armas Brancas do ninja, a mesma se partirá, inutilizando-a. <strong>Preço:</strong> 1.500 Ryo.</p>",
+    "sort": 1700
+   },
+   {
+    "id": "w_katana",
+    "name": "Katana",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+3",
+    "movement": "+0",
+    "special": "Grupo: Espadas",
+    "description": "<p>A espada típica de samurais. <strong>Preço:</strong> 2.500 Ryo.</p>",
+    "sort": 1800
+   },
+   {
+    "id": "w_zanbatou",
+    "name": "Zanbatou",
+    "techniqueId": "armas_brancas",
+    "speed": "-2",
+    "damage": "+7",
+    "movement": "-1",
+    "special": "Grupo: Espadas; Alcance 2 Hexágonos; Acesso: Jounin",
+    "description": "<p>Esta espada é conhecida pelo seu tamanho descomunal. Com aproximadamente 2 metros de altura e quase 50 cm de largura da lâmina, é dito que são necessárias duas pessoas para levantá-la. Um ninja que não possua o Atributo Força em nível igual ou maior que 5, não consegue utilizá-la em combate. Para cada ponto acima de 5 no Atributo Força do ninja, ele ganha um bônus de +1 Velocidade em todas as manobras com esta arma. Acesso: Jounin <strong>Preço:</strong> 10.000 Ryo. <strong>Acesso:</strong> Jounin.</p>",
+    "sort": 1900
+   },
+   {
+    "id": "w_lanca_naginata",
+    "name": "Lança / Naginata",
+    "techniqueId": "armas_brancas",
+    "speed": "+0",
+    "damage": "+3",
+    "movement": "+1",
+    "special": "Grupo: Lanças; Alcance 2 Hexágonos",
+    "description": "<p>Um bastão longo de madeira ou metal com uma ponta afiada. Uma arma deste tipo pode ser arremessada (Usando como base a Técnica Arremesso do ninja), causando um estrago considerável em seus oponentes. <strong>Preço:</strong> 900 Ryo.</p>",
+    "sort": 2000
+   },
+   {
+    "id": "w_sai",
+    "name": "Sai",
+    "techniqueId": "armas_brancas",
+    "speed": "+1",
+    "damage": "+1",
+    "movement": "+0",
+    "special": "Grupo: Facas",
+    "description": "<p>Consiste num longo pedaço de ferro pontudo com dois outros saindo curvadamente do cabo. Ele foi desenvolvido para pegar e bloquear ataques de armas, assim como para esfaquear. O ninja ao bloquear usando um Sai recebe um bônus de +1 em Absorção e mais 2 dados para a manobra Desarme. <strong>Preço:</strong> 600 Ryo.</p>",
+    "sort": 2100
+   },
+   {
+    "id": "w_senbons",
+    "name": "Senbons",
+    "techniqueId": "arremesso",
+    "speed": "+1",
+    "damage": "-2",
+    "movement": "+0",
+    "special": "",
+    "description": "<p>São agulhas longas, normalmente utilizadas em acupuntura. Em combate, nas mãos de um especialista podem ser mortais. São utilizadas principalmente por ninjas médicos e por manipuladores de marionetes, normalmente embebidas em veneno. Um ninja pode arremessar uma quantidade de Senbons por turno igual à sua técnica de Arremesso. Caso o ninja esteja executando um Jutsu como Repeating Shot, ele poderá lançar em um turno o dobro da sua capacidade normal. <strong>Preço:</strong> 600 Ryo (10 unidades).</p>",
+    "sort": 2200
+   }
+  ],
+  "equipment": [
+   {
+    "id": "eq_pergaminho_em_branco_rolo",
+    "name": "Pergaminho em Branco (Rolo)",
+    "description": "<p>É um tipo de pergaminho muito visto e usado no mundo ninja. Pode-se escrever de cinco páginas de texto (pequeno) até cinqüenta páginas (grande). É usado para anotações em geral, ou para a criação de Pergaminhos de Selos e Pergaminhos de <strong>Preço:</strong> 100 Ryo (Pequeno) 300 Ryo (Grande).</p>",
+    "sort": 100
+   },
+   {
+    "id": "eq_enciclopedia_shinobi",
+    "name": "Enciclopédia Shinobi",
+    "description": "<p>Este livro contém todas as informações básicas que um ninja precisa para ser bem sucedido em sua profissão. Ele contém um mapa, referências a vários Jutsus antigos e ninjas importantes e até mesmo histórias sobre as Grandes Guerras Ninja. Uma nova versão é lançada a cada 20 anos em 5 volumes, descartando as informações obsoletas e atualizando com o que for necessário. Com explanações detalhadas e referências de grande ajuda, cada volume deveria ser o livro de cabeceira de todo ninja sério. Observação importante, os volumes não são vendidos separadamente. Volume I – Recursos e Ferramentas Ninja <strong>Preço:</strong> 5.000 Ryo.</p>",
+    "sort": 200
+   },
+   {
+    "id": "eq_pergaminho_de_selos",
+    "name": "Pergaminho de Selos",
+    "description": "<p>Estes pergaminhos possuem descrições completas de como executar os Jutsus neles descritos. Permitindo ao jogador aprender um Jutsu sem a ajuda de um Sensei. Encontrar estes pergaminhos para comprar pode ser fácil ou difícil dependendo do tamanho do mesmo. (Pequenos) Estes pergaminhos podem ser encontrados facilmente em Lojas de Artigos Ninja. Cada rolo contém até 3 Jutsus descritos. Cada Jutsu descrito deve ter o seu menor custo em Pontos de Jutsu não maior do que 2 pontos. E cada rolo descreve Jutsus que a soma de seus Pontos de Jutsu totalizem 3 pontos. (Grandes) Estes pergaminhos são bastan <strong>Preço:</strong> 600 Ryo (Pequeno) 2.800 Ryo (Grande).</p>",
+    "sort": 300
+   },
+   {
+    "id": "eq_pergaminho_de_invocacao_kuchiyose_no_jutsu",
+    "name": "Pergaminho de Invocação (Kuchiyose no Jutsu)",
+    "description": "<p>É um tipo de pergaminho que obviamente é usado durante Invocações (Kuchiyose no Jutsu) e ajuda ao ninja a trazer para lutar ao seu lado criaturas ainda mais poderosas. Um pergaminho só pode ser usado para invocar um determinado tipo de criatura, ou seja um Pergaminho de Invocação para Sapos, não pode ser usado para invocar Cobras por exemplo. Após ser utilizado as inscrições contidas nele desaparecem e o pergaminho torna-se um mero Pergaminho em Branco. Um ninja que não conheça a técnica Kuchiyose no Jutsu não consegue se utilizar das vantagens que este tipo de pergaminho oferece. Os benefício <strong>Preço:</strong> 700 Ryo (Pequeno) 5.000 Ryo (Grande).</p>",
+    "sort": 400
+   },
+   {
+    "id": "eq_pergaminho_de_jutsu",
+    "name": "Pergaminho de Jutsu",
+    "description": "<p>Este pergaminho contém um único Ninjutsu ou Genjutsu, que pode ser usado por qualquer um que leia seu conteúdo. Após sua utilização, as inscrições contidas desaparecem e o pergaminho torna-se um mero pergaminho em branco. Com exceção de Jutsus pertencentes a Linhagens Avançadas (Clã Notável 4 ou 5), não há restrições a respeito de quais Jutsus podem ser encontrados neste tipo de pergaminho, mas quanto mais poderoso for o Jutsu, mais raro será encontrá-lo para venda e mais caro ele será. Um Pergaminho de Jutsu custará em Ryo 4.000 X o menor custo em Pontos de Jutsu do Jutsu escolhido. Ou seja,  <strong>Preço:</strong> Variável (ver texto).</p>",
+    "sort": 500
+   },
+   {
+    "id": "eq_pergaminho_de_invocacao_objetos",
+    "name": "Pergaminho de Invocação (Objetos)",
+    "description": "<p>Trata-se de uma ferramenta importante e bastante usada no mundo ninja. O ninja pode selar uma determinada quantidade de objetos, dependendo somente do tamanho do pergaminho adquirido. Cada tipo de pergaminho possui uma unidade de armazenamento chamada Compartimento. Cada Compartimento pode armazenar um objeto de até 30 Quilos. Caso seja necessário armazenar um objeto de peso maior, o mesmo ocupará mais Compartimentos. Há dois procedimentos para liberar um objeto armazenado neste tipo de pergaminho. Caso o ninja possua o Jutsu Release (Kai), ele pode fazê-lo instantaneamente e sem custo em Chak <strong>Preço:</strong> 500 Ryo (Pequeno) 1.500 Ryo (Grande).</p>",
+    "sort": 600
+   },
+   {
+    "id": "eq_mascara_de_gas",
+    "name": "Máscara de Gás",
+    "description": "<p>É um equipamento típico, para proteção. Cobre o nariz e a boca do usuário, e possui diversos orifícios por onde o usuário pode respirar normalmente, pois os mesmos são recobertos com uma película que purifica o ar que é inalado. O uso deste tipo de proteção garante um bônus de +5 dados para resistir aos efeitos de um veneno inalado, assim <strong>Preço:</strong> 900 Ryo.</p>",
+    "sort": 700
+   },
+   {
+    "id": "eq_makibishi",
+    "name": "Makibishi",
+    "description": "<p>Trata-se de um artefato de ferro com quatro pontas, feito de forma que três das pontas formem um apoio e a outra ponta fique apontada para cima. O seu uso normal é para ferir oponentes que pisem neles, ou pelo menos retardá-los. Uma bolsa de Makibishi cobre um quadrado de 5 X 5 hexágonos. Cada vez que alguém pisa neste quadrado, com uma velocidade maior do que a metade de sua movimentação para a manobra escolhida, ou a cada turno que alguém esteja lutando nesta área ele sofrerá imediatamente um ataque que causa 4 dados de Dano, e caso receba qualquer dano terá sua movimentação reduzida à metad <strong>Preço:</strong> 300 Ryo (Bolsa com vários, ver descrição).</p>",
+    "sort": 800
+   },
+   {
+    "id": "eq_comunicadores_ninja",
+    "name": "Comunicadores Ninja",
+    "description": "<p>É um dispositivo pequeno, feito em uma faixa com velcro que pode ser presa em uma parte do corpo de uma pessoa (normalmente o pescoço) e pode ser usado para comunicar-se em 35 freqüências diferentes. É ativado por voz, e possui um ajuste para o volume tanto da recepção, quanto para o envio da <strong>Preço:</strong> 1.500 Ryo.</p>",
+    "sort": 900
+   },
+   {
+    "id": "eq_bomba_de_fumaca_kemuridama",
+    "name": "Bomba de Fumaça (Kemuridama)",
+    "description": "<p>Trata-se de uma pequena esfera que ao tocar o solo se rompe liberando uma fumaça. Estas bombas são usadas para confundir e deixar temporariamente cegos todos os que estiverem na área de efeito. Ela cobre com uma fumaça colorida (a cor varia) uma área de 1 hexágono de raio, ou seja o hexágono onde ela foi lançada e todos os seis hexágonos em volta. A fumaça se dissipa após 2 <strong>Preço:</strong> 200 Ryo.</p>",
+    "sort": 1000
+   },
+   {
+    "id": "eq_tarjas_bomba_kibaku_fuuda",
+    "name": "Tarjas Bomba (Kibaku Fuuda)",
+    "description": "<p>Estes pequenos pedaços de papel, também conhecidos como notas explosivas, são um tipo de explosivo muito comum no mundo Shinobi, por que são fáceis de carregar e ocultar. Estão disponíveis em três tipos de tarjas. Tarjas Bombas (Normais) – Este tipo de tarja carrega em si uma boa quantidade de Chakra, que explode em um determinado tempo depois de armada, com um simples selo. O ninja pode determinar em quanto tempo a mesma explodirá. Ela pode ser desarmada sem desperdício através do Jutsu Release (Kai). Este tipo de tarja causa um dano base de 10 dados de Dano no hexágono em que foi colocada e  <strong>Preço:</strong> Variável (Ver texto). <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1100
+   },
+   {
+    "id": "eq_fio_de_aco_kousen",
+    "name": "Fio de Aço (Kousen)",
+    "description": "<p>Muito resistente e maleável, este ítem é muito útil em uma série de situações. Por ser muito fino é difícil notá-lo em batalha ou quando usado em armadilhas (dificuldade 8 em um teste apropriado). Pode ser usado para amarrar um oponente entre outras possibilidades. Drogas, Venenos e Antidotos Drogas Há uma grande diversidade de drogas usadas pelos ninjas, muitas são extremamente difíceis de conseguir, <strong>Preço:</strong> 100 Ryo (15 metros ).</p>",
+    "sort": 1200
+   },
+   {
+    "id": "eq_pilulas_de_comida",
+    "name": "Pílulas de Comida",
+    "description": "<p>Esta é uma ferramenta importante entre os ninjas que são obrigados a permanecer por muito tempo longe, sem água ou comida. Com apenas uma destas pílulas o ninja pode ficar até 6 dias sem água e/ou comida, apesar de haver efeitos colaterais. Após a ingestão de uma pílula de comida, o ninja não sentirá fome ou sede por seis dias. Após os efeitos, o ninja receberá automaticamente uma quantidade de dano igual 8 – o Vigor do ninja, que será curado automaticamente após o ninja descansar e comer comida de verdade. Os efeitos e penalidades são cumulativos. <strong>Preço:</strong> 900 Ryo (5 Unidades). <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1300
+   },
+   {
+    "id": "eq_pilulas_de_soldado",
+    "name": "Pílulas de Soldado",
+    "description": "<p>Esta pílula possui um composto que é capaz de ativar a produção e circulação de Chakra do ninja, deixando-o literalmente “ligado”. No momento que o ninja ingere esta pílula, ele recebe um aumento 5 pontos em sua reserva de Chakra (podendo inclusive ultrapassar o nível permanente), um bônus de +1 em Força, Destreza e Vigor e pode continuar lutando mesmo após ter uma quantidade de dano maior do que o nível permanente de Saúde. Os benefícios duram uma quantidade de turnos igual ao Vigor do ninja x3. Como efeito colateral, o ninja não consegue dormir por 36 horas, e após este período ele estará co <strong>Preço:</strong> 2000 Ryo (5 Unidades). <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1400
+   },
+   {
+    "id": "eq_flechas_especiais",
+    "name": "Flechas Especiais",
+    "description": "<p>Possuir flechas diferenciadas pode ser um dos maiores trunfos que um ninja arqueiro. Abaixo seguem as descrições dos efeitos de cada tipo de flecha que um arqueiro pode adquirir. Flechas Comuns: São as flechas que todos conhecem. Não adicionam nenhum efeito à Manobra Arremesso (Arco e Flecha). Preço: 200 Ryo Flechas Explosivas: Este tipo de flecha possui uma inscrição no cabo e na ponta da flecha que podem ser ativadas (através do Jutsu Kai instantaneamente e sem custo em Chakra, ou de modo similar gastando 1 Ponto de Chakra). A flecha explodirá e afetará o hexágono onde a mesma se encontra, e <strong>Preço:</strong> Variável (Ver texto) (12 unidades). <strong>Acesso:</strong> Chuunin.</p>",
+    "sort": 1500
+   }
+  ]
+ },
+ "journal": {
+  "name": "Naruto RPG — Complicações e Vantagens das Manobras",
+  "pages": [
+   {
+    "name": "Complicações",
+    "content": "<h2>Atordoamento (Dizzy)</h2><p>Quando um personagem perde em um ataque mais Níveis de Saúde que seu <strong>Vigor</strong>, ele fica atordoado. Um personagem atordoado perde seu turno seguinte: não joga Carta de Combate e fica incapaz de agir, enquanto o oponente ganha um turno livre. Ninguém pode ser atordoado por dois turnos seguidos, não importando o dano. Algumas Manobras Combo somam seu dano para atordoar.</p>\n<h2>Inconsciência</h2><p>Um personagem com Saúde reduzida a zero ou menos fica inconsciente até que o Narrador decida que despertou — normalmente até o fim da cena. O personagem deve permanecer inconsciente apenas enquanto isso for útil à história: mantenha todos os jogadores envolvidos na ação.</p>\n<h2>Morte</h2><p>Não existe regra fixa: a morte é um evento tão trágico que cabe ao Narrador decidir quando um ferimento é fatal, sempre como um momento dramático. Dois recursos clássicos (sem excessos): a <em>armadilha mortal</em> da qual os heróis escapam, e a <em>falsa morte</em> do vilão (aquele golpe fatal era um Kage Bunshin...).</p>\n<h2>Falhas Críticas</h2><p>Uma falha crítica num teste de dano significa um acidente no meio do combate: o personagem se desequilibrou e está vulnerável — <strong>−2 de Velocidade</strong> na manobra do próximo turno.</p>\n<h2>Surpreendendo o Inimigo</h2><p>Teste Resistido de <strong>Destreza + Furtividade</strong> contra <strong>Percepção + Prontidão</strong> do alvo (o Narrador decide o tipo de surpresa).</p><ul><li><strong>Surpresa Parcial:</strong> o oponente não pode abortar sua Manobra para uma Manobra de Interrupção.</li><li><strong>Surpresa Total:</strong> além do acima, o ninja adiciona <strong>+3 de Dano</strong> ao Jutsu escolhido, e no turno seguinte o oponente ainda sofre <strong>−2 de Velocidade</strong>.</li></ul>"
+   },
+   {
+    "name": "Vantagens das Manobras",
+    "content": "<p>Algumas manobras, principalmente Jutsus, têm qualidades extras além do dano:</p>\n<h2>Manobra de Interrupção</h2><p>Você pode trocar qualquer ação pela Manobra de Interrupção, mudando sua Carta de Combate, ao custo de <strong>1 Força de Vontade</strong>. Ela se torna sua ação do turno e permite interromper a ação de outro personagem se sua nova Manobra tiver Velocidade mais alta.</p>\n<h2>Manobra Aérea</h2><p>Executada acima do chão: o lutador não pode ser afetado por rasteiras ou Manobras de Agachamento até terminá-la.</p>\n<h2>Manobra Combo</h2><p>Duas ou três manobras ligadas em sequência. O Combo básico dá <strong>+2 de Velocidade</strong> à segunda manobra quando usada imediatamente após a primeira. O Combo Atordoante soma os danos das manobras para fins de Atordoamento.</p>\n<h2>Manobra de Agachamento</h2><p>Realizada rente ao chão: imune a Manobras Aéreas (salvo indicação em contrário).</p>\n<h2>Knockdown</h2><p>Derruba o oponente: a próxima manobra da vítima sofre <strong>−2 de Velocidade</strong> (ou perde a ação, se ainda não agiu no turno). Só faz efeito se causar ao menos 1 Nível de Saúde de dano; quem bloqueia não sofre Knockdown, a menos que o ataque ignore bloqueios.</p>\n<h2>Manobra de Múltiplo Impacto</h2><p>Permite mais de um teste de Dano no oponente. Esses danos não se somam para atordoar, exceto em Combo Atordoante.</p>\n<h2>Apresamento Sustentado</h2><p>Se causar ao menos 1 Nível de Saúde de dano, o atacante imobiliza a vítima, que nada pode fazer até escapar vencendo uma disputa de <strong>Força versus Força</strong> (um teste por turno, perdendo a ação). O atacante inflige dano a cada turno em que mantiver a mesma Carta, até o limite de turnos igual à sua Técnica de <strong>Apresamento</strong>. Se o atacante for atordoado ou nocauteado por um terceiro, o apresamento é cancelado.</p>\n<h2>Ações Sustentadas</h2><p>Similares aos Apresamentos Sustentados, mas normalmente baseadas em Focus, como Genjutsus e Ninjutsus contínuos.</p>"
+   },
+   {
+    "name": "Usando Armas",
+    "content": "<p>Todas as armas têm modificadores de <strong>Velocidade, Dano e Movimento</strong>. Largar a arma é ação livre; sacar ou pegar leva um turno (apenas carta de Movimento). Com uma arma na mão você não pode socar, e certas Manobras Especiais ficam excluídas (a critério do Narrador).</p>\n<h2>Grupos de Armas</h2><p>As Armas Brancas dividem-se em grupos pela funcionalidade (Facas, Espadas, Bastões, Lanças, Machados, Martelos, Correntes, Chicotes, Nunchakos, Leques...). Um ninja está apto a usar <strong>um grupo de armas a cada dois níveis</strong> da Técnica Armas Brancas e deve informar sua escolha ao Narrador. A escolha do grupo influencia quais Jutsus ele pode aprender.</p>\n<h2>Manobras com Armas</h2><p>Prepare 3 Cartas de Combate adicionais para sua arma — Jab, Strong e Fierce — usando a Técnica de <strong>Armas Brancas</strong> no lugar de Soco, e aplique os modificadores da arma em Velocidade, Dano e Movimento. Jutsus Especiais de arma geram cartas próprias que podem substituir um ataque padrão com arma.</p>"
+   }
+  ]
+ }
+}

@@ -54,6 +54,13 @@ export function registerSettings() {
     default: true,
   });
 
+  game.settings.register("naruto-rpg", "officialContentImported", {
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("naruto-rpg", "autoAddTraitsOnManualCreate", {
     name: "NARUTO_RPG.Settings.AutoAddTraitsOnManualCreate.Name",
     hint: "NARUTO_RPG.Settings.AutoAddTraitsOnManualCreate.Hint",

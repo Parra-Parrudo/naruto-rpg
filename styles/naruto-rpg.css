@@ -3957,3 +3957,13 @@ button.nrpg-import-characters:hover {
   margin-top: 4px;
   opacity: 0.85;
 }
+
+/* Respiro entre Conceito e Nindô no cabeçalho */
+.naruto-rpg .header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.naruto-rpg .header-details .nindo-group {
+  margin-top: 4px;
+}

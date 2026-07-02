@@ -37,6 +37,7 @@ Write-Host "Copying files..." -ForegroundColor Yellow
 # Files and folders to include
 $IncludeItems = @(
     "module",
+    "data",
     "templates",
     "styles",
     "lang",

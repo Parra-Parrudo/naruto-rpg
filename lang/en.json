@@ -212,7 +212,23 @@
     "Library": {
       "import": "Import Library",
       "importSuccess": "Library imported successfully",
-      "importError": "Error importing library"
+      "importError": "Error importing library",
+      "Folders": {
+        "attributes": "Attributes",
+        "abilities": "Abilities",
+        "techniques": "Techniques",
+        "backgrounds": "Backgrounds",
+        "divisions": "Ninja Ranks",
+        "fightingStyles": "Ninja Art Styles",
+        "specialManeuvers": "Jutsus",
+        "weapons": "Weapons",
+        "equipment": "Equipment"
+      },
+      "officialImport": "Official Content",
+      "officialImportPromptTitle": "Naruto RPG — Official Content",
+      "officialImportPromptContent": "Import the official Naruto RPG content now (Attributes, Abilities, Techniques, Backgrounds, Ninja Ranks, Ninja Art Styles, Weapons, Equipment and the combat rules journal)? You can also do it later via the \"Official Content\" button in the Items directory.",
+      "officialImportDone": "Official content imported: {count} items created ({skipped} already existed).",
+      "officialImportError": "Could not load the system's official content."
     },
     "Character": {
       "import": "Import Characters",
@@ -243,7 +259,11 @@
       "background": "Background",
       "motivations": "Motivations",
       "appearanceNotes": "Appearance",
-      "languages": "Languages"
+      "languages": "Languages",
+      "sendNindo": "Send Nindo to chat",
+      "noNindo": "This character has no Nindo set yet.",
+      "nindoChatCaption": "{name}'s Nindo",
+      "nindoPlaceholder": "My ninja way..."
     },
     "Combo": {
       "title": "Combos",

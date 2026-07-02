@@ -34,7 +34,8 @@ https://github.com/Parra-Parrudo/naruto-rpg/releases/latest/download/system.json
 ## Roadmap
 
 - [x] Fase 1 — Conversão de identidade e terminologia (Street Fighter → Naruto RPG)
-- [ ] Fase 2 — Compêndios com os jutsus do Livro Básico e da Expansão
+- [x] Conteúdo oficial embutido: características, Estilos de Artes Ninja, Ranks, Armas, Equipamentos e regras de combate (botão "Conteúdo Oficial")
+- [ ] Fase 2 — Jutsus do Livro Básico e da Expansão
 - [ ] Fase 3 — Mecânicas da Expansão (Hachimon, Selo Amaldiçoado, Transformações de Bijuu, Afinidade Elemental)
 
 ## Créditos

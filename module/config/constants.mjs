@@ -10,7 +10,7 @@ export const TRAIT_MAX_VALUES = {
   attribute: 8,
   ability: 8,
   technique: 8,
-  background: 5,
+  background: 6,
   default: 10,
 };
 
