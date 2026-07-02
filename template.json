@@ -1,7 +1,13 @@
 {
   "Actor": {
-    "types": ["fighter"],
-    "htmlFields": ["background", "motivations", "appearanceNotes"],
+    "types": [
+      "fighter"
+    ],
+    "htmlFields": [
+      "background",
+      "motivations",
+      "appearanceNotes"
+    ],
     "fighter": {
       "importData": {
         "isImported": false,
@@ -20,13 +26,28 @@
         "signature": ""
       },
       "resources": {
-        "health": { "value": 10, "max": 10 },
-        "chi": { "value": 0, "max": 10 },
-        "willpower": { "value": 0, "max": 10 }
+        "health": {
+          "value": 10,
+          "max": 10
+        },
+        "chi": {
+          "value": 0,
+          "max": 0
+        },
+        "willpower": {
+          "value": 0,
+          "max": 0
+        }
       },
       "renown": {
-        "honor": { "permanent": 0, "temporary": 0 },
-        "glory": { "permanent": 0, "temporary": 0 }
+        "honor": {
+          "permanent": 0,
+          "temporary": 0
+        },
+        "glory": {
+          "permanent": 0,
+          "temporary": 0
+        }
       },
       "experience": {
         "total": 0,
@@ -42,8 +63,20 @@
     }
   },
   "Item": {
-    "types": ["fightingStyle", "specialManeuver", "attribute", "ability", "technique", "background", "weapon", "division", "equipment"],
-    "htmlFields": ["description"],
+    "types": [
+      "fightingStyle",
+      "specialManeuver",
+      "attribute",
+      "ability",
+      "technique",
+      "background",
+      "weapon",
+      "division",
+      "equipment"
+    ],
+    "htmlFields": [
+      "description"
+    ],
     "fightingStyle": {
       "sourceId": "",
       "initialChi": 3,
@@ -98,7 +131,8 @@
       "value": 0,
       "isOptional": true,
       "isUnique": false,
-      "description": ""
+      "description": "",
+      "notes": ""
     },
     "weapon": {
       "sourceId": "",

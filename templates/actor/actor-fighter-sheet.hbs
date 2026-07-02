@@ -38,6 +38,7 @@
     <a class="item" data-tab="maneuvers">{{localize "NARUTO_RPG.Tabs.maneuvers"}}</a>
     <a class="item" data-tab="resources">{{localize "NARUTO_RPG.Tabs.resources"}}</a>
     <a class="item" data-tab="effects">{{localize "NARUTO_RPG.Tabs.effects"}}</a>
+    <a class="item" data-tab="backgrounds">{{localize "NARUTO_RPG.Tabs.backgrounds"}}</a>
     <a class="item" data-tab="biography">{{localize "NARUTO_RPG.Tabs.biography"}}</a>
   </nav>
 
@@ -314,33 +315,61 @@
         </div>
 
         {{!-- Honor --}}
-        <div class="resource-row" data-renown="honor">
-          <label>{{localize "NARUTO_RPG.Renown.honor"}}</label>
-          {{{circlePips systemData.renown.honor.permanent 10 dataAttrs="data-resource=\"honor\""}}}
-          <span class="resource-value">{{systemData.renown.honor.permanent}} ({{systemData.renown.honor.temporary}})</span>
-          {{#unless isImported}}
-          <a class="resource-edit" data-action="editRenownPermanent" data-renown="honor" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}">
-            <i class="fas fa-edit"></i>
-          </a>
-          {{/unless}}
+        <div class="resource-row renown-row" data-renown="honor">
+          <div class="renown-level">
+            <a class="renown-roll rollable" data-action="rollRenown" data-renown="honor" title="{{localize 'NARUTO_RPG.Renown.rollHint'}}"><label>{{localize "NARUTO_RPG.Renown.honor"}}</label></a>
+            {{{circlePips systemData.renown.honor.permanent 10 dataAttrs="data-resource=\"honor\""}}}
+            {{#unless isImported}}
+            <a class="resource-edit" data-action="editRenownPermanent" data-renown="honor" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}"><i class="fas fa-edit"></i></a>
+            {{/unless}}
+          </div>
+          <div class="renown-points">
+            <span class="renown-points-label">{{localize "NARUTO_RPG.Renown.points"}}</span>
+            <button type="button" class="resource-control" data-action="renownPoints" data-renown="honor" data-delta="-1">-</button>
+            <span class="renown-points-value">{{systemData.renown.honor.temporary}}</span>
+            <button type="button" class="resource-control" data-action="renownPoints" data-renown="honor" data-delta="1">+</button>
+            <span class="renown-points-hint">/ 10</span>
+            {{#if isGM}}{{#if (gte systemData.renown.honor.temporary 10)}}
+            <a class="renown-levelup" data-action="convertRenown" data-renown="honor" title="{{localize 'NARUTO_RPG.Renown.convert'}}"><i class="fas fa-arrow-up"></i></a>
+            {{/if}}{{/if}}
+          </div>
         </div>
 
         {{!-- Glory --}}
-        <div class="resource-row" data-renown="glory">
-          <label>{{localize "NARUTO_RPG.Renown.glory"}}</label>
-          {{{circlePips systemData.renown.glory.permanent 10 dataAttrs="data-resource=\"glory\""}}}
-          <span class="resource-value">{{systemData.renown.glory.permanent}} ({{systemData.renown.glory.temporary}})</span>
-          {{#unless isImported}}
-          <a class="resource-edit" data-action="editRenownPermanent" data-renown="glory" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}">
-            <i class="fas fa-edit"></i>
-          </a>
-          {{/unless}}
+        <div class="resource-row renown-row" data-renown="glory">
+          <div class="renown-level">
+            <a class="renown-roll rollable" data-action="rollRenown" data-renown="glory" title="{{localize 'NARUTO_RPG.Renown.rollHint'}}"><label>{{localize "NARUTO_RPG.Renown.glory"}}</label></a>
+            {{{circlePips systemData.renown.glory.permanent 10 dataAttrs="data-resource=\"glory\""}}}
+            {{#unless isImported}}
+            <a class="resource-edit" data-action="editRenownPermanent" data-renown="glory" title="{{localize 'NARUTO_RPG.Renown.editPermanent'}}"><i class="fas fa-edit"></i></a>
+            {{/unless}}
+          </div>
+          <div class="renown-points">
+            <span class="renown-points-label">{{localize "NARUTO_RPG.Renown.points"}}</span>
+            <button type="button" class="resource-control" data-action="renownPoints" data-renown="glory" data-delta="-1">-</button>
+            <span class="renown-points-value">{{systemData.renown.glory.temporary}}</span>
+            <button type="button" class="resource-control" data-action="renownPoints" data-renown="glory" data-delta="1">+</button>
+            <span class="renown-points-hint">/ 10</span>
+            {{#if isGM}}{{#if (gte systemData.renown.glory.temporary 10)}}
+            <a class="renown-levelup" data-action="convertRenown" data-renown="glory" title="{{localize 'NARUTO_RPG.Renown.convert'}}"><i class="fas fa-arrow-up"></i></a>
+            {{/if}}{{/if}}
+          </div>
         </div>
 
         {{!-- Experience --}}
-        <div class="resource-row">
+        <div class="resource-row experience-row">
           <label>{{localize "NARUTO_RPG.Experience.title"}}</label>
-          <span class="resource-value">{{systemData.experience.spent}} / {{systemData.experience.total}}</span>
+          {{#if isGM}}
+          <div class="xp-boxes">
+            <span>{{localize "NARUTO_RPG.Experience.total"}}</span>
+            <input type="number" name="system.experience.total" value="{{systemData.experience.total}}" min="0" />
+            <span>{{localize "NARUTO_RPG.Experience.spent"}}</span>
+            <input type="number" name="system.experience.spent" value="{{systemData.experience.spent}}" min="0" />
+            <span class="xp-available">{{localize "NARUTO_RPG.Experience.available"}}: <strong>{{xpAvailable}}</strong></span>
+          </div>
+          {{else}}
+          <span class="resource-value">{{localize "NARUTO_RPG.Experience.spent"}}: {{systemData.experience.spent}} &nbsp;|&nbsp; {{localize "NARUTO_RPG.Experience.total"}}: {{systemData.experience.total}} &nbsp;|&nbsp; {{localize "NARUTO_RPG.Experience.available"}}: <strong>{{xpAvailable}}</strong></span>
+          {{/if}}
         </div>
       </div>
 
@@ -509,6 +538,33 @@
     </div>
 
     {{!-- Biography Tab --}}
+    {{!-- Backgrounds Detail Tab --}}
+    <div class="tab" data-group="primary" data-tab="backgrounds">
+      <div class="traits-section">
+        <h3>{{localize "NARUTO_RPG.Trait.Categories.backgrounds"}}</h3>
+        {{#each items.backgrounds as |bg|}}
+        <div class="bg-detail-card" data-item-id="{{bg.id}}">
+          <div class="bg-detail-header">
+            <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{bg.name}}</a>
+            {{{circlePips bg.effectiveValue 6 baseValue=bg.baseValue}}}
+            {{#unless @root.isImported}}
+            <a class="bg-edit" data-action="editItem" data-item-id="{{bg.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
+            {{/unless}}
+          </div>
+          {{#if bg.system.description}}
+          <details class="bg-official-desc">
+            <summary>{{localize "NARUTO_RPG.Backgrounds.officialDescription"}}</summary>
+            <div class="bg-official-text">{{{bg.system.description}}}</div>
+          </details>
+          {{/if}}
+          <textarea class="bg-notes" data-item-id="{{bg.id}}" rows="3" placeholder="{{localize 'NARUTO_RPG.Backgrounds.notesPlaceholder'}}" {{#unless @root.isEditable}}disabled{{/unless}}>{{bg.system.notes}}</textarea>
+        </div>
+        {{else}}
+        <p class="bg-empty">{{localize "NARUTO_RPG.Backgrounds.empty"}}</p>
+        {{/each}}
+      </div>
+    </div>
+
     <div class="tab" data-group="primary" data-tab="biography">
       {{!-- Profile Fields --}}
       <div class="biography-section profile-fields">

@@ -51,6 +51,9 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       addBasicManeuvers: NarutoRpgActorSheet._onAddBasicManeuvers,
       importCharacter: NarutoRpgActorSheet._onImportCharacter,
       sendNindoToChat: NarutoRpgActorSheet._onSendNindoToChat,
+      rollRenown: NarutoRpgActorSheet._onRollRenown,
+      renownPoints: NarutoRpgActorSheet._onRenownPoints,
+      convertRenown: NarutoRpgActorSheet._onConvertRenown,
     },
     form: {
       submitOnChange: true,
@@ -72,6 +75,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       maneuvers: { id: "maneuvers", group: "primary", label: "NARUTO_RPG.Tabs.maneuvers" },
       resources: { id: "resources", group: "primary", label: "NARUTO_RPG.Tabs.resources" },
       effects: { id: "effects", group: "primary", label: "NARUTO_RPG.Tabs.effects" },
+      backgrounds: { id: "backgrounds", group: "primary", label: "NARUTO_RPG.Tabs.backgrounds" },
       biography: { id: "biography", group: "primary", label: "NARUTO_RPG.Tabs.biography" },
     },
   };
@@ -102,6 +106,15 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
+
+    // Background notes (Antecedentes tab)
+    this.element.querySelectorAll(".bg-notes").forEach((ta) => {
+      ta.addEventListener("change", async (event) => {
+        const itemId = event.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (item) await item.update({ "system.notes": event.currentTarget.value });
+      });
+    });
     
     // Setup tab click handlers
     const tabs = this.element.querySelectorAll(".sheet-tabs .item");
@@ -189,6 +202,8 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     // Check if character is imported (read-only) or manual (editable)
     context.isImported = this.actor.system.importData?.isImported || false;
     context.isEditable = this.isEditable && !context.isImported;
+    context.isGM = game.user.isGM;
+    context.xpAvailable = (this.actor.system.experience?.total ?? 0) - (this.actor.system.experience?.spent ?? 0);
 
     context.items = this._prepareItems(context);
     context.effects = this._prepareEffects(context);
@@ -1002,6 +1017,66 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     });
   }
 
+  /**
+   * Roll a renown pool (permanent level) in d10s
+   */
+  static async _onRollRenown(event, target) {
+    event.preventDefault();
+    const renown = target.dataset.renown;
+    const level = this.actor.system.renown?.[renown]?.permanent ?? 0;
+    const label = game.i18n.localize(`NARUTO_RPG.Renown.${renown}`);
+    if (level <= 0) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Roll.noDice"));
+      return;
+    }
+    await executeRoll({
+      actor: this.actor,
+      attribute: null,
+      secondTrait: null,
+      difficulty: 6,
+      modifier: 0,
+      fixedModifiers: [],
+      effectModifiers: [],
+      dicePool: level,
+      rollTitle: label,
+      targetTokenId: null,
+      targetActorId: null,
+      targetName: null,
+      isDamageRoll: false,
+    });
+  }
+
+  /**
+   * Increment/decrement temporary renown points
+   */
+  static async _onRenownPoints(event, target) {
+    event.preventDefault();
+    const renown = target.dataset.renown;
+    const delta = Number(target.dataset.delta || 0);
+    const cur = this.actor.system.renown?.[renown]?.temporary ?? 0;
+    await this.actor.update({ [`system.renown.${renown}.temporary`]: Math.max(0, cur + delta) });
+  }
+
+  /**
+   * Convert 10 temporary renown points into 1 permanent level (GM only)
+   * Book rule: temporary points are erased on conversion
+   */
+  static async _onConvertRenown(event, target) {
+    event.preventDefault();
+    if (!game.user.isGM) return;
+    const renown = target.dataset.renown;
+    const data = this.actor.system.renown?.[renown] ?? {};
+    if ((data.temporary ?? 0) < 10) return;
+    await this.actor.update({
+      [`system.renown.${renown}.permanent`]: (data.permanent ?? 0) + 1,
+      [`system.renown.${renown}.temporary`]: 0,
+    });
+    ui.notifications.info(game.i18n.format("NARUTO_RPG.Renown.levelUp", {
+      name: this.actor.name,
+      renown: game.i18n.localize(`NARUTO_RPG.Renown.${renown}`),
+    }));
+  }
+
   static async _onRollTrait(event, target) {
     event.preventDefault();
     
@@ -1255,15 +1330,18 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     
     // Source IDs das manobras básicas
     const BASIC_MANEUVERS = [
-      'jab',
-      'forward',
-      'fierce',
-      'strong',
-      'roundhouse',
-      'short',
-      'movement',
-      'block',
-      'grab'
+      "jab",
+      "strong",
+      "fierce",
+      "short",
+      "forward",
+      "roundhouse",
+      "block",
+      "movement",
+      "jab_slash",
+      "strong_slash",
+      "fierce_slash",
+      "arremesso_basico",
     ];
     
     // Verifica quais manobras já existem no ator

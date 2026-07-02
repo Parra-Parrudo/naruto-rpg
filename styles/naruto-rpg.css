@@ -3967,3 +3967,69 @@ button.nrpg-import-characters:hover {
 .naruto-rpg .header-details .nindo-group {
   margin-top: 4px;
 }
+
+/* ===== Renome: nível + pontos ===== */
+.naruto-rpg .renown-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+.naruto-rpg .renown-level {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.naruto-rpg .renown-roll { cursor: pointer; }
+.naruto-rpg .renown-roll label { cursor: pointer; }
+.naruto-rpg .renown-roll:hover label { text-shadow: 0 0 6px var(--color-shadow-primary, #ff6400); }
+.naruto-rpg .renown-points {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+.naruto-rpg .renown-points-value {
+  min-width: 22px;
+  text-align: center;
+  font-weight: bold;
+}
+.naruto-rpg .renown-points-hint { opacity: 0.6; font-size: 11px; }
+.naruto-rpg .renown-levelup {
+  margin-left: 4px;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: #b8860b;
+  color: #fff;
+  cursor: pointer;
+  animation: nrpg-pulse 1.2s infinite alternate;
+}
+@keyframes nrpg-pulse { from { opacity: 0.75; } to { opacity: 1; } }
+
+/* ===== XP ===== */
+.naruto-rpg .experience-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.naruto-rpg .xp-boxes { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.naruto-rpg .xp-boxes input { width: 52px; text-align: center; }
+.naruto-rpg .xp-available { margin-left: 8px; }
+
+/* ===== Aba Antecedentes ===== */
+.naruto-rpg .bg-detail-card {
+  border: 1px solid var(--color-border-light-tertiary, #999);
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+.naruto-rpg .bg-detail-header { display: flex; align-items: center; gap: 8px; }
+.naruto-rpg .bg-detail-header .trait-name { font-weight: bold; }
+.naruto-rpg .bg-edit { margin-left: auto; }
+.naruto-rpg .bg-official-desc { margin: 4px 0; font-size: 12px; }
+.naruto-rpg .bg-official-desc summary { cursor: pointer; opacity: 0.75; }
+.naruto-rpg .bg-official-text { padding: 4px 8px; opacity: 0.85; }
+.naruto-rpg .bg-notes {
+  width: 100%;
+  margin-top: 4px;
+  font-size: 12px;
+  resize: vertical;
+  min-height: 44px;
+}
+.naruto-rpg .bg-empty { opacity: 0.7; font-style: italic; }

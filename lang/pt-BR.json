@@ -190,19 +190,25 @@
       "biography": "Biografia",
       "traits": "Características",
       "maneuvers": "Jutsus",
-      "resources": "Recursos"
+      "resources": "Recursos",
+      "backgrounds": "Antecedentes"
     },
     "Renown": {
       "honor": "Honra",
       "glory": "Glória",
       "editPermanent": "Editar Valor Permanente",
       "editPermanentTitle": "Editar {renown} Permanente",
-      "permanentValue": "Valor Permanente"
+      "permanentValue": "Valor Permanente",
+      "points": "Pontos",
+      "rollHint": "Clique para rolar o Nível",
+      "convert": "Subir 1 Nível (gasta os 10 pontos)",
+      "levelUp": "{name} subiu o Nível de {renown}!"
     },
     "Experience": {
       "title": "Experiência",
       "total": "Total",
-      "spent": "Gasto"
+      "spent": "Gasto",
+      "available": "Disponível"
     },
     "SheetLabels": {
       "Actor": "Ficha de Personagem Naruto RPG",
@@ -496,6 +502,11 @@
       "ResetSelections": "Resetar todas as seleções e iniciar um novo turno",
       "OpenTurnDialog": "Abrir diálogo de turno",
       "soak": "Absorção"
+    },
+    "Backgrounds": {
+      "officialDescription": "Descrição oficial",
+      "notesPlaceholder": "Detalhe este antecedente: quem são seus aliados ou contatos, quem é seu sensei, qual sua fonte de recursos, qual sua Bijuu...",
+      "empty": "Nenhum antecedente adicionado. Arraste antecedentes do diretório de itens para a ficha."
     }
   }
 }

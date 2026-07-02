@@ -390,6 +390,7 @@ async function createTraitItem(data, folders) {
       break;
     case "background":
       baseData.system.isUnique = data.unique ?? false;
+      baseData.system.notes = data.notes ?? "";
       break;
   }
 

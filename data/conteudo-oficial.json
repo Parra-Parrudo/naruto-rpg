@@ -850,6 +850,338 @@
     "description": "<p>Possuir flechas diferenciadas pode ser um dos maiores trunfos que um ninja arqueiro. Abaixo seguem as descrições dos efeitos de cada tipo de flecha que um arqueiro pode adquirir. Flechas Comuns: São as flechas que todos conhecem. Não adicionam nenhum efeito à Manobra Arremesso (Arco e Flecha). Preço: 200 Ryo Flechas Explosivas: Este tipo de flecha possui uma inscrição no cabo e na ponta da flecha que podem ser ativadas (através do Jutsu Kai instantaneamente e sem custo em Chakra, ou de modo similar gastando 1 Ponto de Chakra). A flecha explodirá e afetará o hexágono onde a mesma se encontra, e <strong>Preço:</strong> Variável (Ver texto) (12 unidades). <strong>Acesso:</strong> Chuunin.</p>",
     "sort": 1500
    }
+  ],
+  "special_maneuvers": [
+   {
+    "id": "jab",
+    "name": "Jab",
+    "category": "punch",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "punch",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+2",
+    "damageModifier": "-1",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Soco: um golpe rápido e direto, ideal para manter a pressão.</p>",
+    "sort": 100
+   },
+   {
+    "id": "strong",
+    "name": "Strong",
+    "category": "punch",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "punch",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+0",
+    "damageModifier": "+1",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Soco: um golpe firme, equilibrando velocidade e impacto.</p>",
+    "sort": 200
+   },
+   {
+    "id": "fierce",
+    "name": "Fierce",
+    "category": "punch",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "punch",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "-1",
+    "damageModifier": "+3",
+    "movementModifier": "-1",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Soco: o golpe mais poderoso do repertório básico de mãos.</p>",
+    "sort": 300
+   },
+   {
+    "id": "short",
+    "name": "Short",
+    "category": "kick",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "kick",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+1",
+    "damageModifier": "+0",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Chute: um chute curto e rápido.</p>",
+    "sort": 400
+   },
+   {
+    "id": "forward",
+    "name": "Forward",
+    "category": "kick",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "kick",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+0",
+    "damageModifier": "+2",
+    "movementModifier": "-1",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Chute: um chute médio com bom impacto.</p>",
+    "sort": 500
+   },
+   {
+    "id": "roundhouse",
+    "name": "Roundhouse",
+    "category": "kick",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "kick",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "-2",
+    "damageModifier": "+4",
+    "movementModifier": "-1",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Chute: o chute giratório — lento, mas devastador.</p>",
+    "sort": 600
+   },
+   {
+    "id": "block",
+    "name": "Bloqueio",
+    "category": "block",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "block",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+4",
+    "damageModifier": "+0",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "Sem Dano e sem Movimento. Adiciona a Técnica Bloqueio à Absorção. Apresamentos ignoram Bloqueios (absorva só com Vigor). No turno seguinte: +2 de Velocidade em qualquer manobra. Impede Knockdown. Pode ser usada como Manobra de Interrupção.",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Bloqueio: postura defensiva que neutraliza golpes.</p>",
+    "sort": 700
+   },
+   {
+    "id": "movement",
+    "name": "Movimentação",
+    "category": "athletics",
+    "prerequisites": [],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+3",
+    "damageModifier": "+0",
+    "movementModifier": "+3",
+    "notes": "",
+    "ruleSummary": "Sem Dano. Apenas movimento.",
+    "damageTraitOverride": null,
+    "damageAttributeOverride": null,
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
+    "description": "<p>Manobra Básica de Esportes: deslocamento puro pelo campo de batalha. Única Manobra Básica que não exige ponto na Técnica.</p>",
+    "sort": 800
+   },
+   {
+    "id": "jab_slash",
+    "name": "Jab Slash",
+    "category": "other",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "armas_brancas",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+2",
+    "damageModifier": "-1",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": "armas_brancas",
+    "damageAttributeOverride": null,
+    "speedTraitOverride": "armas_brancas",
+    "movementTraitOverride": "armas_brancas",
+    "description": "<p>Manobra Básica de Armas Brancas: o golpe rápido, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
+    "sort": 900
+   },
+   {
+    "id": "strong_slash",
+    "name": "Strong Slash",
+    "category": "other",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "armas_brancas",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+0",
+    "damageModifier": "+1",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": "armas_brancas",
+    "damageAttributeOverride": null,
+    "speedTraitOverride": "armas_brancas",
+    "movementTraitOverride": "armas_brancas",
+    "description": "<p>Manobra Básica de Armas Brancas: o golpe firme, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
+    "sort": 1000
+   },
+   {
+    "id": "fierce_slash",
+    "name": "Fierce Slash",
+    "category": "other",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "armas_brancas",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "-1",
+    "damageModifier": "+3",
+    "movementModifier": "-1",
+    "notes": "",
+    "ruleSummary": "",
+    "damageTraitOverride": "armas_brancas",
+    "damageAttributeOverride": null,
+    "speedTraitOverride": "armas_brancas",
+    "movementTraitOverride": "armas_brancas",
+    "description": "<p>Manobra Básica de Armas Brancas: o golpe pesado, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
+    "sort": 1100
+   },
+   {
+    "id": "arremesso_basico",
+    "name": "Arremesso",
+    "category": "other",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "arremesso",
+      "minimumValue": 1
+     }
+    ],
+    "defaultPowerPointCost": 0,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+0",
+    "damageModifier": "+0",
+    "movementModifier": "+0",
+    "notes": "",
+    "ruleSummary": "Sem Movimento.",
+    "damageTraitOverride": "arremesso",
+    "damageAttributeOverride": null,
+    "speedTraitOverride": "arremesso",
+    "movementTraitOverride": "arremesso",
+    "description": "<p>Manobra Básica de Arremesso: lançar uma arma de arremesso (shuriken, kunai, senbon) contra o alvo. Aplique os modificadores da arma usada.</p>",
+    "sort": 1200
+   }
   ]
  },
  "journal": {

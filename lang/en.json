@@ -190,19 +190,25 @@
       "biography": "Biography",
       "traits": "Traits",
       "maneuvers": "Jutsus",
-      "resources": "Resources"
+      "resources": "Resources",
+      "backgrounds": "Backgrounds"
     },
     "Renown": {
       "honor": "Honor",
       "glory": "Glory",
       "editPermanent": "Edit Permanent Value",
       "editPermanentTitle": "Edit {renown} Permanent",
-      "permanentValue": "Permanent Value"
+      "permanentValue": "Permanent Value",
+      "points": "Points",
+      "rollHint": "Click to roll the Level",
+      "convert": "Raise 1 Level (spends the 10 points)",
+      "levelUp": "{name} raised their {renown} Level!"
     },
     "Experience": {
       "title": "Experience",
       "total": "Total",
-      "spent": "Spent"
+      "spent": "Spent",
+      "available": "Available"
     },
     "SheetLabels": {
       "Actor": "Naruto RPG Actor Sheet",
@@ -496,6 +502,11 @@
       "ResetSelections": "Reset all selections and start a new turn",
       "OpenTurnDialog": "Open turn dialog",
       "soak": "Soak"
+    },
+    "Backgrounds": {
+      "officialDescription": "Official description",
+      "notesPlaceholder": "Detail this background: who are your allies or contacts, who is your sensei, your source of resources, which Bijuu...",
+      "empty": "No backgrounds added. Drag backgrounds from the items directory onto the sheet."
     }
   }
 }
