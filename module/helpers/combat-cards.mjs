@@ -1,19 +1,20 @@
 /**
  * Naruto RPG - Cartas de Combate
- * Integra as manobras/jutsus do personagem com o sistema de Cards do Foundry:
- * gera uma "mao" de cartas por personagem (1 carta por manobra, com os valores
- * calculados) e uma pilha compartilhada "Mesa de Combate" para a fase de selecao.
- * Carta jogada na Mesa durante a Fase de Selecao = manobra selecionada no combate
- * (a iniciativa/ordem de execucao passa a ser a Velocidade da carta).
+ * Integra as manobras/jutsus do personagem com o sistema de Cards do Foundry.
+ * Carta jogada na "Mesa de Combate" durante a Fase de Selecao = manobra
+ * selecionada no combate (a ordem de execucao passa a ser a Velocidade da carta).
+ * As cartas voltam automaticamente para as maos quando uma nova Fase de Selecao
+ * comeca ou quando o combate termina.
  */
 
 import { prepareActorManeuvers, calculateManeuverStats, canAffordManeuver } from "./maneuver-calculator.mjs";
 import { getEffectiveTraitValue } from "./effect-helpers.mjs";
-import { COMBAT_PHASE, calculateSpeedTiebreaker } from "../combat/combat-phases.mjs";
+import { COMBAT_PHASE, SF_HOOKS, calculateSpeedTiebreaker } from "../combat/combat-phases.mjs";
+
+const LOG = "Naruto RPG | Cartas |";
 
 /**
  * Get (or create, GM only) the shared combat table pile
- * @returns {Promise<Cards|null>}
  */
 export async function getCombatTable() {
   const name = game.i18n.localize("NARUTO_RPG.Cards.tableName");
@@ -31,9 +32,6 @@ export async function getCombatTable() {
 
 /**
  * Create or refresh the combat cards hand for an actor.
- * One card per special maneuver, with calculated Speed/Damage/Movement.
- * @param {Actor} actor
- * @returns {Promise<{hand: Cards, count: number}|null>}
  */
 export async function syncCombatCards(actor) {
   const prepared = prepareActorManeuvers(actor, { sortBySpeed: false });
@@ -69,6 +67,7 @@ export async function syncCombatCards(actor) {
 
   const catLabel = (key) =>
     game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories?.[key] ?? "NARUTO_RPG.Maneuver.Categories.other");
+  const backName = game.i18n.localize("NARUTO_RPG.Cards.cardBack");
 
   const cardsData = prepared.map((m, i) => {
     const cat = catLabel(m.system?.category);
@@ -93,8 +92,9 @@ export async function syncCombatCards(actor) {
       description,
       faces: [{ name: m.name, img: m.img || "icons/svg/sword.svg", text: statsLine }],
       face: 0,
+      back: { name: backName, img: "icons/svg/card-hand.svg" },
       sort: i * 10,
-      flags: { "naruto-rpg": { actorId: actor.id, itemId: m.id } },
+      flags: { "naruto-rpg": { actorId: actor.id, itemId: m.id, handName: name } },
     };
   });
 
@@ -106,33 +106,86 @@ export async function syncCombatCards(actor) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Integracao com o combate: carta jogada na Mesa = manobra selecionada       */
+/*  Integracao com o combate                                                   */
 /* -------------------------------------------------------------------------- */
+
+function _tableName() {
+  return game.i18n.localize("NARUTO_RPG.Cards.tableName");
+}
 
 function _findCombatantForActor(actorId) {
   const combat = game.combat;
   if (!combat) return null;
-  return combat.combatants.find((c) => c.actor?.id === actorId) ?? null;
+  return combat.combatants.find((c) => c.actor?.id === actorId || c.token?.actorId === actorId) ?? null;
+}
+
+/**
+ * Return all cards on the combat table to their owners' hands (GM only)
+ */
+export async function returnCombatCards({ silent = false } = {}) {
+  if (!game.user.isGM) return;
+  const table = game.cards.getName(_tableName());
+  if (!table || !table.cards.size) return;
+
+  // Group cards by destination hand
+  const groups = new Map();
+  for (const card of table.cards) {
+    const handName = card.getFlag("naruto-rpg", "handName");
+    if (!handName) continue;
+    if (!groups.has(handName)) groups.set(handName, []);
+    groups.get(handName).push(card.id);
+  }
+
+  let returned = 0;
+  for (const [handName, ids] of groups.entries()) {
+    const hand = game.cards.getName(handName);
+    if (!hand) continue;
+    try {
+      await table.pass(hand, ids, { chatNotification: false });
+      returned += ids.length;
+    } catch (e) {
+      console.warn(LOG, "falha ao devolver cartas para", handName, e);
+    }
+  }
+
+  if (returned && !silent) {
+    ui.notifications.info(game.i18n.format("NARUTO_RPG.Cards.returned", { count: returned }));
+  }
 }
 
 /**
  * Register the hooks that bridge played cards to the phase-based combat system.
- * A card played onto the "Mesa de Combate" selects that maneuver for the
- * combatant, so execution order (initiative) comes from the card's Speed.
  */
 export function registerCombatCardHooks() {
   Hooks.on("createCard", async (card, options, userId) => {
     if (game.user.id !== userId) return;
-    const tableName = game.i18n.localize("NARUTO_RPG.Cards.tableName");
-    if (card.parent?.name !== tableName) return;
+    if (card.parent?.name !== _tableName()) return;
 
     const actorId = card.getFlag("naruto-rpg", "actorId");
     const itemId = card.getFlag("naruto-rpg", "itemId");
-    if (!actorId || !itemId) return;
+    console.log(LOG, "carta jogada na Mesa:", card.name, { actorId, itemId, phase: game.combat?.phase });
+
+    if (!actorId || !itemId) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Cards.oldCard"));
+      return;
+    }
+
+    const combat = game.combat;
+    if (!combat) {
+      console.log(LOG, "nenhum combate ativo — carta apenas colocada na Mesa.");
+      return;
+    }
 
     const combatant = _findCombatantForActor(actorId);
-    if (!combatant) return;
-    if (game.combat?.phase !== COMBAT_PHASE.SELECTION) return;
+    if (!combatant) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Cards.noCombatant"));
+      return;
+    }
+
+    if (combat.phase !== COMBAT_PHASE.SELECTION) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Cards.notSelectionPhase"));
+      return;
+    }
 
     const actor = combatant.actor;
     const maneuver = actor?.items.get(itemId);
@@ -146,42 +199,46 @@ export function registerCombatCardHooks() {
       return;
     }
 
-    const prepared = calculateManeuverStats(actor, maneuver);
+    try {
+      const prepared = calculateManeuverStats(actor, maneuver);
 
-    const findTraitValue = (sourceId) => {
-      if (!sourceId) return 0;
-      const item = actor.items.find((i) => i.system.sourceId === sourceId);
-      if (!item) return 0;
-      const effective = getEffectiveTraitValue(actor, sourceId, item.system.value || 0);
-      return effective.value;
-    };
-    const speedTiebreaker = calculateSpeedTiebreaker(
-      prepared.calculatedSpeed,
-      findTraitValue("wits"),
-      findTraitValue("perception")
-    );
+      const findTraitValue = (sourceId) => {
+        if (!sourceId) return 0;
+        const item = actor.items.find((i) => i.system.sourceId === sourceId);
+        if (!item) return 0;
+        const effective = getEffectiveTraitValue(actor, sourceId, item.system.value || 0);
+        return effective.value;
+      };
+      const speedTiebreaker = calculateSpeedTiebreaker(
+        prepared.calculatedSpeed,
+        findTraitValue("wits"),
+        findTraitValue("perception")
+      );
 
-    await combatant.selectManeuver({
-      itemId: maneuver.id,
-      name: maneuver.name,
-      speed: prepared.calculatedSpeed,
-      speedTiebreaker,
-      damage: prepared.calculatedDamage,
-      movement: prepared.calculatedMovement,
-      category: prepared.category,
-      chiCost: prepared.chiCost,
-      willpowerCost: prepared.willpowerCost,
-      notes: prepared.notes,
-    });
+      await combatant.selectManeuver({
+        itemId: maneuver.id,
+        name: maneuver.name,
+        speed: prepared.calculatedSpeed,
+        speedTiebreaker,
+        damage: prepared.calculatedDamage,
+        movement: prepared.calculatedMovement,
+        category: prepared.category,
+        chiCost: prepared.chiCost,
+        willpowerCost: prepared.willpowerCost,
+        notes: prepared.notes,
+      });
 
-    ui.notifications.info(game.i18n.format("NARUTO_RPG.Combat.ManeuverSelected", { name: maneuver.name }));
-    ui.combat?.render();
+      ui.notifications.info(game.i18n.format("NARUTO_RPG.Combat.ManeuverSelected", { name: maneuver.name }));
+      ui.combat?.render();
+    } catch (e) {
+      console.error(LOG, "erro ao selecionar manobra pela carta:", e);
+      ui.notifications.error(`Cartas de Combate: ${e.message}`);
+    }
   });
 
   Hooks.on("deleteCard", async (card, options, userId) => {
     if (game.user.id !== userId) return;
-    const tableName = game.i18n.localize("NARUTO_RPG.Cards.tableName");
-    if (card.parent?.name !== tableName) return;
+    if (card.parent?.name !== _tableName()) return;
 
     const actorId = card.getFlag("naruto-rpg", "actorId");
     const itemId = card.getFlag("naruto-rpg", "itemId");
@@ -191,10 +248,22 @@ export function registerCombatCardHooks() {
     if (!combatant) return;
     if (game.combat?.phase !== COMBAT_PHASE.SELECTION) return;
 
-    // Only clear if the removed card is the currently selected maneuver
     if (combatant.selectedManeuver?.itemId === itemId) {
       await combatant.clearManeuverSelection();
       ui.combat?.render();
     }
+  });
+
+  // Nova Fase de Selecao => devolve as cartas do turno anterior (GM)
+  Hooks.on(SF_HOOKS.PHASE_CHANGED, async (combat, newPhase) => {
+    if (newPhase === COMBAT_PHASE.SELECTION) {
+      await returnCombatCards({ silent: true });
+    }
+  });
+
+  // Fim do combate => devolve tudo (GM)
+  Hooks.on("deleteCombat", async (combat, options, userId) => {
+    if (game.user.id !== userId) return;
+    await returnCombatCards();
   });
 }

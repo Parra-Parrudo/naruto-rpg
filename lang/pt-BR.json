@@ -556,7 +556,12 @@
       "cost": "Custo",
       "synced": "{count} cartas geradas em \"{name}\". Abra o menu de Cartas (ícone de baralho na barra lateral).",
       "noManeuvers": "Este personagem não possui manobras para gerar cartas.",
-      "createDenied": "Você não tem permissão para criar baralhos — peça ao Narrador para clicar em Gerar Cartas na sua ficha."
+      "createDenied": "Você não tem permissão para criar baralhos — peça ao Narrador para clicar em Gerar Cartas na sua ficha.",
+      "cardBack": "Carta de Combate",
+      "oldCard": "Esta carta foi gerada numa versão antiga — abra a ficha e clique em Gerar Cartas novamente.",
+      "noCombatant": "Este personagem não está no combate atual.",
+      "notSelectionPhase": "O combate não está na Fase de Seleção — a carta ficou na Mesa, mas não selecionou manobra.",
+      "returned": "{count} cartas devolvidas às mãos."
     }
   }
 }
