@@ -61,7 +61,9 @@
         "grab": "Grab",
         "athletics": "Athletics",
         "focus": "Focus",
-        "other": "Other"
+        "other": "Other",
+        "arremesso": "Throwing",
+        "armas_brancas": "Melee Weapons"
       }
     },
     "Maneuvers": {
@@ -124,7 +126,8 @@
       "damageTraitOverride": "Damage Trait Override",
       "damageAttributeOverride": "Damage Attribute Override",
       "speedTraitOverride": "Speed Trait Override",
-      "movementTraitOverride": "Movement Trait Override"
+      "movementTraitOverride": "Movement Trait Override",
+      "system": "System"
     },
     "Weapon": {
       "techniqueId": "Technique ID",
@@ -208,7 +211,12 @@
       "title": "Experience",
       "total": "Total",
       "spent": "Spent",
-      "available": "Available"
+      "available": "Available",
+      "totalSpent": "Total Spent",
+      "totalEarned": "Total Earned",
+      "add": "Add",
+      "spend": "Spend",
+      "notEnough": "Not enough available XP."
     },
     "SheetLabels": {
       "Actor": "Naruto RPG Actor Sheet",

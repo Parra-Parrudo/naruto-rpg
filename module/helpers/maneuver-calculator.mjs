@@ -164,6 +164,7 @@ export function calculateManeuverStats(actor, maneuver, options = {}) {
     id: maneuver.id,
     name: maneuver.name,
     img: maneuver.img,
+    sort: maneuver.sort ?? 0,
     category: category,
     system: maneuver.system,
 

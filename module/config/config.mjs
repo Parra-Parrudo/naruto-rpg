@@ -81,6 +81,8 @@ export const NARUTO_RPG = {
     grab: "NARUTO_RPG.Maneuver.Categories.grab",
     athletics: "NARUTO_RPG.Maneuver.Categories.athletics",
     focus: "NARUTO_RPG.Maneuver.Categories.focus",
+    arremesso: "NARUTO_RPG.Maneuver.Categories.arremesso",
+    armas_brancas: "NARUTO_RPG.Maneuver.Categories.armas_brancas",
     other: "NARUTO_RPG.Maneuver.Categories.other",
   },
 

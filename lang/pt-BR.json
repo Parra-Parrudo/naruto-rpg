@@ -61,7 +61,9 @@
         "grab": "Apresamento",
         "athletics": "Esportes",
         "focus": "Focus",
-        "other": "Outro"
+        "other": "Outro",
+        "arremesso": "Arremesso",
+        "armas_brancas": "Armas Brancas"
       }
     },
     "Maneuvers": {
@@ -124,7 +126,8 @@
       "damageTraitOverride": "Substituição de Característica de Dano",
       "damageAttributeOverride": "Substituição de Atributo de Dano",
       "speedTraitOverride": "Substituição de Característica de Velocidade",
-      "movementTraitOverride": "Substituição de Característica de Movimento"
+      "movementTraitOverride": "Substituição de Característica de Movimento",
+      "system": "Sistema"
     },
     "Weapon": {
       "techniqueId": "ID da Técnica",
@@ -208,7 +211,12 @@
       "title": "Experiência",
       "total": "Total",
       "spent": "Gasto",
-      "available": "Disponível"
+      "available": "Disponível",
+      "totalSpent": "Total Gasto",
+      "totalEarned": "Total Recebido",
+      "add": "Adicionar",
+      "spend": "Gastar",
+      "notEnough": "XP disponível insuficiente."
     },
     "SheetLabels": {
       "Actor": "Ficha de Personagem Naruto RPG",

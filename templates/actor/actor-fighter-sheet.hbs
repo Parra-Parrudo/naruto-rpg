@@ -153,7 +153,7 @@
             {{#each items.backgrounds as |bg|}}
             <li class="trait-item {{#if bg.hasModifiers}}has-modifiers{{/if}}" data-item-id="{{bg.id}}">
               <a class="trait-name rollable" data-action="rollTrait" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{bg.name}}</a>
-              {{{circlePips bg.effectiveValue 5 baseValue=bg.baseValue}}}
+              {{{circlePips bg.effectiveValue 6 baseValue=bg.baseValue}}}
             </li>
             {{/each}}
           </ul>
@@ -172,12 +172,14 @@
           </button>
           {{/unless}}
         </div>
+        {{#each maneuverGroups as |group|}}
+        {{#if group.maneuvers.length}}
+        <h4 class="maneuver-group-label">{{group.label}}</h4>
         <div class="maneuver-list">
-          {{#each items.specialManeuvers as |maneuver|}}
+          {{#each group.maneuvers as |maneuver|}}
           <div class="maneuver-card" data-item-id="{{maneuver.id}}">
             <div class="maneuver-row">
               <a class="maneuver-name rollable" data-action="rollManeuver" title="{{localize 'NARUTO_RPG.Roll.click'}}">{{maneuver.name}}</a>
-              <span class="maneuver-category">{{maneuver.system.category}}</span>
               <div class="maneuver-stats-inline">
                 <span class="stat-inline" title="{{localize 'NARUTO_RPG.Weapon.speed'}}">
                   <i class="fas fa-bolt"></i> {{maneuver.calculatedSpeed}} <span class="stat-original">({{maneuver.originalSpeed}})</span>
@@ -199,7 +201,7 @@
                 <i class="fas fa-brain"></i> {{maneuver.system.willpowerCost}}
               </span>
               {{/if}}
-              {{#unless ../isImported}}
+              {{#unless @root.isImported}}
               <div class="item-controls">
                 <a data-action="editItem" data-item-id="{{maneuver.id}}" title="{{localize 'NARUTO_RPG.Common.edit'}}"><i class="fas fa-edit"></i></a>
                 <a data-action="deleteItem" data-item-id="{{maneuver.id}}" title="{{localize 'NARUTO_RPG.Common.delete'}}"><i class="fas fa-trash"></i></a>
@@ -209,8 +211,10 @@
             </div>
             <div class="maneuver-notes collapsed">
               <div class="notes-content">
-                {{#if maneuver.system.notes}}
-                <p>{{maneuver.system.notes}}</p>
+                {{#if maneuver.hasDetails}}
+                {{#if maneuver.system.description}}<div class="maneuver-desc">{{{maneuver.system.description}}}</div>{{/if}}
+                {{#if maneuver.system.ruleSummary}}<p class="maneuver-rule"><strong>{{localize "NARUTO_RPG.SpecialManeuver.system"}}:</strong> {{maneuver.system.ruleSummary}}</p>{{/if}}
+                {{#if maneuver.system.notes}}<p class="maneuver-note"><strong>{{localize "NARUTO_RPG.SpecialManeuver.notes"}}:</strong> {{maneuver.system.notes}}</p>{{/if}}
                 {{else}}
                 <p class="no-notes">{{localize "NARUTO_RPG.Common.none"}}</p>
                 {{/if}}
@@ -219,6 +223,8 @@
           </div>
           {{/each}}
         </div>
+        {{/if}}
+        {{/each}}
       </div>
 
       {{!-- Combos Section --}}
@@ -359,17 +365,23 @@
         {{!-- Experience --}}
         <div class="resource-row experience-row">
           <label>{{localize "NARUTO_RPG.Experience.title"}}</label>
-          {{#if isGM}}
-          <div class="xp-boxes">
-            <span>{{localize "NARUTO_RPG.Experience.total"}}</span>
-            <input type="number" name="system.experience.total" value="{{systemData.experience.total}}" min="0" />
-            <span>{{localize "NARUTO_RPG.Experience.spent"}}</span>
-            <input type="number" name="system.experience.spent" value="{{systemData.experience.spent}}" min="0" />
-            <span class="xp-available">{{localize "NARUTO_RPG.Experience.available"}}: <strong>{{xpAvailable}}</strong></span>
+          <div class="xp-flow">
+            <span class="xp-stat xp-available-box">{{localize "NARUTO_RPG.Experience.available"}}: <strong>{{xpAvailable}}</strong></span>
+            <span class="xp-stat">{{localize "NARUTO_RPG.Experience.totalSpent"}}: <strong>{{systemData.experience.spent}}</strong></span>
+            <span class="xp-stat xp-muted">{{localize "NARUTO_RPG.Experience.totalEarned"}}: {{systemData.experience.total}}</span>
+            {{#if isGM}}
+            <span class="xp-action">
+              <input type="number" class="xp-input" placeholder="XP" />
+              <button type="button" data-action="xpAdd"><i class="fas fa-plus"></i> {{localize "NARUTO_RPG.Experience.add"}}</button>
+            </span>
+            {{/if}}
+            {{#if isEditable}}
+            <span class="xp-action">
+              <input type="number" class="xp-input" placeholder="XP" />
+              <button type="button" data-action="xpSpend"><i class="fas fa-minus"></i> {{localize "NARUTO_RPG.Experience.spend"}}</button>
+            </span>
+            {{/if}}
           </div>
-          {{else}}
-          <span class="resource-value">{{localize "NARUTO_RPG.Experience.spent"}}: {{systemData.experience.spent}} &nbsp;|&nbsp; {{localize "NARUTO_RPG.Experience.total"}}: {{systemData.experience.total}} &nbsp;|&nbsp; {{localize "NARUTO_RPG.Experience.available"}}: <strong>{{xpAvailable}}</strong></span>
-          {{/if}}
         </div>
       </div>
 

@@ -4033,3 +4033,23 @@ button.nrpg-import-characters:hover {
   min-height: 44px;
 }
 .naruto-rpg .bg-empty { opacity: 0.7; font-style: italic; }
+
+/* ===== Grupos de manobras por técnica ===== */
+.naruto-rpg .maneuver-group-label {
+  margin: 10px 0 4px;
+  padding: 2px 8px;
+  background: rgba(184, 134, 11, 0.12);
+  border-left: 3px solid #b8860b;
+  border-radius: 2px;
+  font-size: 13px;
+}
+.naruto-rpg .maneuver-desc { margin-bottom: 4px; }
+.naruto-rpg .maneuver-rule, .naruto-rpg .maneuver-note { margin: 3px 0; font-size: 12px; }
+
+/* ===== Fluxo de XP ===== */
+.naruto-rpg .xp-flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+.naruto-rpg .xp-stat.xp-available-box strong { color: #2e7d32; font-size: 15px; }
+.naruto-rpg .xp-muted { opacity: 0.65; }
+.naruto-rpg .xp-action { display: inline-flex; align-items: center; gap: 4px; }
+.naruto-rpg .xp-action .xp-input { width: 52px; text-align: center; }
+.naruto-rpg .xp-action button { font-size: 12px; padding: 2px 8px; line-height: 1.4; width: auto; }

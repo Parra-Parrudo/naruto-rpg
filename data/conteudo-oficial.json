@@ -854,7 +854,7 @@
   "special_maneuvers": [
    {
     "id": "jab",
-    "name": "Jab",
+    "name": "Soco Rápido (Jab)",
     "category": "punch",
     "prerequisites": [
      {
@@ -882,7 +882,7 @@
    },
    {
     "id": "strong",
-    "name": "Strong",
+    "name": "Soco Forte (Strong)",
     "category": "punch",
     "prerequisites": [
      {
@@ -910,7 +910,7 @@
    },
    {
     "id": "fierce",
-    "name": "Fierce",
+    "name": "Soco Feroz (Fierce)",
     "category": "punch",
     "prerequisites": [
      {
@@ -938,7 +938,7 @@
    },
    {
     "id": "short",
-    "name": "Short",
+    "name": "Chute Curto (Short)",
     "category": "kick",
     "prerequisites": [
      {
@@ -966,7 +966,7 @@
    },
    {
     "id": "forward",
-    "name": "Forward",
+    "name": "Chute Frontal (Forward)",
     "category": "kick",
     "prerequisites": [
      {
@@ -994,7 +994,7 @@
    },
    {
     "id": "roundhouse",
-    "name": "Roundhouse",
+    "name": "Chute Giratório (Roundhouse)",
     "category": "kick",
     "prerequisites": [
      {
@@ -1072,8 +1072,8 @@
    },
    {
     "id": "jab_slash",
-    "name": "Jab Slash",
-    "category": "other",
+    "name": "Corte Rápido (Jab Slash)",
+    "category": "armas_brancas",
     "prerequisites": [
      {
       "type": "techniqueRating",
@@ -1091,17 +1091,17 @@
     "movementModifier": "+0",
     "notes": "",
     "ruleSummary": "",
-    "damageTraitOverride": "armas_brancas",
+    "damageTraitOverride": null,
     "damageAttributeOverride": null,
-    "speedTraitOverride": "armas_brancas",
-    "movementTraitOverride": "armas_brancas",
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
     "description": "<p>Manobra Básica de Armas Brancas: o golpe rápido, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
     "sort": 900
    },
    {
     "id": "strong_slash",
-    "name": "Strong Slash",
-    "category": "other",
+    "name": "Corte Forte (Strong Slash)",
+    "category": "armas_brancas",
     "prerequisites": [
      {
       "type": "techniqueRating",
@@ -1119,17 +1119,17 @@
     "movementModifier": "+0",
     "notes": "",
     "ruleSummary": "",
-    "damageTraitOverride": "armas_brancas",
+    "damageTraitOverride": null,
     "damageAttributeOverride": null,
-    "speedTraitOverride": "armas_brancas",
-    "movementTraitOverride": "armas_brancas",
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
     "description": "<p>Manobra Básica de Armas Brancas: o golpe firme, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
     "sort": 1000
    },
    {
     "id": "fierce_slash",
-    "name": "Fierce Slash",
-    "category": "other",
+    "name": "Corte Feroz (Fierce Slash)",
+    "category": "armas_brancas",
     "prerequisites": [
      {
       "type": "techniqueRating",
@@ -1147,17 +1147,17 @@
     "movementModifier": "-1",
     "notes": "",
     "ruleSummary": "",
-    "damageTraitOverride": "armas_brancas",
+    "damageTraitOverride": null,
     "damageAttributeOverride": null,
-    "speedTraitOverride": "armas_brancas",
-    "movementTraitOverride": "armas_brancas",
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
     "description": "<p>Manobra Básica de Armas Brancas: o golpe pesado, executado com a arma em mãos. Aplique também os modificadores da arma usada.</p>",
     "sort": 1100
    },
    {
     "id": "arremesso_basico",
     "name": "Arremesso",
-    "category": "other",
+    "category": "arremesso",
     "prerequisites": [
      {
       "type": "techniqueRating",
@@ -1175,10 +1175,10 @@
     "movementModifier": "+0",
     "notes": "",
     "ruleSummary": "Sem Movimento.",
-    "damageTraitOverride": "arremesso",
+    "damageTraitOverride": null,
     "damageAttributeOverride": null,
-    "speedTraitOverride": "arremesso",
-    "movementTraitOverride": "arremesso",
+    "speedTraitOverride": null,
+    "movementTraitOverride": null,
     "description": "<p>Manobra Básica de Arremesso: lançar uma arma de arremesso (shuriken, kunai, senbon) contra o alvo. Aplique os modificadores da arma usada.</p>",
     "sort": 1200
    }

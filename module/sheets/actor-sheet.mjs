@@ -52,6 +52,8 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       importCharacter: NarutoRpgActorSheet._onImportCharacter,
       sendNindoToChat: NarutoRpgActorSheet._onSendNindoToChat,
       rollRenown: NarutoRpgActorSheet._onRollRenown,
+      xpAdd: NarutoRpgActorSheet._onXpAdd,
+      xpSpend: NarutoRpgActorSheet._onXpSpend,
       renownPoints: NarutoRpgActorSheet._onRenownPoints,
       convertRenown: NarutoRpgActorSheet._onConvertRenown,
     },
@@ -206,6 +208,24 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context.xpAvailable = (this.actor.system.experience?.total ?? 0) - (this.actor.system.experience?.spent ?? 0);
 
     context.items = this._prepareItems(context);
+
+    // Group maneuvers by technique/category for the maneuvers tab
+    const catOrder = ["punch", "kick", "block", "grab", "athletics", "focus", "arremesso", "armas_brancas", "other"];
+    const bySortName = (a, b) => ((a.sort ?? 0) - (b.sort ?? 0)) || a.name.localeCompare(b.name);
+    const maneuvers = (context.items.specialManeuvers ?? []).map((m) => {
+      m.hasDetails = !!(m.system?.description || m.system?.ruleSummary || m.system?.notes);
+      return m;
+    });
+    context.maneuverGroups = catOrder.map((key) => ({
+      key,
+      label: game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories[key] ?? "NARUTO_RPG.Maneuver.Categories.other"),
+      maneuvers: maneuvers
+        .filter((m) => {
+          const cat = catOrder.includes(m.system?.category) ? m.system.category : "other";
+          return cat === key;
+        })
+        .sort(bySortName),
+    }));
     context.effects = this._prepareEffects(context);
     context.effectiveResources = this._prepareEffectiveResources();
     context.tabs = this._prepareTabs(options);
@@ -1015,6 +1035,39 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: `<div class="nrpg-nindo-card"><i class="fas fa-scroll"></i> <em>"${esc(nindo)}"</em><div class="nrpg-nindo-caption">— ${game.i18n.format("NARUTO_RPG.Profile.nindoChatCaption", { name: esc(this.actor.name) })}</div></div>`,
     });
+  }
+
+  /**
+   * Add XP to the character (GM). Negative values allowed for corrections.
+   */
+  static async _onXpAdd(event, target) {
+    event.preventDefault();
+    if (!game.user.isGM) return;
+    const input = target.closest(".xp-action")?.querySelector(".xp-input");
+    const amount = Number(input?.value || 0);
+    if (!amount) return;
+    const total = Math.max(0, (this.actor.system.experience?.total ?? 0) + amount);
+    await this.actor.update({ "system.experience.total": total });
+    if (input) input.value = "";
+  }
+
+  /**
+   * Spend XP: adds to the spent total. Players cannot spend more than available.
+   */
+  static async _onXpSpend(event, target) {
+    event.preventDefault();
+    const input = target.closest(".xp-action")?.querySelector(".xp-input");
+    const amount = Number(input?.value || 0);
+    if (!amount) return;
+    const exp = this.actor.system.experience ?? {};
+    const available = (exp.total ?? 0) - (exp.spent ?? 0);
+    if (!game.user.isGM && amount > available) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Experience.notEnough"));
+      return;
+    }
+    const spent = Math.max(0, (exp.spent ?? 0) + amount);
+    await this.actor.update({ "system.experience.spent": spent });
+    if (input) input.value = "";
   }
 
   /**

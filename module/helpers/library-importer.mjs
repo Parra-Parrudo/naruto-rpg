@@ -110,7 +110,10 @@ export async function importLibraryData(library, fallbackName = "Library") {
       for (const maneuver of library.special_maneuvers) {
         try {
           if (exists(maneuver.id, "specialManeuver")) { counts.skipped++; continue; }
-          await createSpecialManeuverItem(maneuver, folders.specialManeuvers);
+          const catKey = maneuver.category || "other";
+          const catLabel = game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories?.[catKey] ?? "NARUTO_RPG.Maneuver.Categories.other");
+          const catFolder = await getOrCreateSubfolder(catLabel, folders.specialManeuvers);
+          await createSpecialManeuverItem(maneuver, catFolder);
           counts.specialManeuvers++;
         } catch (e) {
           errors.push(`Special Maneuver ${maneuver.id}: ${e.message}`);
