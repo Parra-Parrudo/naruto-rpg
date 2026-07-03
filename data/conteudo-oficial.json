@@ -391,7 +391,179 @@
     "description": "<p>O destino de ser o recipiente vivo de uma das nove Bijuus. O nível reflete o grau de controle sobre o poder da besta — do selo instável ao Controle Total (nível 6). (Expansão)</p>",
     "isOptional": true,
     "sort": 4700,
-    "unique": true
+    "unique": true,
+    "active_effects": [
+     {
+      "name": "Modo: Presença Bijuu (Antecedente ••)",
+      "img": "icons/svg/eye.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +1, Percepção +1; ataques desarmados causam dano letal. Ação livre, sem custo nem desgaste corporal.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.trait.perception",
+        "mode": 2,
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "name": "Modo: Manto Bijuu (Antecedente •••)",
+      "img": "icons/svg/fire.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>A aura de caudas: Acelerado (+2 Velocidade, já aplicado). Some manualmente Força/Absorção conforme as caudas da sua Bijuu — 1–2 caudas: +2 For/+1 Abs; 3–4: +3/+2; 5–6: +4/+2; 7–8: +5/+3; 9 (Kurama): +6/+4. Custo: Chakra igual ao nível do Manto ao ativar; 1 nível de Contusão (não absorvível) no início de cada turno. Janela Segura conforme o Antecedente; depois, Teste de Domínio (dif. 7–10 pelas caudas).</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.speed.punch",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.kick",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.block",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.grab",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.athletics",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.focus",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.arremesso",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.armas_brancas",
+        "mode": 2,
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "name": "Modo: Modo Bijuu (Antecedente •••••)",
+      "img": "icons/svg/fire.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Incremental sobre o Manto Bijuu (mantenha os dois efeitos ativos): +1 Destreza e +1 Absorção. NÃO pode fazer selos de mão — apenas Taijutsu e técnicas da própria Bijuu.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.dexterity",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.resource.max.soak",
+        "mode": 2,
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "name": "Modo: Forma Bijuu (Antecedente ••••••)",
+      "img": "icons/svg/terror.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>A besta completa: +8 Força, +6 Vigor (já aplicados), Absorção dobrada (ajuste manual), tamanho colossal. Evento de clímax — ver regras próprias no Livro de Expansão. Dano recebido para encerrar é Agravado.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "8"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "6"
+       }
+      ]
+     },
+     {
+      "name": "Manto de Chakra de Bijuu (Controle Total)",
+      "img": "icons/svg/sun.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Exclusivo do Controle Total (Antecedente 6 + arco de parceria). Armadura de Chakra: +2 Força, +2 Destreza, +2 Absorção e +3 Velocidade (já aplicados); selos de mão liberados; Reação de Chakra 1×/turno (+2 na dificuldade do atacante). Custo: 3 Chakra ao ativar, 1 Chakra/turno. Sem desgaste corporal nem Teste de Domínio. Técnicas: Braço de Chakra (Vel +1/Dano +4/15 m), Disparo de Chakra (Dano +5 área), Mini-Bijuudama (Vel −1/Dano +7, 2 Chakra extras).</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.trait.dexterity",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.resource.max.soak",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.punch",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.kick",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.block",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.grab",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.athletics",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.focus",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.arremesso",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.armas_brancas",
+        "mode": 2,
+        "value": "3"
+       }
+      ]
+     }
+    ]
    },
    {
     "id": "selo_amaldicoado",
@@ -400,7 +572,304 @@
     "description": "<p>A marca de um selo amaldiçoado e seus estágios de transformação — do surto involuntário ao Segundo Estágio Completo e à Transformação Eremita (Senninka). (Expansão)</p>",
     "isOptional": true,
     "sort": 4800,
-    "unique": true
+    "unique": true,
+    "active_effects": [
+     {
+      "name": "Selo Nível 1 — Selo Dormente (involuntário)",
+      "img": "icons/svg/paralysis.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Dispara sozinho sob estresse extremo, por 1 turno: +1 Força, +1 Vigor (já aplicados); o portador NÃO dirige o surto. Ao fim, fatigado: −1 em ações físicas por uma cena.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "name": "Selo Nível 2 — Primeiro Estágio",
+      "img": "icons/svg/paralysis.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+2 de Dano em todos os ataques, +1 em testes de ataque e defesa, +1 Força, +1 Vigor (já aplicados); −1 na dificuldade das suas Técnicas; imune a penalidades de ferimento leve e a Intimidação. Custo: 1 Chakra ao ativar, 1/turno. Ao desativar: fatigado (−1 físico por uma cena).</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.damage.punch",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.kick",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.block",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.grab",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.athletics",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.focus",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.arremesso",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.armas_brancas",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.roll.all",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "name": "Selo Nível 3 — Segundo Estágio Parcial",
+      "img": "icons/svg/paralysis.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+3 de Dano em todos os ataques, +1 em testes, +2 Força, +2 Vigor, +1 Absorção (já aplicados); deslocamento aprimorado (saltos longos/planar curto). Custo: 2 Chakra ao ativar, 1/turno; 1 Contusão a cada 2 turnos mantidos. Em fúria: teste de FV (dif. 6) para não agir por impulso.</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.damage.punch",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.kick",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.block",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.grab",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.athletics",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.focus",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.arremesso",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.armas_brancas",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.roll.all",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.resource.max.soak",
+        "mode": 2,
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "name": "Selo Nível 4 — Segundo Estágio Completo",
+      "img": "icons/svg/paralysis.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+4 de Dano em todos os ataques, +2 em testes, +3 Força, +3 Vigor, +1 Destreza, +2 Absorção (já aplicados); voo/planar pleno; imune a penalidades de ferimento e medo. Custo: 3 Chakra ao ativar, 2/turno; 1 Contusão por turno. Ao desativar: exaustão grave (uma cena). Em fúria: FV dif. 7.</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.damage.punch",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.kick",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.block",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.grab",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.athletics",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.focus",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.arremesso",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.armas_brancas",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.roll.all",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.trait.dexterity",
+        "mode": 2,
+        "value": "1"
+       },
+       {
+        "key": "sf.resource.max.soak",
+        "mode": 2,
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "name": "Selo Nível 5 — Transformação Eremita (Senninka)",
+      "img": "icons/svg/paralysis.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+5 de Dano em todos os ataques, +2 em testes, +3 Força, +3 Vigor, +2 Absorção (já aplicados); Transmutação Corporal: armas de Senjutsu no corpo e ataque à distância de Dano +6 (jato de chakra). Custo: 4 Chakra ao ativar, 2/turno; 2 Contusão por turno (portador de selo) OU instabilidade mental (clã de Jugo: FV dif. 8 por cena de combate).</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.damage.punch",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.kick",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.block",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.grab",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.athletics",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.focus",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.arremesso",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.maneuver.technique.damage.armas_brancas",
+        "mode": 2,
+        "value": "5"
+       },
+       {
+        "key": "sf.roll.all",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.trait.stamina",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.resource.max.soak",
+        "mode": 2,
+        "value": "2"
+       }
+      ]
+     }
+    ]
    }
   ],
   "divisions": [
@@ -504,7 +973,33 @@
     "initialChi": 2,
     "initialWillpower": 5,
     "description": "<p>(Expansão) A arte da Energia Natural: escutar o mundo e equilibrar os três Chakras (físico, espiritual e natural). Inseparável do Modo Sennin — fora dele seus Jutsus exclusivos são inacessíveis. Estilo de longo prazo: sem um Sensei que o guie, a prática pode levar à petrificação.</p>",
-    "sort": 800
+    "sort": 800,
+    "active_effects": [
+     {
+      "name": "Modo Sennin — Sennin Imperfeito (Focus 6)",
+      "img": "icons/svg/mountain.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Reserva de Energia Natural igual ao Focus. Dádivas básicas (1 ponto, ação livre): Punho da Montanha (+2 dados de Força no dano corpo a corpo), Pele de Pedra (+2 Absorção até o próximo turno), Reflexo Natural (+1 dado em ataque/defesa), Passo do Sábio (+2 Velocidade em uma manobra), Sentidos Ampliados (sensor de chakra por 1 cena). Passivos: Jutsus de Ninjutsu/Focus custam 1 Chakra a menos (mín. 1); acesso aos Jutsus de Senjutsu. Coleta de Energia Natural: teste de Focus (dif. 8), 2 turnos imóvel. Risco de petrificação por excesso.</p>",
+      "changes": []
+     },
+     {
+      "name": "Modo Sennin — Sennin Pleno (Focus 7 + arco)",
+      "img": "icons/svg/mountain.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Como o Imperfeito, e desbloqueia as Dádivas de 2 pontos: Investida Sennin (um Jutsu de Ninjutsu/Focus com dificuldade −1 e +2 dados de dano) e Corpo Inquebrável (ignora penalidades de ferimento por 1 cena). Aparência perfeita.</p>",
+      "changes": []
+     },
+     {
+      "name": "Modo Sennin — Sennin Perfeito (Focus 8)",
+      "img": "icons/svg/mountain.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Como o Pleno; uma Dádiva por cena custa 0 pontos; pode reentrar no Modo com 1 ação completa (1×/cena).</p>",
+      "changes": []
+     }
+    ]
    },
    {
     "id": "fuinjutsu",
@@ -1181,6 +1676,301 @@
     "movementTraitOverride": null,
     "description": "<p>Manobra Básica de Arremesso: lançar uma arma de arremesso (shuriken, kunai, senbon) contra o alvo. Aplique os modificadores da arma usada.</p>",
     "sort": 1200
+   },
+   {
+    "id": "hachimon_tonkou",
+    "name": "Hachimon Tonkou (Os Oito Portões)",
+    "category": "other",
+    "prerequisites": [
+     {
+      "type": "techniqueRating",
+      "traitId": "punch",
+      "minimumValue": 4
+     },
+     {
+      "type": "techniqueRating",
+      "traitId": "athletics",
+      "minimumValue": 4
+     },
+     {
+      "type": "attributeRating",
+      "traitId": "stamina",
+      "minimumValue": 4
+     }
+    ],
+    "defaultPowerPointCost": 2,
+    "stylePowerPointCosts": {},
+    "backgroundPowerPointCosts": {},
+    "chiCost": null,
+    "willpowerCost": null,
+    "speedModifier": "+0",
+    "damageModifier": "+0",
+    "movementModifier": "+0",
+    "notes": "Exclusivo do estilo Taijutsu (estilo principal).",
+    "ruleSummary": "Jutsu progressivo (níveis 1–8): o nível é o número de portões que pode abrir. Custos em Pontos de Jutsu: nv1-2: 2; nv3-4: 3; nv5-6: 4; nv7-8: 5 (nv7-8 exigem autorização do Narrador + arco). Abrir portões é ação de preparação; abrir vários no turno exige teste de Vigor (dif. = portão × 2). Ative os efeitos dos portões abertos (Força cumulativa) + UM efeito de aceleração.",
+    "description": "<p>Os limitadores naturais do corpo, removidos um a um. Poder físico que ultrapassa qualquer técnica convencional — ao preço do próprio corpo. Exclusivo de quem tem Taijutsu como estilo principal (Rock Lee, Maito Gai). Pré-requisitos do 1º Portão: Soco 4, Esportes 4, Vigor 4; níveis seguintes exigem Técnicas e Focus crescentes (ver tabela no Livro de Expansão).</p>",
+    "sort": 1300,
+    "active_effects": [
+     {
+      "name": "Portão 1 — Kaimon (Abertura)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +2 (cumulativa). Libera 100% dos músculos; permite a Lótus Inicial. Custo: 2 Contusão/turno.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "name": "Portão 2 — Kyuumon (Cura)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +3 (cumulativa). Imune a fadiga/exaustão; recupera 1 Contusão por turno (custo líquido 1 Contusão/turno).</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "3"
+       }
+      ]
+     },
+     {
+      "name": "Portão 3 — Seimon (Vida)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +4 (cumulativa). +1 dado contra Genjutsu; pele rubra; permite a Lótus Final. Custo: 2 Contusão/turno.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "4"
+       }
+      ]
+     },
+     {
+      "name": "Portão 4 — Shomon (Dor)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +5 (cumulativa). +1 dado contra Genjutsu. Músculos começam a rasgar: 1 Agravado/turno. Use o efeito Acelerado Aprimorado.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "5"
+       }
+      ]
+     },
+     {
+      "name": "Portão 5 — Tomon (Limite)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +6 (cumulativa). +2 dados contra Genjutsu. Custo: 2 Agravado/turno. Sequela ao fechar: −1 Força permanente.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "6"
+       }
+      ]
+     },
+     {
+      "name": "Portão 6 — Keimon (Vista)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +7 (cumulativa). +2 dados contra Genjutsu; permite o Pavão Matutino. Custo: 3 Agravado/turno. Sequela: −2 Destreza permanente.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "7"
+       }
+      ]
+     },
+     {
+      "name": "Portão 7 — Kyomon (Milagre)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +9 (cumulativa). +3 dados contra Genjutsu; inimigo perde 1 dado de defesa; permite o Tigre da Tarde. Custo: 4 Agravado/turno. Sequela: −2 For ou Des + 2 semanas incapacitado. Use o Super Acelerado.</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "9"
+       }
+      ]
+     },
+     {
+      "name": "Portão 8 — Shimon (Morte)",
+      "img": "icons/svg/upgrade.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>Força +12 (cumulativa). Imune a Genjutsu; acerto automático; permite o Elefante da Noite / Night Guy. Custo: MORTE ao final (ver regras especiais).</p>",
+      "changes": [
+       {
+        "key": "sf.trait.strength",
+        "mode": 2,
+        "value": "12"
+       }
+      ]
+     },
+     {
+      "name": "Hachimon: Acelerado (Portões 1–3)",
+      "img": "icons/svg/wing.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+2 de Velocidade nas manobras e deslocamento dobrado. Mantenha apenas UM efeito de aceleração ativo.</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.speed.punch",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.kick",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.block",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.grab",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.athletics",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.focus",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.arremesso",
+        "mode": 2,
+        "value": "2"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.armas_brancas",
+        "mode": 2,
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "name": "Hachimon: Acelerado Aprimorado (Portões 4–6)",
+      "img": "icons/svg/wing.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+3 de Velocidade nas manobras. Mantenha apenas UM efeito de aceleração ativo.</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.speed.punch",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.kick",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.block",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.grab",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.athletics",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.focus",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.arremesso",
+        "mode": 2,
+        "value": "3"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.armas_brancas",
+        "mode": 2,
+        "value": "3"
+       }
+      ]
+     },
+     {
+      "name": "Hachimon: Super Acelerado (Portões 7–8)",
+      "img": "icons/svg/wing.svg",
+      "disabled": true,
+      "transfer": true,
+      "description": "<p>+4 de Velocidade nas manobras; o inimigo perde 1 dado de defesa. Mantenha apenas UM efeito de aceleração ativo.</p>",
+      "changes": [
+       {
+        "key": "sf.maneuver.technique.speed.punch",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.kick",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.block",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.grab",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.athletics",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.focus",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.arremesso",
+        "mode": 2,
+        "value": "4"
+       },
+       {
+        "key": "sf.maneuver.technique.speed.armas_brancas",
+        "mode": 2,
+        "value": "4"
+       }
+      ]
+     }
+    ]
    }
   ]
  },

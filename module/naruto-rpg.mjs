@@ -128,6 +128,26 @@ Hooks.on("renderItemDirectory", (app, html, data) => {
   }
 });
 
+/* Condicoes de combate do Naruto RPG como status de token */
+Hooks.once("i18nInit", () => {
+  const TECHS = ["punch", "kick", "block", "grab", "athletics", "focus", "arremesso", "armas_brancas"];
+  const spdAll = (v) => TECHS.map((t) => ({ key: `sf.maneuver.technique.speed.${t}`, mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `${v}` }));
+  const loc = (k) => game.i18n.localize(`NARUTO_RPG.Status.${k}`);
+
+  const conditions = [
+    { id: "nrpg-atordoado", name: loc("atordoado"), img: "icons/svg/daze.svg", description: loc("atordoadoDesc") },
+    { id: "nrpg-derrubado", name: loc("derrubado"), img: "icons/svg/falling.svg", description: loc("derrubadoDesc"), changes: spdAll(-2), duration: { rounds: 1 } },
+    { id: "nrpg-desequilibrado", name: loc("desequilibrado"), img: "icons/svg/downgrade.svg", description: loc("desequilibradoDesc"), changes: spdAll(-2), duration: { rounds: 1 } },
+    { id: "nrpg-surpreso", name: loc("surpreso"), img: "icons/svg/hazard.svg", description: loc("surpresoDesc"), changes: spdAll(-2), duration: { rounds: 1 } },
+    { id: "nrpg-bloqueando", name: loc("bloqueando"), img: "icons/svg/shield.svg", description: loc("bloqueandoDesc") },
+    { id: "nrpg-apresado", name: loc("apresado"), img: "icons/svg/net.svg", description: loc("apresadoDesc") },
+    { id: "nrpg-envenenado", name: loc("envenenado"), img: "icons/svg/poison.svg", description: loc("envenenadoDesc") },
+    { id: "nrpg-cego", name: loc("cego"), img: "icons/svg/blind.svg", description: loc("cegoDesc") },
+    { id: "nrpg-inconsciente", name: loc("inconsciente"), img: "icons/svg/unconscious.svg", description: loc("inconscienteDesc") },
+  ];
+  CONFIG.statusEffects = CONFIG.statusEffects.concat(conditions);
+});
+
 /* Oferece a importacao do conteudo oficial na primeira vez que o GM abre o mundo */
 Hooks.once("ready", async () => {
   if (!game.user.isGM) return;

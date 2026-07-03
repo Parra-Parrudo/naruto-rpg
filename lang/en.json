@@ -515,6 +515,26 @@
       "officialDescription": "Official description",
       "notesPlaceholder": "Detail this background: who are your allies or contacts, who is your sensei, your source of resources, which Bijuu...",
       "empty": "No backgrounds added. Drag backgrounds from the items directory onto the sheet."
+    },
+    "Status": {
+      "atordoado": "Dizzy",
+      "atordoadoDesc": "Loses the next combat turn: no Combat Card, no action. Cannot be dizzied two turns in a row.",
+      "derrubado": "Knocked Down",
+      "derrubadoDesc": "−2 Speed on the next maneuver (or loses the action if they haven't acted this turn).",
+      "desequilibrado": "Off-Balance (Botch)",
+      "desequilibradoDesc": "Critical failure on damage: −2 Speed on next turn's maneuver.",
+      "surpreso": "Surprised",
+      "surpresoDesc": "Victim of Total Surprise: could not abort the maneuver; −2 Speed next turn.",
+      "bloqueando": "Blocking",
+      "bloqueandoDesc": "Adds the Block Technique to Soak (Grabs ignore it). Immune to Knockdown. Next turn: +2 Speed.",
+      "apresado": "Grabbed",
+      "apresadoDesc": "Held by a Sustained Grab: loses actions and takes damage each turn until escaping (Strength vs. Strength).",
+      "envenenado": "Poisoned",
+      "envenenadoDesc": "Under a poison's effect — see the specific poison.",
+      "cego": "Blinded",
+      "cegoDesc": "Cannot see: use the Blind Fighting rules.",
+      "inconsciente": "Unconscious",
+      "inconscienteDesc": "Health at zero or below: out of combat until the Narrator decides they wake."
     }
   }
 }

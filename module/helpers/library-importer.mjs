@@ -157,6 +157,12 @@ export async function importLibraryData(library, fallbackName = "Library") {
 /**
  * Create an Equipment item from library data
  */
+async function createRawActiveEffects(item, data) {
+  if (Array.isArray(data.active_effects) && data.active_effects.length) {
+    await item.createEmbeddedDocuments("ActiveEffect", data.active_effects);
+  }
+}
+
 async function createEquipmentItem(data, folder) {
   await Item.create({
     name: data.name,
@@ -273,6 +279,7 @@ async function createFightingStyleItem(data, folder) {
   };
   const item = await Item.create(itemData);
   await createActiveEffectsFromData(item, data.effects);
+  await createRawActiveEffects(item, data);
 }
 
 /**
@@ -339,6 +346,7 @@ async function createSpecialManeuverItem(data, folder) {
   };
   const item = await Item.create(itemData);
   await createActiveEffectsFromData(item, data.effects);
+  await createRawActiveEffects(item, data);
 }
 
 /**
@@ -399,6 +407,7 @@ async function createTraitItem(data, folders) {
 
   const item = await Item.create(baseData);
   await createActiveEffectsFromData(item, data.effects);
+  await createRawActiveEffects(item, data);
 
   return itemType;
 }

@@ -515,6 +515,26 @@
       "officialDescription": "Descrição oficial",
       "notesPlaceholder": "Detalhe este antecedente: quem são seus aliados ou contatos, quem é seu sensei, qual sua fonte de recursos, qual sua Bijuu...",
       "empty": "Nenhum antecedente adicionado. Arraste antecedentes do diretório de itens para a ficha."
+    },
+    "Status": {
+      "atordoado": "Atordoado (Dizzy)",
+      "atordoadoDesc": "Perde o próximo turno de combate: não joga Carta de Combate e não age. Não pode ser atordoado dois turnos seguidos.",
+      "derrubado": "Derrubado (Knockdown)",
+      "derrubadoDesc": "−2 de Velocidade na próxima manobra (ou perde a ação, se ainda não agiu no turno).",
+      "desequilibrado": "Desequilibrado (Falha Crítica)",
+      "desequilibradoDesc": "Falha crítica no dano: −2 de Velocidade na manobra do próximo turno.",
+      "surpreso": "Surpreso",
+      "surpresoDesc": "Vítima de Surpresa Total: não pôde abortar a manobra; −2 de Velocidade no turno seguinte.",
+      "bloqueando": "Bloqueando",
+      "bloqueandoDesc": "Soma a Técnica Bloqueio à Absorção (Apresamentos ignoram). Imune a Knockdown. No próximo turno: +2 de Velocidade.",
+      "apresado": "Apresado",
+      "apresadoDesc": "Imobilizado por Apresamento Sustentado: perde a ação e sofre dano por turno até escapar (Força vs. Força).",
+      "envenenado": "Envenenado",
+      "envenenadoDesc": "Sob efeito de veneno — ver a descrição do veneno específico.",
+      "cego": "Cego",
+      "cegoDesc": "Não enxerga: use as regras de Luta às Cegas.",
+      "inconsciente": "Inconsciente",
+      "inconscienteDesc": "Saúde em zero ou menos: fora de combate até o Narrador decidir que desperta."
     }
   }
 }
