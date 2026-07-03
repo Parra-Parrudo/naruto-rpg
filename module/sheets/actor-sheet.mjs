@@ -14,6 +14,7 @@ import {
   prepareManeuverRollData,
 } from "../helpers/maneuver-calculator.mjs";
 import { showPlayerCharacterImportDialog } from "../helpers/character-importer.mjs";
+import { syncCombatCards } from "../helpers/combat-cards.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -53,6 +54,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       sendNindoToChat: NarutoRpgActorSheet._onSendNindoToChat,
       rollRenown: NarutoRpgActorSheet._onRollRenown,
       xpAdd: NarutoRpgActorSheet._onXpAdd,
+      syncCards: NarutoRpgActorSheet._onSyncCards,
       xpSpend: NarutoRpgActorSheet._onXpSpend,
       renownPoints: NarutoRpgActorSheet._onRenownPoints,
       convertRenown: NarutoRpgActorSheet._onConvertRenown,
@@ -1035,6 +1037,14 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: `<div class="nrpg-nindo-card"><i class="fas fa-scroll"></i> <em>"${esc(nindo)}"</em><div class="nrpg-nindo-caption">— ${game.i18n.format("NARUTO_RPG.Profile.nindoChatCaption", { name: esc(this.actor.name) })}</div></div>`,
     });
+  }
+
+  /**
+   * Generate/refresh the actor's combat cards hand
+   */
+  static async _onSyncCards(event, target) {
+    event.preventDefault();
+    await syncCombatCards(this.actor);
   }
 
   /**

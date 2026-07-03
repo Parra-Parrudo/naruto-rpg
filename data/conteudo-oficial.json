@@ -388,182 +388,10 @@
     "id": "jinchuuriki",
     "name": "Jinchuuriki",
     "category": "backgrounds",
-    "description": "<p>O destino de ser o recipiente vivo de uma das nove Bijuus. O nível reflete o grau de controle sobre o poder da besta — do selo instável ao Controle Total (nível 6). (Expansão)</p>",
+    "description": "<p>O destino de ser o recipiente vivo de uma das nove Bijuus. O nível reflete o grau de controle sobre o poder da besta — do selo instável ao Controle Total (nível 6). (Expansão) Os 4 Modos do Poder e o Manto de Chakra estão disponíveis como status no token (botão direito no token).</p>",
     "isOptional": true,
     "sort": 4700,
-    "unique": true,
-    "active_effects": [
-     {
-      "name": "Modo: Presença Bijuu (Antecedente ••)",
-      "img": "icons/svg/eye.svg",
-      "disabled": true,
-      "transfer": true,
-      "description": "<p>Força +1, Percepção +1; ataques desarmados causam dano letal. Ação livre, sem custo nem desgaste corporal.</p>",
-      "changes": [
-       {
-        "key": "sf.trait.strength",
-        "mode": 2,
-        "value": "1"
-       },
-       {
-        "key": "sf.trait.perception",
-        "mode": 2,
-        "value": "1"
-       }
-      ]
-     },
-     {
-      "name": "Modo: Manto Bijuu (Antecedente •••)",
-      "img": "icons/svg/fire.svg",
-      "disabled": true,
-      "transfer": true,
-      "description": "<p>A aura de caudas: Acelerado (+2 Velocidade, já aplicado). Some manualmente Força/Absorção conforme as caudas da sua Bijuu — 1–2 caudas: +2 For/+1 Abs; 3–4: +3/+2; 5–6: +4/+2; 7–8: +5/+3; 9 (Kurama): +6/+4. Custo: Chakra igual ao nível do Manto ao ativar; 1 nível de Contusão (não absorvível) no início de cada turno. Janela Segura conforme o Antecedente; depois, Teste de Domínio (dif. 7–10 pelas caudas).</p>",
-      "changes": [
-       {
-        "key": "sf.maneuver.technique.speed.punch",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.kick",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.block",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.grab",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.athletics",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.focus",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.arremesso",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.armas_brancas",
-        "mode": 2,
-        "value": "2"
-       }
-      ]
-     },
-     {
-      "name": "Modo: Modo Bijuu (Antecedente •••••)",
-      "img": "icons/svg/fire.svg",
-      "disabled": true,
-      "transfer": true,
-      "description": "<p>Incremental sobre o Manto Bijuu (mantenha os dois efeitos ativos): +1 Destreza e +1 Absorção. NÃO pode fazer selos de mão — apenas Taijutsu e técnicas da própria Bijuu.</p>",
-      "changes": [
-       {
-        "key": "sf.trait.dexterity",
-        "mode": 2,
-        "value": "1"
-       },
-       {
-        "key": "sf.resource.max.soak",
-        "mode": 2,
-        "value": "1"
-       }
-      ]
-     },
-     {
-      "name": "Modo: Forma Bijuu (Antecedente ••••••)",
-      "img": "icons/svg/terror.svg",
-      "disabled": true,
-      "transfer": true,
-      "description": "<p>A besta completa: +8 Força, +6 Vigor (já aplicados), Absorção dobrada (ajuste manual), tamanho colossal. Evento de clímax — ver regras próprias no Livro de Expansão. Dano recebido para encerrar é Agravado.</p>",
-      "changes": [
-       {
-        "key": "sf.trait.strength",
-        "mode": 2,
-        "value": "8"
-       },
-       {
-        "key": "sf.trait.stamina",
-        "mode": 2,
-        "value": "6"
-       }
-      ]
-     },
-     {
-      "name": "Manto de Chakra de Bijuu (Controle Total)",
-      "img": "icons/svg/sun.svg",
-      "disabled": true,
-      "transfer": true,
-      "description": "<p>Exclusivo do Controle Total (Antecedente 6 + arco de parceria). Armadura de Chakra: +2 Força, +2 Destreza, +2 Absorção e +3 Velocidade (já aplicados); selos de mão liberados; Reação de Chakra 1×/turno (+2 na dificuldade do atacante). Custo: 3 Chakra ao ativar, 1 Chakra/turno. Sem desgaste corporal nem Teste de Domínio. Técnicas: Braço de Chakra (Vel +1/Dano +4/15 m), Disparo de Chakra (Dano +5 área), Mini-Bijuudama (Vel −1/Dano +7, 2 Chakra extras).</p>",
-      "changes": [
-       {
-        "key": "sf.trait.strength",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.trait.dexterity",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.resource.max.soak",
-        "mode": 2,
-        "value": "2"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.punch",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.kick",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.block",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.grab",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.athletics",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.focus",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.arremesso",
-        "mode": 2,
-        "value": "3"
-       },
-       {
-        "key": "sf.maneuver.technique.speed.armas_brancas",
-        "mode": 2,
-        "value": "3"
-       }
-      ]
-     }
-    ]
+    "unique": true
    },
    {
     "id": "selo_amaldicoado",
@@ -1988,6 +1816,10 @@
    {
     "name": "Usando Armas",
     "content": "<p>Todas as armas têm modificadores de <strong>Velocidade, Dano e Movimento</strong>. Largar a arma é ação livre; sacar ou pegar leva um turno (apenas carta de Movimento). Com uma arma na mão você não pode socar, e certas Manobras Especiais ficam excluídas (a critério do Narrador).</p>\n<h2>Grupos de Armas</h2><p>As Armas Brancas dividem-se em grupos pela funcionalidade (Facas, Espadas, Bastões, Lanças, Machados, Martelos, Correntes, Chicotes, Nunchakos, Leques...). Um ninja está apto a usar <strong>um grupo de armas a cada dois níveis</strong> da Técnica Armas Brancas e deve informar sua escolha ao Narrador. A escolha do grupo influencia quais Jutsus ele pode aprender.</p>\n<h2>Manobras com Armas</h2><p>Prepare 3 Cartas de Combate adicionais para sua arma — Jab, Strong e Fierce — usando a Técnica de <strong>Armas Brancas</strong> no lugar de Soco, e aplique os modificadores da arma em Velocidade, Dano e Movimento. Jutsus Especiais de arma geram cartas próprias que podem substituir um ataque padrão com arma.</p>"
+   },
+   {
+    "name": "Cartas de Combate no Foundry",
+    "content": "<p>O Naruto RPG usa <strong>Cartas de Combate</strong>: cada manobra/jutsu do personagem é uma carta, escolhida em segredo na Fase de Seleção. O sistema integra isso ao menu de <strong>Cartas</strong> do Foundry (ícone de baralho na barra lateral).</p>\n<h2>Preparação</h2><p>Na ficha do personagem, aba <strong>Jutsus</strong>, clique em <strong>Gerar Cartas</strong>. Isso cria (ou atualiza) a mão \"Cartas de Combate — Nome\" com uma carta por manobra, mostrando Velocidade, Dano e Movimento já calculados, e a pilha compartilhada <strong>Mesa de Combate</strong>. Regenere as cartas sempre que as Características ou manobras do personagem mudarem.</p>\n<h2>Fase de Seleção</h2><p>Cada jogador abre sua mão de cartas, escolhe a manobra do turno e a joga na <strong>Mesa de Combate</strong> <em>virada para baixo</em> (ao jogar a carta, marque a opção de face para baixo). O Narrador faz o mesmo pelos inimigos.</p>\n<h2>Fase de Execução</h2><p>Na ordem de Velocidade (da maior para a menor), o Narrador vira cada carta na Mesa, revelando a manobra. Resolva as ações normalmente (a rolagem continua sendo feita pela ficha, clicando na manobra).</p>\n<h2>Fim do turno</h2><p>O Narrador devolve as cartas da Mesa para as mãos dos donos (clique direito na carta → devolver, ou selecione todas e passe de volta). As cartas não são compradas nem embaralhadas: a mão é o repertório completo do ninja, sempre disponível.</p>\n<p><em>Dica: o diálogo de seleção de manobras do rastreador de combate continua funcionando normalmente — as cartas são a camada visual e tátil por cima dele. Use o que a mesa preferir.</em></p>"
    }
   ]
  }

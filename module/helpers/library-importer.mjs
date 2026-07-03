@@ -189,17 +189,30 @@ export async function importOfficialContent({ silent = false } = {}) {
   const data = await response.json();
   const result = await importLibraryData(data.library, "Naruto RPG");
 
-  // Rules journal
-  if (data.journal && !game.journal.find(j => j.name === data.journal.name)) {
-    await JournalEntry.create({
-      name: data.journal.name,
-      pages: data.journal.pages.map((p, i) => ({
-        name: p.name,
-        type: "text",
-        sort: (i + 1) * 100,
-        text: { format: 1, content: p.content },
-      })),
-    });
+  // Rules journal (creates it, or adds any missing pages to an existing one)
+  if (data.journal) {
+    const existing = game.journal.find(j => j.name === data.journal.name);
+    if (!existing) {
+      await JournalEntry.create({
+        name: data.journal.name,
+        pages: data.journal.pages.map((p, i) => ({
+          name: p.name,
+          type: "text",
+          sort: (i + 1) * 100,
+          text: { format: 1, content: p.content },
+        })),
+      });
+    } else {
+      const missing = data.journal.pages.filter(p => !existing.pages.find(ep => ep.name === p.name));
+      if (missing.length) {
+        await existing.createEmbeddedDocuments("JournalEntryPage", missing.map((p, i) => ({
+          name: p.name,
+          type: "text",
+          sort: (existing.pages.size + i + 1) * 100,
+          text: { format: 1, content: p.content },
+        })));
+      }
+    }
   }
 
   await game.settings.set("naruto-rpg", "officialContentImported", true);

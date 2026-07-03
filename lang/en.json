@@ -534,7 +534,29 @@
       "cego": "Blinded",
       "cegoDesc": "Cannot see: use the Blind Fighting rules.",
       "inconsciente": "Unconscious",
-      "inconscienteDesc": "Health at zero or below: out of combat until the Narrator decides they wake."
+      "inconscienteDesc": "Health at zero or below: out of combat until the Narrator decides they wake.",
+      "Bijuu": {
+        "presenca": "Bijuu: Presence",
+        "presencaDesc": "Strength +1, Perception +1 (applied); unarmed attacks deal lethal damage. Free action, no cost. Requires Jinchuuriki Background ••.",
+        "manto": "Bijuu: Cloak",
+        "mantoDesc": "Accelerated: +2 Speed (applied). Add Strength/Soak manually by tails (1–2: +2/+1; 3–4: +3/+2; 5–6: +4/+2; 7–8: +5/+3; 9: +6/+4). Cost: Chakra = Cloak level; 1 Bashing/turn. Requires Background •••.",
+        "modo": "Bijuu: Bijuu Mode",
+        "modoDesc": "Incremental over the Cloak (keep both active): +1 Dexterity, +1 Soak (applied). No hand seals. Requires Background •••••.",
+        "forma": "Bijuu: Bijuu Form",
+        "formaDesc": "The full beast: +8 Strength, +6 Stamina (applied); Soak doubled (manual); colossal scale. Requires Background ••••••.",
+        "chakra": "Bijuu: Chakra Cloak (Full Control)",
+        "chakraDesc": "+2 Strength, +2 Dexterity, +2 Soak, +3 Speed (applied); hand seals allowed; Chakra Reaction 1×/turn. Cost: 3 Chakra + 1/turn. Requires Full Control."
+      }
+    },
+    "Cards": {
+      "sync": "Generate Cards",
+      "syncHint": "Creates/refreshes this character's Combat Cards hand (Foundry Cards menu)",
+      "handName": "Combat Cards — {name}",
+      "tableName": "Combat Table",
+      "cost": "Cost",
+      "synced": "{count} cards generated in \"{name}\". Open the Cards menu (deck icon in the sidebar).",
+      "noManeuvers": "This character has no maneuvers to generate cards from.",
+      "createDenied": "You lack permission to create card stacks — ask the Narrator to click Generate Cards on your sheet."
     }
   }
 }

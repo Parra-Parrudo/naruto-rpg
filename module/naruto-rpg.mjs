@@ -145,7 +145,28 @@ Hooks.once("i18nInit", () => {
     { id: "nrpg-cego", name: loc("cego"), img: "icons/svg/blind.svg", description: loc("cegoDesc") },
     { id: "nrpg-inconsciente", name: loc("inconsciente"), img: "icons/svg/unconscious.svg", description: loc("inconscienteDesc") },
   ];
-  CONFIG.statusEffects = CONFIG.statusEffects.concat(conditions);
+  const trait = (id, v) => ({ key: `sf.trait.${id}`, mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `${v}` });
+  const soak = (v) => ({ key: "sf.resource.max.soak", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `${v}` });
+  const locB = (k) => game.i18n.localize(`NARUTO_RPG.Status.Bijuu.${k}`);
+
+  const bijuuModes = [
+    { id: "nrpg-bijuu-presenca", name: locB("presenca"), img: "icons/svg/eye.svg", description: locB("presencaDesc"),
+      changes: [trait("strength", 1), trait("perception", 1)] },
+    { id: "nrpg-bijuu-manto", name: locB("manto"), img: "icons/svg/fire.svg", description: locB("mantoDesc"),
+      changes: spdAll(2) },
+    { id: "nrpg-bijuu-modo", name: locB("modo"), img: "icons/svg/blood.svg", description: locB("modoDesc"),
+      changes: [trait("dexterity", 1), soak(1)] },
+    { id: "nrpg-bijuu-forma", name: locB("forma"), img: "icons/svg/terror.svg", description: locB("formaDesc"),
+      changes: [trait("strength", 8), trait("stamina", 6)] },
+    { id: "nrpg-bijuu-chakra", name: locB("chakra"), img: "icons/svg/sun.svg", description: locB("chakraDesc"),
+      changes: [trait("strength", 2), trait("dexterity", 2), soak(2)].concat(spdAll(3)) },
+  ];
+
+  // Lista curada: remove os status padrão do Foundry que não existem no Naruto RPG
+  const keepIds = ["dead", "invisible"];
+  const kept = CONFIG.statusEffects.filter((s) => keepIds.includes(s.id));
+  CONFIG.statusEffects = kept.concat(conditions).concat(bijuuModes);
+  CONFIG.specialStatusEffects.BLIND = "nrpg-cego";
 });
 
 /* Oferece a importacao do conteudo oficial na primeira vez que o GM abre o mundo */

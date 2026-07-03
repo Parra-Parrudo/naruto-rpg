@@ -534,7 +534,29 @@
       "cego": "Cego",
       "cegoDesc": "Não enxerga: use as regras de Luta às Cegas.",
       "inconsciente": "Inconsciente",
-      "inconscienteDesc": "Saúde em zero ou menos: fora de combate até o Narrador decidir que desperta."
+      "inconscienteDesc": "Saúde em zero ou menos: fora de combate até o Narrador decidir que desperta.",
+      "Bijuu": {
+        "presenca": "Bijuu: Presença",
+        "presencaDesc": "Força +1, Percepção +1 (aplicados); ataques desarmados causam dano letal. Ação livre, sem custo. Requer Antecedente Jinchuuriki ••.",
+        "manto": "Bijuu: Manto",
+        "mantoDesc": "Acelerado: +2 Velocidade (aplicado). Some manualmente Força/Absorção pelas caudas (1–2: +2/+1; 3–4: +3/+2; 5–6: +4/+2; 7–8: +5/+3; 9: +6/+4). Custo: Chakra = nível do Manto; 1 Contusão/turno. Requer Antecedente •••.",
+        "modo": "Bijuu: Modo Bijuu",
+        "modoDesc": "Incremental sobre o Manto (mantenha os dois ativos): +1 Destreza, +1 Absorção (aplicados). Sem selos de mão. Requer Antecedente •••••.",
+        "forma": "Bijuu: Forma Bijuu",
+        "formaDesc": "A besta completa: +8 Força, +6 Vigor (aplicados); Absorção dobrada (manual); escala colossal. Requer Antecedente ••••••.",
+        "chakra": "Bijuu: Manto de Chakra (Controle Total)",
+        "chakraDesc": "+2 Força, +2 Destreza, +2 Absorção, +3 Velocidade (aplicados); selos liberados; Reação de Chakra 1×/turno. Custo: 3 Chakra + 1/turno. Requer Controle Total."
+      }
+    },
+    "Cards": {
+      "sync": "Gerar Cartas",
+      "syncHint": "Gera/atualiza a mão de Cartas de Combate deste personagem (menu Cartas do Foundry)",
+      "handName": "Cartas de Combate — {name}",
+      "tableName": "Mesa de Combate",
+      "cost": "Custo",
+      "synced": "{count} cartas geradas em \"{name}\". Abra o menu de Cartas (ícone de baralho na barra lateral).",
+      "noManeuvers": "Este personagem não possui manobras para gerar cartas.",
+      "createDenied": "Você não tem permissão para criar baralhos — peça ao Narrador para clicar em Gerar Cartas na sua ficha."
     }
   }
 }
