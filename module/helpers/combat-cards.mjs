@@ -1,11 +1,15 @@
 /**
  * Naruto RPG - Cartas de Combate
  * Integra as manobras/jutsus do personagem com o sistema de Cards do Foundry:
- * gera uma "mão" de cartas por personagem (1 carta por manobra, com os valores
- * calculados) e uma pilha compartilhada "Mesa de Combate" para a fase de seleção.
+ * gera uma "mao" de cartas por personagem (1 carta por manobra, com os valores
+ * calculados) e uma pilha compartilhada "Mesa de Combate" para a fase de selecao.
+ * Carta jogada na Mesa durante a Fase de Selecao = manobra selecionada no combate
+ * (a iniciativa/ordem de execucao passa a ser a Velocidade da carta).
  */
 
-import { prepareActorManeuvers } from "./maneuver-calculator.mjs";
+import { prepareActorManeuvers, calculateManeuverStats, canAffordManeuver } from "./maneuver-calculator.mjs";
+import { getEffectiveTraitValue } from "./effect-helpers.mjs";
+import { COMBAT_PHASE, calculateSpeedTiebreaker } from "../combat/combat-phases.mjs";
 
 /**
  * Get (or create, GM only) the shared combat table pile
@@ -90,6 +94,7 @@ export async function syncCombatCards(actor) {
       faces: [{ name: m.name, img: m.img || "icons/svg/sword.svg", text: statsLine }],
       face: 0,
       sort: i * 10,
+      flags: { "naruto-rpg": { actorId: actor.id, itemId: m.id } },
     };
   });
 
@@ -98,4 +103,98 @@ export async function syncCombatCards(actor) {
 
   ui.notifications.info(game.i18n.format("NARUTO_RPG.Cards.synced", { count: cardsData.length, name }));
   return { hand, count: cardsData.length };
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Integracao com o combate: carta jogada na Mesa = manobra selecionada       */
+/* -------------------------------------------------------------------------- */
+
+function _findCombatantForActor(actorId) {
+  const combat = game.combat;
+  if (!combat) return null;
+  return combat.combatants.find((c) => c.actor?.id === actorId) ?? null;
+}
+
+/**
+ * Register the hooks that bridge played cards to the phase-based combat system.
+ * A card played onto the "Mesa de Combate" selects that maneuver for the
+ * combatant, so execution order (initiative) comes from the card's Speed.
+ */
+export function registerCombatCardHooks() {
+  Hooks.on("createCard", async (card, options, userId) => {
+    if (game.user.id !== userId) return;
+    const tableName = game.i18n.localize("NARUTO_RPG.Cards.tableName");
+    if (card.parent?.name !== tableName) return;
+
+    const actorId = card.getFlag("naruto-rpg", "actorId");
+    const itemId = card.getFlag("naruto-rpg", "itemId");
+    if (!actorId || !itemId) return;
+
+    const combatant = _findCombatantForActor(actorId);
+    if (!combatant) return;
+    if (game.combat?.phase !== COMBAT_PHASE.SELECTION) return;
+
+    const actor = combatant.actor;
+    const maneuver = actor?.items.get(itemId);
+    if (!maneuver) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Combat.ManeuverNotFound"));
+      return;
+    }
+
+    if (!canAffordManeuver(actor, maneuver)) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Combat.CannotAffordManeuver"));
+      return;
+    }
+
+    const prepared = calculateManeuverStats(actor, maneuver);
+
+    const findTraitValue = (sourceId) => {
+      if (!sourceId) return 0;
+      const item = actor.items.find((i) => i.system.sourceId === sourceId);
+      if (!item) return 0;
+      const effective = getEffectiveTraitValue(actor, sourceId, item.system.value || 0);
+      return effective.value;
+    };
+    const speedTiebreaker = calculateSpeedTiebreaker(
+      prepared.calculatedSpeed,
+      findTraitValue("wits"),
+      findTraitValue("perception")
+    );
+
+    await combatant.selectManeuver({
+      itemId: maneuver.id,
+      name: maneuver.name,
+      speed: prepared.calculatedSpeed,
+      speedTiebreaker,
+      damage: prepared.calculatedDamage,
+      movement: prepared.calculatedMovement,
+      category: prepared.category,
+      chiCost: prepared.chiCost,
+      willpowerCost: prepared.willpowerCost,
+      notes: prepared.notes,
+    });
+
+    ui.notifications.info(game.i18n.format("NARUTO_RPG.Combat.ManeuverSelected", { name: maneuver.name }));
+    ui.combat?.render();
+  });
+
+  Hooks.on("deleteCard", async (card, options, userId) => {
+    if (game.user.id !== userId) return;
+    const tableName = game.i18n.localize("NARUTO_RPG.Cards.tableName");
+    if (card.parent?.name !== tableName) return;
+
+    const actorId = card.getFlag("naruto-rpg", "actorId");
+    const itemId = card.getFlag("naruto-rpg", "itemId");
+    if (!actorId) return;
+
+    const combatant = _findCombatantForActor(actorId);
+    if (!combatant) return;
+    if (game.combat?.phase !== COMBAT_PHASE.SELECTION) return;
+
+    // Only clear if the removed card is the currently selected maneuver
+    if (combatant.selectedManeuver?.itemId === itemId) {
+      await combatant.clearManeuverSelection();
+      ui.combat?.render();
+    }
+  });
 }

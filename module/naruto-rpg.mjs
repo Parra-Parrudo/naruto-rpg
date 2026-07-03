@@ -23,6 +23,7 @@ import { registerCombatSockets } from "./combat/combat-socket.mjs";
 import { registerEffects } from "./effects/index.mjs";
 
 import { importOfficialContent, showImportDialog } from "./helpers/library-importer.mjs";
+import { registerCombatCardHooks } from "./helpers/combat-cards.mjs";
 import { showCharacterImportDialog } from "./helpers/character-importer.mjs";
 import { executeRoll } from "./dice/roll-dialog.mjs";
 import { createImportButton, canInteractWithChatMessage } from "./helpers/utils.mjs";
@@ -30,6 +31,7 @@ import { DIFFICULTY } from "./config/constants.mjs";
 
 Hooks.once("init", async () => {
   console.log("Naruto RPG | Initializing Naruto RPG System");
+  registerCombatCardHooks();
 
   game.narutorpg = {
     NarutoRpgActor,
