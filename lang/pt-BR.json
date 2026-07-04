@@ -509,7 +509,15 @@
       "ExecutionPhaseStarted": "Fase de execução iniciada. As ações começam!",
       "ResetSelections": "Resetar todas as seleções e iniciar um novo turno",
       "OpenTurnDialog": "Abrir diálogo de turno",
-      "soak": "Absorção"
+      "soak": "Absorção",
+      "SortBy": {
+        "label": "Ordenar por",
+        "speed": "Velocidade",
+        "name": "Nome",
+        "category": "Técnica",
+        "damage": "Dano",
+        "movement": "Movimento"
+      }
     },
     "Backgrounds": {
       "officialDescription": "Descrição oficial",
@@ -561,7 +569,9 @@
       "oldCard": "Esta carta foi gerada numa versão antiga — abra a ficha e clique em Gerar Cartas novamente.",
       "noCombatant": "Este personagem não está no combate atual.",
       "notSelectionPhase": "O combate não está na Fase de Seleção — a carta ficou na Mesa, mas não selecionou manobra.",
-      "returned": "{count} cartas devolvidas às mãos."
+      "returned": "{count} cartas devolvidas às mãos.",
+      "returnBtn": "Devolver Cartas",
+      "returnBtnHint": "Devolve todas as cartas da Mesa de Combate para as mãos dos donos (não use o Reset nativo da Mesa!)"
     }
   }
 }

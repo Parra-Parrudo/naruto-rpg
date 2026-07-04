@@ -4,6 +4,7 @@
  * @author Kirlian Silvestre
  */
 
+import { returnCombatCards } from "../helpers/combat-cards.mjs";
 import {
   COMBAT_PHASE,
   SELECTION_STATUS,
@@ -28,6 +29,7 @@ export class NarutoRpgCombatTracker extends foundry.applications.sidebar.tabs.Co
     id: "combat",
     actions: {
       startTurn: NarutoRpgCombatTracker._onStartTurn,
+      returnCards: NarutoRpgCombatTracker._onReturnCards,
       startExecution: NarutoRpgCombatTracker._onStartExecution,
       nextTurn: NarutoRpgCombatTracker._onNextTurn,
       openManeuverSelection: NarutoRpgCombatTracker._onOpenManeuverSelection,
@@ -332,6 +334,11 @@ export class NarutoRpgCombatTracker extends foundry.applications.sidebar.tabs.Co
    * @param {HTMLElement} target
    * @this {NarutoRpgCombatTracker}
    */
+  static async _onReturnCards(event, target) {
+    event.preventDefault();
+    await returnCombatCards();
+  }
+
   static async _onStartTurn(event, target) {
     event.preventDefault();
     const combat = this.viewed;

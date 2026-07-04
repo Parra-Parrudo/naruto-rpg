@@ -28,6 +28,7 @@ export class ManeuverSelectionDialog extends foundry.applications.api.Handlebars
     super(options);
     this.combat = combat;
     this.combatant = combatant;
+    this.sortMode = "speed";
   }
 
   /** @override */
@@ -76,13 +77,20 @@ export class ManeuverSelectionDialog extends foundry.applications.api.Handlebars
     const maneuvers = this._prepareManeuvers(actor);
     const currentSelection = this.combatant.selectedManeuver;
 
+    const sortOptions = ["speed", "name", "category", "damage", "movement"].map((key) => ({
+      key,
+      label: game.i18n.localize(`NARUTO_RPG.Combat.SortBy.${key}`),
+      selected: key === this.sortMode,
+    }));
+
     return {
       combatant: this.combatant,
       actor: actor,
       maneuvers: maneuvers,
       hasManeuvers: maneuvers.length > 0,
       currentSelection: currentSelection,
-      currentSelectionId: currentSelection?.itemId ?? null
+      currentSelectionId: currentSelection?.itemId ?? null,
+      sortOptions,
     };
   }
 
@@ -96,16 +104,42 @@ export class ManeuverSelectionDialog extends foundry.applications.api.Handlebars
     const maneuvers = actor.items.filter(item => item.type === "specialManeuver");
     const characterStats = getCharacterStatsForManeuver(actor);
 
+    const catOrder = ["punch", "kick", "block", "grab", "athletics", "focus", "arremesso", "armas_brancas", "other"];
+    const catLabel = (key) =>
+      game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories?.[key] ?? "NARUTO_RPG.Maneuver.Categories.other");
+
     const prepared = maneuvers.map(maneuver => {
       const data = calculateManeuverStats(actor, maneuver, { characterStats });
       return {
         ...data,
-        canAfford: canAffordManeuver(actor, maneuver)
+        canAfford: canAffordManeuver(actor, maneuver),
+        categoryLabel: catLabel(data.category || maneuver.system.category),
+        description: maneuver.system.description || "",
+        hasDetails: !!(maneuver.system.description || data.ruleSummary || data.notes),
       };
     });
 
-    // Sort by calculated speed (lower speed = faster = first)
-    return prepared.sort((a, b) => a.calculatedSpeed - b.calculatedSpeed);
+    const num = (v) => Number(v) || 0;
+    const sorters = {
+      speed: (a, b) => num(a.calculatedSpeed) - num(b.calculatedSpeed) || a.name.localeCompare(b.name),
+      name: (a, b) => a.name.localeCompare(b.name),
+      category: (a, b) => (catOrder.indexOf(a.category) - catOrder.indexOf(b.category)) || a.name.localeCompare(b.name),
+      damage: (a, b) => num(b.calculatedDamage) - num(a.calculatedDamage) || a.name.localeCompare(b.name),
+      movement: (a, b) => num(b.calculatedMovement) - num(a.calculatedMovement) || a.name.localeCompare(b.name),
+    };
+    return prepared.sort(sorters[this.sortMode] ?? sorters.speed);
+  }
+
+  /** @override */
+  _onRender(context, options) {
+    super._onRender?.(context, options);
+    const select = this.element.querySelector(".nrpg-sort-select");
+    if (select) {
+      select.addEventListener("change", (event) => {
+        this.sortMode = event.currentTarget.value;
+        this.render();
+      });
+    }
   }
 
   /**

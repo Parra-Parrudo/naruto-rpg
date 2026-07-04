@@ -37,6 +37,10 @@
     {{!-- GM Controls --}}
     {{#if sfCombat.isGM}}
     <div class="nrpg-gm-controls">
+      <button type="button" class="nrpg-control-btn nrpg-return-cards" data-action="returnCards" data-tooltip="{{localize 'NARUTO_RPG.Cards.returnBtnHint'}}">
+        <i class="fas fa-undo"></i>
+        {{localize "NARUTO_RPG.Cards.returnBtn"}}
+      </button>
       {{#if sfCombat.isSetup}}
       <button type="button" class="nrpg-control-btn nrpg-start-turn" data-action="startTurn">
         <i class="fas fa-play"></i>

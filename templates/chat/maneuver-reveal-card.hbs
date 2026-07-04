@@ -16,8 +16,8 @@
       <div class="nrpg-maneuver-row">
         <span class="nrpg-maneuver-name">{{maneuver.name}}</span>
         <div class="nrpg-maneuver-stats-inline">
-          {{#if maneuver.category}}
-          <span class="nrpg-maneuver-category">{{maneuver.category}}</span>
+          {{#if categoryLabel}}
+          <span class="nrpg-maneuver-category">{{categoryLabel}}</span>
           {{/if}}
           <span class="nrpg-stat-inline" title="{{localize 'NARUTO_RPG.Combat.Speed'}}">
             <i class="fas fa-bolt"></i> {{maneuver.speed}}
@@ -41,15 +41,20 @@
         </span>
         {{/if}}
 
-        {{#if maneuver.notes}}
+        {{#if (or description ruleSummary)}}
         <span class="nrpg-maneuver-expand-chat" data-action="toggleNotes"><i class="fas fa-chevron-down"></i></span>
         {{/if}}
       </div>
 
-      {{#if maneuver.notes}}
+      {{#if (or description ruleSummary)}}
       <div class="nrpg-maneuver-notes collapsed">
         <div class="nrpg-notes-content-chat">
-          <p>{{maneuver.notes}}</p>
+          {{#if description}}
+          <div class="nrpg-chat-desc">{{{description}}}</div>
+          {{/if}}
+          {{#if ruleSummary}}
+          <p class="nrpg-rule-summary"><strong>{{localize "NARUTO_RPG.SpecialManeuver.system"}}:</strong> {{ruleSummary}}</p>
+          {{/if}}
         </div>
       </div>
       {{/if}}

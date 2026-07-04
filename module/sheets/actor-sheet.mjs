@@ -860,9 +860,12 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     const item = this.actor.items.get(itemId);
     if (!item) return;
 
+    const categoryLabel = game.i18n.localize(
+      CONFIG.NARUTO_RPG.maneuverCategories?.[item.system.category] ?? "NARUTO_RPG.Maneuver.Categories.other"
+    );
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/naruto-rpg/templates/chat/maneuver-chat-card.hbs",
-      { item }
+      { item, categoryLabel }
     );
 
     await ChatMessage.create({

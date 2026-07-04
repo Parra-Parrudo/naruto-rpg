@@ -4053,3 +4053,19 @@ button.nrpg-import-characters:hover {
 .naruto-rpg .xp-action { display: inline-flex; align-items: center; gap: 4px; }
 .naruto-rpg .xp-action .xp-input { width: 52px; text-align: center; }
 .naruto-rpg .xp-action button { font-size: 12px; padding: 2px 8px; line-height: 1.4; width: auto; }
+
+/* ===== Ordenação no diálogo de seleção ===== */
+.naruto-rpg .nrpg-sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+  font-size: 12px;
+}
+.naruto-rpg .nrpg-sort-bar select { width: auto; }
+.naruto-rpg .nrpg-maneuver-desc { font-size: 12px; margin-bottom: 4px; }
+.naruto-rpg .nrpg-return-cards { background: rgba(184, 134, 11, 0.25); }
+
+/* Descrição de manobra nos cartões de chat */
+.nrpg-chat-desc { font-size: 12px; margin: 4px 0; opacity: 0.95; }
+.nrpg-chat-desc p { margin: 2px 0; }

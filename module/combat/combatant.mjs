@@ -223,6 +223,11 @@ export class NarutoRpgCombatant extends Combatant {
     const maneuver = this.selectedManeuver;
     if (!maneuver) return;
 
+    const item = this.actor?.items.get(maneuver.itemId);
+    const categoryLabel = maneuver.category
+      ? game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories?.[maneuver.category] ?? "NARUTO_RPG.Maneuver.Categories.other")
+      : "";
+
     const messageData = {
       speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.token }),
       content: await foundry.applications.handlebars.renderTemplate(
@@ -230,6 +235,9 @@ export class NarutoRpgCombatant extends Combatant {
         {
           combatantName: this.name,
           maneuver: maneuver,
+          categoryLabel: categoryLabel,
+          description: item?.system.description || "",
+          ruleSummary: item?.system.ruleSummary || maneuver.notes || "",
           actorId: this.actor?.id,
           tokenId: this.token?.id
         }

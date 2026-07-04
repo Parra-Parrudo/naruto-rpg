@@ -10,6 +10,14 @@
   </header>
 
   {{#if hasManeuvers}}
+  <div class="nrpg-sort-bar">
+    <label>{{localize "NARUTO_RPG.Combat.SortBy.label"}}</label>
+    <select class="nrpg-sort-select">
+      {{#each sortOptions as |opt|}}
+      <option value="{{opt.key}}" {{#if opt.selected}}selected{{/if}}>{{opt.label}}</option>
+      {{/each}}
+    </select>
+  </div>
   <div class="nrpg-maneuver-list">
     {{#each maneuvers as |maneuver|}}
     <div class="nrpg-maneuver-card {{#unless maneuver.canAfford}}nrpg-cannot-afford{{/unless}} {{#if (eq maneuver.id @root.currentSelectionId)}}nrpg-selected{{/if}}"
@@ -18,7 +26,7 @@
       {{!-- Main Row - Clickable to select --}}
       <div class="nrpg-maneuver-row" data-action="selectManeuver" data-maneuver-id="{{maneuver.id}}">
         <span class="nrpg-maneuver-name">{{maneuver.name}}</span>
-        <span class="nrpg-maneuver-category">{{maneuver.category}}</span>
+        <span class="nrpg-maneuver-category">{{maneuver.categoryLabel}}</span>
 
         <div class="nrpg-maneuver-stats-inline">
           <span class="nrpg-stat-inline {{#if maneuver.hasSpeedModifiers}}nrpg-stat-modified{{/if}}" title="{{localize 'NARUTO_RPG.Combat.Speed'}}{{#if maneuver.hasSpeedModifiers}} ({{localize 'NARUTO_RPG.ActiveEffects.modifiedManeuverStat'}}){{/if}}">
@@ -50,20 +58,23 @@
         <span class="nrpg-selected-check"><i class="fas fa-check-circle"></i></span>
         {{/if}}
 
-        {{#if (or maneuver.notes maneuver.ruleSummary)}}
+        {{#if maneuver.hasDetails}}
         <span class="nrpg-maneuver-expand" data-action="toggleNotes"><i class="fas fa-chevron-down"></i></span>
         {{/if}}
       </div>
 
-      {{!-- Expandable Notes Section --}}
-      {{#if (or maneuver.notes maneuver.ruleSummary)}}
+      {{!-- Expandable Details Section --}}
+      {{#if maneuver.hasDetails}}
       <div class="nrpg-maneuver-notes collapsed">
         <div class="nrpg-notes-content">
-          {{#if maneuver.notes}}
-          <p>{{maneuver.notes}}</p>
+          {{#if maneuver.description}}
+          <div class="nrpg-maneuver-desc">{{{maneuver.description}}}</div>
           {{/if}}
           {{#if maneuver.ruleSummary}}
-          <p class="nrpg-rule-summary">{{maneuver.ruleSummary}}</p>
+          <p class="nrpg-rule-summary"><strong>{{localize "NARUTO_RPG.SpecialManeuver.system"}}:</strong> {{maneuver.ruleSummary}}</p>
+          {{/if}}
+          {{#if maneuver.notes}}
+          <p><strong>{{localize "NARUTO_RPG.SpecialManeuver.notes"}}:</strong> {{maneuver.notes}}</p>
           {{/if}}
         </div>
       </div>
