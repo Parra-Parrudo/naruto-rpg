@@ -55,6 +55,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       rollRenown: NarutoRpgActorSheet._onRollRenown,
       xpAdd: NarutoRpgActorSheet._onXpAdd,
       syncCards: NarutoRpgActorSheet._onSyncCards,
+      toggleSheetLock: NarutoRpgActorSheet._onToggleSheetLock,
       xpSpend: NarutoRpgActorSheet._onXpSpend,
       renownPoints: NarutoRpgActorSheet._onRenownPoints,
       convertRenown: NarutoRpgActorSheet._onConvertRenown,
@@ -71,6 +72,20 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       template: "systems/naruto-rpg/templates/actor/actor-fighter-sheet.hbs",
     },
   };
+
+  /** @override GM-only padlock in the sheet header */
+  _getHeaderControls() {
+    const controls = super._getHeaderControls();
+    if (game.user.isGM) {
+      const locked = this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+      controls.unshift({
+        icon: locked ? "fas fa-lock" : "fas fa-lock-open",
+        label: locked ? "NARUTO_RPG.SheetLock.unlock" : "NARUTO_RPG.SheetLock.lock",
+        action: "toggleSheetLock",
+      });
+    }
+    return controls;
+  }
 
   /** @inheritDoc */
   static TABS = {
@@ -203,9 +218,12 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context.config = CONFIG.NARUTO_RPG;
     context.isOwner = this.actor.isOwner;
     
-    // Check if character is imported (read-only) or manual (editable)
-    context.isImported = this.actor.system.importData?.isImported || false;
-    context.isEditable = this.isEditable && !context.isImported;
+    // Sheet lock: GM-controlled padlock (imported sheets are editable unless locked)
+    context.wasImported = this.actor.system.importData?.isImported || false;
+    context.isLocked = this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+    // Templates historically gate on "isImported" — it now means "locked"
+    context.isImported = context.isLocked;
+    context.isEditable = this.isEditable && !context.isLocked;
     context.isGM = game.user.isGM;
     context.xpAvailable = (this.actor.system.experience?.total ?? 0) - (this.actor.system.experience?.spent ?? 0);
 
@@ -1040,6 +1058,21 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: `<div class="nrpg-nindo-card"><i class="fas fa-scroll"></i> <em>"${esc(nindo)}"</em><div class="nrpg-nindo-caption">— ${game.i18n.format("NARUTO_RPG.Profile.nindoChatCaption", { name: esc(this.actor.name) })}</div></div>`,
     });
+  }
+
+  /**
+   * GM: lock/unlock the sheet for editing
+   */
+  static async _onToggleSheetLock(event, target) {
+    event?.preventDefault?.();
+    if (!game.user.isGM) return;
+    const locked = this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+    await this.actor.setFlag("naruto-rpg", "sheetLocked", !locked);
+    ui.notifications.info(game.i18n.format(
+      locked ? "NARUTO_RPG.SheetLock.unlocked" : "NARUTO_RPG.SheetLock.locked",
+      { name: this.actor.name }
+    ));
+    this.render();
   }
 
   /**

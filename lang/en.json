@@ -250,7 +250,7 @@
       "importError": "Error importing characters",
       "isImported": "Imported Character",
       "isManual": "Manual Character",
-      "readOnlyWarning": "This character was imported and cannot be edited. Re-import to update.",
+      "readOnlyWarning": "This sheet is locked by the Narrator.",
       "importMyCharacter": "Import My Character",
       "playerImportHint": "Select a file containing exactly one character to import into this sheet.",
       "reimportHint": "You can only reimport the same character ({name}). Select the file to update.",
@@ -572,6 +572,43 @@
       "returned": "{count} cards returned to their hands.",
       "returnBtn": "Return Cards",
       "returnBtnHint": "Returns all cards from the Combat Table to their owners' hands (do not use the Table's native Reset!)"
+    },
+    "SheetLock": {
+      "lock": "Lock Sheet",
+      "unlock": "Unlock Sheet",
+      "locked": "{name}'s sheet locked.",
+      "unlocked": "{name}'s sheet unlocked."
+    },
+    "Chargen": {
+      "title": "Character Creator — Naruto RPG",
+      "button": "Create Character",
+      "step0": "Profile & Style",
+      "step1": "Attributes",
+      "step2": "Abilities",
+      "step3": "Techniques & Backgrounds",
+      "step4": "Jutsus",
+      "step5": "Finishing Touches",
+      "prio_primary": "Primary (7/9)",
+      "prio_secondary": "Secondary (5/7)",
+      "prio_tertiary": "Tertiary (3/4)",
+      "bonusLeft": "Bonus Points",
+      "jutsuPoints": "Jutsu Points",
+      "attrHint": "Prioritize the categories (7/5/3). Every attribute starts at 1; max 5 at creation. Exceeding the pool spends Bonus Points (5⭐/point).",
+      "abilHint": "Prioritize the categories (9/7/4). Max 3 at creation; the 4th point onward spends Bonus Points (2⭐/point).",
+      "jutsuHint": "7 Jutsu Points. Costs shown already consider your Style. Lock = unmet prerequisites (listed). Jutsus costing — are clan/style exclusive (ask the Narrator). Showing up to 80 results — use the search.",
+      "search": "Search jutsu...",
+      "extraPJ": "Extra Jutsu Point",
+      "bonusBuys": "Bonus Point purchases",
+      "summary": "Summary",
+      "finishHint": "On finish, the character is created with attributes, abilities, techniques, backgrounds, style, jutsus and eligible basic maneuvers.",
+      "prev": "Back",
+      "next": "Next",
+      "finish": "Create Character",
+      "needContent": "The Official Content must be imported into the world (Items directory button) before using the Creator.",
+      "overBudget": "You are over budget — reduce spending or buy extra Jutsu Points.",
+      "missingBasics": "Set at least the Name and the Ninja Art Style.",
+      "created": "{name} created! Welcome to the shinobi world.",
+      "createFailed": "Could not create the character (check Actor creation permissions)."
     }
   }
 }

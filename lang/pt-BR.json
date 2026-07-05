@@ -250,7 +250,7 @@
       "importError": "Erro ao importar personagens",
       "isImported": "Personagem Importado",
       "isManual": "Personagem Manual",
-      "readOnlyWarning": "Este personagem foi importado e não pode ser editado. Reimporte para atualizar.",
+      "readOnlyWarning": "Esta ficha está bloqueada pelo Narrador.",
       "importMyCharacter": "Importar Meu Personagem",
       "playerImportHint": "Selecione um arquivo contendo exatamente um personagem para importar nesta ficha.",
       "reimportHint": "Você só pode reimportar o mesmo personagem ({name}). Selecione o arquivo para atualizar.",
@@ -572,6 +572,43 @@
       "returned": "{count} cartas devolvidas às mãos.",
       "returnBtn": "Devolver Cartas",
       "returnBtnHint": "Devolve todas as cartas da Mesa de Combate para as mãos dos donos (não use o Reset nativo da Mesa!)"
+    },
+    "SheetLock": {
+      "lock": "Bloquear Ficha",
+      "unlock": "Desbloquear Ficha",
+      "locked": "Ficha de {name} bloqueada.",
+      "unlocked": "Ficha de {name} desbloqueada."
+    },
+    "Chargen": {
+      "title": "Criador de Personagens — Naruto RPG",
+      "button": "Criar Personagem",
+      "step0": "Perfil & Estilo",
+      "step1": "Atributos",
+      "step2": "Habilidades",
+      "step3": "Técnicas & Antecedentes",
+      "step4": "Jutsus",
+      "step5": "Toques Finais",
+      "prio_primary": "Primária (7/9)",
+      "prio_secondary": "Secundária (5/7)",
+      "prio_tertiary": "Terciária (3/4)",
+      "bonusLeft": "Pontos de Bônus",
+      "jutsuPoints": "Pontos de Jutsu",
+      "attrHint": "Priorize as categorias (7/5/3). Todo atributo começa em 1; máximo 5 na criação. Passar do limite consome Pontos de Bônus (5⭐ por ponto).",
+      "abilHint": "Priorize as categorias (9/7/4). Máximo 3 na criação; do 4º ponto em diante consome Pontos de Bônus (2⭐ por ponto).",
+      "jutsuHint": "7 Pontos de Jutsu. O custo mostrado já considera o seu Estilo. Cadeado = pré-requisitos não cumpridos (mostrados ao lado). Jutsus com custo — são exclusivos de clã/estilo (fale com o Narrador). Mostrando até 80 resultados — use a busca.",
+      "search": "Buscar jutsu...",
+      "extraPJ": "Ponto de Jutsu extra",
+      "bonusBuys": "Compras com Pontos de Bônus",
+      "summary": "Resumo",
+      "finishHint": "Ao concluir, o personagem é criado com atributos, habilidades, técnicas, antecedentes, estilo, jutsus e as manobras básicas elegíveis.",
+      "prev": "Voltar",
+      "next": "Avançar",
+      "finish": "Criar Personagem",
+      "needContent": "O Conteúdo Oficial precisa estar importado no mundo (botão no diretório de Itens) antes de usar o Criador.",
+      "overBudget": "Os pontos estouraram o orçamento — reduza gastos ou compre Pontos de Jutsu extras.",
+      "missingBasics": "Defina ao menos o Nome e o Estilo de Arte Ninja.",
+      "created": "{name} criado! Bem-vindo ao mundo shinobi.",
+      "createFailed": "Não foi possível criar o personagem (verifique permissões de criação de Atores)."
     }
   }
 }

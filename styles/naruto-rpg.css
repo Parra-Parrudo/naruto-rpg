@@ -4069,3 +4069,45 @@ button.nrpg-import-characters:hover {
 /* Descrição de manobra nos cartões de chat */
 .nrpg-chat-desc { font-size: 12px; margin: 4px 0; opacity: 0.95; }
 .nrpg-chat-desc p { margin: 2px 0; }
+
+/* ===== Criador de Personagens ===== */
+.nrpg-chargen .nrpg-cg { display: flex; flex-direction: column; height: 100%; gap: 6px; }
+.nrpg-cg-steps { display: flex; gap: 4px; flex-wrap: wrap; }
+.nrpg-cg-step { padding: 3px 10px; border-radius: 12px; background: rgba(0,0,0,0.08); font-size: 12px; opacity: 0.7; }
+.nrpg-cg-step.active { background: #b8860b; color: #fff; opacity: 1; font-weight: bold; }
+.nrpg-cg-step.done { opacity: 1; background: rgba(184,134,11,0.25); }
+.nrpg-cg-scoreboard { display: flex; gap: 18px; padding: 4px 8px; background: rgba(184,134,11,0.1); border-radius: 4px; font-size: 13px; }
+.nrpg-cg-neg { color: #c62828; font-weight: bold; }
+.nrpg-cg-body { flex: 1; overflow-y: auto; padding: 4px; }
+.nrpg-cg-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+.nrpg-cg-styles { display: flex; flex-wrap: wrap; gap: 6px; }
+.nrpg-cg-style { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 31%; padding: 8px 4px; border: 2px solid transparent; border-radius: 6px; cursor: pointer; }
+.nrpg-cg-style.selected { border-color: #b8860b; background: rgba(184,134,11,0.15); }
+.nrpg-cg-style span { font-size: 11px; opacity: 0.8; }
+.nrpg-cg-cols { display: flex; gap: 12px; }
+.nrpg-cg-col { flex: 1; min-width: 0; }
+.nrpg-cg-col h4 { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.nrpg-cg-col select { width: auto; font-size: 11px; }
+.nrpg-cg-pool { font-size: 12px; margin-bottom: 4px; padding: 2px 6px; background: rgba(0,0,0,0.06); border-radius: 3px; display: inline-block; }
+.nrpg-cg-over { background: rgba(184,134,11,0.3); font-weight: bold; }
+.nrpg-cg-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 4px; font-size: 13px; }
+.nrpg-cg-row:nth-child(odd) { background: rgba(0,0,0,0.03); }
+.nrpg-cg-ctrl { display: inline-flex; align-items: center; gap: 6px; }
+.nrpg-cg-ctrl button { width: 22px; height: 22px; line-height: 1; padding: 0; }
+.nrpg-cg-ctrl strong { min-width: 18px; text-align: center; }
+.nrpg-jutsu-search { width: 100%; margin-bottom: 6px; }
+.nrpg-cg-jutsus { display: flex; flex-direction: column; gap: 2px; }
+.nrpg-cg-jutsu { display: flex; align-items: center; gap: 8px; padding: 3px 6px; border-radius: 3px; font-size: 12px; }
+.nrpg-cg-jutsu.selected { background: rgba(184,134,11,0.18); }
+.nrpg-cg-jutsu.locked { opacity: 0.6; }
+.nrpg-cg-jutsu button { width: 26px; padding: 0; background: none; border: none; cursor: pointer; }
+.nrpg-cg-jname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nrpg-cg-jcat { opacity: 0.7; font-size: 11px; }
+.nrpg-cg-jcost { font-weight: bold; min-width: 40px; text-align: right; }
+.nrpg-cg-jmissing { color: #b26a00; font-size: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nrpg-cg-summary { background: rgba(184,134,11,0.07); border-radius: 6px; padding: 8px; }
+.nrpg-cg-footer { display: flex; justify-content: space-between; padding-top: 4px; border-top: 1px solid rgba(0,0,0,0.15); }
+.nrpg-cg-footer button { width: auto; padding: 4px 16px; }
+.nrpg-cg-finish { background: #b8860b; color: #fff; font-weight: bold; }
+.nrpg-cg-hint { font-size: 11px; opacity: 0.75; }
+.nrpg-cg-warn { padding: 20px; text-align: center; }

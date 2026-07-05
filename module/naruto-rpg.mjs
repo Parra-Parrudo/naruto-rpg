@@ -24,6 +24,7 @@ import { registerEffects } from "./effects/index.mjs";
 
 import { importOfficialContent, showImportDialog } from "./helpers/library-importer.mjs";
 import { registerCombatCardHooks } from "./helpers/combat-cards.mjs";
+import { openChargen } from "./apps/chargen.mjs";
 import { showCharacterImportDialog } from "./helpers/character-importer.mjs";
 import { executeRoll } from "./dice/roll-dialog.mjs";
 import { createImportButton, canInteractWithChatMessage } from "./helpers/utils.mjs";
@@ -40,6 +41,7 @@ Hooks.once("init", async () => {
     showImportDialog,
     showCharacterImportDialog,
     importOfficialContent,
+    openChargen,
   };
 
   CONFIG.NARUTO_RPG = NARUTO_RPG;
@@ -198,9 +200,17 @@ Hooks.on("renderActorDirectory", (app, html, data) => {
     () => game.narutorpg.showCharacterImportDialog()
   );
 
+  const chargenButton = createImportButton(
+    "nrpg-chargen",
+    "NARUTO_RPG.Chargen.button",
+    "fas fa-user-ninja",
+    () => game.narutorpg.openChargen()
+  );
+
   const actionButtons = html.querySelector(".directory-header .action-buttons");
   if (actionButtons) {
     actionButtons.prepend(button);
+    actionButtons.prepend(chargenButton);
   }
 });
 

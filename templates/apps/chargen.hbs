@@ -1,0 +1,210 @@
+<div class="nrpg-cg">
+  {{#unless ready}}
+  <p class="nrpg-cg-warn">{{localize "NARUTO_RPG.Chargen.needContent"}}</p>
+  {{else}}
+
+  {{!-- passos --}}
+  <nav class="nrpg-cg-steps">
+    {{#each steps as |st|}}
+    <span class="nrpg-cg-step {{#if st.active}}active{{/if}} {{#if st.done}}done{{/if}}">{{st.label}}</span>
+    {{/each}}
+  </nav>
+
+  {{!-- placar permanente --}}
+  <div class="nrpg-cg-scoreboard">
+    <span class="{{#if (lt calc.bonusLeft 0)}}nrpg-cg-neg{{/if}}">
+      <i class="fas fa-star"></i> {{localize "NARUTO_RPG.Chargen.bonusLeft"}}: <strong>{{calc.bonusLeft}}</strong>/15
+    </span>
+    <span><i class="fas fa-fire"></i> {{localize "NARUTO_RPG.Chargen.jutsuPoints"}}: <strong>{{calc.jutsu.used}}</strong>/{{calc.jutsu.limit}}</span>
+  </div>
+
+  <section class="nrpg-cg-body">
+
+    {{!-- PASSO 0: Perfil & Estilo --}}
+    {{#if isStep.0}}
+    <div class="nrpg-cg-grid2">
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Common.name"}} *</label>
+        <input type="text" data-field="profile.name" value="{{state.profile.name}}" /></div>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.concept"}}</label>
+        <input type="text" data-field="profile.concept" value="{{state.profile.concept}}" /></div>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.schoolName"}}</label>
+        <input type="text" data-field="profile.vila" value="{{state.profile.vila}}" /></div>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.fightingTeam"}}</label>
+        <input type="text" data-field="profile.time" value="{{state.profile.time}}" /></div>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.stable"}}</label>
+        <input type="text" data-field="profile.cla" value="{{state.profile.cla}}" /></div>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
+        <input type="text" data-field="profile.nindo" value="{{state.profile.nindo}}" /></div>
+    </div>
+    <h3>{{localize "NARUTO_RPG.Item.Types.fightingStyle"}} *</h3>
+    <div class="nrpg-cg-styles">
+      {{#each styles as |st|}}
+      <button type="button" class="nrpg-cg-style {{#if st.selected}}selected{{/if}}" data-action="pickStyle" data-style-id="{{st.id}}">
+        <strong>{{st.name}}</strong>
+        <span>{{localize "NARUTO_RPG.Resources.chi"}} {{st.chi}} | {{localize "NARUTO_RPG.Resources.willpower"}} {{st.wp}}</span>
+      </button>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- PASSO 1: Atributos --}}
+    {{#if isStep.1}}
+    <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.attrHint"}}</p>
+    <div class="nrpg-cg-cols">
+      {{#each attrsByCat as |col|}}
+      <div class="nrpg-cg-col">
+        <h4>{{col.label}}
+          <select data-prio="{{col.prioKey}}">
+            {{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}
+          </select>
+        </h4>
+        <div class="nrpg-cg-pool {{#if col.pool.over}}nrpg-cg-over{{/if}}">{{col.pool.used}}/{{col.pool.limit}}{{#if col.pool.over}} +{{col.pool.over}} ⭐{{/if}}</div>
+        {{#each col.rows as |r|}}
+        <div class="nrpg-cg-row">
+          <span>{{r.name}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
+            <strong>{{r.value}}</strong>
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
+          </span>
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- PASSO 2: Habilidades --}}
+    {{#if isStep.2}}
+    <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.abilHint"}}</p>
+    <div class="nrpg-cg-cols">
+      {{#each abilsByCat as |col|}}
+      <div class="nrpg-cg-col">
+        <h4>{{col.label}}
+          <select data-prio="{{col.prioKey}}">
+            {{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}
+          </select>
+        </h4>
+        <div class="nrpg-cg-pool {{#if col.pool.over}}nrpg-cg-over{{/if}}">{{col.pool.used}}/{{col.pool.limit}}{{#if col.pool.over}} +{{col.pool.over}} ⭐{{/if}}</div>
+        {{#each col.rows as |r|}}
+        <div class="nrpg-cg-row">
+          <span>{{r.name}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
+            <strong>{{r.value}}</strong>
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
+          </span>
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- PASSO 3: Técnicas & Antecedentes --}}
+    {{#if isStep.3}}
+    <div class="nrpg-cg-cols">
+      <div class="nrpg-cg-col">
+        <h4>{{localize "NARUTO_RPG.Trait.Categories.techniques"}}</h4>
+        <div class="nrpg-cg-pool {{#if calc.cat.techs.over}}nrpg-cg-over{{/if}}">{{calc.cat.techs.used}}/{{calc.cat.techs.limit}}{{#if calc.cat.techs.over}} +{{calc.cat.techs.over}} ⭐{{/if}}</div>
+        {{#each techRows as |r|}}
+        <div class="nrpg-cg-row">
+          <span>{{r.name}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
+            <strong>{{r.value}}</strong>
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
+          </span>
+        </div>
+        {{/each}}
+      </div>
+      <div class="nrpg-cg-col">
+        <h4>{{localize "NARUTO_RPG.Trait.Categories.backgrounds"}}</h4>
+        <div class="nrpg-cg-pool {{#if calc.cat.bgs.over}}nrpg-cg-over{{/if}}">{{calc.cat.bgs.used}}/{{calc.cat.bgs.limit}}{{#if calc.cat.bgs.over}} +{{calc.cat.bgs.over}} ⭐{{/if}}</div>
+        {{#each bgRows as |r|}}
+        <div class="nrpg-cg-row">
+          <span>{{r.name}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
+            <strong>{{r.value}}</strong>
+            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
+          </span>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- PASSO 4: Jutsus --}}
+    {{#if isStep.4}}
+    <input type="text" class="nrpg-jutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.filter}}" />
+    <div class="nrpg-cg-jutsus">
+      {{#each jutsuRows as |j|}}
+      <div class="nrpg-cg-jutsu {{#if j.selected}}selected{{/if}} {{#unless j.ok}}locked{{/unless}}">
+        <button type="button" data-action="toggleJutsu" data-jutsu-id="{{j.id}}" {{#unless j.ok}}{{#unless j.selected}}disabled{{/unless}}{{/unless}}>
+          {{#if j.selected}}<i class="fas fa-check-square"></i>{{else}}{{#if j.ok}}<i class="far fa-square"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}{{/if}}
+        </button>
+        <span class="nrpg-cg-jname">{{j.name}}</span>
+        <span class="nrpg-cg-jcat">{{j.category}}</span>
+        <span class="nrpg-cg-jcost">{{#if j.unavailable}}—{{else}}{{j.cost}} PJ{{/if}}</span>
+        {{#if j.missing.length}}<span class="nrpg-cg-jmissing" title="{{j.missingText}}"><i class="fas fa-exclamation-triangle"></i> {{j.missingText}}</span>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+    <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.jutsuHint"}}</p>
+    {{/if}}
+
+    {{!-- PASSO 5: Toques Finais --}}
+    {{#if isStep.5}}
+    <div class="nrpg-cg-cols">
+      <div class="nrpg-cg-col">
+        <h4>{{localize "NARUTO_RPG.Renown.honor"}} & {{localize "NARUTO_RPG.Renown.glory"}} ({{calc.renownSpent}}/3)</h4>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Renown.honor"}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="renown" data-id="honor" data-delta="-1">-</button>
+            <strong>{{state.renown.honor}}</strong>
+            <button type="button" data-action="adjust" data-pool="renown" data-id="honor" data-delta="1">+</button>
+          </span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Renown.glory"}}</span>
+          <span class="nrpg-cg-ctrl">
+            <button type="button" data-action="adjust" data-pool="renown" data-id="glory" data-delta="-1">-</button>
+            <strong>{{state.renown.glory}}</strong>
+            <button type="button" data-action="adjust" data-pool="renown" data-id="glory" data-delta="1">+</button>
+          </span></div>
+        <h4>{{localize "NARUTO_RPG.Chargen.bonusBuys"}}</h4>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Resources.chi"}} (1⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="chakra" data-delta="-1">-</button><strong>+{{state.buys.chakra}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="chakra" data-delta="1">+</button></span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Resources.willpower"}} (1⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="willpower" data-delta="-1">-</button><strong>+{{state.buys.willpower}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="willpower" data-delta="1">+</button></span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Resources.health"}} (3⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="health" data-delta="-1">-</button><strong>+{{state.buys.health}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="health" data-delta="1">+</button></span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Chargen.extraPJ"}} (4⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="jutsuPoints" data-delta="-1">-</button><strong>+{{state.buys.jutsuPoints}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="jutsuPoints" data-delta="1">+</button></span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Renown.honor"}} temp. (1⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="tempHonor" data-delta="-1">-</button><strong>+{{state.buys.tempHonor}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="tempHonor" data-delta="1">+</button></span></div>
+        <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Renown.glory"}} temp. (1⭐)</span>
+          <span class="nrpg-cg-ctrl"><button type="button" data-action="adjust" data-pool="buys" data-id="tempGlory" data-delta="-1">-</button><strong>+{{state.buys.tempGlory}}</strong><button type="button" data-action="adjust" data-pool="buys" data-id="tempGlory" data-delta="1">+</button></span></div>
+      </div>
+      <div class="nrpg-cg-col nrpg-cg-summary">
+        <h4>{{localize "NARUTO_RPG.Chargen.summary"}}</h4>
+        <p><strong>{{state.profile.name}}</strong>{{#if style}} — {{style.name}}{{/if}}</p>
+        <p>{{localize "NARUTO_RPG.Resources.health"}}: {{finalHealth}} | {{localize "NARUTO_RPG.Resources.chi"}}: {{finalChakra}} | {{localize "NARUTO_RPG.Resources.willpower"}}: {{finalWillpower}}</p>
+        <p>{{localize "NARUTO_RPG.Tabs.maneuvers"}}: {{state.jutsus.length}} ({{calc.jutsu.used}}/{{calc.jutsu.limit}} PJ)</p>
+        <p>{{localize "NARUTO_RPG.Chargen.bonusLeft"}}: <strong>{{calc.bonusLeft}}</strong></p>
+        <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.finishHint"}}</p>
+      </div>
+    </div>
+    {{/if}}
+
+  </section>
+
+  <footer class="nrpg-cg-footer">
+    <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}><i class="fas fa-arrow-left"></i> {{localize "NARUTO_RPG.Chargen.prev"}}</button>
+    {{#if isLastStep}}
+    <button type="button" class="nrpg-cg-finish" data-action="finish" {{#unless canFinish}}disabled{{/unless}}><i class="fas fa-user-ninja"></i> {{localize "NARUTO_RPG.Chargen.finish"}}</button>
+    {{else}}
+    <button type="button" data-action="nextStep">{{localize "NARUTO_RPG.Chargen.next"}} <i class="fas fa-arrow-right"></i></button>
+    {{/if}}
+  </footer>
+  {{/unless}}
+</div>
