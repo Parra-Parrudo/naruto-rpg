@@ -362,7 +362,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
   }
 }
 
-export function openChargen() {
+export async function openChargen() {
   let app;
   try {
     app = new NarutoRpgChargen();
@@ -373,18 +373,21 @@ export function openChargen() {
   }
 
   if (!app.ready) {
-    console.warn(
-      "Naruto RPG | Criador indisponivel - Conteudo Oficial insuficiente no mundo.",
-      { atributos: app.attributes?.length, tecnicas: app.techniques?.length, estilos: app.styles?.length }
+    const counts = { atributos: app.attributes?.length ?? 0, tecnicas: app.techniques?.length ?? 0, estilos: app.styles?.length ?? 0 };
+    console.warn("Naruto RPG | Criador indisponivel - Conteudo Oficial insuficiente no mundo.", counts);
+    ui.notifications.warn(
+      `Naruto RPG | Importe o Conteudo Oficial antes de criar personagens. ` +
+      `Encontrado: ${counts.atributos} atributos (min 9), ${counts.tecnicas} tecnicas (min 6), ${counts.estilos} estilos (min 1).`,
+      { permanent: true }
     );
-    ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Chargen.needContent"));
     return;
   }
 
+  // render() e assincrono: precisamos aguardar para capturar erros de _prepareContext/template
   try {
-    app.render(true);
+    await app.render({ force: true });
   } catch (err) {
     console.error("Naruto RPG | Falha ao renderizar o Criador de Personagens:", err);
-    ui.notifications.error(`Naruto RPG | Erro ao renderizar o Criador: ${err.message}`);
+    ui.notifications.error(`Naruto RPG | Erro ao renderizar o Criador: ${err.message}`, { permanent: true });
   }
 }

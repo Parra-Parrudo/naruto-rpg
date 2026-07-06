@@ -847,6 +847,10 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    * @private
    */
   _editItemById(itemId) {
+    if (this._sheetLocked) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
+      return;
+    }
     const item = this.actor.items.get(itemId);
     item?.sheet.render(true);
   }
@@ -857,6 +861,10 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    * @private
    */
   async _deleteItemById(itemId) {
+    if (this._sheetLocked) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
+      return;
+    }
     const item = this.actor.items.get(itemId);
     if (!item) return;
 
@@ -901,6 +909,10 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    * @private
    */
   async _incrementTraitById(itemId) {
+    if (this._sheetLocked) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
+      return;
+    }
     const item = this.actor.items.get(itemId);
     if (!item) return;
 
@@ -918,6 +930,10 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    * @private
    */
   async _decrementTraitById(itemId) {
+    if (this._sheetLocked) {
+      ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
+      return;
+    }
     const item = this.actor.items.get(itemId);
     if (!item) return;
 
