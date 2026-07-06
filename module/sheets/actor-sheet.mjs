@@ -73,17 +73,41 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     },
   };
 
-  /** @override GM-only padlock in the sheet header */
+  /**
+   * Single source of truth for the sheet lock state (GM padlock).
+   * Imported sheets are editable unless the GM has locked them.
+   * @returns {boolean}
+   */
+  get _sheetLocked() {
+    return this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+  }
+
+  /** @override Header controls: GM padlock + owner (re)import button */
   _getHeaderControls() {
     const controls = super._getHeaderControls();
-    if (game.user.isGM) {
-      const locked = this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+    const isGM = game.user.isGM;
+    const isOwner = this.actor.isOwner;
+
+    // GM-only padlock to lock/unlock editing
+    if (isGM) {
+      const locked = this._sheetLocked;
       controls.unshift({
         icon: locked ? "fas fa-lock" : "fas fa-lock-open",
         label: locked ? "NARUTO_RPG.SheetLock.unlock" : "NARUTO_RPG.SheetLock.lock",
         action: "toggleSheetLock",
       });
     }
+
+    // Non-GM owners can import into their own sheet
+    if (isOwner && !isGM) {
+      controls.unshift({
+        icon: "fas fa-file-import",
+        label: "NARUTO_RPG.Character.importMyCharacter",
+        action: "importCharacter",
+        visible: true,
+      });
+    }
+
     return controls;
   }
 
@@ -186,27 +210,6 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     this.tabGroups.primary = tabName;
   }
 
-  /** @inheritDoc */
-  _getHeaderControls() {
-    const controls = super._getHeaderControls();
-    
-    // Add import button for sheet owners
-    // Show for: non-imported characters (first import) OR already imported (reimport)
-    // Non-GM players can import into their own sheets
-    const isOwner = this.actor.isOwner;
-    const isGM = game.user.isGM;
-    
-    if (isOwner && !isGM) {
-      controls.unshift({
-        icon: "fas fa-file-import",
-        label: "NARUTO_RPG.Character.importMyCharacter",
-        action: "importCharacter",
-        visible: true,
-      });
-    }
-    
-    return controls;
-  }
 
   /** @inheritDoc */
   async _prepareContext(options) {
@@ -220,7 +223,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     
     // Sheet lock: GM-controlled padlock (imported sheets are editable unless locked)
     context.wasImported = this.actor.system.importData?.isImported || false;
-    context.isLocked = this.actor.getFlag("naruto-rpg", "sheetLocked") ?? false;
+    context.isLocked = this._sheetLocked;
     // Templates historically gate on "isImported" — it now means "locked"
     context.isImported = context.isLocked;
     context.isEditable = this.isEditable && !context.isLocked;
@@ -498,7 +501,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   /** @inheritDoc */
   async _onDropItem(event, data) {
     // Block drops on imported characters
-    if (!this.isEditable || this.actor.system.importData?.isImported) {
+    if (!this.isEditable || this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return false;
     }
@@ -542,7 +545,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onDeleteItem(event, target) {
     event.preventDefault();
     // Block on imported characters
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }
@@ -644,7 +647,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    */
   _setupTraitContextMenu(html) {
     const sheet = this;
-    const isImported = this.actor.system.importData?.isImported;
+    const isImported = this._sheetLocked;
     
     const menuItems = [];
     
@@ -704,7 +707,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    */
   _setupFightingStyleContextMenu(html) {
     const sheet = this;
-    const isImported = this.actor.system.importData?.isImported;
+    const isImported = this._sheetLocked;
     
     const menuItems = [];
     
@@ -1002,7 +1005,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     if (!effect) return;
 
     // For imported characters, only allow deleting manual effects
-    const isImported = this.actor.system.importData?.isImported;
+    const isImported = this._sheetLocked;
     const isManual = effect.flags?.["naruto-rpg"]?.isManual;
     
     if (isImported && !isManual) {
@@ -1247,7 +1250,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onEditResourceMax(event, target) {
     event.preventDefault();
     
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }
@@ -1295,7 +1298,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onEditRenownPermanent(event, target) {
     event.preventDefault();
     
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }
@@ -1345,7 +1348,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onAddCombo(event, target) {
     event.preventDefault();
     
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }
@@ -1372,7 +1375,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onEditCombo(event, target) {
     event.preventDefault();
     
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }
@@ -1404,7 +1407,7 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static async _onDeleteCombo(event, target) {
     event.preventDefault();
     
-    if (this.actor.system.importData?.isImported) {
+    if (this._sheetLocked) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Character.readOnlyWarning"));
       return;
     }

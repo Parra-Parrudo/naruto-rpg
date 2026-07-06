@@ -363,10 +363,28 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
 }
 
 export function openChargen() {
-  const app = new NarutoRpgChargen();
+  let app;
+  try {
+    app = new NarutoRpgChargen();
+  } catch (err) {
+    console.error("Naruto RPG | Falha ao iniciar o Criador de Personagens:", err);
+    ui.notifications.error(`Naruto RPG | Erro ao abrir o Criador: ${err.message}`);
+    return;
+  }
+
   if (!app.ready) {
+    console.warn(
+      "Naruto RPG | Criador indisponivel - Conteudo Oficial insuficiente no mundo.",
+      { atributos: app.attributes?.length, tecnicas: app.techniques?.length, estilos: app.styles?.length }
+    );
     ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Chargen.needContent"));
     return;
   }
-  app.render(true);
+
+  try {
+    app.render(true);
+  } catch (err) {
+    console.error("Naruto RPG | Falha ao renderizar o Criador de Personagens:", err);
+    ui.notifications.error(`Naruto RPG | Erro ao renderizar o Criador: ${err.message}`);
+  }
 }
