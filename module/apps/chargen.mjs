@@ -22,7 +22,7 @@ const BASICS_BY_TECH = { jab: "punch", strong: "punch", fierce: "punch", short: 
 export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) {
   constructor(options = {}) {
     super(options);
-    this.state = {
+    this.cg = {
       step: 0,
       profile: { name: "", concept: "", vila: "", time: "", cla: "", nindo: "" },
       styleId: null,
@@ -71,7 +71,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
   /* ------------------------- motor de pontos ------------------------- */
   _traitValue(pool, id) {
     const base = pool === "attrs" ? 1 : 0;
-    return base + (this.state[pool][id] ?? 0);
+    return base + (this.cg[pool][id] ?? 0);
   }
 
   _catOf(pool, id) {
@@ -81,7 +81,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
 
   _spentByCategory(pool) {
     const spent = {};
-    for (const [id, n] of Object.entries(this.state[pool])) {
+    for (const [id, n] of Object.entries(this.cg[pool])) {
       const cat = this._catOf(pool, id);
       spent[cat] = (spent[cat] ?? 0) + n;
     }
@@ -89,7 +89,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
   }
 
   calc() {
-    const s = this.state;
+    const s = this.cg;
     const c = { bonusSpent: 0, cat: {} };
     for (const pool of ["attrs", "abils"]) {
       const spent = this._spentByCategory(pool);
@@ -123,7 +123,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     const m = this._bySource(this.maneuvers, id);
     if (!m) return null;
     const sc = m.system.stylePowerPointCosts ?? {};
-    if (this.state.styleId && sc[this.state.styleId] != null) return sc[this.state.styleId];
+    if (this.cg.styleId && sc[this.cg.styleId] != null) return sc[this.cg.styleId];
     const d = m.system.defaultPowerPointCost ?? 0;
     return d > 0 ? d : null;
   }
@@ -135,7 +135,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
         const rid = p.requiredManeuverId ?? p.id;
         const okBasic = rid in BASICS_BY_TECH ? this._traitValue("techs", BASICS_BY_TECH[rid]) >= 1 : false;
         const okMove = rid === "movement";
-        if (!this.state.jutsus.includes(rid) && !okBasic && !okMove) {
+        if (!this.cg.jutsus.includes(rid) && !okBasic && !okMove) {
           const req = this._bySource(this.maneuvers, rid);
           missing.push(req?.name ?? rid);
         }
@@ -158,7 +158,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
 
   /* ------------------------- contexto ------------------------- */
   async _prepareContext() {
-    const s = this.state;
+    const s = this.cg;
     const c = this.calc();
     const L = (k) => game.i18n.localize(`NARUTO_RPG.Chargen.${k}`);
     const style = s.styleId ? this._bySource(this.styles, s.styleId) : null;
@@ -229,14 +229,14 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     this.element.querySelectorAll("[data-field]").forEach((el) => {
       el.addEventListener("change", (ev) => {
         const path = ev.currentTarget.dataset.field;
-        foundry.utils.setProperty(this.state, path, ev.currentTarget.value);
+        foundry.utils.setProperty(this.cg, path, ev.currentTarget.value);
       });
     });
     this.element.querySelectorAll("[data-prio]").forEach((el) => {
       el.addEventListener("change", (ev) => {
         const [pool, cat] = ev.currentTarget.dataset.prio.split(".");
         const newP = ev.currentTarget.value;
-        const prio = this.state.prio[pool];
+        const prio = this.cg.prio[pool];
         const other = Object.keys(prio).find((k) => k !== cat && prio[k] === newP);
         if (other) prio[other] = prio[cat];
         prio[cat] = newP;
@@ -246,20 +246,20 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     const search = this.element.querySelector(".nrpg-jutsu-search");
     if (search) {
       search.addEventListener("input", (ev) => {
-        this.state.filter = ev.currentTarget.value;
+        this.cg.filter = ev.currentTarget.value;
         clearTimeout(this._ft);
         this._ft = setTimeout(() => this.render(), 250);
       });
     }
   }
 
-  static _onNext() { if (this.state.step < 5) { this.state.step++; this.render(); } }
-  static _onPrev() { if (this.state.step > 0) { this.state.step--; this.render(); } }
+  static _onNext() { if (this.cg.step < 5) { this.cg.step++; this.render(); } }
+  static _onPrev() { if (this.cg.step > 0) { this.cg.step--; this.render(); } }
 
   static _onAdjust(event, target) {
     const { pool, id } = target.dataset;
     const delta = Number(target.dataset.delta);
-    const s = this.state;
+    const s = this.cg;
     if (pool === "renown") {
       const next = Math.max(0, (s.renown[id] ?? 0) + delta);
       const otherKey = id === "honor" ? "glory" : "honor";
@@ -277,13 +277,13 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
   }
 
   static _onPickStyle(event, target) {
-    this.state.styleId = target.dataset.styleId;
+    this.cg.styleId = target.dataset.styleId;
     this.render();
   }
 
   static _onToggleJutsu(event, target) {
     const id = target.dataset.jutsuId;
-    const s = this.state;
+    const s = this.cg;
     if (s.jutsus.includes(id)) {
       s.jutsus = s.jutsus.filter((j) => j !== id);
       let changed = true;
@@ -303,7 +303,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
   }
 
   static async _onFinish() {
-    const s = this.state;
+    const s = this.cg;
     const c = this.calc();
     if (c.bonusLeft < 0 || c.jutsu.over > 0) {
       ui.notifications.warn(game.i18n.localize("NARUTO_RPG.Chargen.overBudget")); return;
