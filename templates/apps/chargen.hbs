@@ -21,7 +21,7 @@
   <section class="nrpg-cg-body">
 
     {{!-- PASSO 0: Perfil & Estilo --}}
-    {{#if isStep.0}}
+    {{#if isStep.[0]}}
     <div class="nrpg-cg-grid2">
       <div class="form-group"><label>{{localize "NARUTO_RPG.Common.name"}} *</label>
         <input type="text" data-field="profile.name" value="{{state.profile.name}}" /></div>
@@ -48,7 +48,7 @@
     {{/if}}
 
     {{!-- PASSO 1: Atributos --}}
-    {{#if isStep.1}}
+    {{#if isStep.[1]}}
     <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.attrHint"}}</p>
     <div class="nrpg-cg-cols">
       {{#each attrsByCat as |col|}}
@@ -75,7 +75,7 @@
     {{/if}}
 
     {{!-- PASSO 2: Habilidades --}}
-    {{#if isStep.2}}
+    {{#if isStep.[2]}}
     <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.abilHint"}}</p>
     <div class="nrpg-cg-cols">
       {{#each abilsByCat as |col|}}
@@ -102,7 +102,7 @@
     {{/if}}
 
     {{!-- PASSO 3: Técnicas & Antecedentes --}}
-    {{#if isStep.3}}
+    {{#if isStep.[3]}}
     <div class="nrpg-cg-cols">
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Trait.Categories.techniques"}}</h4>
@@ -136,7 +136,7 @@
     {{/if}}
 
     {{!-- PASSO 4: Jutsus --}}
-    {{#if isStep.4}}
+    {{#if isStep.[4]}}
     <input type="text" class="nrpg-jutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.filter}}" />
     <div class="nrpg-cg-jutsus">
       {{#each jutsuRows as |j|}}
@@ -155,7 +155,7 @@
     {{/if}}
 
     {{!-- PASSO 5: Toques Finais --}}
-    {{#if isStep.5}}
+    {{#if isStep.[5]}}
     <div class="nrpg-cg-cols">
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Renown.honor"}} & {{localize "NARUTO_RPG.Renown.glory"}} ({{calc.renownSpent}}/3)</h4>

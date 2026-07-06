@@ -647,55 +647,41 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    */
   _setupTraitContextMenu(html) {
     const sheet = this;
-    const isImported = this._sheetLocked;
-    
-    const menuItems = [];
-    
-    // Only add edit/delete and increment/decrement for non-imported characters
-    if (!isImported) {
-      menuItems.push({
+    // Edit options are always registered but gated by a LIVE condition, so a stale
+    // context menu (Foundry keeps delegated listeners across re-renders) still respects the lock.
+    const editable = () => !sheet._sheetLocked;
+
+    const menuItems = [
+      {
         name: game.i18n.localize("NARUTO_RPG.Common.edit"),
         icon: '<i class="fas fa-edit"></i>',
-        callback: (li) => {
-          const itemId = li.dataset?.itemId;
-          if (itemId) sheet._editItemById(itemId);
-        },
-      });
-      menuItems.push({
+        condition: editable,
+        callback: (li) => { const itemId = li.dataset?.itemId; if (itemId) sheet._editItemById(itemId); },
+      },
+      {
         name: game.i18n.localize("NARUTO_RPG.ContextMenu.increment"),
         icon: '<i class="fas fa-plus"></i>',
-        callback: (li) => {
-          const itemId = li.dataset?.itemId;
-          if (itemId) sheet._incrementTraitById(itemId);
-        },
-      });
-      menuItems.push({
+        condition: editable,
+        callback: (li) => { const itemId = li.dataset?.itemId; if (itemId) sheet._incrementTraitById(itemId); },
+      },
+      {
         name: game.i18n.localize("NARUTO_RPG.ContextMenu.decrement"),
         icon: '<i class="fas fa-minus"></i>',
-        callback: (li) => {
-          const itemId = li.dataset?.itemId;
-          if (itemId) sheet._decrementTraitById(itemId);
-        },
-      });
-      menuItems.push({
+        condition: editable,
+        callback: (li) => { const itemId = li.dataset?.itemId; if (itemId) sheet._decrementTraitById(itemId); },
+      },
+      {
         name: game.i18n.localize("NARUTO_RPG.Common.delete"),
         icon: '<i class="fas fa-trash"></i>',
-        callback: (li) => {
-          const itemId = li.dataset?.itemId;
-          if (itemId) sheet._deleteItemById(itemId);
-        },
-      });
-    }
-    
-    // Send to chat is always available
-    menuItems.push({
-      name: game.i18n.localize("NARUTO_RPG.ContextMenu.sendToChat"),
-      icon: '<i class="fas fa-comment"></i>',
-      callback: (li) => {
-        const itemId = li.dataset?.itemId;
-        if (itemId) sheet._sendTraitToChatById(itemId);
+        condition: editable,
+        callback: (li) => { const itemId = li.dataset?.itemId; if (itemId) sheet._deleteItemById(itemId); },
       },
-    });
+      {
+        name: game.i18n.localize("NARUTO_RPG.ContextMenu.sendToChat"),
+        icon: '<i class="fas fa-comment"></i>',
+        callback: (li) => { const itemId = li.dataset?.itemId; if (itemId) sheet._sendTraitToChatById(itemId); },
+      },
+    ];
 
     new foundry.applications.ux.ContextMenu.implementation(html, ".trait-item[data-item-id]", menuItems, { jQuery: false });
   }
@@ -707,28 +693,22 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
    */
   _setupFightingStyleContextMenu(html) {
     const sheet = this;
-    const isImported = this._sheetLocked;
-    
-    const menuItems = [];
-    
-    if (!isImported) {
-      menuItems.push({
+    const editable = () => !sheet._sheetLocked;
+
+    const menuItems = [
+      {
         name: game.i18n.localize("NARUTO_RPG.Common.edit"),
         icon: '<i class="fas fa-edit"></i>',
-        callback: (target) => {
-          const itemId = target.dataset?.itemId;
-          if (itemId) sheet._editItemById(itemId);
-        },
-      });
-      menuItems.push({
+        condition: editable,
+        callback: (target) => { const itemId = target.dataset?.itemId; if (itemId) sheet._editItemById(itemId); },
+      },
+      {
         name: game.i18n.localize("NARUTO_RPG.Common.delete"),
         icon: '<i class="fas fa-trash"></i>',
-        callback: (target) => {
-          const itemId = target.dataset?.itemId;
-          if (itemId) sheet._deleteItemById(itemId);
-        },
-      });
-    }
+        condition: editable,
+        callback: (target) => { const itemId = target.dataset?.itemId; if (itemId) sheet._deleteItemById(itemId); },
+      },
+    ];
 
     new foundry.applications.ux.ContextMenu.implementation(html, ".header-style", menuItems, { jQuery: false });
   }
