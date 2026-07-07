@@ -9,6 +9,7 @@
  */
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import { CLANS, CLAN_BY_NAME, clanRequiredFor } from "../config/clans.mjs";
 
 const BONUS_COST = { attrs: 5, abils: 2, techs: 5, bgs: 1, chakra: 1, willpower: 1, health: 3, tempRenown: 1 };
 const JUTSU_BONUS_MULT = 4; // jutsu comprado com bonus custa (PJ x4)
@@ -169,6 +170,9 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
         }
       }
     }
+    // Gate de cla: jutsus exclusivos exigem o cla correspondente selecionado
+    const reqClan = clanRequiredFor(m.system.sourceId);
+    if (reqClan && s.profile.cla !== reqClan) missing.push(`Cla ${reqClan}`);
     return missing;
   }
 
@@ -178,6 +182,11 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     const c = this.calc();
     const L = (k) => game.i18n.localize(`NARUTO_RPG.Chargen.${k}`);
     const style = s.styleId ? this._bySource(this.styles, s.styleId) : null;
+    const claName = s.profile.cla || "";
+    const selectedClan = CLAN_BY_NAME[claName] || null;
+    const clanOpt = (c) => ({ name: c.name, emoji: c.emoji, selected: c.name === claName });
+    const clanBase = CLANS.filter((c) => !c.expansion).map(clanOpt);
+    const clanExp = CLANS.filter((c) => c.expansion).map(clanOpt);
 
     const prioOptions = ["primary", "secondary", "tertiary"].map((p) => ({ key: p, label: L(`prio_${p}`) }));
     const catLabel = (key) => game.i18n.localize(CONFIG.NARUTO_RPG.maneuverCategories?.[key] ?? "NARUTO_RPG.Maneuver.Categories.other");
@@ -218,6 +227,8 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
       steps: [0,1,2,3,4,5,6].map((i) => ({ i, label: (i === 6 ? L("step6") : L(`step${i}`)), active: i === s.step, done: i < s.step })),
       isStep: Object.fromEntries([0,1,2,3,4,5,6].map((i) => [i, s.step === i])),
       styles: this.styles.map((st) => ({ id: st.system.sourceId, name: st.name, chi: st.system.initialChi, wp: st.system.initialWillpower, selected: st.system.sourceId === s.styleId })),
+      clanBase, clanExp, selectedClan,
+      styleDesc: style?.system?.description ?? "",
       attrsByCat: ATTR_CATS.map((cat) => ({
         cat, label: game.i18n.localize(`NARUTO_RPG.Categories.${cat}`), prioKey: `attrs.${cat}`,
         prioOptions: prioOptions.map((o) => ({ ...o, selected: o.key === s.prio.attrs[cat] })),
@@ -276,6 +287,8 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     };
     bindSearch(".nrpg-jutsu-search", "filter");
     bindSearch(".nrpg-bjutsu-search", "bfilter");
+    const claSel = this.element.querySelector("[data-cla-select]");
+    if (claSel) claSel.addEventListener("change", (ev) => { this.cg.profile.cla = ev.currentTarget.value; this.render(); });
   }
 
   static _onNext() { if (this.cg.step < LAST_STEP) { this.cg.step++; this.render(); } }

@@ -43,7 +43,15 @@
       <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.fightingTeam"}}</label>
         <input type="text" data-field="profile.time" value="{{state.profile.time}}" /></div>
       <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.stable"}}</label>
-        <input type="text" data-field="profile.cla" value="{{state.profile.cla}}" /></div>
+        <select data-cla-select>
+          <option value="">— Sem Clã —</option>
+          <optgroup label="Clãs Base">
+            {{#each clanBase as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}
+          </optgroup>
+          <optgroup label="Clãs da Expansão">
+            {{#each clanExp as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}
+          </optgroup>
+        </select></div>
       <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
         <input type="text" data-field="profile.nindo" value="{{state.profile.nindo}}" /></div>
     </div>
@@ -56,6 +64,19 @@
       </button>
       {{/each}}
     </div>
+    {{#if selectedClan}}
+    <details class="nrpg-cg-desc" open>
+      <summary>{{selectedClan.emoji}} {{selectedClan.name}} · {{selectedClan.vila}}</summary>
+      {{#if selectedClan.req}}<p class="nrpg-cg-req"><strong>Requisito:</strong> {{selectedClan.req}}</p>{{/if}}
+      <p>{{selectedClan.texto}}</p>
+    </details>
+    {{/if}}
+    {{#if style}}
+    <details class="nrpg-cg-desc">
+      <summary><i class="fas fa-book"></i> {{localize "NARUTO_RPG.Item.Types.fightingStyle"}}: {{style.name}}</summary>
+      <div class="nrpg-cg-desc-body">{{{styleDesc}}}</div>
+    </details>
+    {{/if}}
     {{/if}}
 
     {{!-- PASSO 1: Atributos --}}

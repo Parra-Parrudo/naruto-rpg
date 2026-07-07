@@ -15,6 +15,7 @@ import {
 } from "../helpers/maneuver-calculator.mjs";
 import { showPlayerCharacterImportDialog } from "../helpers/character-importer.mjs";
 import { syncCombatCards } from "../helpers/combat-cards.mjs";
+import { CLAN_BY_NAME } from "../config/clans.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -231,6 +232,11 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context.xpAvailable = (this.actor.system.experience?.total ?? 0) - (this.actor.system.experience?.spent ?? 0);
 
     context.items = this._prepareItems(context);
+
+    // Clã (system.profile.stable) + descrição para painel expansível na ficha
+    context.clanInfo = CLAN_BY_NAME[this.actor.system.profile?.stable] || null;
+    const styleItem = this.actor.items.find((i) => i.type === "fightingStyle");
+    context.styleDescription = styleItem?.system?.description || "";
 
     // Group maneuvers by technique/category for the maneuvers tab
     const catOrder = ["punch", "kick", "block", "grab", "athletics", "focus", "arremesso", "armas_brancas", "other"];

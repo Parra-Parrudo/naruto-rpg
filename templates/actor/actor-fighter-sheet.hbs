@@ -19,6 +19,19 @@
         <span class="style-name">{{style.name}}</span>
       </div>
       {{/each}}
+      {{#if clanInfo}}
+      <details class="nrpg-desc-panel">
+        <summary>{{clanInfo.emoji}} {{localize "NARUTO_RPG.Profile.stable"}}: {{clanInfo.name}} · {{clanInfo.vila}}</summary>
+        {{#if clanInfo.req}}<p class="nrpg-desc-req"><strong>Requisito:</strong> {{clanInfo.req}}</p>{{/if}}
+        <p>{{clanInfo.texto}}</p>
+      </details>
+      {{/if}}
+      {{#if styleDescription}}
+      <details class="nrpg-desc-panel">
+        <summary><i class="fas fa-book"></i> {{localize "NARUTO_RPG.Item.Types.fightingStyle"}} — {{localize "NARUTO_RPG.Common.description"}}</summary>
+        <div class="nrpg-desc-body">{{{styleDescription}}}</div>
+      </details>
+      {{/if}}
       <div class="header-details">
         <div class="form-group">
           <label>{{localize "NARUTO_RPG.Profile.concept"}}</label>
