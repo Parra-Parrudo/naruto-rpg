@@ -33,8 +33,14 @@ export class NarutoRpgActor extends Actor {
     const isImported = this.system.importData?.isImported === true;
     if (isImported) return;
 
+    // Actors built by the Character Creator (or any flow that already provides items)
+    // must not get non-optional traits added again, or attributes/abilities/techniques
+    // would be duplicated. Dedupe against the sourceIds already present on the actor.
     if (game.settings.get("naruto-rpg", "autoAddTraitsOnManualCreate")) {
-      await addNonOptionalTraitsToActor(this);
+      const existingSourceIds = new Set(
+        this.items.map((i) => i.system?.sourceId).filter(Boolean)
+      );
+      await addNonOptionalTraitsToActor(this, existingSourceIds);
     }
   }
 

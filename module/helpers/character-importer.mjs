@@ -7,48 +7,56 @@
 import { findWorldItemBySourceId, addNonOptionalTraitsToActor } from "./utils.mjs";
 
 /**
+ * Decodifica o conteudo de importacao: aceita um codigo "NRPG1|<base64>" (copiado do
+ * criador de celular/desktop) OU o texto cru de um arquivo .fscharacters/JSON.
+ * @param {string} text
+ * @returns {object} objeto { version, characters } pronto para importar
+ */
+export function decodeImportPayload(text) {
+  let t = (text || "").trim();
+  if (t.startsWith("NRPG1|")) {
+    // base64 unicode-safe, mesmo esquema do app (encodeURIComponent/escape)
+    t = decodeURIComponent(escape(atob(t.slice(6).replace(/\s+/g, ""))));
+  }
+  return JSON.parse(t);
+}
+
+/**
  * Import characters from a .fscharacters file
  * @param {File} file - The file to import
  * @param {Folder} folder - Optional folder to place characters in
  * @returns {Promise<{success: boolean, counts: object, errors: string[]}>}
  */
-export async function importCharacters(file, folder = null) {
+export async function importCharacters(fileOrText, folder = null) {
   const errors = [];
-  const counts = {
-    imported: 0,
-    updated: 0,
-    skipped: 0,
-  };
+  const counts = { imported: 0, updated: 0, skipped: 0 };
 
+  let data;
   try {
-    const text = await file.text();
-    const data = JSON.parse(text);
-
-    if (!data.characters || !Array.isArray(data.characters)) {
-      errors.push("Invalid file format: missing characters array");
-      return { success: false, counts, errors };
-    }
-
-    const version = data.version || "unknown";
-
-    for (const charData of data.characters) {
-      try {
-        const result = await importSingleCharacter(charData, version, folder);
-        if (result.isUpdate) {
-          counts.updated++;
-        } else {
-          counts.imported++;
-        }
-      } catch (e) {
-        errors.push(`Character ${charData.name || charData.characterId}: ${e.message}`);
-      }
-    }
-
-    return { success: true, counts, errors };
+    const text = typeof fileOrText === "string" ? fileOrText : await fileOrText.text();
+    data = decodeImportPayload(text);
   } catch (e) {
-    errors.push(`Failed to parse file: ${e.message}`);
+    errors.push(`Falha ao ler o arquivo/codigo: ${e.message}`);
     return { success: false, counts, errors };
   }
+
+  if (!data.characters || !Array.isArray(data.characters)) {
+    errors.push("Formato invalido: falta o array 'characters'");
+    return { success: false, counts, errors };
+  }
+
+  const version = data.version || "unknown";
+  for (const charData of data.characters) {
+    try {
+      const result = await importSingleCharacter(charData, version, folder);
+      if (result.isUpdate) counts.updated++;
+      else counts.imported++;
+    } catch (e) {
+      errors.push(`Character ${charData.name || charData.characterId}: ${e.message}`);
+    }
+  }
+
+  return { success: true, counts, errors };
 }
 
 /**
@@ -323,10 +331,10 @@ async function addEmbeddedItems(actor, charData) {
  * @param {Actor} targetActor - The actor to import into
  * @returns {Promise<{success: boolean, error: string|null}>}
  */
-export async function importCharacterIntoActor(file, targetActor) {
+export async function importCharacterIntoActor(fileOrText, targetActor) {
   try {
-    const text = await file.text();
-    const data = JSON.parse(text);
+    const text = typeof fileOrText === "string" ? fileOrText : await fileOrText.text();
+    const data = decodeImportPayload(text);
 
     if (!data.characters || !Array.isArray(data.characters)) {
       return { 
@@ -425,8 +433,13 @@ export async function showPlayerCharacterImportDialog(targetActor) {
   
   const content = `
     <form>
+      <div class="form-group" style="display:flex; flex-direction:column; gap:4px;">
+        <label>Colar codigo (NRPG1|...) ou conteudo .fscharacters</label>
+        <textarea name="characterCode" rows="4" placeholder="NRPG1|eyJ2ZXJzaW9uIjoiMS4wIi..." style="width:100%; font-family:monospace; font-size:11px;"></textarea>
+      </div>
+      <div style="text-align:center; color:#888; font-size:11px; margin:6px 0;">— ou —</div>
       <div class="form-group">
-        <label>Character File (.fscharacters)</label>
+        <label>Arquivo do personagem (.fscharacters)</label>
         <input type="file" name="characterFile" accept=".fscharacters,.json" />
       </div>
       <p style="font-size: 11px; color: #888; margin-top: 8px;">
@@ -436,6 +449,7 @@ export async function showPlayerCharacterImportDialog(targetActor) {
   `;
 
   let fileInput = null;
+  let codeInput = null;
 
   await DialogV2.prompt({
     window: {
@@ -445,20 +459,27 @@ export async function showPlayerCharacterImportDialog(targetActor) {
     content,
     render: (event, dialog) => {
       fileInput = dialog.element.querySelector('input[name="characterFile"]');
+      codeInput = dialog.element.querySelector('textarea[name="characterCode"]');
     },
     ok: {
       label: game.i18n.localize("NARUTO_RPG.Character.import"),
       icon: "fas fa-file-import",
       callback: async () => {
-        if (!fileInput?.files.length) {
+        const pastedCode = codeInput?.value?.trim();
+        if (!pastedCode && !fileInput?.files.length) {
           ui.notifications.error(game.i18n.localize("NARUTO_RPG.Errors.noFileSelected"));
           return;
         }
 
-        const file = fileInput.files[0];
-        ui.notifications.info(game.i18n.format("NARUTO_RPG.Character.importingFile", { name: file.name }));
-
-        const result = await importCharacterIntoActor(file, targetActor);
+        let result;
+        if (pastedCode) {
+          ui.notifications.info("Importando personagem do codigo colado...");
+          result = await importCharacterIntoActor(pastedCode, targetActor);
+        } else {
+          const file = fileInput.files[0];
+          ui.notifications.info(game.i18n.format("NARUTO_RPG.Character.importingFile", { name: file.name }));
+          result = await importCharacterIntoActor(file, targetActor);
+        }
 
         if (result.success) {
           ui.notifications.info(game.i18n.localize("NARUTO_RPG.Character.playerImportSuccess"));
@@ -479,17 +500,23 @@ export async function showCharacterImportDialog() {
   
   const content = `
     <form>
+      <div class="form-group" style="display:flex; flex-direction:column; gap:4px;">
+        <label>Colar codigo (NRPG1|...) ou conteudo .fscharacters</label>
+        <textarea name="characterCode" rows="4" placeholder="NRPG1|eyJ2ZXJzaW9uIjoiMS4wIi..." style="width:100%; font-family:monospace; font-size:11px;"></textarea>
+      </div>
+      <div style="text-align:center; color:#888; font-size:11px; margin:6px 0;">— ou —</div>
       <div class="form-group">
-        <label>Character File (.fscharacters)</label>
+        <label>Arquivo do personagem (.fscharacters)</label>
         <input type="file" name="characterFile" accept=".fscharacters,.json" />
       </div>
       <p style="font-size: 11px; color: #888; margin-top: 8px;">
-        Imported characters are read-only and can only be updated by re-importing.
+        Personagens importados sao somente-leitura ate serem destravados pelo Narrador (cadeado).
       </p>
     </form>
   `;
 
   let fileInput = null;
+  let codeInput = null;
 
   await DialogV2.prompt({
     window: {
@@ -499,20 +526,27 @@ export async function showCharacterImportDialog() {
     content,
     render: (event, dialog) => {
       fileInput = dialog.element.querySelector('input[name="characterFile"]');
+      codeInput = dialog.element.querySelector('textarea[name="characterCode"]');
     },
     ok: {
       label: game.i18n.localize("NARUTO_RPG.Character.import"),
       icon: "fas fa-file-import",
       callback: async () => {
-        if (!fileInput?.files.length) {
+        const pastedCode = codeInput?.value?.trim();
+        if (!pastedCode && !fileInput?.files.length) {
           ui.notifications.error(game.i18n.localize("NARUTO_RPG.Errors.noFileSelected"));
           return;
         }
 
-        const file = fileInput.files[0];
-        ui.notifications.info(`Importing characters from: ${file.name}...`);
-
-        const result = await importCharacters(file);
+        let result;
+        if (pastedCode) {
+          ui.notifications.info("Importando personagem do codigo colado...");
+          result = await importCharacters(pastedCode);
+        } else {
+          const file = fileInput.files[0];
+          ui.notifications.info(`Importing characters from: ${file.name}...`);
+          result = await importCharacters(file);
+        }
 
         if (result.success) {
           const parts = [];

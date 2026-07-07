@@ -608,7 +608,12 @@
       "overBudget": "You are over budget — reduce spending or buy extra Jutsu Points.",
       "missingBasics": "Set at least the Name and the Ninja Art Style.",
       "created": "{name} created! Welcome to the shinobi world.",
-      "createFailed": "Could not create the character (check Actor creation permissions)."
+      "createFailed": "Could not create the character (check Actor creation permissions).",
+      "step6": "Bonus Points",
+      "renownHint": "Distribute 3 points between Honor and Glory (permanent).",
+      "bonusStepHint": "In the next step you spend the 15 Bonus Points.",
+      "bonusHint": "Spend the 15 Bonus Points: attribute 5, ability 2, technique 5, background 1, jutsu (JP×4), chi/willpower 1, health 3, temp renown 1. Here you may exceed the normal step caps.",
+      "bonusJutsus": "buy extra jutsus (JP×4)"
     }
   }
 }

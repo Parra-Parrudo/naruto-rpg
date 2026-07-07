@@ -593,8 +593,8 @@
       "prio_tertiary": "Terciária (3/4)",
       "bonusLeft": "Pontos de Bônus",
       "jutsuPoints": "Pontos de Jutsu",
-      "attrHint": "Priorize as categorias (7/5/3). Todo atributo começa em 1; máximo 5 na criação. Passar do limite consome Pontos de Bônus (5⭐ por ponto).",
-      "abilHint": "Priorize as categorias (9/7/4). Máximo 3 na criação; do 4º ponto em diante consome Pontos de Bônus (2⭐ por ponto).",
+      "attrHint": "Priorize as categorias (7/5/3). Todo atributo começa em 1; máximo 5. O pool trava no limite — pontos extras vêm da etapa de Pontos de Bônus.",
+      "abilHint": "Priorize as categorias (9/7/4). Máximo 3 na criação. O pool trava no limite — para ir além, use a etapa de Pontos de Bônus.",
       "jutsuHint": "7 Pontos de Jutsu. O custo mostrado já considera o seu Estilo. Cadeado = pré-requisitos não cumpridos (mostrados ao lado). Jutsus com custo — são exclusivos de clã/estilo (fale com o Narrador). Mostrando até 80 resultados — use a busca.",
       "search": "Buscar jutsu...",
       "extraPJ": "Ponto de Jutsu extra",
@@ -608,7 +608,12 @@
       "overBudget": "Os pontos estouraram o orçamento — reduza gastos ou compre Pontos de Jutsu extras.",
       "missingBasics": "Defina ao menos o Nome e o Estilo de Arte Ninja.",
       "created": "{name} criado! Bem-vindo ao mundo shinobi.",
-      "createFailed": "Não foi possível criar o personagem (verifique permissões de criação de Atores)."
+      "createFailed": "Não foi possível criar o personagem (verifique permissões de criação de Atores).",
+      "step6": "Pontos de Bônus",
+      "renownHint": "Distribua 3 pontos entre Honra e Glória (permanentes).",
+      "bonusStepHint": "Na próxima etapa você distribui os 15 Pontos de Bônus.",
+      "bonusHint": "Gaste os 15 Pontos de Bônus: atributo 5⭐, habilidade 2⭐, técnica 5⭐, antecedente 1⭐, jutsu (PJ×4), chakra/FV 1⭐, saúde 3⭐, renome temp. 1⭐. Aqui você pode ultrapassar os tetos das etapas normais.",
+      "bonusJutsus": "comprar jutsus extras (PJ×4)"
     }
   }
 }
