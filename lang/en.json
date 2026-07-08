@@ -17,7 +17,8 @@
         "background": "Background",
         "weapon": "Weapon",
         "division": "Ninja Rank",
-        "equipment": "Equipment"
+        "equipment": "Equipment",
+        "clan": "Clan"
       }
     },
     "Attributes": {
@@ -236,7 +237,8 @@
         "fightingStyles": "Ninja Art Styles",
         "specialManeuvers": "Jutsus",
         "weapons": "Weapons",
-        "equipment": "Equipment"
+        "equipment": "Equipment",
+        "clans": "Clans"
       },
       "officialImport": "Official Content",
       "officialImportPromptTitle": "Naruto RPG — Official Content",
@@ -614,6 +616,13 @@
       "bonusStepHint": "In the next step you spend the 15 Bonus Points.",
       "bonusHint": "Spend the 15 Bonus Points: attribute 5, ability 2, technique 5, background 1, jutsu (JP×4), chi/willpower 1, health 3, temp renown 1. Here you may exceed the normal step caps.",
       "bonusJutsus": "buy extra jutsus (JP×4)"
+    },
+    "Clan": {
+      "vila": "Village",
+      "req": "Requirement",
+      "emoji": "Emoji",
+      "select": "Clan",
+      "none": "— No Clan —"
     }
   }
 }

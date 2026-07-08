@@ -56,6 +56,16 @@ export class NarutoRpgActor extends Actor {
     if (addedStyle) {
       this._applyFightingStyleResources(addedStyle);
     }
+
+    // Cla adicionado como Item: sincroniza profile.stable e mantem apenas um cla
+    const addedClan = documents.find(doc => doc.type === "clan");
+    if (addedClan) {
+      const others = this.items.filter(i => i.type === "clan" && i.id !== addedClan.id).map(i => i.id);
+      if (others.length) this.deleteEmbeddedDocuments("Item", others);
+      if (this.system.profile?.stable !== addedClan.name) {
+        this.update({ "system.profile.stable": addedClan.name });
+      }
+    }
   }
 
   /** @override */
@@ -69,6 +79,12 @@ export class NarutoRpgActor extends Actor {
     const removedStyle = documents.find(doc => doc.type === "fightingStyle");
     if (removedStyle) {
       this._removeFightingStyleResources(removedStyle);
+    }
+
+    // Cla removido: limpa profile.stable se corresponder
+    const removedClan = documents.find(doc => doc.type === "clan");
+    if (removedClan && this.system.profile?.stable === removedClan.name) {
+      this.update({ "system.profile.stable": "" });
     }
   }
 

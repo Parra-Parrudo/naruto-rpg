@@ -11,6 +11,7 @@ export const NARUTO_RPG = {
 
   itemTypes: {
     fightingStyle: "NARUTO_RPG.Item.Types.fightingStyle",
+    clan: "NARUTO_RPG.Item.Types.clan",
     specialManeuver: "NARUTO_RPG.Item.Types.specialManeuver",
     attribute: "NARUTO_RPG.Item.Types.attribute",
     ability: "NARUTO_RPG.Item.Types.ability",

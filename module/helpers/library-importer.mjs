@@ -39,6 +39,7 @@ export async function importLibraryData(library, fallbackName = "Library") {
     weapons: 0,
     divisions: 0,
     equipment: 0,
+    clans: 0,
     skipped: 0,
   };
 
@@ -61,6 +62,7 @@ export async function importLibraryData(library, fallbackName = "Library") {
       specialManeuvers: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.specialManeuvers"), mainFolder),
       weapons: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.weapons"), mainFolder),
       equipment: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.equipment"), mainFolder),
+      clans: await getOrCreateSubfolder(loc("NARUTO_RPG.Library.Folders.clans"), mainFolder),
     };
 
     // PHASE 1: Import traits FIRST (attributes, abilities, techniques, backgrounds)
@@ -101,6 +103,19 @@ export async function importLibraryData(library, fallbackName = "Library") {
           counts.fightingStyles++;
         } catch (e) {
           errors.push(`Fighting Style ${style.id}: ${e.message}`);
+        }
+      }
+    }
+
+    // PHASE 3b: Import clans
+    if (library.clans && Array.isArray(library.clans)) {
+      for (const clan of library.clans) {
+        try {
+          if (exists(clan.id, "clan")) { counts.skipped++; continue; }
+          await createClanItem(clan, folders.clans);
+          counts.clans++;
+        } catch (e) {
+          errors.push(`Clan ${clan.id}: ${e.message}`);
         }
       }
     }
@@ -257,6 +272,24 @@ async function getOrCreateSubfolder(name, parent) {
  * @param {object} data - Division data from library
  * @param {Folder} folder - Folder to place item in
  */
+async function createClanItem(data, folder) {
+  const itemData = {
+    name: data.name,
+    type: "clan",
+    folder: folder?.id || folder,
+    sort: data.sort ?? 0,
+    system: {
+      sourceId: data.id,
+      emoji: data.emoji || "",
+      vila: data.vila || "",
+      req: data.req || "",
+      expansion: !!data.expansion,
+      description: data.description || "",
+    },
+  };
+  await Item.create(itemData);
+}
+
 async function createDivisionItem(data, folder) {
   const itemData = {
     name: data.name,

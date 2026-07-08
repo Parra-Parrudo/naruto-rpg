@@ -17,7 +17,8 @@
         "background": "Antecedente",
         "weapon": "Arma",
         "division": "Rank Ninja",
-        "equipment": "Equipamento"
+        "equipment": "Equipamento",
+        "clan": "Clã"
       }
     },
     "Attributes": {
@@ -236,7 +237,8 @@
         "fightingStyles": "Estilos de Artes Ninja",
         "specialManeuvers": "Jutsus",
         "weapons": "Armas",
-        "equipment": "Equipamentos"
+        "equipment": "Equipamentos",
+        "clans": "Clãs"
       },
       "officialImport": "Conteúdo Oficial",
       "officialImportPromptTitle": "Naruto RPG — Conteúdo Oficial",
@@ -614,6 +616,13 @@
       "bonusStepHint": "Na próxima etapa você distribui os 15 Pontos de Bônus.",
       "bonusHint": "Gaste os 15 Pontos de Bônus: atributo 5⭐, habilidade 2⭐, técnica 5⭐, antecedente 1⭐, jutsu (PJ×4), chakra/FV 1⭐, saúde 3⭐, renome temp. 1⭐. Aqui você pode ultrapassar os tetos das etapas normais.",
       "bonusJutsus": "comprar jutsus extras (PJ×4)"
+    },
+    "Clan": {
+      "vila": "Vila",
+      "req": "Requisito",
+      "emoji": "Emoji",
+      "select": "Clã",
+      "none": "— Sem Clã —"
     }
   }
 }

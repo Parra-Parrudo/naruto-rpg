@@ -11,6 +11,7 @@ export async function preloadHandlebarsTemplates() {
   const templatePaths = [
     "systems/naruto-rpg/templates/actor/actor-fighter-sheet.hbs",
     "systems/naruto-rpg/templates/item/item-fightingStyle-sheet.hbs",
+    "systems/naruto-rpg/templates/item/item-clan-sheet.hbs",
     "systems/naruto-rpg/templates/item/item-specialManeuver-sheet.hbs",
     "systems/naruto-rpg/templates/item/item-attribute-sheet.hbs",
     "systems/naruto-rpg/templates/item/item-ability-sheet.hbs",

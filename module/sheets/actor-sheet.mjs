@@ -15,7 +15,7 @@ import {
 } from "../helpers/maneuver-calculator.mjs";
 import { showPlayerCharacterImportDialog } from "../helpers/character-importer.mjs";
 import { syncCombatCards } from "../helpers/combat-cards.mjs";
-import { CLAN_BY_NAME } from "../config/clans.mjs";
+import { CLAN_BY_NAME, CLANS } from "../config/clans.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -234,7 +234,9 @@ export class NarutoRpgActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context.items = this._prepareItems(context);
 
     // Clã (system.profile.stable) + descrição para painel expansível na ficha
-    context.clanInfo = CLAN_BY_NAME[this.actor.system.profile?.stable] || null;
+    const curClan = this.actor.system.profile?.stable || "";
+    context.clanInfo = CLAN_BY_NAME[curClan] || null;
+    context.clanOptions = CLANS.map((c) => ({ name: c.name, emoji: c.emoji, expansion: c.expansion, selected: c.name === curClan }));
     const styleItem = this.actor.items.find((i) => i.type === "fightingStyle");
     context.styleDescription = styleItem?.system?.description || "";
 

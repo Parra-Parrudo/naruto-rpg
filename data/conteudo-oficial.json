@@ -15951,7 +15951,219 @@
         "sort": 6150
       }
     ],
-    "_correctionNote": "Custos preenchidos a partir das notas (Pontos de Jutsu). Corrige defaultPowerPointCost:0 em jutsus com custo de estilo (ex: Henge, Puppeteer). Poison Sting do Livro de Expansão. Bijuu/Selo/transformações: acquisitionType=background."
+    "_correctionNote": "Custos preenchidos a partir das notas (Pontos de Jutsu). Corrige defaultPowerPointCost:0 em jutsus com custo de estilo (ex: Henge, Puppeteer). Poison Sting do Livro de Expansão. Bijuu/Selo/transformações: acquisitionType=background.",
+    "clans": [
+      {
+        "id": "uchiha_cla",
+        "name": "Uchiha",
+        "emoji": "🔥",
+        "vila": "Konoha",
+        "req": "Clã Notável 5 (Doujutsu) para o Sharingan",
+        "expansion": false,
+        "description": "<p>Um dos clãs mais poderosos e trágicos de Konoha. Possuem o Sharingan, um dōjutsu (poder ocular) que copia técnicas e prevê movimentos. Mestres natos do elemento Fogo.</p>",
+        "sort": 10
+      },
+      {
+        "id": "hyuuga_cla",
+        "name": "Hyuuga",
+        "emoji": "👁️",
+        "vila": "Konoha",
+        "req": "Clã Notável 5 (Doujutsu) para o Byakugan",
+        "expansion": false,
+        "description": "<p>Clã nobre detentor do Byakugan, olhos que enxergam em 360°, veem através de objetos e revelam o fluxo de chakra. Lutam com o Juuken (Punho Gentil), atacando os pontos vitais internos do oponente.</p>",
+        "sort": 20
+      },
+      {
+        "id": "nara_cla",
+        "name": "Nara",
+        "emoji": "🌑",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (técnicas exclusivas)",
+        "expansion": false,
+        "description": "<p>Estrategistas geniais que manipulam as próprias sombras para imobilizar e controlar inimigos à distância. Preguiçosos por fora, mentes brilhantes por dentro.</p>",
+        "sort": 30
+      },
+      {
+        "id": "akimichi_cla",
+        "name": "Akimichi",
+        "emoji": "💪",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (técnicas exclusivas)",
+        "expansion": false,
+        "description": "<p>Guerreiros de grande porte que convertem calorias em chakra para expandir partes do corpo a tamanhos gigantescos. Leais, gentis e devastadores em combate corpo a corpo.</p>",
+        "sort": 40
+      },
+      {
+        "id": "yamanaka_cla",
+        "name": "Yamanaka",
+        "emoji": "🧠",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (técnicas exclusivas)",
+        "expansion": false,
+        "description": "<p>Especialistas em técnicas mentais: invadem e assumem o controle da mente alheia, transmitem pensamentos e atuam na inteligência e interrogatório da vila.</p>",
+        "sort": 50
+      },
+      {
+        "id": "aburame_cla",
+        "name": "Aburame",
+        "emoji": "🐛",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (técnicas exclusivas)",
+        "expansion": false,
+        "description": "<p>Hospedam colônias de insetos especiais (kikaichu) dentro do próprio corpo desde o nascimento. Os insetos drenam o chakra do inimigo e servem de rastreadores silenciosos.</p>",
+        "sort": 60
+      },
+      {
+        "id": "inuzuka_cla",
+        "name": "Inuzuka",
+        "emoji": "🐺",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 + Mascote 3 (cão ninja)",
+        "expansion": false,
+        "description": "<p>Lutam em parceria com cães ninja (ninken), sincronizando ataques ferozes. Sentidos animalescos aguçados, sobretudo olfato. Selvagens, leais e instintivos.</p>",
+        "sort": 70
+      },
+      {
+        "id": "sarutobi_cla",
+        "name": "Sarutobi",
+        "emoji": "🍃",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (recomendado)",
+        "expansion": false,
+        "description": "<p>Clã versátil e respeitado, que já deu Hokages à vila. Sem um Kekkei Genkai único, brilham pela maestria ampla em Ninjutsu e dedicação à Folha.</p>",
+        "sort": 80
+      },
+      {
+        "id": "hatake_cla",
+        "name": "Hatake",
+        "emoji": "⚡",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (recomendado)",
+        "expansion": false,
+        "description": "<p>Pequeno clã de gênios solitários, célebre por Kakashi, o Ninja Copiador. Conhecidos por habilidade excepcional e pela técnica de raio Chidori.</p>",
+        "sort": 90
+      },
+      {
+        "id": "uzumaki_cla",
+        "name": "Uzumaki",
+        "emoji": "🌀",
+        "vila": "Redemoinho / Konoha",
+        "req": "Clã Notável 3 · Sensei 1 recomendado",
+        "expansion": true,
+        "description": "<p>Clã de imensa vitalidade e reservas de chakra colossais, aparentado dos Senju. Mestres do Fuinjutsu (a arte dos selos). Sua vila natal, Uzushiogakure, foi destruída por ser temida.</p>",
+        "sort": 100
+      },
+      {
+        "id": "yuki_cla",
+        "name": "Yuki",
+        "emoji": "❄️",
+        "vila": "Kirigakure",
+        "req": "Clã Notável 4 · Afinidade Água + Vento",
+        "expansion": true,
+        "description": "<p>Portadores do raro Kekkei Genkai Hyoton (Gelo), que combina Água e Vento para criar gelo a partir do nada. Quase exterminados nas perseguições da Névoa — Haku foi um dos últimos.</p>",
+        "sort": 110
+      },
+      {
+        "id": "kaguya_cla",
+        "name": "Kaguya",
+        "emoji": "🦴",
+        "vila": "Kirigakure",
+        "req": "Clã Notável 5 (Doujutsu corporal)",
+        "expansion": true,
+        "description": "<p>Clã guerreiro de fisiologia única: o Shikotsumyaku permite manipular, endurecer e projetar os próprios ossos como armas e armadura. Ferozes e orgulhosos do combate.</p>",
+        "sort": 120
+      },
+      {
+        "id": "hozuki_cla",
+        "name": "Hozuki",
+        "emoji": "💧",
+        "vila": "Kirigakure",
+        "req": "Clã Notável 4 · Afinidade Água",
+        "expansion": true,
+        "description": "<p>Capazes de liquefazer o próprio corpo em água, tornando-se intangíveis a ataques físicos. Mais fortes perto de grandes massas de água. Clã de Suigetsu.</p>",
+        "sort": 130
+      },
+      {
+        "id": "terumi_cla",
+        "name": "Terumi",
+        "emoji": "🌋",
+        "vila": "Kirigakure",
+        "req": "Clã Notável 4 · Afinidade dupla (Fogo+Água ou Fogo+Terra)",
+        "expansion": true,
+        "description": "<p>Linhagem raríssima que pode manifestar dois Kekkei Genkai: Yoton (Lava) e Futton (Vapor Ácido). Mei Terumi, a Quinta Mizukage, é o exemplo máximo.</p>",
+        "sort": 140
+      },
+      {
+        "id": "linhagem_kazekage_cla",
+        "name": "Linhagem Kazekage",
+        "emoji": "🧲",
+        "vila": "Sunagakure",
+        "req": "Clã Notável 4 · Afinidade Terra",
+        "expansion": true,
+        "description": "<p>Linhagem recorrente na família dos Kazekages. O Jiton (Liberação Magnética) magnetiza o chakra para controlar metais e areia com precisão cirúrgica. O caso de Gaara é amplificado pelo Bijuu Shukaku.</p>",
+        "sort": 150
+      },
+      {
+        "id": "fuuma_cla",
+        "name": "Fuuma",
+        "emoji": "🌪️",
+        "vila": "País do Fogo / Chuva",
+        "req": "Clã Notável 3 · alto nível em Arremesso",
+        "expansion": true,
+        "description": "<p>Clã agressivo e ambicioso, criador e maior especialista das gigantescas Fuuma Shuriken de quatro lâminas. Prodígios natos do combate à distância.</p>",
+        "sort": 160
+      },
+      {
+        "id": "hoshigaki_cla",
+        "name": "Hoshigaki",
+        "emoji": "🦈",
+        "vila": "Kirigakure",
+        "req": "Clã Notável 3 · Afinidade Água",
+        "expansion": true,
+        "description": "<p>Membros com traços de tubarão — dentes afiados, guelras, reservas de chakra vastíssimas. Mestres do Suiton e mortais perto da água. Clã de Kisame, portador da Samehada.</p>",
+        "sort": 170
+      },
+      {
+        "id": "yotsuki_cla",
+        "name": "Yotsuki",
+        "emoji": "☁️",
+        "vila": "Kumogakure",
+        "req": "Clã Notável 3 · alto nível em Armas Brancas",
+        "expansion": true,
+        "description": "<p>Clã da Nuvem famoso pela lealdade inabalável — nunca traem nem entregam aliados — e por uma esgrima sem igual. Guardiões do treino do jinchuuriki do Hachibi.</p>",
+        "sort": 180
+      },
+      {
+        "id": "shimura_cla",
+        "name": "Shimura",
+        "emoji": "🍃",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 · Afinidade Vento",
+        "expansion": true,
+        "description": "<p>Um dos clãs fundadores da Folha, ao lado de Senju e Uchiha. Combatentes excepcionais, mestres do Fuuton (vento que corta defesas) e de técnicas de selamento próprias. Clã de Danzo.</p>",
+        "sort": 190
+      },
+      {
+        "id": "senju_cla",
+        "name": "Senju",
+        "emoji": "🌳",
+        "vila": "Konoha",
+        "req": "Clã Notável 4 (Mokuton: Clã Notável 5)",
+        "expansion": true,
+        "description": "<p>Clã lendário co-fundador de Konoha, descendente do Sábio dos Seis Caminhos. Vitalidade e chakra extraordinários; deu origem ao Mokuton (Madeira) de Hashirama, o Primeiro Hokage.</p>",
+        "sort": 200
+      },
+      {
+        "id": "namikaze_cla",
+        "name": "Namikaze",
+        "emoji": "💨",
+        "vila": "Konoha",
+        "req": "Clã Notável 3 (recomendado)",
+        "expansion": true,
+        "description": "<p>Linhagem rara e veloz, eternizada por Minato, o Quarto Hokage — o 'Relâmpago Amarelo'. Equilíbrio notável entre chakra e força de vontade, e afinidade com técnicas de espaço-tempo.</p>",
+        "sort": 210
+      }
+    ]
   },
   "journal": {
     "name": "Naruto RPG — Complicações e Vantagens das Manobras",

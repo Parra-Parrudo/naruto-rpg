@@ -65,6 +65,7 @@
   "Item": {
     "types": [
       "fightingStyle",
+      "clan",
       "specialManeuver",
       "attribute",
       "ability",
@@ -155,6 +156,14 @@
     },
     "equipment": {
       "sourceId": "",
+      "description": ""
+    },
+    "clan": {
+      "sourceId": "",
+      "emoji": "",
+      "vila": "",
+      "req": "",
+      "expansion": false,
       "description": ""
     }
   }

@@ -37,6 +37,13 @@
           <label>{{localize "NARUTO_RPG.Profile.concept"}}</label>
           <input type="text" name="system.profile.concept" value="{{systemData.profile.concept}}" {{#unless isEditable}}disabled{{/unless}} />
         </div>
+        <div class="form-group">
+          <label>{{localize "NARUTO_RPG.Clan.select"}}</label>
+          <select name="system.profile.stable" {{#unless isEditable}}disabled{{/unless}}>
+            <option value="">{{localize "NARUTO_RPG.Clan.none"}}</option>
+            {{#each clanOptions as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}
+          </select>
+        </div>
         <div class="form-group nindo-group">
           <label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
           <input type="text" name="system.profile.signature" value="{{systemData.profile.signature}}" placeholder="{{localize 'NARUTO_RPG.Profile.nindoPlaceholder'}}" {{#unless isEditable}}disabled{{/unless}} />
