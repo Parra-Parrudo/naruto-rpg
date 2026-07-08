@@ -40,6 +40,8 @@ https://github.com/Parra-Parrudo/naruto-rpg/releases/latest/download/system.json
 - [x] **Fase 4** — Ferramentas de mesa: Cartas de Combate (mão + Mesa de Combate) e cadeado de ficha (GM trava/destrava edição)
 - [x] **Fase 5** — Criador de Personagens nativo (distribuição por pools + etapa dedicada de Pontos de Bônus) e importação de personagens (arquivo `.fscharacters` ou código `NRPG1|` colado)
 - [x] **Fase 6** — Sistema de Clãs: seleção por lista (Criador e ficha), Item de clã no Conteúdo Oficial, descrições em painéis expansíveis e **requisito de jutsus por clã**
+- [x] **Conteúdo** — Descrições oficiais de Habilidades, Técnicas e Antecedentes incorporadas ao dataset (livro base + Expansão)
+- [x] **Criador aprimorado** — Painéis de descrição expansíveis (características e jutsus), filtros de jutsu por técnica e clã, e requisitos dos jutsus sempre visíveis
 - [ ] **Fase 7** — Tela de Evolução/XP (gastar XP em características e jutsus com os custos oficiais)
 - [ ] Filtros de jutsus por Afinidade Elemental no compêndio
 - [ ] NPCs prontos (Cap. 8 da Expansão) e aventuras (Cap. 11)

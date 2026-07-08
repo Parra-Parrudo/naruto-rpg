@@ -79,7 +79,7 @@
         "id": "alertness",
         "name": "Prontidão",
         "category": "talents",
-        "description": "<p>Sua consciência do que acontece ao redor. Percepção + Prontidão é o teste clássico para notar perigos e emboscadas.</p>",
+        "description": "<p>Indica a sua consciência do mundo à volta — quanta atenção você dá ao que ocorre ao seu redor. Quem tem Prontidão permanece alerta por longos períodos e dificilmente é surpreendido.</p>",
         "isOptional": false,
         "sort": 1000
       },
@@ -87,7 +87,7 @@
         "id": "insight",
         "name": "Perspicácia",
         "category": "talents",
-        "description": "<p>Ler as pessoas: perceber mentiras, intenções e emoções ocultas por trás das palavras e gestos.</p>",
+        "description": "<p>Permite avaliar as forças e fraquezas de um oponente, analisar seu estilo de luta e até antever suas Cartas de Combate. Após observar o alvo por três rodadas, role Percepção + Perspicácia (dif. 6): 1 sucesso identifica o estilo; cada sucesso extra revela uma Carta de Combate do oponente.</p>",
         "isOptional": false,
         "sort": 1100
       },
@@ -95,7 +95,7 @@
         "id": "intimidation",
         "name": "Intimidação",
         "category": "talents",
-        "description": "<p>Dobrar os outros pelo medo, seja por ameaça explícita, presença ou reputação.</p>",
+        "description": "<p>A arte de sobrepujar alguém psicologicamente, de sugestões sutis a ameaças diretas. Role Carisma + Intimidação (dificuldade igual à Força de Vontade do alvo); cada sucesso subtrai 1 da Velocidade do oponente no primeiro turno.</p>",
         "isOptional": false,
         "sort": 1200
       },
@@ -103,7 +103,7 @@
         "id": "leadership",
         "name": "Liderança",
         "category": "talents",
-        "description": "<p>Comandar e inspirar quem já o segue: coordenar um time em missão, dar ordens que são obedecidas.</p>",
+        "description": "<p>Fazer com que os outros sigam seus comandos por exemplo e autoridade — e ser o tipo de pessoa que os outros seguem espontaneamente. Costuma ser combinada com o Carisma.</p>",
         "isOptional": false,
         "sort": 1300
       },
@@ -111,7 +111,7 @@
         "id": "streetwise",
         "name": "Manha",
         "category": "talents",
-        "description": "<p>Malandragem de rua: contatos do submundo, gírias, saber onde conseguir o que não se vende em lojas.</p>",
+        "description": "<p>O conhecimento do submundo: misturar-se ao ambiente sem chamar atenção, fofocar, furtar e empregar as gírias das ruas. Uma fonte essencial de informação (e de problemas).</p>",
         "isOptional": false,
         "sort": 1400
       },
@@ -119,7 +119,7 @@
         "id": "labia",
         "name": "Lábia",
         "category": "talents",
-        "description": "<p>A arte de convencer pela palavra — o dom do orador, do negociador, do diplomata. É o famoso \"Talk no Jutsu\": discursos que mudam convicções e trazem inimigos de volta da luz. (Expansão)</p>",
+        "description": "<p>(Expansão) A arte do engano e da persuasão: mentir de forma convincente, blefar, disfarçar as próprias intenções e conduzir uma conversa a seu favor.</p>",
         "isOptional": false,
         "sort": 1500
       },
@@ -127,7 +127,7 @@
         "id": "blind_fighting",
         "name": "Luta às Cegas",
         "category": "skills",
-        "description": "<p>Lutar sem depender da visão: no escuro, cegado ou contra inimigos invisíveis.</p>",
+        "description": "<p>Sentidos apuradíssimos que permitem sentir um oponente por sons, mudanças de pressão e Chakra mesmo sem vê-lo. Em cegueira total a dificuldade para acertar é 10; cada sucesso em Percepção + Luta às Cegas reduz essa dificuldade (até o padrão), e com 5+ sucessos ignora-se a penalidade de −2 Velocidade ao errar.</p>",
         "isOptional": false,
         "sort": 1600
       },
@@ -135,7 +135,7 @@
         "id": "animal_empathy",
         "name": "Empatia com Animais",
         "category": "skills",
-        "description": "<p>Compreender e se fazer entender por animais, acalmá-los e treiná-los. Marca registrada do clã Inuzuka.</p>",
+        "description": "<p>Conhecer e compreender as necessidades e habilidades dos animais — treiná-los, conquistar sua confiança ou lidar com feras. Habilidade praticamente universal entre os Inuzuka.</p>",
         "isOptional": false,
         "sort": 1700
       },
@@ -143,7 +143,7 @@
         "id": "survival",
         "name": "Sobrevivência",
         "category": "skills",
-        "description": "<p>Sobreviver em ambiente hostil: rastrear, caçar, encontrar abrigo e água, orientar-se.</p>",
+        "description": "<p>Buscar abrigo, encontrar rotas, obter segurança no campo e rastrear nas regiões selvagens. Ao usar Furtividade no campo, não se rola mais dados de Furtividade do que o nível em Sobrevivência.</p>",
         "isOptional": false,
         "sort": 1800
       },
@@ -151,7 +151,7 @@
         "id": "stealth",
         "name": "Furtividade",
         "category": "skills",
-        "description": "<p>Mover-se sem ser visto nem ouvido. Testada contra a Percepção + Prontidão dos observadores.</p>",
+        "description": "<p>Esgueirar-se e esconder-se sem ser visto nem ouvido. O teste é normalmente resistido pela Percepção de quem procura.</p>",
         "isOptional": false,
         "sort": 1900
       },
@@ -159,7 +159,7 @@
         "id": "traps",
         "name": "Armadilhas",
         "category": "skills",
-        "description": "<p>Montar, detectar e desarmar armadilhas — dos fios com kunais explosivas às fossas camufladas.</p>",
+        "description": "<p>Elaborar e executar armadilhas, das mais simples às mais complexas, com os mais variados materiais — incluindo faixas explosivas.</p>",
         "isOptional": false,
         "sort": 2000
       },
@@ -167,7 +167,7 @@
         "id": "oficio",
         "name": "Ofício",
         "category": "skills",
-        "description": "<p>Criar e reparar objetos com as próprias mãos: forjar lâminas, fabricar ferramentas ninja, confeccionar pergaminhos, consertar marionetes. Recomenda-se declarar uma especialização — Ofício (Ferraria), Ofício (Marionetes). (Expansão)</p>",
+        "description": "<p>(Expansão) O domínio prático de um trabalho manual ou artesanal: forjar, reparar, construir e criar objetos úteis com as próprias mãos.</p>",
         "isOptional": false,
         "sort": 2100
       },
@@ -175,7 +175,7 @@
         "id": "poisons",
         "name": "Venefício",
         "category": "knowledge",
-        "description": "<p>O estudo dos venenos e antídotos: identificar, extrair, preparar e aplicar toxinas.</p>",
+        "description": "<p>Conhecimento profundo dos venenos: extraí-los de plantas e materiais, aplicá-los e desenvolver antídotos, inclusive a partir de amostras desconhecidas.</p>",
         "isOptional": false,
         "sort": 2200
       },
@@ -183,7 +183,7 @@
         "id": "medicine",
         "name": "Medicina",
         "category": "knowledge",
-        "description": "<p>Diagnosticar e tratar ferimentos e doenças. Base do ninja médico.</p>",
+        "description": "<p>Assistência médica: em níveis baixos, primeiros-socorros; em níveis altos, a compreensão das práticas médicas. NÃO confere, por si só, habilidade em Ninjutsu Médico.</p>",
         "isOptional": false,
         "sort": 2300
       },
@@ -191,7 +191,7 @@
         "id": "styles",
         "name": "Estilos",
         "category": "knowledge",
-        "description": "<p>Conhecimento das artes ninja e dos estilos de luta: reconhecer o que cada escola pode e não pode fazer.</p>",
+        "description": "<p>O estudo das outras artes ninja — saber basicamente o que cada estilo pode e não pode fazer, e reconhecê-los em combate.</p>",
         "isOptional": false,
         "sort": 2400
       },
@@ -199,7 +199,7 @@
         "id": "investigation",
         "name": "Investigação",
         "category": "knowledge",
-        "description": "<p>Notar pistas, conduzir pesquisas e interrogatórios, agir como detetive.</p>",
+        "description": "<p>Notar detalhes que passariam despercebidos e agir como detetive, além de realizar pesquisas em bibliotecas ou por meio de entrevistas.</p>",
         "isOptional": false,
         "sort": 2500
       },
@@ -207,7 +207,7 @@
         "id": "politics",
         "name": "Política",
         "category": "knowledge",
-        "description": "<p>As relações entre os países e vilas: alianças, costumes, interesses e intrigas dos líderes.</p>",
+        "description": "<p>As relações políticas entre os países, as alianças entre as vilas e os costumes locais — do próprio país aos cinco grandes.</p>",
         "isOptional": false,
         "sort": 2600
       },
@@ -215,7 +215,7 @@
         "id": "ocultismo",
         "name": "Ocultismo",
         "category": "knowledge",
-        "description": "<p>O estudo do que escapa ao entendimento comum: a teoria dos selos, a natureza das Bijuus, maldições, rituais proibidos. Onde a Investigação reúne fatos, o Ocultismo decifra o esotérico. (Expansão)</p>",
+        "description": "<p>(Expansão) O saber esotérico: lendas, selos proibidos, entidades e fenômenos sobrenaturais — o conhecimento por trás de rituais, maldições e mistérios do Chakra.</p>",
         "isOptional": false,
         "sort": 2700
       },
@@ -223,7 +223,7 @@
         "id": "punch",
         "name": "Soco",
         "category": "techniques",
-        "description": "<p>Todo golpe envolvendo mãos e braços: punhos fechados, golpes laterais, perfurantes com os dedos.</p>",
+        "description": "<p>Todo golpe com as mãos — socos diretos, golpes laterais de mão esticada, perfurações com os dedos e, em alguns casos, ataques com o braço. Base de inúmeros Jutsus corpo a corpo.</p>",
         "isOptional": false,
         "sort": 2800
       },
@@ -231,7 +231,7 @@
         "id": "kick",
         "name": "Chute",
         "category": "techniques",
-        "description": "<p>Golpes com pernas e pés, dos chutes diretos aos voadores. Costumam ferir mais que socos, porém mais lentos.</p>",
+        "description": "<p>A maioria dos movimentos com pernas e pés. Cada estilo enfatiza os chutes de forma diferente, mas um mestre desta Técnica desfere ataques impressionantes.</p>",
         "isOptional": false,
         "sort": 2900
       },
@@ -239,7 +239,7 @@
         "id": "block",
         "name": "Bloqueio",
         "category": "techniques",
-        "description": "<p>Defesas e aparos. A maioria não causa dano, mas quanto melhor a Técnica, mais golpes você neutraliza.</p>",
+        "description": "<p>Funciona diferente das outras Técnicas: a maioria não causa dano, mas quanto mais pontos, mais efetiva a defesa e mais dano se consegue deter. Muitos Jutsus avançados de defesa exigem maestria nesta Técnica.</p>",
         "isOptional": false,
         "sort": 3000
       },
@@ -247,7 +247,7 @@
         "id": "grab",
         "name": "Apresamento",
         "category": "techniques",
-        "description": "<p>Imobilizações, chaves e projeções. Um ninja bem treinado só precisa agarrar o oponente uma ou duas vezes para deixá-lo indefeso.</p>",
+        "description": "<p>Chaves, imobilizações e projeções que podem fazer um oponente desistir rapidamente. Tem alcance limitado e é difícil contra alvos rápidos — mas um ninja treinado só precisa se aproximar uma ou duas vezes para deixar o inimigo indefeso.</p>",
         "isOptional": false,
         "sort": 3100
       },
@@ -255,7 +255,7 @@
         "id": "athletics",
         "name": "Esportes",
         "category": "techniques",
-        "description": "<p>Velocidade e mobilidade: saltos, arremetidas e recuos. Parte integral de quase todos os Jutsus de movimento.</p>",
+        "description": "<p>Define quão longe e rápido você cobre distância: saltar mais alto, avançar mais longe numa arremetida e recuar mais depressa. Parte integral de quase todos os Jutsus de mobilidade.</p>",
         "isOptional": false,
         "sort": 3200
       },
@@ -263,7 +263,7 @@
         "id": "focus",
         "name": "Focus",
         "category": "techniques",
-        "description": "<p>Canalizar mente e espírito — e o Chakra — para feitos sobrenaturais. Governa os Jutsus além do entendimento humano: bolas de fogo, controle elemental, telepatia.</p>",
+        "description": "<p>Canalizar mente e espírito para feitos sobre-humanos. Quanto mais desenvolvida a mente, mais Chakra o Shinobi canaliza. Governa todos os Jutsus além do entendimento humano normal — de bolas de fogo a telepatia e teletransporte.</p>",
         "isOptional": false,
         "sort": 3300
       },
@@ -271,7 +271,7 @@
         "id": "arremesso",
         "name": "Arremesso",
         "category": "techniques",
-        "description": "<p>O uso de todas as Armas de Arremesso: Shurikens, Kunais e Senbons, de alvos próximos a distâncias consideráveis. Um arqueiro usa Arremesso (Arco) — declare esta especialização ao Narrador.</p>",
+        "description": "<p>A precisão com armas de arremesso (Shuriken, Kunai, Senbon) contra alvos em diversas posições e distâncias. Acertar um alvo imóvel e próximo é fácil; alvos móveis e distantes exigem os mais experientes.</p>",
         "isOptional": false,
         "sort": 3400,
         "isWeaponTechnique": true
@@ -280,7 +280,7 @@
         "id": "armas_brancas",
         "name": "Armas Brancas",
         "category": "techniques",
-        "description": "<p>O uso de armas brancas em combate corpo-a-corpo, das kunais às espadas lendárias. <strong>Grupos de Armas:</strong> as Armas Brancas dividem-se em grupos pela funcionalidade (Facas, Espadas, Bastões, Lanças, Machados, Martelos, Correntes, Chicotes, Nunchakos, Leques...). Um ninja está apto a usar <strong>um grupo de armas a cada dois níveis</strong> da Técnica Armas Brancas e deve informar ao Narrador sobre sua escolha. Com ao menos um ponto nesta Técnica, o ninja tem acesso às manobras básicas de Armas Brancas.</p>",
+        "description": "<p>O uso de armas brancas em combate. Algumas armas são especiais e capazes de feitos únicos. Importante: uma Kunai usada corpo a corpo tem seu Dano baseado em Armas Brancas, não em Arremesso.</p>",
         "isOptional": false,
         "sort": 3500,
         "isWeaponTechnique": true
@@ -289,7 +289,7 @@
         "id": "allies",
         "name": "Aliados",
         "category": "backgrounds",
-        "description": "<p>Amigos ou criaturas que apóiam o personagem e podem ser chamados em momentos de necessidade — de outros ninjas a animais invocados pelo Kuchiyose no Jutsu.</p>",
+        "description": "<p>Amigos e criaturas de apoio dispostos a ajudar. Quanto maior o nível, mais poderosos os aliados.</p>",
         "isOptional": true,
         "sort": 3600,
         "unique": false
@@ -298,7 +298,7 @@
         "id": "mascote",
         "name": "Mascote",
         "category": "backgrounds",
-        "description": "<p>Um animal companheiro sintonizado com o Shinobi. Em níveis altos, o elo se torna empático e até místico, e o personagem pode comprar Jutsus que reflitam as habilidades do animal.</p>",
+        "description": "<p>Um animal companheiro especial, treinado e leal. Essencial para o clã Inuzuka (cão ninja).</p>",
         "isOptional": true,
         "sort": 3700,
         "unique": false
@@ -307,7 +307,7 @@
         "id": "contacts",
         "name": "Contatos",
         "category": "backgrounds",
-        "description": "<p>Pessoas que fornecem informações ao personagem — qualquer um, em qualquer lugar, do informante de beco ao burocrata da torre do Kage.</p>",
+        "description": "<p>Fontes de informação espalhadas pelo mundo. Podem cobrar favores em troca do que sabem.</p>",
         "isOptional": true,
         "sort": 3800,
         "unique": false
@@ -316,7 +316,7 @@
         "id": "resources",
         "name": "Recursos",
         "category": "backgrounds",
-        "description": "<p>Riqueza e posses materiais. Determina seu padrão de vida e o equipamento que pode adquirir.</p>",
+        "description": "<p>A riqueza e os bens do personagem. Nível 1 ≈ 500 ryo por mês; nível 5 ≈ milionário.</p>",
         "isOptional": true,
         "sort": 3900,
         "unique": false
@@ -325,7 +325,7 @@
         "id": "cla_notavel",
         "name": "Clã Notável",
         "category": "backgrounds",
-        "description": "<p>Você pertence a um dos clãs renomados do mundo ninja, com o prestígio, os aliados e as expectativas que isso traz.</p>",
+        "description": "<p>O sangue e o legado de um clã de destaque. Nível 3 = técnicas exclusivas do clã; nível 4 = Linhagem Avançada / Kekkei Genkai; nível 5 = Doujutsu.</p>",
         "isOptional": true,
         "sort": 4000,
         "unique": false
@@ -334,7 +334,7 @@
         "id": "afinidade_elemental",
         "name": "Afinidade Elemental",
         "category": "backgrounds",
-        "description": "<p>Sua ligação natural com um elemento (Fogo, Água, Terra, Vento ou Relâmpago) concede bônus aos Jutsus daquele elemento. Declare o elemento ao adquirir.</p>",
+        "description": "<p>A natureza de Chakra do ninja (Fogo, Água, Terra, Vento ou Raio). Concede +1 de Absorção contra o próprio elemento e −1 contra o elemento oposto, além de reduzir o custo de Jutsus daquela natureza. Linhagens Avançadas surgem de combinações (ex.: Água + Vento = Gelo / Hyōton).</p>",
         "isOptional": true,
         "sort": 4100,
         "unique": false
@@ -343,7 +343,7 @@
         "id": "sensei",
         "name": "Sensei",
         "category": "backgrounds",
-        "description": "<p>Um mestre que ensina e orienta o personagem. Quanto maior o nível, mais poderoso e dedicado é o mestre — encontrar um assim pode ser uma aventura por si só.</p>",
+        "description": "<p>Um mestre que treina e orienta o personagem. Quanto maior o nível, mais habilidoso e influente o mestre.</p>",
         "isOptional": true,
         "sort": 4200,
         "unique": false
@@ -352,7 +352,7 @@
         "id": "construtor_habilidoso",
         "name": "Construtor Habilidoso",
         "category": "backgrounds",
-        "description": "<p>Acesso a oficina, materiais e conhecimento para construir dispositivos e equipamentos especiais, como as marionetes de combate.</p>",
+        "description": "<p>Perícia em construir marionetes com compartimentos e armas ocultas. Essencial para os Manipuladores de Marionetes.</p>",
         "isOptional": true,
         "sort": 4300,
         "unique": false
@@ -361,7 +361,7 @@
         "id": "posicao_na_vila",
         "name": "Posição na Vila",
         "category": "backgrounds",
-        "description": "<p>O cargo oficial e a autoridade formal que o personagem ocupa na hierarquia de sua aldeia. Distinto do Renome: Renome é fama; Posição é poder institucional. (Expansão)</p>",
+        "description": "<p>Cargo oficial e autoridade formal na hierarquia da vila. 1 = Genin de confiança; 3 = Jounin pleno; 4 = Capitão ANBU / chefe de divisão; 5 = Conselheiro do Kage. É acesso narrativo, não bônus de dados.</p>",
         "isOptional": true,
         "sort": 4400,
         "unique": false
@@ -370,7 +370,7 @@
         "id": "artefato",
         "name": "Artefato",
         "category": "backgrounds",
-        "description": "<p>A posse de um item especial que não está à venda em loja alguma — de um consumível de fórmula secreta a um objeto único e histórico com nome e poder próprios. (Expansão)</p>",
+        "description": "<p>Posse de um item especial fora do comércio. 1 = consumível raro; 2-3 = material ou arma notável; 4 = arma lendária (uma das Sete Espadas); 5 = relíquia de poder mítico. Níveis 4-5 exigem aval do Narrador.</p>",
         "isOptional": true,
         "sort": 4500,
         "unique": false
@@ -379,7 +379,7 @@
         "id": "contrato_invocacao",
         "name": "Contrato de Invocação",
         "category": "backgrounds",
-        "description": "<p>Um pacto de sangue firmado com uma espécie de animais invocáveis (sapos, lesmas, cobras, cães ninja...). Permite o Kuchiyose no Jutsu com essa espécie. (Expansão)</p>",
+        "description": "<p>Pacto de sangue com uma espécie invocável (Kuchiyose). 1 = filhotes; 3 = criaturas veteranas; 5 = o Chefe da espécie (Gamabunta, Manda, Katsuyu). Invocar custa 1/2/4/6/10 de Chakra conforme o porte. Um pacto por ninja.</p>",
         "isOptional": true,
         "sort": 4600,
         "unique": false
@@ -388,7 +388,7 @@
         "id": "jinchuuriki",
         "name": "Jinchuuriki",
         "category": "backgrounds",
-        "description": "<p>O destino de ser o recipiente vivo de uma das nove Bijuus. O nível reflete o grau de controle sobre o poder da besta — do selo instável ao Controle Total (nível 6). (Expansão) Os 4 Modos do Poder e o Manto de Chakra estão disponíveis como status no token (botão direito no token).</p>",
+        "description": "<p>Recipiente vivo de uma Bijuu. 1 = Selado (hostil, sem acesso); 2 = Presença; 3 = Contato (Manto, primeiras caudas); 4-6 = controle crescente. Curva de poder deliberadamente lenta. Aval do Narrador; máx. nível 3 na criação.</p>",
         "isOptional": true,
         "sort": 4700,
         "unique": true
@@ -397,7 +397,7 @@
         "id": "selo_amaldicoado",
         "name": "Selo Amaldiçoado",
         "category": "backgrounds",
-        "description": "<p>A marca de um selo amaldiçoado e seus estágios de transformação — do surto involuntário ao Segundo Estágio Completo e à Transformação Eremita (Senninka). (Expansão)</p>",
+        "description": "<p>A marca proibida de Orochimaru. 1 = Dormente; 2 = Primeiro Estágio; 3 = Segundo Estágio Parcial; 4 = Segundo Estágio Completo; 5 = Transformação Eremita (Senninka). Impõe custo ao corpo e à mente. Sobreviver ao Juuin Jutsu; máx. nível 3 na criação.</p>",
         "isOptional": true,
         "sort": 4800,
         "unique": true,

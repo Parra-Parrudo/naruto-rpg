@@ -3,14 +3,63 @@
   <p class="nrpg-cg-warn">{{localize "NARUTO_RPG.Chargen.needContent"}}</p>
   {{else}}
 
+  {{!-- ============ PARTIALS INLINE ============ --}}
+  {{#* inline "nrpgTraitRow"}}
+  <div class="nrpg-cg-item">
+    {{#if desc}}
+    <details class="nrpg-cg-namebox"><summary>{{name}}</summary><div class="nrpg-cg-rowdesc">{{{desc}}}</div></details>
+    {{else}}
+    <span class="nrpg-cg-namebox nrpg-cg-noexp">{{name}}</span>
+    {{/if}}
+    <span class="nrpg-cg-ctrl">
+      <button type="button" data-action="adjust" data-pool="{{pool}}" data-id="{{id}}" data-delta="-1">-</button>
+      <strong>{{value}}</strong>
+      <button type="button" data-action="adjust" data-pool="{{pool}}" data-id="{{id}}" data-delta="1">+</button>
+    </span>
+  </div>
+  {{/inline}}
+
   {{#* inline "nrpgBonusRow"}}
-  <div class="nrpg-cg-row">
-    <span>{{name}}</span>
+  <div class="nrpg-cg-item">
+    {{#if desc}}
+    <details class="nrpg-cg-namebox"><summary>{{name}}</summary><div class="nrpg-cg-rowdesc">{{{desc}}}</div></details>
+    {{else}}
+    <span class="nrpg-cg-namebox nrpg-cg-noexp">{{name}}</span>
+    {{/if}}
     <span class="nrpg-cg-ctrl">
       <button type="button" data-action="adjustBonus" data-kind="trait" data-pool="{{pool}}" data-id="{{id}}" data-delta="-1" {{#unless canDec}}disabled{{/unless}}>-</button>
       <strong>{{total}}</strong>
       <button type="button" data-action="adjustBonus" data-kind="trait" data-pool="{{pool}}" data-id="{{id}}" data-delta="1" {{#unless canInc}}disabled{{/unless}}>+</button>
     </span>
+  </div>
+  {{/inline}}
+
+  {{#* inline "nrpgJutsuRow"}}
+  <div class="nrpg-cg-jutsu {{#if selected}}selected{{/if}} {{#unless ok}}{{#unless selected}}locked{{/unless}}{{/unless}}">
+    <div class="nrpg-cg-jrow">
+      <button type="button" class="nrpg-cg-jcheck" data-action="{{action}}" data-jutsu-id="{{id}}" {{#unless ok}}{{#unless selected}}disabled{{/unless}}{{/unless}}>
+        {{#if selected}}<i class="fas fa-check-square"></i>{{else}}{{#if ok}}<i class="far fa-square"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}{{/if}}
+      </button>
+      <span class="nrpg-cg-jname">{{name}}</span>
+      <span class="nrpg-cg-jcat">{{category}}</span>
+      {{#if clan}}<span class="nrpg-cg-jclan"><i class="fas fa-fingerprint"></i> {{clan}}</span>{{/if}}
+      <span class="nrpg-cg-jcost">{{costLabel}}</span>
+    </div>
+    {{#if reqs.length}}
+    <div class="nrpg-cg-jreqs"><span class="nrpg-cg-reqlabel">Requisitos:</span>
+      {{#each reqs as |r|}}<span class="nrpg-cg-req {{#if r.met}}met{{else}}unmet{{/if}}">{{#if r.met}}✓{{else}}✗{{/if}} {{r.label}}</span>{{/each}}
+    </div>
+    {{/if}}
+    {{#if inOther}}<div class="nrpg-cg-jnote">já comprado na outra etapa</div>{{/if}}
+    <details class="nrpg-cg-jdetails">
+      <summary><i class="fas fa-book-open"></i> Descrição &amp; Regras</summary>
+      {{#if desc}}<div class="nrpg-cg-jdesc">{{{desc}}}</div>{{/if}}
+      {{#if rules}}<p class="nrpg-cg-jrules"><strong>Sistema:</strong> {{rules}}</p>{{/if}}
+      <div class="nrpg-cg-jcosts">
+        {{#if chi}}<span class="cost-badge chi"><i class="fas fa-yin-yang"></i> {{chi}}</span>{{/if}}
+        {{#if wp}}<span class="cost-badge willpower"><i class="fas fa-brain"></i> {{wp}}</span>{{/if}}
+      </div>
+    </details>
   </div>
   {{/inline}}
 
@@ -42,19 +91,22 @@
         <input type="text" data-field="profile.vila" value="{{state.profile.vila}}" /></div>
       <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.fightingTeam"}}</label>
         <input type="text" data-field="profile.time" value="{{state.profile.time}}" /></div>
-      <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.stable"}}</label>
+      <div class="form-group"><label>{{localize "NARUTO_RPG.Clan.select"}}</label>
         <select data-cla-select>
-          <option value="">— Sem Clã —</option>
-          <optgroup label="Clãs Base">
-            {{#each clanBase as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}
-          </optgroup>
-          <optgroup label="Clãs da Expansão">
-            {{#each clanExp as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}
-          </optgroup>
+          <option value="">{{localize "NARUTO_RPG.Clan.none"}}</option>
+          <optgroup label="Clãs Base">{{#each clanBase as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}</optgroup>
+          <optgroup label="Clãs da Expansão">{{#each clanExp as |c|}}<option value="{{c.name}}" {{#if c.selected}}selected{{/if}}>{{c.emoji}} {{c.name}}</option>{{/each}}</optgroup>
         </select></div>
       <div class="form-group"><label>{{localize "NARUTO_RPG.Profile.signature"}}</label>
         <input type="text" data-field="profile.nindo" value="{{state.profile.nindo}}" /></div>
     </div>
+    {{#if selectedClan}}
+    <details class="nrpg-cg-desc" open>
+      <summary>{{selectedClan.emoji}} {{selectedClan.name}} · {{selectedClan.vila}}</summary>
+      {{#if selectedClan.req}}<p class="nrpg-cg-req-line"><strong>Requisito:</strong> {{selectedClan.req}}</p>{{/if}}
+      <p>{{selectedClan.texto}}</p>
+    </details>
+    {{/if}}
     <h3>{{localize "NARUTO_RPG.Item.Types.fightingStyle"}} *</h3>
     <div class="nrpg-cg-styles">
       {{#each styles as |st|}}
@@ -64,13 +116,6 @@
       </button>
       {{/each}}
     </div>
-    {{#if selectedClan}}
-    <details class="nrpg-cg-desc" open>
-      <summary>{{selectedClan.emoji}} {{selectedClan.name}} · {{selectedClan.vila}}</summary>
-      {{#if selectedClan.req}}<p class="nrpg-cg-req"><strong>Requisito:</strong> {{selectedClan.req}}</p>{{/if}}
-      <p>{{selectedClan.texto}}</p>
-    </details>
-    {{/if}}
     {{#if style}}
     <details class="nrpg-cg-desc">
       <summary><i class="fas fa-book"></i> {{localize "NARUTO_RPG.Item.Types.fightingStyle"}}: {{style.name}}</summary>
@@ -86,21 +131,10 @@
       {{#each attrsByCat as |col|}}
       <div class="nrpg-cg-col">
         <h4>{{col.label}}
-          <select data-prio="{{col.prioKey}}">
-            {{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}
-          </select>
+          <select data-prio="{{col.prioKey}}">{{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}</select>
         </h4>
         <div class="nrpg-cg-pool {{#if (gte col.pool.used col.pool.limit)}}nrpg-cg-full{{/if}}">{{col.pool.used}}/{{col.pool.limit}}</div>
-        {{#each col.rows as |r|}}
-        <div class="nrpg-cg-row">
-          <span>{{r.name}}</span>
-          <span class="nrpg-cg-ctrl">
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
-            <strong>{{r.value}}</strong>
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
-          </span>
-        </div>
-        {{/each}}
+        {{#each col.rows as |r|}}{{> nrpgTraitRow r}}{{/each}}
       </div>
       {{/each}}
     </div>
@@ -113,21 +147,10 @@
       {{#each abilsByCat as |col|}}
       <div class="nrpg-cg-col">
         <h4>{{col.label}}
-          <select data-prio="{{col.prioKey}}">
-            {{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}
-          </select>
+          <select data-prio="{{col.prioKey}}">{{#each col.prioOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}</select>
         </h4>
         <div class="nrpg-cg-pool {{#if (gte col.pool.used col.pool.limit)}}nrpg-cg-full{{/if}}">{{col.pool.used}}/{{col.pool.limit}}</div>
-        {{#each col.rows as |r|}}
-        <div class="nrpg-cg-row">
-          <span>{{r.name}}</span>
-          <span class="nrpg-cg-ctrl">
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
-            <strong>{{r.value}}</strong>
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
-          </span>
-        </div>
-        {{/each}}
+        {{#each col.rows as |r|}}{{> nrpgTraitRow r}}{{/each}}
       </div>
       {{/each}}
     </div>
@@ -139,49 +162,25 @@
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Trait.Categories.techniques"}}</h4>
         <div class="nrpg-cg-pool {{#if (gte calc.cat.techs.used calc.cat.techs.limit)}}nrpg-cg-full{{/if}}">{{calc.cat.techs.used}}/{{calc.cat.techs.limit}}</div>
-        {{#each techRows as |r|}}
-        <div class="nrpg-cg-row">
-          <span>{{r.name}}</span>
-          <span class="nrpg-cg-ctrl">
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
-            <strong>{{r.value}}</strong>
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
-          </span>
-        </div>
-        {{/each}}
+        {{#each techRows as |r|}}{{> nrpgTraitRow r}}{{/each}}
       </div>
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Trait.Categories.backgrounds"}}</h4>
         <div class="nrpg-cg-pool {{#if (gte calc.cat.bgs.used calc.cat.bgs.limit)}}nrpg-cg-full{{/if}}">{{calc.cat.bgs.used}}/{{calc.cat.bgs.limit}}</div>
-        {{#each bgRows as |r|}}
-        <div class="nrpg-cg-row">
-          <span>{{r.name}}</span>
-          <span class="nrpg-cg-ctrl">
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="-1">-</button>
-            <strong>{{r.value}}</strong>
-            <button type="button" data-action="adjust" data-pool="{{r.pool}}" data-id="{{r.id}}" data-delta="1">+</button>
-          </span>
-        </div>
-        {{/each}}
+        {{#each bgRows as |r|}}{{> nrpgTraitRow r}}{{/each}}
       </div>
     </div>
     {{/if}}
 
     {{!-- PASSO 4: Jutsus (Pontos de Jutsu) --}}
     {{#if isStep.[4]}}
-    <input type="text" class="nrpg-jutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.filter}}" />
+    <div class="nrpg-cg-filters">
+      <input type="text" class="nrpg-jutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.filter}}" />
+      <select data-jfilter="filterCat"><option value="">Todas as técnicas</option>{{#each jutsuCatOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}</select>
+      <select data-jfilter="filterClan"><option value="">Todos os clãs</option>{{#each jutsuClanOptions as |o|}}<option value="{{o.name}}" {{#if o.selected}}selected{{/if}}>{{o.name}}</option>{{/each}}</select>
+    </div>
     <div class="nrpg-cg-jutsus">
-      {{#each jutsuRows as |j|}}
-      <div class="nrpg-cg-jutsu {{#if j.selected}}selected{{/if}} {{#unless j.ok}}{{#unless j.selected}}locked{{/unless}}{{/unless}}">
-        <button type="button" data-action="toggleJutsu" data-jutsu-id="{{j.id}}" {{#unless j.ok}}{{#unless j.selected}}disabled{{/unless}}{{/unless}}>
-          {{#if j.selected}}<i class="fas fa-check-square"></i>{{else}}{{#if j.ok}}<i class="far fa-square"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}{{/if}}
-        </button>
-        <span class="nrpg-cg-jname">{{j.name}}</span>
-        <span class="nrpg-cg-jcat">{{j.category}}</span>
-        <span class="nrpg-cg-jcost">{{#if j.unavailable}}—{{else}}{{j.cost}} PJ{{/if}}</span>
-        {{#if j.missing.length}}<span class="nrpg-cg-jmissing" title="{{j.missingText}}"><i class="fas fa-exclamation-triangle"></i> {{j.missingText}}</span>{{/if}}
-      </div>
-      {{/each}}
+      {{#each jutsuRows as |j|}}{{> nrpgJutsuRow j}}{{/each}}
     </div>
     <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.jutsuHint"}}</p>
     {{/if}}
@@ -207,7 +206,7 @@
       </div>
       <div class="nrpg-cg-col nrpg-cg-summary">
         <h4>{{localize "NARUTO_RPG.Chargen.summary"}}</h4>
-        <p><strong>{{state.profile.name}}</strong>{{#if style}} — {{style.name}}{{/if}}</p>
+        <p><strong>{{state.profile.name}}</strong>{{#if style}} — {{style.name}}{{/if}}{{#if selectedClan}} · {{selectedClan.emoji}} {{selectedClan.name}}{{/if}}</p>
         <p>{{localize "NARUTO_RPG.Resources.health"}}: {{finalHealth}} | {{localize "NARUTO_RPG.Resources.chi"}}: {{finalChakra}} | {{localize "NARUTO_RPG.Resources.willpower"}}: {{finalWillpower}}</p>
         <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.bonusStepHint"}}</p>
       </div>
@@ -223,7 +222,6 @@
     <p class="nrpg-cg-hint">{{localize "NARUTO_RPG.Chargen.bonusHint"}}</p>
 
     <div class="nrpg-cg-cols">
-      {{!-- Recursos --}}
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Chargen.bonusBuys"}}</h4>
         <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Resources.chi"}} (1⭐)</span>
@@ -237,55 +235,35 @@
         <div class="nrpg-cg-row"><span>{{localize "NARUTO_RPG.Renown.glory"}} temp. (1⭐)</span>
           <span class="nrpg-cg-ctrl"><button type="button" data-action="adjustBonus" data-kind="renown" data-id="tempGlory" data-delta="-1">-</button><strong>{{state.bonus.tempGlory}}</strong><button type="button" data-action="adjustBonus" data-kind="renown" data-id="tempGlory" data-delta="1">+</button></span></div>
       </div>
-
-      {{!-- Atributos (bônus) --}}
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Item.Types.attribute"}} (5⭐)</h4>
-        {{#each bonusAttrs as |r|}}
-        {{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}
-        {{/each}}
+        {{#each bonusAttrs as |r|}}{{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}{{/each}}
       </div>
     </div>
 
     <div class="nrpg-cg-cols">
-      {{!-- Habilidades (bônus) --}}
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Item.Types.ability"}} (2⭐)</h4>
-        {{#each bonusAbils as |r|}}
-        {{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}
-        {{/each}}
+        {{#each bonusAbils as |r|}}{{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}{{/each}}
       </div>
-      {{!-- Técnicas (bônus) --}}
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Item.Types.technique"}} (5⭐)</h4>
-        {{#each bonusTechs as |r|}}
-        {{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}
-        {{/each}}
+        {{#each bonusTechs as |r|}}{{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}{{/each}}
       </div>
-      {{!-- Antecedentes (bônus) --}}
       <div class="nrpg-cg-col">
         <h4>{{localize "NARUTO_RPG.Item.Types.background"}} (1⭐)</h4>
-        {{#each bonusBgs as |r|}}
-        {{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}
-        {{/each}}
+        {{#each bonusBgs as |r|}}{{#if r.bonus}}{{> nrpgBonusRow r}}{{else}}{{#if r.canInc}}{{> nrpgBonusRow r}}{{/if}}{{/if}}{{/each}}
       </div>
     </div>
 
-    {{!-- Jutsus de bônus (PJ × 4) --}}
     <h4>{{localize "NARUTO_RPG.Tabs.maneuvers"}} — {{localize "NARUTO_RPG.Chargen.bonusJutsus"}}</h4>
-    <input type="text" class="nrpg-bjutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.bfilter}}" />
+    <div class="nrpg-cg-filters">
+      <input type="text" class="nrpg-bjutsu-search" placeholder="{{localize 'NARUTO_RPG.Chargen.search'}}" value="{{state.bfilter}}" />
+      <select data-jfilter="bfilterCat"><option value="">Todas as técnicas</option>{{#each bjutsuCatOptions as |o|}}<option value="{{o.key}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>{{/each}}</select>
+      <select data-jfilter="bfilterClan"><option value="">Todos os clãs</option>{{#each bjutsuClanOptions as |o|}}<option value="{{o.name}}" {{#if o.selected}}selected{{/if}}>{{o.name}}</option>{{/each}}</select>
+    </div>
     <div class="nrpg-cg-jutsus">
-      {{#each bonusJutsuRows as |j|}}
-      <div class="nrpg-cg-jutsu {{#if j.selected}}selected{{/if}} {{#unless j.ok}}{{#unless j.selected}}locked{{/unless}}{{/unless}}">
-        <button type="button" data-action="toggleBonusJutsu" data-jutsu-id="{{j.id}}" {{#unless j.ok}}{{#unless j.selected}}disabled{{/unless}}{{/unless}}>
-          {{#if j.selected}}<i class="fas fa-check-square"></i>{{else}}{{#if j.ok}}<i class="far fa-square"></i>{{else}}<i class="fas fa-lock"></i>{{/if}}{{/if}}
-        </button>
-        <span class="nrpg-cg-jname">{{j.name}}</span>
-        <span class="nrpg-cg-jcat">{{j.category}}</span>
-        <span class="nrpg-cg-jcost">{{#if j.unavailable}}—{{else}}{{j.payCost}}⭐{{/if}}</span>
-        {{#if j.inOther}}<span class="nrpg-cg-jmissing">já comprado com PJ</span>{{else}}{{#if j.missing.length}}<span class="nrpg-cg-jmissing" title="{{j.missingText}}"><i class="fas fa-exclamation-triangle"></i> {{j.missingText}}</span>{{/if}}{{/if}}
-      </div>
-      {{/each}}
+      {{#each bonusJutsuRows as |j|}}{{> nrpgJutsuRow j}}{{/each}}
     </div>
     {{/if}}
 

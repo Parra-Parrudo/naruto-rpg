@@ -41,7 +41,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
       renown: { honor: 2, glory: 1 },
       bonus: { attrs: {}, abils: {}, techs: {}, bgs: {}, jutsus: [],
                chakra: 0, willpower: 0, health: 0, tempHonor: 0, tempGlory: 0 },
-      filter: "", bfilter: "",
+      filter: "", bfilter: "", filterCat: "", filterClan: "", bfilterCat: "", bfilterClan: "",
     };
     this._loadWorldData();
   }
@@ -176,6 +176,35 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     return missing;
   }
 
+  /** Lista TODOS os requisitos de um jutsu (atendidos ou nao) para exibicao clara. */
+  _jutsuRequirements(m) {
+    const s = this.cg;
+    const all = [...this.attributes, ...this.abilities, ...this.techniques, ...this.backgrounds];
+    const reqs = [];
+    for (const p of m.system.prerequisites ?? []) {
+      if (p.type === "maneuver" || p.requiredManeuverId) {
+        const rid = p.requiredManeuverId ?? p.id;
+        const req = this._bySource(this.maneuvers, rid);
+        const met = s.jutsus.includes(rid) || s.bonus.jutsus.includes(rid)
+          || (rid in BASICS_BY_TECH && this._total("techs", BASICS_BY_TECH[rid]) >= 1) || rid === "movement";
+        reqs.push({ label: `Jutsu: ${req?.name ?? rid}`, met });
+      } else {
+        const tid = p.id ?? p.traitId;
+        const min = p.value ?? p.minimumValue ?? 1;
+        let val = 0;
+        if (this._bySource(this.attributes, tid)) val = this._total("attrs", tid);
+        else if (this._bySource(this.abilities, tid)) val = this._total("abils", tid);
+        else if (this._bySource(this.techniques, tid)) val = this._total("techs", tid);
+        else if (this._bySource(this.backgrounds, tid)) val = this._total("bgs", tid);
+        const name = this._bySource(all, tid)?.name ?? tid;
+        reqs.push({ label: `${name} ${min}`, met: val >= min });
+      }
+    }
+    const reqClan = clanRequiredFor(m.system.sourceId);
+    if (reqClan) reqs.push({ label: `Cla ${reqClan}`, met: s.profile.cla === reqClan });
+    return reqs;
+  }
+
   /* ------------------------- contexto ------------------------- */
   async _prepareContext() {
     const s = this.cg;
@@ -194,18 +223,26 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     // linhas da distribuicao normal (mostram o valor BASE)
     const baseRows = (pool, list) => list.map((i) => ({
       id: i.system.sourceId, name: i.name, value: this._base(pool, i.system.sourceId), pool,
+      desc: i.system.description || "",
     }));
     // linhas da etapa de bonus (mostram o TOTAL e o quanto veio de bonus)
     const bonusRows = (pool, list) => list.map((i) => {
       const id = i.system.sourceId;
       return { id, name: i.name, pool, total: this._total(pool, id), bonus: this._bonusOf(pool, id),
+        desc: i.system.description || "",
         canInc: this._total(pool, id) < this._capTotal(pool, id) && c.bonusLeft >= BONUS_COST[pool],
         canDec: this._bonusOf(pool, id) > 0 };
     });
 
-    // catalogo de jutsus (pool) e jutsus de bonus
-    const buildJutsuRows = (selectedList, filterText, isBonus) => this.maneuvers
-      .filter((m) => { const f = (filterText ?? "").toLowerCase(); return !f || m.name.toLowerCase().includes(f); })
+    // catalogo de jutsus (pool) e jutsus de bonus, com filtros por texto/tecnica/cla
+    const buildJutsuRows = (selectedList, f, isBonus) => this.maneuvers
+      .filter((m) => {
+        const txt = (f.text ?? "").toLowerCase();
+        if (txt && !m.name.toLowerCase().includes(txt)) return false;
+        if (f.cat && (m.system.category || "other") !== f.cat) return false;
+        if (f.clan && clanRequiredFor(m.system.sourceId) !== f.clan) return false;
+        return true;
+      })
       .map((m) => {
         const id = m.system.sourceId;
         const cost = this._jutsuCost(id);
@@ -215,11 +252,23 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
         const payCost = isBonus ? (cost != null ? cost * JUTSU_BONUS_MULT : null) : cost;
         const affordable = isBonus ? (payCost != null && c.bonusLeft >= payCost) : true;
         return { id, name: m.name, category: catLabel(m.system.category), cost, payCost,
+          costLabel: isBonus ? (payCost != null ? `${payCost}⭐` : "—") : (cost != null ? `${cost} PJ` : "—"),
+          action: isBonus ? "toggleBonusJutsu" : "toggleJutsu",
           unavailable: cost === null, missing: miss, missingText: miss.join(", "),
+          reqs: this._jutsuRequirements(m),
+          desc: m.system.description || "", rules: m.system.ruleSummary || "",
+          chi: m.system.chiCost || 0, wp: m.system.willpowerCost || 0,
+          clan: clanRequiredFor(id) || "",
           selected, inOther, ok: cost !== null && miss.length === 0 && !inOther && affordable };
       })
       .sort((a, b) => (b.selected - a.selected) || (b.ok - a.ok) || a.name.localeCompare(b.name))
       .slice(0, 80);
+
+    // opcoes de filtro de jutsu (tecnica/cla)
+    const catsPresent = [...new Set(this.maneuvers.map((m) => m.system.category || "other"))];
+    const clansPresent = [...new Set(this.maneuvers.map((m) => clanRequiredFor(m.system.sourceId)).filter(Boolean))].sort();
+    const catOpts = (sel) => catsPresent.map((k) => ({ key: k, label: catLabel(k), selected: k === sel }));
+    const clanFOpts = (sel) => clansPresent.map((n) => ({ name: n, selected: n === sel }));
 
     return {
       ready: this.ready,
@@ -241,13 +290,15 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
       })),
       techRows: baseRows("techs", this.techniques),
       bgRows: baseRows("bgs", this.backgrounds),
-      jutsuRows: buildJutsuRows(s.jutsus, s.filter, false),
+      jutsuRows: buildJutsuRows(s.jutsus, { text: s.filter, cat: s.filterCat, clan: s.filterClan }, false),
+      jutsuCatOptions: catOpts(s.filterCat), jutsuClanOptions: clanFOpts(s.filterClan),
       // bonus step data
       bonusAttrs: bonusRows("attrs", this.attributes),
       bonusAbils: bonusRows("abils", this.abilities),
       bonusTechs: bonusRows("techs", this.techniques),
       bonusBgs: bonusRows("bgs", this.backgrounds),
-      bonusJutsuRows: buildJutsuRows(s.bonus.jutsus, s.bfilter, true),
+      bonusJutsuRows: buildJutsuRows(s.bonus.jutsus, { text: s.bfilter, cat: s.bfilterCat, clan: s.bfilterClan }, true),
+      bjutsuCatOptions: catOpts(s.bfilterCat), bjutsuClanOptions: clanFOpts(s.bfilterClan),
       resChakra: this._finalChakra(), resWillpower: this._finalWillpower(), resHealth: this._finalHealth(),
       style,
       finalChakra: this._finalChakra(), finalWillpower: this._finalWillpower(), finalHealth: this._finalHealth(),
@@ -289,6 +340,9 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
     bindSearch(".nrpg-bjutsu-search", "bfilter");
     const claSel = this.element.querySelector("[data-cla-select]");
     if (claSel) claSel.addEventListener("change", (ev) => { this.cg.profile.cla = ev.currentTarget.value; this.render(); });
+    this.element.querySelectorAll("[data-jfilter]").forEach((el) => {
+      el.addEventListener("change", (ev) => { this.cg[ev.currentTarget.dataset.jfilter] = ev.currentTarget.value; this.render(); });
+    });
   }
 
   static _onNext() { if (this.cg.step < LAST_STEP) { this.cg.step++; this.render(); } }
