@@ -27,18 +27,9 @@ export function decodeImportPayload(text) {
  * @param {Folder} folder - Optional folder to place characters in
  * @returns {Promise<{success: boolean, counts: object, errors: string[]}>}
  */
-export async function importCharacters(fileOrText, folder = null) {
+export async function importParsedCharacters(data, folder = null) {
   const errors = [];
   const counts = { imported: 0, updated: 0, skipped: 0 };
-
-  let data;
-  try {
-    const text = typeof fileOrText === "string" ? fileOrText : await fileOrText.text();
-    data = decodeImportPayload(text);
-  } catch (e) {
-    errors.push(`Falha ao ler o arquivo/codigo: ${e.message}`);
-    return { success: false, counts, errors };
-  }
 
   if (!data.characters || !Array.isArray(data.characters)) {
     errors.push("Formato invalido: falta o array 'characters'");
@@ -57,6 +48,60 @@ export async function importCharacters(fileOrText, folder = null) {
   }
 
   return { success: true, counts, errors };
+}
+
+export async function importCharacters(fileOrText, folder = null) {
+  let data;
+  try {
+    const text = typeof fileOrText === "string" ? fileOrText : await fileOrText.text();
+    data = decodeImportPayload(text);
+  } catch (e) {
+    return { success: false, counts: { imported: 0, updated: 0, skipped: 0 }, errors: [`Falha ao ler o arquivo/codigo: ${e.message}`] };
+  }
+  return importParsedCharacters(data, folder);
+}
+
+/**
+ * Mostra um checklist para o Narrador escolher QUAIS personagens importar de uma biblioteca.
+ * @param {object[]} characters
+ * @returns {Promise<number[]|null>} indices escolhidos, ou null se cancelado
+ */
+async function promptSelectCharacters(characters) {
+  const { DialogV2 } = foundry.applications.api;
+  const esc = (t) => String(t).replace(/[&<>"]/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
+  const rows = characters.map((c, i) => {
+    const name = c.characterName || c.name || `Personagem ${i + 1}`;
+    return `<label style="display:flex;gap:8px;align-items:center;padding:3px 4px;border-bottom:1px solid rgba(0,0,0,.05);">
+      <input type="checkbox" name="pick" value="${i}" checked /> <span>${esc(name)}</span>
+    </label>`;
+  }).join("");
+  const content = `
+    <form>
+      <div style="display:flex;gap:8px;margin-bottom:6px;">
+        <button type="button" data-all><i class="fas fa-check-double"></i> Todos</button>
+        <button type="button" data-none><i class="fas fa-xmark"></i> Nenhum</button>
+        <span style="margin-left:auto;font-size:11px;opacity:.7;align-self:center;">${characters.length} na biblioteca</span>
+      </div>
+      <div class="nrpg-npc-picklist" style="max-height:360px;overflow:auto;border:1px solid rgba(0,0,0,.15);border-radius:4px;padding:4px;">${rows}</div>
+    </form>`;
+  let root = null;
+  const picked = await DialogV2.prompt({
+    window: { title: "Importar biblioteca — escolha os personagens", icon: "fas fa-list-check" },
+    position: { width: 460 },
+    content,
+    render: (event, dialog) => {
+      root = dialog.element;
+      root.querySelector("[data-all]")?.addEventListener("click", () => root.querySelectorAll('input[name="pick"]').forEach((cb) => (cb.checked = true)));
+      root.querySelector("[data-none]")?.addEventListener("click", () => root.querySelectorAll('input[name="pick"]').forEach((cb) => (cb.checked = false)));
+    },
+    ok: {
+      label: "Importar selecionados",
+      icon: "fas fa-file-import",
+      callback: () => [...root.querySelectorAll('input[name="pick"]:checked')].map((cb) => Number(cb.value)),
+    },
+    rejectClose: false,
+  });
+  return picked ?? null;
 }
 
 /**
@@ -309,7 +354,7 @@ async function addEmbeddedItems(actor, charData) {
 
   // Create all embedded items
   if (itemsToCreate.length > 0) {
-    await actor.createEmbeddedDocuments("Item", itemsToCreate);
+    await actor.createEmbeddedDocuments("Item", itemsToCreate, { nrpgResourcesPreset: true });
   }
 
   // Add non-optional traits if setting is enabled
@@ -538,15 +583,31 @@ export async function showCharacterImportDialog() {
           return;
         }
 
-        let result;
-        if (pastedCode) {
-          ui.notifications.info("Importando personagem do codigo colado...");
-          result = await importCharacters(pastedCode);
-        } else {
-          const file = fileInput.files[0];
-          ui.notifications.info(`Importing characters from: ${file.name}...`);
-          result = await importCharacters(file);
+        // Decodifica o conteudo (arquivo OU codigo colado)
+        let data;
+        try {
+          const text = pastedCode || (await fileInput.files[0].text());
+          data = decodeImportPayload(text);
+        } catch (e) {
+          ui.notifications.error(`Naruto RPG | Falha ao ler o arquivo/codigo: ${e.message}`);
+          return;
         }
+        if (!data.characters || !data.characters.length) {
+          ui.notifications.error("Naruto RPG | Nenhum personagem encontrado no arquivo/codigo.");
+          return;
+        }
+
+        // Importacao SELETIVA: se houver mais de um personagem, deixa o Narrador escolher
+        let toImport = data;
+        if (data.characters.length > 1) {
+          const picked = await promptSelectCharacters(data.characters);
+          if (picked === null) return; // cancelado
+          if (!picked.length) { ui.notifications.warn("Naruto RPG | Nenhum personagem selecionado."); return; }
+          toImport = { ...data, characters: picked.map((i) => data.characters[i]) };
+        }
+
+        ui.notifications.info(`Naruto RPG | Importando ${toImport.characters.length} personagem(ns)...`);
+        const result = await importParsedCharacters(toImport);
 
         if (result.success) {
           const parts = [];

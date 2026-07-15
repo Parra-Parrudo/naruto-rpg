@@ -1,7 +1,7 @@
 {
   "library": {
     "name": "Naruto RPG — Conteúdo Oficial",
-    "version": "2.1.1",
+    "version": "2.2.0",
     "traits": [
       {
         "id": "strength",
@@ -13556,40 +13556,6 @@
         "styleExclusive": true
       },
       {
-        "id": "chakra_scalpel_chakura_no_mesu",
-        "name": "Chakra Scalpel (Chakura no Mesu)",
-        "category": "focus",
-        "prerequisites": [
-          {
-            "type": "techniqueRating",
-            "traitId": "focus",
-            "minimumValue": 4
-          },
-          {
-            "type": "maneuver",
-            "requiredManeuverId": "mystical_palm_technique_shousen_jutsu"
-          }
-        ],
-        "defaultPowerPointCost": 4,
-        "stylePowerPointCosts": {
-          "ninjutsu_medico": 3
-        },
-        "backgroundPowerPointCosts": {},
-        "chiCost": 2,
-        "willpowerCost": null,
-        "speedModifier": "+2",
-        "damageModifier": "+4 Agravado (ignora Absorção)",
-        "movementModifier": "Nenhum",
-        "notes": "Custo: 2 Chakra | Pontos de Jutsu: Médico 3, Outros 4 | Pré-requisitos: Focus ••••, Mystical Palm Technique",
-        "ruleSummary": "Ataque de contato que ignora completamente a Absorção do alvo — as lâminas de Chakra cortam por dentro. O Dano causado é Agravado (dano interno). Como a técnica exige precisão extrema, qualquer oponente que estiver usando uma técnica de Bloqueio reduz o bônus de Velocidade deste Jutsu para +0 (não pode ser bloqueado normalmente, mas a distração afeta a precisão).",
-        "damageTraitOverride": null,
-        "damageAttributeOverride": null,
-        "speedTraitOverride": null,
-        "movementTraitOverride": null,
-        "description": "<p>O ninja molda o Chakra em lâminas finas e invisíveis ao redor das mãos — precisas o suficiente para cirurgia, afiadas o suficiente para combate. O Chakra Scalpel corta internamente, danificando órgãos e músculos sem ferir a superfície.</p><p><em>Expansão — Cap. 5 — Novos Jutsus (Focus)</em></p>",
-        "sort": 5480
-      },
-      {
         "id": "chikushodo_caminho_animal_invocacao_sem_selos",
         "name": "Chikushōdō — Caminho Animal: Invocação Sem Selos",
         "category": "focus",
@@ -16679,9 +16645,622 @@
         "ruleSummary": "As divisões de Katsuyu transmitem cura e Chakra remotamente aos aliados tocados (canal médico de longo alcance). Custo: 4 Chakra.",
         "notes": "Custo: 4 Chakra | Pontos de Jutsu: Jutsu Médico 4; Outros 5 | Pré-requisitos: Focus •••••, Contrato de Invocação ••••, Medicina •••",
         "_source": "Livro de Expansão — Cap. 8 (ficha de Tsunade)"
+      },
+      {
+        "id": "rising_dragon_control_souryuuten",
+        "name": "Rising Dragon Control (Souryuuten)",
+        "category": "arremesso",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "arremesso",
+            "minimumValue": 4
+          },
+          {
+            "type": "background",
+            "traitId": "recursos",
+            "minimumValue": 3
+          }
+        ],
+        "stylePowerPointCosts": {
+          "combate_armado": 3,
+          "fuinjutsu": 3
+        },
+        "defaultPowerPointCost": 4,
+        "chiCost": 3,
+        "willpowerCost": null,
+        "speedModifier": "-1",
+        "damageModifier": "+3",
+        "movementModifier": "Nenhum",
+        "description": "A assinatura de Tenten: dois pergaminhos de selagem desenrolados em espiral ejetam uma chuva massiva de armas em arco, saturando a área com projéteis.",
+        "ruleSummary": "Atinge todos os alvos numa área de Arremesso hexágonos de raio; cada alvo rola separadamente para absorver Dano +3. Requer os pergaminhos do arsenal (Recursos 3+). Custo: 3 Chakra.",
+        "notes": "Custo: 3 Chakra | Pontos de Jutsu: Combate Armado 3, Fuinjutsu 3; Outros 4 | Pré-requisitos: Arremesso ••••, Recursos •••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Tenten)"
+      },
+      {
+        "id": "twin_rising_dragons_soushouryuu",
+        "name": "Twin Rising Dragons (Soushouryuu)",
+        "category": "arremesso",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "rising_dragon_control_souryuuten"
+          },
+          {
+            "type": "background",
+            "traitId": "recursos",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {
+          "combate_armado": 4,
+          "fuinjutsu": 4
+        },
+        "defaultPowerPointCost": 5,
+        "chiCost": 4,
+        "willpowerCost": null,
+        "speedModifier": "-1",
+        "damageModifier": "+4",
+        "movementModifier": "Nenhum",
+        "description": "A versão ampliada do Souryuuten, executada com o Bashousen — o leque lendário que comanda os elementos — encantando a tempestade de armas.",
+        "ruleSummary": "Como o Rising Dragon Control, mas as armas ganham um efeito elemental à escolha (fogo, água, terra ou raio) com +1 de Dano adicional (total +4). Requer o item Bashousen (Antecedente Recursos 4+ / Artefato).",
+        "notes": "Custo: 4 Chakra | Pontos de Jutsu: Combate Armado 4, Fuinjutsu 4; Outros 5 | Pré-requisitos: Rising Dragon Control, Recursos •••• (Bashousen)",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Tenten)"
+      },
+      {
+        "id": "weapon_summoning_buki_kuchiyose",
+        "name": "Weapon Summoning (Buki Kuchiyose)",
+        "category": "arremesso",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "arremesso",
+            "minimumValue": 3
+          },
+          {
+            "type": "background",
+            "traitId": "recursos",
+            "minimumValue": 2
+          }
+        ],
+        "stylePowerPointCosts": {
+          "fuinjutsu": 2,
+          "combate_armado": 2
+        },
+        "defaultPowerPointCost": 3,
+        "chiCost": 0,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Nenhum",
+        "movementModifier": "Nenhum",
+        "description": "Domínio absoluto do Fuinjutsu de armazenamento: o usuário invoca instantaneamente qualquer arma catalogada em seus pergaminhos, sem procurá-la.",
+        "ruleSummary": "Sacar/invocar qualquer arma do arsenal selado é uma ação rápida, sem custo de Chakra. Requer os pergaminhos de selagem preparados (Recursos 2+).",
+        "notes": "Custo: Nenhum (ação rápida) | Pontos de Jutsu: Fuinjutsu 2, Combate Armado 2; Outros 3 | Pré-requisitos: Arremesso •••, Recursos ••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Tenten)"
+      },
+      {
+        "id": "tsukuyomi",
+        "name": "Tsukuyomi",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "mangekyu_sharingan"
+          },
+          {
+            "type": "background",
+            "traitId": "cla_notavel",
+            "minimumValue": 5
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 7
+          },
+          {
+            "type": "attributeRating",
+            "traitId": "manipulation",
+            "minimumValue": 5
+          }
+        ],
+        "stylePowerPointCosts": {
+          "genjutsu": 5
+        },
+        "defaultPowerPointCost": 6,
+        "chiCost": 4,
+        "willpowerCost": 2,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O Genjutsu supremo do Mangekyō de Itachi: no mundo da lua invertida, o alvo vive dias de tortura em um instante do mundo real.",
+        "ruleSummary": "Teste: Manipulação + Focus vs. Força de Vontade + Percepção (dif. 8). Sucesso: o alvo fica incapacitado pelo resto da cena e sofre −2 dados em todas as paradas pelo resto da sessão (exaustão mental). Conforme a tabela do Cap. 4 da Expansão. Só um Doujutsu equivalente permite resistir ou quebrar.",
+        "notes": "Custo: 4 Chakra + 2 Força de Vontade | Pontos de Jutsu: Genjutsu 5; Outros 6 | Pré-requisitos: Mangekyu Sharingan, Clã Notável ••••• (Uchiha), Focus •••••••, Manipulação •••••",
+        "_source": "Livro de Expansão — Cap. 4 (tabela de Doujutsu) e Cap. 8 (ficha de Itachi)",
+        "gmLocked": true
+      },
+      {
+        "id": "izanagi",
+        "name": "Izanagi",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "mangekyu_sharingan"
+          },
+          {
+            "type": "background",
+            "traitId": "cla_notavel",
+            "minimumValue": 5
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 8
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 6,
+        "chiCost": 5,
+        "willpowerCost": 3,
+        "speedModifier": "+0",
+        "damageModifier": "Nenhum",
+        "movementModifier": "Nenhum",
+        "description": "O Genjutsu lançado sobre a própria realidade: por um instante, ferimento e morte tornam-se ilusão — ao preço da luz de um olho.",
+        "ruleSummary": "Anula completamente 1 morte ou incapacitação do usuário (o evento 'não aconteceu'). O olho usado cega permanentemente. Conforme a tabela do Cap. 4 da Expansão. Danzo, com dez Sharingan implantados, podia absorver dez mortes.",
+        "notes": "Custo: 5 Chakra + 3 Força de Vontade + 1 olho (cegueira permanente) | Pontos de Jutsu: Outros 6 | Pré-requisitos: Mangekyu Sharingan, Clã Notável ••••• (Uchiha), Focus ••••••••",
+        "_source": "Livro de Expansão — Cap. 4 (tabela de Doujutsu) e Cap. 8 (fichas de Itachi e Danzo)",
+        "gmLocked": true
+      },
+      {
+        "id": "kamui",
+        "name": "Kamui",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "mangekyu_sharingan"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 6
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 5,
+        "chiCost": 4,
+        "willpowerCost": 1,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O Mangekyō de Obito, herdado pelo olho de Kakashi: distorce o espaço, transportando o que for focado para uma dimensão paralela.",
+        "ruleSummary": "Funciona como o Missile Reflection, mas contra QUALQUER ataque — inclusive Jutsus: o ataque focado é absorvido para a dimensão Kamui. Limite: 4 usos por dia sem colapso (5º uso em diante: 1 nível de Dano de Contusão por uso e −2 dados até descansar). Custo: 4 Chakra + 1 FV por uso.",
+        "notes": "Custo: 4 Chakra + 1 Força de Vontade | Pontos de Jutsu: Outros 5 | Pré-requisitos: Mangekyu Sharingan, Focus ••••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kakashi Est.2)",
+        "gmLocked": true
+      },
+      {
+        "id": "kamui_shuriken",
+        "name": "Kamui Shuriken",
+        "category": "arremesso",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "kamui"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "arremesso",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 4,
+        "chiCost": 3,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "+4",
+        "movementModifier": "Nenhum",
+        "description": "Variação ofensiva do Kamui: projéteis são desmaterializados no meio do voo e reenviados de ângulos impossíveis.",
+        "ruleSummary": "Arremesso que ignora Bloqueio físico do alvo (o projétil some e reaparece atrás da guarda): Dano +4, o alvo defende apenas com Esquiva. Custo: 3 Chakra.",
+        "notes": "Custo: 3 Chakra | Pontos de Jutsu: Outros 4 | Pré-requisitos: Kamui, Arremesso ••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kakashi Est.2)",
+        "gmLocked": true
+      },
+      {
+        "id": "lightning_cable_raiton_cabo",
+        "name": "Lightning Cable (Raiton: Cabo de Raio)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "lightning_element_thousand_birds_raiton_chidori"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 6
+          }
+        ],
+        "stylePowerPointCosts": {
+          "ninjutsu": 4
+        },
+        "defaultPowerPointCost": 5,
+        "chiCost": 3,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "+5",
+        "movementModifier": "Nenhum",
+        "description": "Extensão do Chidori em cabo contínuo de Chakra de raio — a lâmina que corta até os braços de Chakra de um Jinchuuriki.",
+        "ruleSummary": "Ataque em linha (até Focus hexágonos): Dano +5; corta construções de Chakra (braços de manto Bijuu, clones de Chakra) automaticamente. Custo: 3 Chakra.",
+        "notes": "Custo: 3 Chakra | Pontos de Jutsu: Ninjutsu 4; Outros 5 | Pré-requisitos: Chidori, Focus ••••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kakashi Est.2)",
+        "gmLocked": true
+      },
+      {
+        "id": "sharingan_genjutsu_hipnose",
+        "name": "Sharingan Genjutsu (Hipnose Ocular)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "sharingan_lv2"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {
+          "genjutsu": 3
+        },
+        "defaultPowerPointCost": 4,
+        "chiCost": 1,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Nenhum",
+        "movementModifier": "Nenhum",
+        "description": "O olhar do Sharingan captura a mente do alvo que o encara — a hipnose básica de todo Uchiha treinado.",
+        "ruleSummary": "Teste oposto: Manipulação + Focus vs. Percepção + Força de Vontade (dif. 7). Sucesso paralisa o alvo por 1 turno. Requer contato visual. Custo: 1 Chakra.",
+        "notes": "Custo: 1 Chakra | Pontos de Jutsu: Genjutsu 3; Outros 4 | Pré-requisitos: Sharingan Lv2, Focus ••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kakashi Est.1)",
+        "gmLocked": true
+      },
+      {
+        "id": "sharingan_copia_de_jutsu",
+        "name": "Sharingan — Cópia de Jutsu",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "sharingan_lv3"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 6
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 5,
+        "chiCost": null,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Nenhum",
+        "movementModifier": "Nenhum",
+        "description": "A fama do Ninja Copiador: o Sharingan completo grava cada selo e movimento — mil jutsus roubados com um olhar.",
+        "ruleSummary": "Com aval do Narrador, o usuário pode executar Jutsus que viu serem usados na mesma cena (custo normal do Jutsu copiado; precisa atender aos pré-requisitos de técnica/atributo, exceto os de clã do original). Não copia Kekkei Genkai nem técnicas de Doujutsu.",
+        "notes": "Custo: Nenhum (passiva do Doujutsu) | Pontos de Jutsu: Outros 5 | Pré-requisitos: Sharingan Lv3, Focus ••••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kakashi Est.2)",
+        "gmLocked": true
+      },
+      {
+        "id": "water_shark_bullet_suiton_suikoudan",
+        "name": "Water Shark Bullet (Suiton: Suikoudan no Jutsu)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 5
+          },
+          {
+            "type": "background",
+            "traitId": "afinidade_elemental",
+            "minimumValue": 3
+          }
+        ],
+        "stylePowerPointCosts": {
+          "ninjutsu": 4
+        },
+        "defaultPowerPointCost": 5,
+        "chiCost": 2,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "+6",
+        "movementModifier": "Nenhum",
+        "description": "Um tubarão de água pressurizada dispara contra o alvo — a assinatura ofensiva de Kisame.",
+        "ruleSummary": "Projétil de médio alcance: Dano +6. Se houver fonte de água abundante, o custo cai para 1 Chakra. Custo: 2 Chakra.",
+        "notes": "Custo: 2 Chakra (1 com fonte de água) | Pontos de Jutsu: Ninjutsu 4; Outros 5 | Pré-requisitos: Focus •••••, Afinidade Elemental (Água) •••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Kisame)",
+        "gmLocked": true
+      },
+      {
+        "id": "third_kazekage_puppet_sandaime_kazekage",
+        "name": "Third Kazekage Puppet (Marionete do Sandaime Kazekage)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "puppeteer_technique_kugutsu_no_jutsu"
+          },
+          {
+            "type": "background",
+            "traitId": "construtor_habilidoso",
+            "minimumValue": 5
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 6
+          }
+        ],
+        "stylePowerPointCosts": {
+          "marionetes": 5
+        },
+        "defaultPowerPointCost": 0,
+        "chiCost": 3,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "+6",
+        "movementModifier": "Nenhum",
+        "description": "A obra-prima humana de Sasori: a marionete do Terceiro Kazekage preserva o Jiton do cadáver — areia de ferro comandada por fios de Chakra.",
+        "ruleSummary": "Marionete de elite (Saúde 14, Absorção 4). Controla Areia de Ferro: ataques à distância Dano +6 que ignoram 2 de Absorção (perfuração magnética); pode criar formas (lanças, blocos). Exclusiva do estilo Manipulação de Marionetes. Custo: 3 Chakra por cena + 1 por turno de Jiton.",
+        "notes": "Custo: 3 Chakra/cena + 1/turno (Jiton) | Pontos de Jutsu: Marionetes 5 (exclusivo do estilo) | Pré-requisitos: Puppeteer Technique, Construtor Habilidoso •••••, Focus ••••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Sasori)",
+        "gmLocked": true,
+        "styleExclusive": true
+      },
+      {
+        "id": "poison_delivery_doku_soubi",
+        "name": "Poison Delivery (Doku Soubi — Armamento Venenoso)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "puppeteer_technique_kugutsu_no_jutsu"
+          },
+          {
+            "type": "abilityRating",
+            "traitId": "poisons",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {
+          "marionetes": 3
+        },
+        "defaultPowerPointCost": 0,
+        "chiCost": null,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O arsenal característico de Sasori: cada lâmina, agulha e junta das marionetes é banhada em veneno de ação lenta e morte certa.",
+        "ruleSummary": "Passiva: todos os ataques das marionetes do usuário aplicam veneno (regras de veneno do Cap. 9 do livro base; severidade definida com o Narrador conforme o veneno preparado). Exclusiva do estilo Manipulação de Marionetes.",
+        "notes": "Custo: Nenhum (preparação prévia) | Pontos de Jutsu: Marionetes 3 (exclusivo do estilo) | Pré-requisitos: Puppeteer Technique, Venefício ••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Sasori)",
+        "gmLocked": true,
+        "styleExclusive": true
+      },
+      {
+        "id": "summoning_manda_kuchiyose_manda",
+        "name": "Summoning: Manda (Kuchiyose: Manda)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 5
+          },
+          {
+            "type": "background",
+            "traitId": "contrato_invocacao",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {
+          "ninjutsu": 4
+        },
+        "defaultPowerPointCost": 5,
+        "chiCost": 4,
+        "willpowerCost": 2,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "A serpente colossal de Ryūchi, invocada por Orochimaru — Manda não serve: cobra o pacto em sacrifícios.",
+        "ruleSummary": "Criatura de Escala Colossal (ver Cap. 8). Além do custo, Manda exige compensação narrativa (sacrifícios) — falhar nisso cria um inimigo. Custo: 4 Chakra + 2 Força de Vontade.",
+        "notes": "Custo: 4 Chakra + 2 Força de Vontade | Pontos de Jutsu: Ninjutsu 4; Outros 5 | Pré-requisitos: Focus •••••, Contrato de Invocação ••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Orochimaru)",
+        "gmLocked": true
+      },
+      {
+        "id": "vanishing_facial_copy_kagemane_no_kao",
+        "name": "Vanishing Facial Copy Technique (Fushi no Kao)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 5
+          },
+          {
+            "type": "abilityRating",
+            "traitId": "medicine",
+            "minimumValue": 3
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 4,
+        "chiCost": 2,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Nenhum",
+        "movementModifier": "Nenhum",
+        "description": "A técnica macabra de Orochimaru: desloca o próprio rosto e assume, em carne, o rosto e a voz de outra pessoa.",
+        "ruleSummary": "Disfarce perfeito de aparência e voz (dificuldade +3 para detectar por meios normais; Byakugan/Sharingan detectam o fluxo de Chakra estranho). Dura até ser dissipada. Custo: 2 Chakra.",
+        "notes": "Custo: 2 Chakra | Pontos de Jutsu: Outros 4 | Pré-requisitos: Focus •••••, Medicina •••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Orochimaru)",
+        "gmLocked": true
+      },
+      {
+        "id": "soft_physique_modification_nan_kaizou",
+        "name": "Soft Physique Modification (Nan Kaizō)",
+        "category": "grab",
+        "prerequisites": [
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 4
+          },
+          {
+            "type": "attributeRating",
+            "traitId": "stamina",
+            "minimumValue": 4
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 4,
+        "chiCost": 1,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O corpo serpentino de Orochimaru: articulações e órgãos modificados permitem alongar, torcer e desarticular o corpo à vontade.",
+        "ruleSummary": "Escapa automaticamente de Apresamentos comuns; pode alongar membros/tronco (alcance corpo a corpo +2 hexágonos); ataques de constrição usam Apresamento com Dano +2 sustentado. Custo: 1 Chakra por cena.",
+        "notes": "Custo: 1 Chakra por cena | Pontos de Jutsu: Outros 4 | Pré-requisitos: Focus ••••, Vigor ••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Orochimaru)",
+        "gmLocked": true
+      },
+      {
+        "id": "eight_branches_technique_yamata_no_jutsu",
+        "name": "Eight Branches Technique (Yamata no Jutsu)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "soft_physique_modification_nan_kaizou"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 7
+          },
+          {
+            "type": "attributeRating",
+            "traitId": "stamina",
+            "minimumValue": 5
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 6,
+        "chiCost": 6,
+        "willpowerCost": 2,
+        "speedModifier": "+0",
+        "damageModifier": "+7",
+        "movementModifier": "Nenhum",
+        "description": "A forma final de Orochimaru: a serpente branca de oito cabeças e oito caudas, colossal como as montanhas — o Yamata-no-Orochi dos mitos.",
+        "ruleSummary": "Transformação em criatura de Escala Colossal (ver Cap. 8): Dano +7, Absorção +5, cada cabeça pode atacar um alvo distinto (até 8 alvos). Custo: 6 Chakra + 2 Força de Vontade; dura a cena.",
+        "notes": "Custo: 6 Chakra + 2 Força de Vontade | Pontos de Jutsu: Outros 6 | Pré-requisitos: Soft Physique Modification, Focus •••••••, Vigor •••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Orochimaru)",
+        "gmLocked": true
+      },
+      {
+        "id": "bansho_tenin",
+        "name": "Banshō Ten'in (Atração Universal)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "tendo_caminho_deva_controle_da_gravidade"
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 6,
+        "chiCost": 2,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O polo oposto do Shinra Tensei: a gravidade obedece ao Rinnegan e puxa o alvo, inescapavelmente, para as mãos do Deus.",
+        "ruleSummary": "Apresamento à distância: puxa um alvo (até Focus hexágonos) para o hexágono do usuário; o alvo resiste com Força de Vontade (dif. 8) ou é trazido e considera-se Apresado. Intervalo de 5 segundos (1 turno) entre usos gravitacionais. Custo: 2 Chakra.",
+        "notes": "Custo: 2 Chakra | Pontos de Jutsu: Outros 6 | Pré-requisitos: Tendō — Controle da Gravidade",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Pain)",
+        "gmLocked": true
+      },
+      {
+        "id": "chibaku_tensei",
+        "name": "Chibaku Tensei (Sepultamento Celestial)",
+        "category": "focus",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "tendo_caminho_deva_controle_da_gravidade"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 7
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 6,
+        "chiCost": 5,
+        "willpowerCost": 2,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "O núcleo negro lançado aos céus atrai terra e rocha, sepultando o alvo dentro de uma lua nascente — a prisão que conteve Bijuu.",
+        "ruleSummary": "Prisão de Escala Ampliada: o alvo é encerrado numa esfera de rocha (Saúde 20, Absorção 5); equivale ao Space-Time Barrier (Cap. 3) combinado ao Desert Suspension. Escapar exige destruir a esfera ou dano de Escala Colossal. Custo: 5 Chakra + 2 Força de Vontade.",
+        "notes": "Custo: 5 Chakra + 2 Força de Vontade | Pontos de Jutsu: Outros 6 | Pré-requisitos: Tendō — Controle da Gravidade, Focus •••••••",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Pain)",
+        "gmLocked": true
+      },
+      {
+        "id": "shadow_strangle_kage_kubishibari",
+        "name": "Shadow Strangle Technique (Kage Kubishibari no Jutsu)",
+        "category": "grab",
+        "prerequisites": [
+          {
+            "type": "maneuver",
+            "requiredManeuverId": "shadow_imitation_technique_kage_mane_no_jutsu"
+          },
+          {
+            "type": "techniqueRating",
+            "traitId": "focus",
+            "minimumValue": 5
+          },
+          {
+            "type": "background",
+            "traitId": "cla_notavel",
+            "minimumValue": 3
+          }
+        ],
+        "stylePowerPointCosts": {},
+        "defaultPowerPointCost": 3,
+        "chiCost": 2,
+        "willpowerCost": null,
+        "speedModifier": "+0",
+        "damageModifier": "Especial",
+        "movementModifier": "Nenhum",
+        "description": "A evolução do Kage Mane: a sombra sobe pelo corpo capturado e forma uma mão que estrangula a garganta do alvo.",
+        "ruleSummary": "Requer o alvo já preso pelo Shadow Imitation: a sombra causa Dano de Contusão +2 por turno de estrangulamento sustentado (o alvo pode tentar quebrar a imitação a cada turno). Custo: 2 Chakra + manutenção do Kage Mane.",
+        "notes": "Custo: 2 Chakra (+manutenção do Kage Mane) | Pontos de Jutsu: Clã Nara 3 | Pré-requisitos: Shadow Imitation, Focus •••••, Clã Notável ••• (Nara)",
+        "_source": "Livro de Expansão — Cap. 8 (ficha de Shikamaru Est.2)",
+        "gmLocked": true
       }
     ],
-    "_correctionNote": "Custos preenchidos a partir das notas (Pontos de Jutsu). Corrige defaultPowerPointCost:0 em jutsus com custo de estilo (ex: Henge, Puppeteer). Poison Sting do Livro de Expansão. Bijuu/Selo/transformações: acquisitionType=background. | v2.1.0: +24 jutsus das fichas de NPCs do Cap.8 da Expansão (fonte anotada em _source de cada um). | v2.1.1: custos por estilo adicionados a 6 jutsus novos (teia, arco, Hari Jizo, invocações) ancorados em Rasengan/Kirigakure/Doryuuheki.",
+    "_correctionNote": "Custos preenchidos a partir das notas (Pontos de Jutsu). Corrige defaultPowerPointCost:0 em jutsus com custo de estilo (ex: Henge, Puppeteer). Poison Sting do Livro de Expansão. Bijuu/Selo/transformações: acquisitionType=background. | v2.1.0: +24 jutsus das fichas de NPCs do Cap.8 da Expansão (fonte anotada em _source de cada um). | v2.1.1: custos por estilo adicionados a 6 jutsus novos (teia, arco, Hari Jizo, invocações) ancorados em Rasengan/Kirigakure/Doryuuheki. | v2.1.2: +3 jutsus da Tenten (Souryuuten, Soushouryuu, Weapon Summoning). | v2.2.0: fusão da duplicata Chakra Scalpel (removida chakura_no_mesu); +17 jutsus lendários Rank S/exclusivos com gmLocked:true (liberação pelo Narrador no Foundry).",
     "clans": [
       {
         "id": "uchiha_cla",

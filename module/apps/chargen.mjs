@@ -515,7 +515,7 @@ export class NarutoRpgChargen extends HandlebarsApplicationMixin(ApplicationV2) 
           experience: { total: 0, spent: 0 },
         },
         items,
-      });
+      }, { nrpgResourcesPreset: true });
       ui.notifications.info(game.i18n.format("NARUTO_RPG.Chargen.created", { name: actor.name }));
       this.close();
       actor.sheet.render(true);

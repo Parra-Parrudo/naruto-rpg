@@ -51,9 +51,13 @@ export class NarutoRpgActor extends Actor {
     if (game.user.id !== userId) return;
     if (collection !== "items") return;
 
-    // Check if a fighting style was added
+    // Check if a fighting style was added. Only apply the style's initial Chakra/FV
+    // when the style is added MANUALLY (drag onto a blank sheet). Characters built by the
+    // Character Creator or imported from the app already carry FINAL resource values, so the
+    // hook must NOT add the style's initial values again (that caused doubled Chakra/FV).
     const addedStyle = documents.find(doc => doc.type === "fightingStyle");
-    if (addedStyle) {
+    const resourcesPreset = options?.nrpgResourcesPreset === true || this.system.importData?.isImported === true;
+    if (addedStyle && !resourcesPreset) {
       this._applyFightingStyleResources(addedStyle);
     }
 

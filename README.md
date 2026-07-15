@@ -42,7 +42,8 @@ https://github.com/Parra-Parrudo/naruto-rpg/releases/latest/download/system.json
 - [x] **Fase 6** — Sistema de Clãs: seleção por lista (Criador e ficha), Item de clã no Conteúdo Oficial, descrições em painéis expansíveis e **requisito de jutsus por clã**
 - [x] **Conteúdo** — Descrições oficiais de Habilidades, Técnicas e Antecedentes incorporadas ao dataset (livro base + Expansão)
 - [x] **Criador aprimorado** — Painéis de descrição expansíveis (características e jutsus), filtros de jutsu por técnica e clã, e requisitos dos jutsus sempre visíveis
-- [x] **Cap. 8 — Bestiário/NPCs** — Dataset canônico v2.1.1 (452 jutsus, +24 do Cap. 8) e biblioteca de 46 NPCs prontos (genéricos + canônicos) importável via `.fscharacters`
+- [x] **Cap. 8 — Bestiário/NPCs** — Dataset canônico v2.2.0 (471 jutsus) com fichas de NPCs completas (jutsus + clãs) e biblioteca de 46 NPCs prontos (genéricos + canônicos) importável via `.fscharacters`
+- [x] **Importação seletiva** — escolher quais personagens/NPCs importar de uma biblioteca por checklist
 - [ ] **Fase 7** — Tela de Evolução/XP (gastar XP em características e jutsus com os custos oficiais)
 - [ ] Filtros de jutsus por Afinidade Elemental no compêndio
 - [x] NPCs prontos (Cap. 8 da Expansão) — biblioteca importável
